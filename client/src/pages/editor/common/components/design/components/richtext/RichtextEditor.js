@@ -1,7 +1,7 @@
 import React from 'react';
-import ColorPicker from 'colorpicker';
-import Button from 'button';
-import Checkbox from 'checkbox';
+import ColorPicker from '../../../colorpicker';
+import Button from '../../../button';
+import Checkbox from '../../../checkbox';
 
 import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
 import Richtext from './editor';

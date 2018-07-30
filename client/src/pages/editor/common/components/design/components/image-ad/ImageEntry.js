@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from 'input';
-import uuid from 'utils/uuid';
+import Input from '../../../input';
+import uuid from '../../../utils/uuid';
 import { Draggable } from 'react-beautiful-dnd';
-import createObjectURL from 'utils/createObjectURL';
+import createObjectURL from '../../../utils/createObjectURL';
 import cx from 'classnames';
 
 import { IMAGE_AD_ENTRY_UUID_KEY, IMAGE_AD_DND_TYPE } from './constants';

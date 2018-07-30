@@ -3,7 +3,7 @@
         "targets": {
           "browsers": [ "last 2 versions"]
         }
-      }], "react"],
+      }], "react","stage-1"],
       "plugins": [
         ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
       ]
