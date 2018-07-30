@@ -1,0 +1,1 @@
+静态资源打包后放到./server/app/public目录下
