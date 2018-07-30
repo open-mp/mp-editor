@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Form from 'form';
-import Sweetalert from 'sweetalert';
+import Form from '../../../../../form';
+import Sweetalert from '../../../../../sweetalert';
 
 const { createForm, Field, InputField } = Form;
 

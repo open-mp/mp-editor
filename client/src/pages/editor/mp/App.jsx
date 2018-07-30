@@ -1,16 +1,17 @@
 import React from 'react'
-import { Design } from '../common/components/index'
-
-class Clock extends React.Component {
+import { Layout } from 'antd';
+import Editor from './Editor.jsx'
+const { Header, Footer, Sider, Content } = Layout;
+class App extends React.Component {
     render() {
-      return (
-        <div>
-          <h1>Hello, world!</h1>
-          <h2>It is 12:00.</h2>
-          <Button type="primary">Primary</Button>
-        </div>
-      );
+            return (
+            <Layout style={{height: "100vh"}}>
+                <Sider width="300">
+                </Sider>
+                <Content Class="editor-content">
+                    <Editor />
+                </Content>
+            </Layout>)
     }
-  }
-
-  export default Clock
+}
+export default App;

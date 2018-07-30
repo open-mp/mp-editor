@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Pop from 'pop';
+import Pop from '../../pop';
 import pick from 'lodash/pick';
 import get from 'lodash/get';
 import { Draggable } from 'react-beautiful-dnd';

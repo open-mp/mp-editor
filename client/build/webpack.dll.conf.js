@@ -1,5 +1,8 @@
 const path = require('path');
 const DllPlugin = require('webpack/lib/DllPlugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const chalk = require("chalk");
 
 module.exports = function (config) {
   let webpackConfig = {
@@ -15,6 +18,14 @@ module.exports = function (config) {
       // 之所以在前面加上 _dll_ 是为了防止全局变量冲突
       library: '_dll_[name]'
     },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [ MiniCssExtractPlugin.loader, "css-loader"]
+        }
+      ]
+    },
     plugins: [
       // 接入 DllPlugin
       new DllPlugin({
@@ -24,6 +35,14 @@ module.exports = function (config) {
         name: '_dll_[name]',
         // 描述动态链接库的 manifest.json 文件输出时的文件名称
         path: path.join(config.assetsRoot, 'js/[name].manifest.json')
+      }),
+      new ProgressBarPlugin({
+        format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+        clear: false
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].css',
+        chunkFilename:'css/[id].css',
       })
     ]
   };

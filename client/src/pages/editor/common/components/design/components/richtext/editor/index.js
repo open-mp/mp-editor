@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import assign from 'lodash/assign';
 import noop from 'lodash/noop';
 import PropTypes from 'prop-types';
-import uuid from 'utils/uuid';
+import uuid from '../../../../utils/uuid';
 
 import './plugins';
 

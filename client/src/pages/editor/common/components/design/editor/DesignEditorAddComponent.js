@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Pop from 'pop';
+import Pop from '../../pop';
 import isFunction from 'lodash/isFunction';
 import isNumber from 'lodash/isNumber';
 import noop from 'lodash/noop';

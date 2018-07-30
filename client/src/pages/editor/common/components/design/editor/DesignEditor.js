@@ -2,8 +2,8 @@ import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'lodash/assign';
-import reorder from 'utils/reorder';
-import shallowEqual from 'utils/shallowEqual';
+import reorder from '../../utils/reorder';
+import shallowEqual from '../../utils/shallowEqual';
 
 const NOT_EVENT_MSG =
   'onInputChange expects an `Event` with { target: { name, value } } as argument';

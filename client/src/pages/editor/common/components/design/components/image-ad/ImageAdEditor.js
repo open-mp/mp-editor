@@ -1,8 +1,8 @@
 import React from 'react';
-import Radio from 'radio';
-import Icon from 'icon';
+import Radio from '../../../radio';
+import Icon from '../../../icon';
 import { Droppable } from 'react-beautiful-dnd';
-import createObjectURL from 'utils/createObjectURL';
+import createObjectURL from '../../../utils/createObjectURL';
 import findIndex from 'lodash/findIndex';
 import isEmpty from 'lodash/isEmpty';
 
