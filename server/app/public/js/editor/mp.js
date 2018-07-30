@@ -31618,6 +31618,39 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
+/***/ "./node_modules/zent/css/design-config.css":
+/*!*************************************************!*\
+  !*** ./node_modules/zent/css/design-config.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/zent/css/design-line.css":
+/*!***********************************************!*\
+  !*** ./node_modules/zent/css/design-line.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/zent/css/design-whitespace.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/zent/css/design-whitespace.css ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/pages/editor/common/components/alert/Alert.js":
 /*!***********************************************************!*\
   !*** ./src/pages/editor/common/components/alert/Alert.js ***!
@@ -64446,6 +64479,12 @@ var _imageAd = __webpack_require__(/*! ../common/components/design/components/im
 
 var _imageAd2 = _interopRequireDefault(_imageAd);
 
+__webpack_require__(/*! zent/css/design-config.css */ "./node_modules/zent/css/design-config.css");
+
+__webpack_require__(/*! zent/css/design-whitespace.css */ "./node_modules/zent/css/design-whitespace.css");
+
+__webpack_require__(/*! zent/css/design-line.css */ "./node_modules/zent/css/design-line.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64454,9 +64493,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import '../common/css/design-config.css';
-// import '../common/css/design-whitespace.css';
-// import '../common/css/design-line.css';
 var components = [Object.assign({}, _config2.default, {
   // 是否可以拖拽
   dragable: false,

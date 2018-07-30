@@ -9,9 +9,10 @@ import lineConf from '../common/components/design/components/line';
 import richtextConf from '../common/components/design/components/richtext';
 import imageAdConf from '../common/components/design/components/image-ad';
 
-// import '../common/css/design-config.css';
-// import '../common/css/design-whitespace.css';
-// import '../common/css/design-line.css';
+import 'zent/css/design-config.css';
+import 'zent/css/design-whitespace.css';
+import 'zent/css/design-line.css';
+
 const components = [
   Object.assign({}, configConf, {
     // 是否可以拖拽

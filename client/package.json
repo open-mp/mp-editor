@@ -39,6 +39,7 @@
     "react-dom": "^16.4.1",
     "react-transition-group": "^2.4.0",
     "tinycolor2": "^1.4.1",
-    "zan-utils": "^1.2.8"
+    "zan-utils": "^1.2.8",
+    "zent": "^6.0.1"
   }
 }
