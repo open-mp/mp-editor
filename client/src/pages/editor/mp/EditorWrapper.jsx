@@ -9,11 +9,7 @@ import lineConf from '../widget/line';
 import richtextConf from '../widget/richtext';
 import imageAdConf from '../widget/image-ad';
 
-import 'zent/css/design-config.css';
-import 'zent/css/design-whitespace.css';
-import 'zent/css/design-line.css';
-import 'zent/css/design-richtext.css';
-import 'zent/css/design-image-ad.css';
+import '../css/design/components/index.pcss';
 
 const components = [
   Object.assign({}, configConf, {
@@ -117,6 +113,7 @@ class Simple extends React.Component {
           onSettingsChange={this.onSettingsChange}
           scrollTopOffset={-270}
           globalConfig={window._global}
+          prefix="mp"          
         />
         <div className="design-example-actions">
           <Button type="primary" onClick={this.submit}>

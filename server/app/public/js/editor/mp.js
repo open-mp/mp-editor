@@ -32130,61 +32130,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ "./node_modules/zent/css/design-config.css":
-/*!*************************************************!*\
-  !*** ./node_modules/zent/css/design-config.css ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./node_modules/zent/css/design-image-ad.css":
-/*!***************************************************!*\
-  !*** ./node_modules/zent/css/design-image-ad.css ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./node_modules/zent/css/design-line.css":
-/*!***********************************************!*\
-  !*** ./node_modules/zent/css/design-line.css ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./node_modules/zent/css/design-richtext.css":
-/*!***************************************************!*\
-  !*** ./node_modules/zent/css/design-richtext.css ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./node_modules/zent/css/design-whitespace.css":
-/*!*****************************************************!*\
-  !*** ./node_modules/zent/css/design-whitespace.css ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./node_modules/zent/lib/alert/Alert.js":
 /*!**********************************************!*\
   !*** ./node_modules/zent/lib/alert/Alert.js ***!
@@ -61111,6 +61056,8 @@ var _stripUUID2 = _interopRequireDefault(_stripUUID);
 
 var _componentGroup = __webpack_require__(/*! ./utils/component-group */ "./src/pages/editor/components/design/utils/component-group.js");
 
+__webpack_require__(/*! ../../css/design.pcss */ "./src/pages/editor/css/design.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _Design2.default.stripUUID = _stripUUID2.default;
@@ -62452,6 +62399,28 @@ function offset(node) {
 
 /***/ }),
 
+/***/ "./src/pages/editor/css/design.pcss":
+/*!******************************************!*\
+  !*** ./src/pages/editor/css/design.pcss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/pages/editor/css/design/components/index.pcss":
+/*!***********************************************************!*\
+  !*** ./src/pages/editor/css/design/components/index.pcss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/pages/editor/mp/App.jsx":
 /*!*************************************!*\
   !*** ./src/pages/editor/mp/App.jsx ***!
@@ -62585,15 +62554,7 @@ var _imageAd = __webpack_require__(/*! ../widget/image-ad */ "./src/pages/editor
 
 var _imageAd2 = _interopRequireDefault(_imageAd);
 
-__webpack_require__(/*! zent/css/design-config.css */ "./node_modules/zent/css/design-config.css");
-
-__webpack_require__(/*! zent/css/design-whitespace.css */ "./node_modules/zent/css/design-whitespace.css");
-
-__webpack_require__(/*! zent/css/design-line.css */ "./node_modules/zent/css/design-line.css");
-
-__webpack_require__(/*! zent/css/design-richtext.css */ "./node_modules/zent/css/design-richtext.css");
-
-__webpack_require__(/*! zent/css/design-image-ad.css */ "./node_modules/zent/css/design-image-ad.css");
+__webpack_require__(/*! ../css/design/components/index.pcss */ "./src/pages/editor/css/design/components/index.pcss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62705,7 +62666,8 @@ var Simple = function (_React$Component) {
           settings: this.state.settings,
           onSettingsChange: this.onSettingsChange,
           scrollTopOffset: -270,
-          globalConfig: window._global
+          globalConfig: window._global,
+          prefix: 'mp'
         }),
         _react2.default.createElement(
           'div',
