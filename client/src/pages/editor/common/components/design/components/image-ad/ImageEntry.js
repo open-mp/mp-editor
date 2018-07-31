@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../../../input';
+import {Input} from 'zent';
 import uuid from '../../../utils/uuid';
 import { Draggable } from 'react-beautiful-dnd';
 import createObjectURL from '../../../utils/createObjectURL';

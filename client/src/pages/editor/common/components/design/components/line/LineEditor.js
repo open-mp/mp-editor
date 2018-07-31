@@ -1,6 +1,5 @@
 import React from 'react';
-import Radio from '../../../radio';
-import ColorPicker from '../../../colorpicker';
+import {Radio, ColorPicker} from 'zent';
 
 import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
 

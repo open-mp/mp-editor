@@ -1,6 +1,6 @@
 import React from 'react'
 import Design from '../common/components/design/index'
-import {Button} from 'antd'
+import { Button } from 'zent';
 
 import configConf from '../common/components/design/components/config';
 import ConfigEditor from '../common/components/design/components/config/ConfigEditor';
@@ -12,6 +12,8 @@ import imageAdConf from '../common/components/design/components/image-ad';
 import 'zent/css/design-config.css';
 import 'zent/css/design-whitespace.css';
 import 'zent/css/design-line.css';
+import 'zent/css/design-richtext.css';
+import 'zent/css/design-image-ad.css';
 
 const components = [
   Object.assign({}, configConf, {

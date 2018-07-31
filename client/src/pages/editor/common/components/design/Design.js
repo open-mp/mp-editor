@@ -27,7 +27,7 @@
 
 import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
-import Alert from '../alert';
+import {Alert} from 'zent';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'lodash/assign';

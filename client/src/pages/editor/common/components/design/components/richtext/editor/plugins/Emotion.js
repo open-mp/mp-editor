@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Dialog from '../../../../../dialog';
-import Tabs from '../../../../../tabs';
+import {Dialog, Tabs} from 'zent';
 
 const TabPanel = Tabs.TabPanel;
 const { openDialog, closeDialog } = Dialog;

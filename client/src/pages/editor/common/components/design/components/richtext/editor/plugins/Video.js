@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Form from '../../../../../form';
-import Sweetalert from '../../../../../sweetalert';
-
+import {Form, Sweetalert} from 'zent';
 const { createForm, Field, InputField } = Form;
 
 const YOUKU_IMAGE =

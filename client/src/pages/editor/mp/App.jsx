@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd';
-import Editor from './Editor.jsx'
+import EditorWrapper from './EditorWrapper.jsx'
 const { Header, Footer, Sider, Content } = Layout;
 class App extends React.Component {
     render() {
@@ -9,7 +9,7 @@ class App extends React.Component {
                 <Sider width="300">
                 </Sider>
                 <Content Class="editor-content">
-                    <Editor />
+                    <EditorWrapper />
                 </Content>
             </Layout>)
     }

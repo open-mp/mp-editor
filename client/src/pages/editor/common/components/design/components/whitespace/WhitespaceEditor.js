@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../../../slider';
+import {Slider}  from 'zent';
 
 import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
 

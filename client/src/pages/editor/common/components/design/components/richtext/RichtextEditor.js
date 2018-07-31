@@ -1,7 +1,5 @@
 import React from 'react';
-import ColorPicker from '../../../colorpicker';
-import Button from '../../../button';
-import Checkbox from '../../../checkbox';
+import {ColorPicker, Button, Checkbox} from 'zent';
 
 import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
 import Richtext from './editor';

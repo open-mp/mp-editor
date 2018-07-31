@@ -1,8 +1,5 @@
 import React from 'react';
-import Form from '../../../../../form';
-import Sweetalert from '../../../../../sweetalert';
-import Notify from '../../../../../notify';
-
+import {Form, Sweetalert, Notify} from 'zent';
 const { createForm, Field, InputField } = Form;
 
 const LinkForm = createForm({})(
