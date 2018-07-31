@@ -11612,17 +11612,6 @@ function offset(node) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/css/design/components/index.pcss":
-/*!***********************************************************!*\
-  !*** ./src/pages/editor/css/design/components/index.pcss ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./src/pages/editor/mp/App.jsx":
 /*!*************************************!*\
   !*** ./src/pages/editor/mp/App.jsx ***!
@@ -11755,8 +11744,6 @@ var _richtext2 = _interopRequireDefault(_richtext);
 var _imageAd = __webpack_require__(/*! ../widget/image-ad */ "./src/pages/editor/widget/image-ad/index.js");
 
 var _imageAd2 = _interopRequireDefault(_imageAd);
-
-__webpack_require__(/*! ../css/design/components/index.pcss */ "./src/pages/editor/css/design/components/index.pcss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12251,6 +12238,8 @@ var _ConfigPreview = __webpack_require__(/*! ./ConfigPreview */ "./src/pages/edi
 
 var _ConfigPreview2 = _interopRequireDefault(_ConfigPreview);
 
+__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/config/index.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -12258,6 +12247,17 @@ exports.default = {
   editor: _ConfigEditor2.default,
   preview: _ConfigPreview2.default
 };
+
+/***/ }),
+
+/***/ "./src/pages/editor/widget/config/index.pcss":
+/*!***************************************************!*\
+  !*** ./src/pages/editor/widget/config/index.pcss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -13013,6 +13013,8 @@ var _ImageAdPreview = __webpack_require__(/*! ./ImageAdPreview */ "./src/pages/e
 
 var _ImageAdPreview2 = _interopRequireDefault(_ImageAdPreview);
 
+__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/image-ad/index.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -13020,6 +13022,17 @@ exports.default = {
   editor: _ImageAdEditor2.default,
   preview: _ImageAdPreview2.default
 };
+
+/***/ }),
+
+/***/ "./src/pages/editor/widget/image-ad/index.pcss":
+/*!*****************************************************!*\
+  !*** ./src/pages/editor/widget/image-ad/index.pcss ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -13286,6 +13299,8 @@ var _LinePreview = __webpack_require__(/*! ./LinePreview */ "./src/pages/editor/
 
 var _LinePreview2 = _interopRequireDefault(_LinePreview);
 
+__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/line/index.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -13293,6 +13308,17 @@ exports.default = {
   editor: _LineEditor2.default,
   preview: _LinePreview2.default
 };
+
+/***/ }),
+
+/***/ "./src/pages/editor/widget/line/index.pcss":
+/*!*************************************************!*\
+  !*** ./src/pages/editor/widget/line/index.pcss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -14422,6 +14448,8 @@ var _RichtextPreview = __webpack_require__(/*! ./RichtextPreview */ "./src/pages
 
 var _RichtextPreview2 = _interopRequireDefault(_RichtextPreview);
 
+__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/richtext/index.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -14429,6 +14457,17 @@ exports.default = {
   editor: _RichtextEditor2.default,
   preview: _RichtextPreview2.default
 };
+
+/***/ }),
+
+/***/ "./src/pages/editor/widget/richtext/index.pcss":
+/*!*****************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/index.pcss ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -14638,6 +14677,8 @@ var _WhitespacePreview = __webpack_require__(/*! ./WhitespacePreview */ "./src/p
 
 var _WhitespacePreview2 = _interopRequireDefault(_WhitespacePreview);
 
+__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/whitespace/index.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -14645,6 +14686,17 @@ exports.default = {
   editor: _WhitespaceEditor2.default,
   preview: _WhitespacePreview2.default
 };
+
+/***/ }),
+
+/***/ "./src/pages/editor/widget/whitespace/index.pcss":
+/*!*******************************************************!*\
+  !*** ./src/pages/editor/widget/whitespace/index.pcss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 

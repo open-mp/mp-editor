@@ -9,8 +9,6 @@ import lineConf from '../widget/line';
 import richtextConf from '../widget/richtext';
 import imageAdConf from '../widget/image-ad';
 
-import '../css/design/components/index.pcss';
-
 const components = [
   Object.assign({}, configConf, {
     // 是否可以拖拽

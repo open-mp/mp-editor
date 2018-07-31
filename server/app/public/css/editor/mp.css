@@ -3463,18 +3463,6 @@ mark {
     left: 0;
   }
 
-/* stylelint-disable media-feature-name-no-unknown */
-
-@define-mixin clearfix {
-  overflow: hidden;
-  zoom: 1;
-}
-
-@define-mixin retina {
-  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-    @mixin-content ;
-  }
-}
 
 .mp-design-component-config-preview {
   height: 64px;
@@ -3484,11 +3472,11 @@ mark {
   background-size: contain;
 }
 
-.mp-design-component-config-preview__title {
+  .mp-design-component-config-preview__title {
     display: inline-block;
     padding: 23px 40px 0 60px;
-    height: 64px;
-    line-height: calc(64px - 24px);
+    height: 450px;
+    line-height: calc(450px - 24px);
     width: 100%;
     box-sizing: border-box;
     text-overflow: ellipsis;
@@ -3500,28 +3488,22 @@ mark {
     vertical-align: middle;
     color: #fff;
   }
-
 .mp-design-component-config-editor__background .mp-design-editor__control-group-control .mp-design-component-config-editor__background-control {
         display: flex;
       }
-
 .mp-design-component-config-editor__background .mp-design-editor__control-group-control .mp-design-component-config-editor__background-control .zent-input-wrapper {
           flex-grow: 1;
         }
-
 .mp-design-component-config-editor__background .mp-design-editor__control-group-control .mp-design-component-config-editor__background-control .zent-btn {
           margin-left: 10px;
         }
-
 .mp-design-component-config-editor__background .mp-design-editor__control-group-control .mp-design-component-config-editor__background-hint {
         margin-top: 5px;
         color: #999;
       }
-
 .mp-design-component-config-editor__tag a {
       text-decoration: none;
     }
-
 .mp-design-component-config-editor__tag-create {
       margin-left: 5px;
       padding-left: 5px;
@@ -3533,24 +3515,22 @@ mark {
       align-items: center;
     }
 
-.mp-design-component-whitespace-editor__height .mp-design-editor__control-group-control .zent-slider {
+      .mp-design-component-whitespace-editor__height .mp-design-editor__control-group-control .zent-slider {
         flex-grow: 1;
       }
 
-.mp-design-component-whitespace-editor__height .mp-design-editor__control-group-control .zent-slider .zent-slider-main {
+      .mp-design-component-whitespace-editor__height .mp-design-editor__control-group-control .zent-slider .zent-slider-main {
           border-color: transparent;
         }
 
 .mp-design-component-line-editor .zent-radio-wrap {
     display: inline-block;
   }
-
-.mp-design-component-line-editor .mp-design-component-line-editor_color-reset {
+  .mp-design-component-line-editor .mp-design-component-line-editor_color-reset {
     font-size: 12px;
     color: #38f;
     cursor: pointer;
   }
-
 .mp-design-component-line-preview {
   padding: 20px 0;
 }
@@ -3559,15 +3539,15 @@ mark {
   z-index: 2000;
 }
 
-.mp-design-component-richtext__link .zent-form__control-label {
+  .mp-design-component-richtext__link .zent-form__control-label {
     width: 60px;
   }
 
-.mp-design-component-richtext__link .zent-input-wrapper {
+  .mp-design-component-richtext__link .zent-input-wrapper {
     width: 300px;
   }
 
-.mp-design-component-richtext__link .btn-primary {
+  .mp-design-component-richtext__link .btn-primary {
     margin-right: 10px;
   }
 
@@ -3785,19 +3765,18 @@ mark {
     padding: 5px 10px;
   }
 
+
 .mp-design-component-image-ad-editor .mp-design-editor__control-group-label {
     width: 5em;
     text-align: left;
   }
-
-.mp-design-component-image-ad-editor__image-entry {
+  .mp-design-component-image-ad-editor__image-entry {
     background: #fff;
     border: 1px solid #e5e5e5;
     padding: 10px;
     display: flex;
   }
-
-.mp-design-component-image-ad-editor__image-entry-image-container {
+  .mp-design-component-image-ad-editor__image-entry-image-container {
       width: 120px;
       height: 120px;
       flex: 0 0 120px;
@@ -3805,8 +3784,7 @@ mark {
       margin-right: 10px;
       position: relative;
     }
-
-.mp-design-component-image-ad-editor__image-entry-image-container img {
+  .mp-design-component-image-ad-editor__image-entry-image-container img {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -3815,15 +3793,13 @@ mark {
         max-width: 100%;
         max-height: 100%;
       }
-
-.mp-design-component-image-ad-editor__image-entry-image-upload {
+  .mp-design-component-image-ad-editor__image-entry-image-upload {
       position: absolute;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-
-.mp-design-component-image-ad-editor__image-entry-image-upload input {
+  .mp-design-component-image-ad-editor__image-entry-image-upload input {
         position: absolute;
         top: 0;
         left: 0;
@@ -3833,8 +3809,7 @@ mark {
         opacity: 0;
         cursor: pointer;
       }
-
-.mp-design-component-image-ad-editor__image-entry-image-upload--has-image {
+  .mp-design-component-image-ad-editor__image-entry-image-upload--has-image {
         bottom: 0;
         left: 0;
         width: 100%;
@@ -3842,51 +3817,42 @@ mark {
         background: rgba(0, 0, 0, 0.6);
         color: #fff;
       }
-
-.mp-design-component-image-ad-editor__image-entry-image-upload--no-image {
+  .mp-design-component-image-ad-editor__image-entry-image-upload--no-image {
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
       }
-
-.mp-design-component-image-ad-editor__image-entry-image-upload--no-image b {
+  .mp-design-component-image-ad-editor__image-entry-image-upload--no-image b {
           font-size: 20px;
           margin-right: 5px;
         }
-
-.mp-design-component-image-ad-editor__image-entry-controls {
+  .mp-design-component-image-ad-editor__image-entry-controls {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-
-.mp-design-component-image-ad-editor__image-entry-image-control {
+  .mp-design-component-image-ad-editor__image-entry-image-control {
       display: flex;
       align-items: center
     }
-
-.mp-design-component-image-ad-editor__image-entry-image-control:first-child {
-  margin-bottom: 10px;
+  .mp-design-component-image-ad-editor__image-entry-image-control:first-child {
+    margin-bottom: 10px;
 }
-
-.mp-design-component-image-ad-editor__image-entry-image-control label {
+  .mp-design-component-image-ad-editor__image-entry-image-control label {
         width: 3em;
 }
-
-.mp-design-component-image-ad-editor__image-entry-image-control .zent-input-wrapper {
+  .mp-design-component-image-ad-editor__image-entry-image-control .zent-input-wrapper {
         flex: 1;
 }
-
-.mp-design-component-image-ad-editor__image-entry-error {
+  .mp-design-component-image-ad-editor__image-entry-error {
       color: #f44;
       position: absolute;
       bottom: 15px;
       left: 30px;
     }
-
-.mp-design-component-image-ad-editor__add-entry-btn {
+  .mp-design-component-image-ad-editor__add-entry-btn {
     height: 45px;
     display: flex;
     align-items: center;
@@ -3896,8 +3862,7 @@ mark {
     padding-left: 10px;
     position: relative;
   }
-
-.mp-design-component-image-ad-editor__add-entry-btn input {
+  .mp-design-component-image-ad-editor__add-entry-btn input {
       position: absolute;
       top: 0;
       left: 0;
@@ -3907,51 +3872,42 @@ mark {
       opacity: 0;
       cursor: pointer;
     }
-
-.mp-design-component-image-ad-editor__add-entry-btn b {
+  .mp-design-component-image-ad-editor__add-entry-btn b {
       font-size: 20px;
       margin-right: 5px;
       margin-top: -2px;
     }
-
-.mp-design-component-image-ad-editor__hint {
+  .mp-design-component-image-ad-editor__hint {
     margin-top: 10px;
     color: #666;
   }
-
-.mp-design-component-image-ad-editor__entry {
+  .mp-design-component-image-ad-editor__entry {
     position: relative;
   }
-
-.mp-design-component-image-ad-editor__entry-prepend-btn,
+  .mp-design-component-image-ad-editor__entry-prepend-btn,
     .mp-design-component-image-ad-editor__entry-append-btn,
     .mp-design-component-image-ad-editor__entry-close-btn {
       display: none;
     }
-
-.mp-design-component-image-ad-editor__entry:hover .mp-design-component-image-ad-editor__entry-close-btn,
+  .mp-design-component-image-ad-editor__entry:hover .mp-design-component-image-ad-editor__entry-close-btn,
       .mp-design-component-image-ad-editor__entry:hover .mp-design-component-image-ad-editor__entry-prepend-btn,
       .mp-design-component-image-ad-editor__entry:hover .mp-design-component-image-ad-editor__entry-append-btn {
         display: inline-block;
 }
-
-.mp-design-component-image-ad-editor__entry:not(:last-child) {
-  margin-bottom: 15px;
+  .mp-design-component-image-ad-editor__entry:not(:last-child) {
+    margin-bottom: 15px;
 }
-
-.mp-design-component-image-ad-editor__entry-close-btn {
+  .mp-design-component-image-ad-editor__entry-close-btn {
       position: absolute;
       top: -6px;
       right: -6px;
       color: #bbb;
       font-size: 18px;
 }
-
-.mp-design-component-image-ad-editor__entry-close-btn:hover {
-  color: #999;
+  .mp-design-component-image-ad-editor__entry-close-btn:hover {
+    color: #999;
 }
-
-.mp-design-component-image-ad-editor__entry-prepend-btn,
+  .mp-design-component-image-ad-editor__entry-prepend-btn,
     .mp-design-component-image-ad-editor__entry-append-btn {
       background: #59f;
       border-radius: 50%;
@@ -3960,30 +3916,25 @@ mark {
       font-size: 10px;
       position: absolute;
 }
-
-.mp-design-component-image-ad-editor__entry-prepend-btn:hover,
+  .mp-design-component-image-ad-editor__entry-prepend-btn:hover,
     .mp-design-component-image-ad-editor__entry-append-btn:hover {
       background: #38f;
 }
-
-.mp-design-component-image-ad-editor__entry-prepend-btn {
+  .mp-design-component-image-ad-editor__entry-prepend-btn {
       top: 0;
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%);
 }
-
-.mp-design-component-image-ad-editor__entry-append-btn {
+  .mp-design-component-image-ad-editor__entry-append-btn {
       bottom: 1px;
       left: 50%;
       -webkit-transform: translate(-50%, 50%);
               transform: translate(-50%, 50%);
 }
-
 .mp-design-component-image-ad-preview {
   position: relative;
 }
-
 .mp-design-component-image-ad-preview--no-data {
     height: 100px;
     line-height: 100px;
@@ -3991,12 +3942,10 @@ mark {
     background: #bdf;
     color: #fff;
   }
-
 .mp-design-component-image-ad-preview__image {
     box-sizing: border-box;
     position: relative;
   }
-
 .mp-design-component-image-ad-preview__image-title {
       position: absolute;
       bottom: 0;
@@ -4011,12 +3960,10 @@ mark {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
 .mp-design-component-image-ad-preview__image-img {
       padding-top: 100%;
       position: relative;
     }
-
 .mp-design-component-image-ad-preview__image img {
       max-width: 100%;
       max-height: 100%;
@@ -4026,12 +3973,10 @@ mark {
       -webkit-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%);
     }
-
 .mp-design-component-image-ad-preview--small {
     display: flex;
     flex-wrap: wrap;
   }
-
 .mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image {
       width: 50%;
       flex: 0 0 50%;
@@ -4040,32 +3985,29 @@ mark {
 
       /* first two */
     }
-
 .mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image:nth-child(-n+2) {
-  margin-top: 0;
+    margin-top: 0;
 }
+.mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image {
 
-.mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image {/* odd */
+    /* odd */
 }
-
 .mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image:nth-child(2n+1) {
-  padding-right: 3px;
+    padding-right: 3px;
 }
+.mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image {
 
-.mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image {/* even */
+    /* even */
 }
-
 .mp-design-component-image-ad-preview--small .mp-design-component-image-ad-preview__image:nth-child(2n) {
-  padding-left: 3px;
+    padding-left: 3px;
 }
-
 .mp-design-component-image-ad-preview--large .mp-design-component-image-ad-preview__image {
       width: 100%;
       margin-top: 5px
     }
-
 .mp-design-component-image-ad-preview--large .mp-design-component-image-ad-preview__image:first-child {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 
