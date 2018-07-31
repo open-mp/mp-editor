@@ -1,7 +1,7 @@
 import React from 'react';
 import {Radio,Icon} from 'zent';
 import { Droppable } from 'react-beautiful-dnd';
-import createObjectURL from '../../../utils/createObjectURL';
+import createObjectURL from 'zent/lib/utils/createObjectURL';
 import findIndex from 'lodash/findIndex';
 import isEmpty from 'lodash/isEmpty';
 

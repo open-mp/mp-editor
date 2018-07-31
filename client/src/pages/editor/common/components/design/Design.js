@@ -37,8 +37,8 @@ import isEmpty from 'lodash/isEmpty';
 import isUndefined from 'lodash/isUndefined';
 import defaultTo from 'lodash/defaultTo';
 import isFunction from 'lodash/isFunction';
-import * as storage from '../utils/storage';
-import uuid from '../utils/uuid';
+import * as storage from 'zent/lib/utils/storage';
+import uuid from 'zent/lib/utils/uuid';
 
 import DesignPreview from './preview/DesignPreview';
 import {

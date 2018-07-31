@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Input} from 'zent';
-import uuid from '../../../utils/uuid';
+import uuid from 'zent/lib/utils/uuid';
 import { Draggable } from 'react-beautiful-dnd';
-import createObjectURL from '../../../utils/createObjectURL';
+import createObjectURL from 'zent/lib/utils/createObjectURL';
 import cx from 'classnames';
 
 import { IMAGE_AD_ENTRY_UUID_KEY, IMAGE_AD_DND_TYPE } from './constants';

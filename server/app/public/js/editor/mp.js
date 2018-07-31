@@ -58249,6 +58249,26 @@ function animatedClosable(Origin) {
 
 /***/ }),
 
+/***/ "./node_modules/zent/lib/utils/createObjectURL.js":
+/*!********************************************************!*\
+  !*** ./node_modules/zent/lib/utils/createObjectURL.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = createObjectURL;
+function createObjectURL(object) {
+  return window.URL ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object);
+}
+
+/***/ }),
+
 /***/ "./node_modules/zent/lib/utils/dom/findPositionedParent.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/zent/lib/utils/dom/findPositionedParent.js ***!
@@ -58509,6 +58529,65 @@ function kindOf(MaybeDerive, Base) {
 
 /***/ }),
 
+/***/ "./node_modules/zent/lib/utils/reorder.js":
+/*!************************************************!*\
+  !*** ./node_modules/zent/lib/utils/reorder.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = reorder;
+/*
+   * Utility to reorder list
+   * Scans the list only once.
+  */
+function reorder(array, fromIndex, toIndex) {
+  var lastIndex = array.length - 1;
+  var firstIndex = 0;
+  var result = new Array(array.length);
+  var tmp = void 0;
+
+  if (fromIndex === toIndex) {
+    return array;
+  } else if (fromIndex < toIndex) {
+    for (var i = firstIndex; i <= lastIndex; i++) {
+      if (i === fromIndex) {
+        tmp = array[i];
+      } else if (i > fromIndex && i < toIndex) {
+        result[i - 1] = array[i];
+      } else if (i === toIndex) {
+        result[i - 1] = array[i];
+        result[i] = tmp;
+      } else {
+        result[i] = array[i];
+      }
+    }
+  } else {
+    for (var _i = lastIndex; _i >= firstIndex; _i--) {
+      if (_i === fromIndex) {
+        tmp = array[_i];
+      } else if (_i < fromIndex && _i > toIndex) {
+        result[_i + 1] = array[_i];
+      } else if (_i === toIndex) {
+        result[_i] = tmp;
+        result[_i + 1] = array[_i];
+      } else {
+        result[_i] = array[_i];
+      }
+    }
+  }
+
+  return result;
+}
+
+/***/ }),
+
 /***/ "./node_modules/zent/lib/utils/scroll.js":
 /*!***********************************************!*\
   !*** ./node_modules/zent/lib/utils/scroll.js ***!
@@ -58637,6 +58716,220 @@ function smoothScroll(el, x, y) {
     x: x,
     y: y
   });
+}
+
+/***/ }),
+
+/***/ "./node_modules/zent/lib/utils/shallowEqual.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/zent/lib/utils/shallowEqual.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof2 = __webpack_require__(/*! babel-runtime/helpers/typeof */ "./node_modules/babel-runtime/helpers/typeof.js");
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { 'default': obj };
+}
+
+/**
+ * Adapted from https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/shallowEqual.js
+ */
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  // SameValue algorithm
+  if (x === y) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    return x !== 0 || 1 / x === 1 / y;
+  }
+  // Step 6.a: NaN == NaN
+  return x !== x && y !== y; // eslint-disable-line
+}
+
+/**
+ * Performs equality by iterating through keys on an object and returning false
+ * when any key has values which are not strictly equal between the arguments.
+ * Returns true when the values of all keys are strictly equal.
+ */
+function shallowEqual(objA, objB) {
+  if (is(objA, objB)) {
+    return true;
+  }
+
+  if ((typeof objA === 'undefined' ? 'undefined' : (0, _typeof3['default'])(objA)) !== 'object' || objA === null || (typeof objB === 'undefined' ? 'undefined' : (0, _typeof3['default'])(objB)) !== 'object' || objB === null) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  // Test for A's keys different from B.
+  for (var i = 0; i < keysA.length; i++) {
+    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+exports['default'] = shallowEqual;
+
+/***/ }),
+
+/***/ "./node_modules/zent/lib/utils/storage.js":
+/*!************************************************!*\
+  !*** ./node_modules/zent/lib/utils/storage.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NOT_FOUND = undefined;
+
+var _defineProperty2 = __webpack_require__(/*! babel-runtime/helpers/defineProperty */ "./node_modules/babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+exports.read = read;
+exports.write = write;
+exports.remove = remove;
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+var NOT_FOUND = exports.NOT_FOUND = function NOT_FOUND() {};
+
+function read(namespace, key) {
+  var ns = readNamespace(namespace);
+  if (ns !== NOT_FOUND && ns && ns.hasOwnProperty(key)) {
+    return ns[key];
+  }
+
+  return NOT_FOUND;
+}
+
+/**
+ * 将 key 对应的 value 写入 namespace 下
+ * 比较暴力，如果无法写入会把所有 Design 相关的缓存清除
+ * @param {string} namespace
+ * @param {string} key
+ * @param {any} value
+ * @return {bool} true 表示成功，false 写入失败
+ */
+function write(namespace, key, value) {
+  var ns = readNamespace(namespace);
+  var isRemove = value === undefined;
+
+  // 不存在就创建一个新的
+  if (ns === NOT_FOUND) {
+    ns = {};
+  }
+
+  if (isRemove) {
+    // 删除
+    delete ns[key];
+  } else {
+    // 新增／更新
+    ns[key] = value;
+  }
+
+  if (writeNamespace(namespace, ns)) {
+    return true;
+  }
+
+  // 写入失败，尝试清空 namespace 下的所有值再重试
+  ns = (0, _defineProperty3["default"])({}, key, value);
+  return writeNamespace(namespace, ns);
+}
+
+function remove(namespace, key) {
+  return write(namespace, key, undefined);
+}
+
+function readNamespace(namespace) {
+  var ns = localStorage.getItem(namespace);
+  if (!ns) {
+    return NOT_FOUND;
+  }
+
+  try {
+    return JSON.parse(ns);
+  } catch (ex) {
+    return NOT_FOUND;
+  }
+}
+
+function writeNamespace(namespace, value) {
+  try {
+    if (Object.keys(value).length === 0) {
+      localStorage.removeItem(namespace);
+    } else {
+      var ns = JSON.stringify(value);
+      localStorage.setItem(namespace, ns);
+    }
+  } catch (ex) {
+    return false;
+  }
+
+  return true;
+}
+
+/***/ }),
+
+/***/ "./node_modules/zent/lib/utils/uuid.js":
+/*!*********************************************!*\
+  !*** ./node_modules/zent/lib/utils/uuid.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports['default'] = uuid;
+
+var _v = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
+
+var _v2 = _interopRequireDefault(_v);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { 'default': obj };
+}
+
+// Ignore all arguments
+function uuid() {
+  return (0, _v2['default'])();
 }
 
 /***/ }),
@@ -58809,11 +59102,11 @@ var _isFunction = __webpack_require__(/*! lodash/isFunction */ "./node_modules/l
 
 var _isFunction2 = _interopRequireDefault(_isFunction);
 
-var _storage = __webpack_require__(/*! ../utils/storage */ "./src/pages/editor/common/components/utils/storage.js");
+var _storage = __webpack_require__(/*! zent/lib/utils/storage */ "./node_modules/zent/lib/utils/storage.js");
 
 var storage = _interopRequireWildcard(_storage);
 
-var _uuid = __webpack_require__(/*! ../utils/uuid */ "./src/pages/editor/common/components/utils/uuid.js");
+var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/lib/utils/uuid.js");
 
 var _uuid2 = _interopRequireDefault(_uuid);
 
@@ -60282,7 +60575,7 @@ var _icon2 = _interopRequireDefault(_icon);
 
 var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
 
-var _createObjectURL = __webpack_require__(/*! ../../../utils/createObjectURL */ "./src/pages/editor/common/components/utils/createObjectURL.js");
+var _createObjectURL = __webpack_require__(/*! zent/lib/utils/createObjectURL */ "./node_modules/zent/lib/utils/createObjectURL.js");
 
 var _createObjectURL2 = _interopRequireDefault(_createObjectURL);
 
@@ -60764,13 +61057,13 @@ var _input = __webpack_require__(/*! zent/lib/input */ "./node_modules/zent/lib/
 
 var _input2 = _interopRequireDefault(_input);
 
-var _uuid = __webpack_require__(/*! ../../../utils/uuid */ "./src/pages/editor/common/components/utils/uuid.js");
+var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/lib/utils/uuid.js");
 
 var _uuid2 = _interopRequireDefault(_uuid);
 
 var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
 
-var _createObjectURL = __webpack_require__(/*! ../../../utils/createObjectURL */ "./src/pages/editor/common/components/utils/createObjectURL.js");
+var _createObjectURL = __webpack_require__(/*! zent/lib/utils/createObjectURL */ "./node_modules/zent/lib/utils/createObjectURL.js");
 
 var _createObjectURL2 = _interopRequireDefault(_createObjectURL);
 
@@ -61552,7 +61845,7 @@ var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-type
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _uuid = __webpack_require__(/*! ../../../../utils/uuid */ "./src/pages/editor/common/components/utils/uuid.js");
+var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/lib/utils/uuid.js");
 
 var _uuid2 = _interopRequireDefault(_uuid);
 
@@ -62691,11 +62984,11 @@ var _assign3 = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/a
 
 var _assign4 = _interopRequireDefault(_assign3);
 
-var _reorder2 = __webpack_require__(/*! ../../utils/reorder */ "./src/pages/editor/common/components/utils/reorder.js");
+var _reorder2 = __webpack_require__(/*! zent/lib/utils/reorder */ "./node_modules/zent/lib/utils/reorder.js");
 
 var _reorder3 = _interopRequireDefault(_reorder2);
 
-var _shallowEqual = __webpack_require__(/*! ../../utils/shallowEqual */ "./src/pages/editor/common/components/utils/shallowEqual.js");
+var _shallowEqual = __webpack_require__(/*! zent/lib/utils/shallowEqual */ "./node_modules/zent/lib/utils/shallowEqual.js");
 
 var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
@@ -64381,7 +64674,7 @@ var _isFunction = __webpack_require__(/*! lodash/isFunction */ "./node_modules/l
 
 var _isFunction2 = _interopRequireDefault(_isFunction);
 
-var _scroll = __webpack_require__(/*! ../..//utils/scroll */ "./src/pages/editor/common/components/utils/scroll.js");
+var _scroll = __webpack_require__(/*! zent/lib/utils/scroll */ "./node_modules/zent/lib/utils/scroll.js");
 
 var _scroll2 = _interopRequireDefault(_scroll);
 
@@ -64846,430 +65139,6 @@ function offset(node) {
     top: bb.top + y,
     left: bb.left + x
   };
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/createObjectURL.js":
-/*!*********************************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/createObjectURL.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = createObjectURL;
-function createObjectURL(object) {
-  return window.URL ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object);
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/isBrowser.js":
-/*!***************************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/isBrowser.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = !!(typeof window !== 'undefined' && window);
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/reorder.js":
-/*!*************************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/reorder.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = reorder;
-/*
-   * Utility to reorder list
-   * Scans the list only once.
-  */
-function reorder(array, fromIndex, toIndex) {
-  var lastIndex = array.length - 1;
-  var firstIndex = 0;
-  var result = new Array(array.length);
-  var tmp = void 0;
-
-  if (fromIndex === toIndex) {
-    return array;
-  } else if (fromIndex < toIndex) {
-    for (var i = firstIndex; i <= lastIndex; i++) {
-      if (i === fromIndex) {
-        tmp = array[i];
-      } else if (i > fromIndex && i < toIndex) {
-        result[i - 1] = array[i];
-      } else if (i === toIndex) {
-        result[i - 1] = array[i];
-        result[i] = tmp;
-      } else {
-        result[i] = array[i];
-      }
-    }
-  } else {
-    for (var _i = lastIndex; _i >= firstIndex; _i--) {
-      if (_i === fromIndex) {
-        tmp = array[_i];
-      } else if (_i < fromIndex && _i > toIndex) {
-        result[_i + 1] = array[_i];
-      } else if (_i === toIndex) {
-        result[_i] = tmp;
-        result[_i + 1] = array[_i];
-      } else {
-        result[_i] = array[_i];
-      }
-    }
-  }
-
-  return result;
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/scroll.js":
-/*!************************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/scroll.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = smoothScroll;
-
-var _raf = __webpack_require__(/*! raf */ "./node_modules/raf/index.js");
-
-var _raf2 = _interopRequireDefault(_raf);
-
-var _isBrowser = __webpack_require__(/*! ./isBrowser */ "./src/pages/editor/common/components/utils/isBrowser.js");
-
-var _isBrowser2 = _interopRequireDefault(_isBrowser);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Adapted from https://github.com/alicelieutier/smoothScroll
- */
-
-var SCROLL_TIME = 250;
-var w = _isBrowser2.default ? window : {};
-var d = _isBrowser2.default ? document : {};
-var originalScroll = w.scroll || w.scrollTo;
-var now = w.performance && w.performance.now ? w.performance.now.bind(w.performance) : Date.now;
-
-/**
- * changes scroll position inside an element
- * @method scrollElement
- * @param {Number} x
- * @param {Number} y
- */
-function scrollElement(x, y) {
-  this.scrollLeft = x;
-  this.scrollTop = y;
-}
-
-/**
- * returns result of applying ease math function to a number
- * @method ease
- * @param {Number} k
- * @returns {Number}
- */
-function ease(k) {
-  return 0.5 * (1 - Math.cos(Math.PI * k));
-}
-
-/**
- * self invoked function that, given a context, steps through scrolling
- * @method step
- * @param {Object} context
- */
-function step(context) {
-  var time = now();
-  var elapsed = (time - context.startTime) / context.duration;
-
-  // avoid elapsed times higher than one
-  elapsed = elapsed > 1 ? 1 : elapsed;
-
-  // apply easing to elapsed time
-  var value = ease(elapsed);
-  var currentX = context.startX + (context.x - context.startX) * value;
-  var currentY = context.startY + (context.y - context.startY) * value;
-
-  context.method.call(context.scrollable, currentX, currentY);
-
-  // scroll more if we have not reached our destination
-  if (currentX !== context.x || currentY !== context.y) {
-    (0, _raf2.default)(step.bind(w, context));
-  }
-}
-
-/**
- * scrolls element with a smooth behavior
- * @method smoothScroll
- * @param {Object|Node} el element to scroll
- * @param {Number} x target position x
- * @param {Number} y target position y
- * @param {Number} duration animation duration
- */
-function smoothScroll(el, x, y) {
-  var duration = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : SCROLL_TIME;
-
-  if (!_isBrowser2.default) {
-    return;
-  }
-
-  var scrollable = void 0;
-  var startX = void 0;
-  var startY = void 0;
-  var method = void 0;
-  var startTime = now();
-
-  // define scroll context
-  if (el === d.body || el === w) {
-    scrollable = w;
-    startX = w.scrollX || w.pageXOffset;
-    startY = w.scrollY || w.pageYOffset;
-    method = originalScroll;
-  } else {
-    scrollable = el;
-    startX = el.scrollLeft;
-    startY = el.scrollTop;
-    method = scrollElement;
-  }
-
-  // scroll looping over a frame
-  step({
-    duration: duration,
-    scrollable: scrollable,
-    method: method,
-    startTime: startTime,
-    startX: startX,
-    startY: startY,
-    x: x,
-    y: y
-  });
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/shallowEqual.js":
-/*!******************************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/shallowEqual.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * Adapted from https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/shallowEqual.js
- */
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-/**
- * inlined Object.is polyfill to avoid requiring consumers ship their own
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
- */
-function is(x, y) {
-  // SameValue algorithm
-  if (x === y) {
-    // Steps 1-5, 7-10
-    // Steps 6.b-6.e: +0 != -0
-    return x !== 0 || 1 / x === 1 / y;
-  }
-  // Step 6.a: NaN == NaN
-  return x !== x && y !== y; // eslint-disable-line
-}
-
-/**
- * Performs equality by iterating through keys on an object and returning false
- * when any key has values which are not strictly equal between the arguments.
- * Returns true when the values of all keys are strictly equal.
- */
-function shallowEqual(objA, objB) {
-  if (is(objA, objB)) {
-    return true;
-  }
-
-  if ((typeof objA === 'undefined' ? 'undefined' : _typeof(objA)) !== 'object' || objA === null || (typeof objB === 'undefined' ? 'undefined' : _typeof(objB)) !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  // Test for A's keys different from B.
-  for (var i = 0; i < keysA.length; i++) {
-    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-exports.default = shallowEqual;
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/storage.js":
-/*!*************************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/storage.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.read = read;
-exports.write = write;
-exports.remove = remove;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var NOT_FOUND = exports.NOT_FOUND = function NOT_FOUND() {};
-
-function read(namespace, key) {
-  var ns = readNamespace(namespace);
-  if (ns !== NOT_FOUND && ns && ns.hasOwnProperty(key)) {
-    return ns[key];
-  }
-
-  return NOT_FOUND;
-}
-
-/**
- * 将 key 对应的 value 写入 namespace 下
- * 比较暴力，如果无法写入会把所有 Design 相关的缓存清除
- * @param {string} namespace
- * @param {string} key
- * @param {any} value
- * @return {bool} true 表示成功，false 写入失败
- */
-function write(namespace, key, value) {
-  var ns = readNamespace(namespace);
-  var isRemove = value === undefined;
-
-  // 不存在就创建一个新的
-  if (ns === NOT_FOUND) {
-    ns = {};
-  }
-
-  if (isRemove) {
-    // 删除
-    delete ns[key];
-  } else {
-    // 新增／更新
-    ns[key] = value;
-  }
-
-  if (writeNamespace(namespace, ns)) {
-    return true;
-  }
-
-  // 写入失败，尝试清空 namespace 下的所有值再重试
-  ns = _defineProperty({}, key, value);
-  return writeNamespace(namespace, ns);
-}
-
-function remove(namespace, key) {
-  return write(namespace, key, undefined);
-}
-
-function readNamespace(namespace) {
-  var ns = localStorage.getItem(namespace);
-  if (!ns) {
-    return NOT_FOUND;
-  }
-
-  try {
-    return JSON.parse(ns);
-  } catch (ex) {
-    return NOT_FOUND;
-  }
-}
-
-function writeNamespace(namespace, value) {
-  try {
-    if (Object.keys(value).length === 0) {
-      localStorage.removeItem(namespace);
-    } else {
-      var ns = JSON.stringify(value);
-      localStorage.setItem(namespace, ns);
-    }
-  } catch (ex) {
-    return false;
-  }
-
-  return true;
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/common/components/utils/uuid.js":
-/*!**********************************************************!*\
-  !*** ./src/pages/editor/common/components/utils/uuid.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = uuid;
-
-var _v = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
-
-var _v2 = _interopRequireDefault(_v);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Ignore all arguments
-function uuid() {
-  return (0, _v2.default)();
 }
 
 /***/ }),
