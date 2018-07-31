@@ -19,8 +19,8 @@ export default class RichtextPreview extends Component {
     return (
       <div
         dangerouslySetInnerHTML={{ __html: content }} // eslint-disable-line
-        className={cx('zent-design-component-richtext-preview', {
-          'zent-design-component-richtext-preview--fullscreen': fullscreen,
+        className={cx('mp-design-component-richtext-preview', {
+          'mp-design-component-richtext-preview--fullscreen': fullscreen,
         })}
         style={{ backgroundColor: color }}
       />

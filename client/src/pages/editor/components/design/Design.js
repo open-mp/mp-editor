@@ -195,7 +195,7 @@ export default class Design extends PureComponent {
       '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？',
     scrollTopOffset: -10,
     scrollLeftOffset: -10,
-    prefix: 'zent',
+    prefix: 'mp',
   };
 
   constructor(props) {

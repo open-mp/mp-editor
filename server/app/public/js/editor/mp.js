@@ -8866,7 +8866,7 @@ Design.defaultProps = {
   cacheRestoreMessage: '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？',
   scrollTopOffset: -10,
   scrollLeftOffset: -10,
-  prefix: 'zent'
+  prefix: 'mp'
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -11829,8 +11829,7 @@ var Simple = function (_React$Component) {
           settings: this.state.settings,
           onSettingsChange: this.onSettingsChange,
           scrollTopOffset: -270,
-          globalConfig: window._global,
-          prefix: 'mp'
+          globalConfig: window._global
         }),
         _react2.default.createElement(
           'div',
@@ -13524,8 +13523,8 @@ var RichtextPreview = function (_Component) {
 
       return _react2.default.createElement('div', {
         dangerouslySetInnerHTML: { __html: content } // eslint-disable-line
-        , className: (0, _classnames2.default)('zent-design-component-richtext-preview', {
-          'zent-design-component-richtext-preview--fullscreen': fullscreen
+        , className: (0, _classnames2.default)('mp-design-component-richtext-preview', {
+          'mp-design-component-richtext-preview--fullscreen': fullscreen
         }),
         style: { backgroundColor: color }
       });

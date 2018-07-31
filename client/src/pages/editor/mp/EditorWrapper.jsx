@@ -78,7 +78,6 @@ class Simple extends React.Component {
           onSettingsChange={this.onSettingsChange}
           scrollTopOffset={-270}
           globalConfig={window._global}
-          prefix="mp"          
         />
         <div className="design-example-actions">
           <Button type="primary" onClick={this.submit}>
