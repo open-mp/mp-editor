@@ -5,6 +5,7 @@ module.exports = function(config){
     rules: [
       {
         test: /\.jsx?$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
       },
       {

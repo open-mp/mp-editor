@@ -5,6 +5,6 @@
         }
       }], "react","stage-1"],
       "plugins": [
-        ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
+        ["zent"],["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
       ]
 }

@@ -11,7 +11,7 @@ module.exports = function (env) {
     env: '',
     assetsRoot,
     dll: {
-      base: ['query-string', 'axios','react','react-dom', 'zent/css/index.css']
+      base: ['query-string', 'axios','react','react-dom', 'zent/css/index.css', 'zent']
     },
     isProduction
   };
