@@ -10,53 +10,20 @@ import richtextConf from '../widget/richtext';
 import imageAdConf from '../widget/image-ad';
 
 const components = [
-  Object.assign({}, configConf, {
-    // 是否可以拖拽
-    dragable: false,
-
-    // 是否出现在底部的添加组件区域
-    appendable: false,
-
-    // 是否可以编辑，UMP里面有些地方config是不能编辑的
-    // editable: true,
-
-    configurable: false,
-
-    highlightWhenSelect: false
-  }),
-
+  configConf,
   richtextConf,
-
   imageAdConf,
-
-  Object.assign({ limit: 1 }, whitespaceConf),
-
-  Object.assign({ limit: 2 }, lineConf)
+  whitespaceConf,
+  lineConf
 ];
 
-const groupedComponents = [
-  Object.assign({}, configConf, {
-    // 是否可以拖拽
-    dragable: false,
-
-    // 是否出现在底部的添加组件区域
-    appendable: false,
-
-    // 是否可以编辑，UMP里面有些地方config是不能编辑的
-    // editable: true,
-
-    configurable: false,
-
-    highlightWhenSelect: false
-  }),
-
+const groupedComponents = [configConf,
   Design.group('基础'),
   richtextConf,
   imageAdConf,
-
   Design.group('其他'),
-  Object.assign({ limit: 1 }, whitespaceConf),
-  Object.assign({ limit: 2 }, lineConf)
+  whitespaceConf,
+  lineConf
 ];
 
 

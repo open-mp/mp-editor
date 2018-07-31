@@ -10258,7 +10258,7 @@ var _stripUUID2 = _interopRequireDefault(_stripUUID);
 
 var _componentGroup = __webpack_require__(/*! ./utils/component-group */ "./src/pages/editor/components/design/utils/component-group.js");
 
-__webpack_require__(/*! ../../css/design.pcss */ "./src/pages/editor/css/design.pcss");
+__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/components/design/index.pcss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10266,6 +10266,17 @@ _Design2.default.stripUUID = _stripUUID2.default;
 _Design2.default.group = _componentGroup.createGroup;
 
 exports.default = _Design2.default;
+
+/***/ }),
+
+/***/ "./src/pages/editor/components/design/index.pcss":
+/*!*******************************************************!*\
+  !*** ./src/pages/editor/components/design/index.pcss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -11601,17 +11612,6 @@ function offset(node) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/css/design.pcss":
-/*!******************************************!*\
-  !*** ./src/pages/editor/css/design.pcss ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./src/pages/editor/mp/App.jsx":
 /*!*************************************!*\
   !*** ./src/pages/editor/mp/App.jsx ***!
@@ -11753,35 +11753,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var components = [Object.assign({}, _config2.default, {
-  // 是否可以拖拽
-  dragable: false,
+var components = [_config2.default, _richtext2.default, _imageAd2.default, _whitespace2.default, _line2.default];
 
-  // 是否出现在底部的添加组件区域
-  appendable: false,
-
-  // 是否可以编辑，UMP里面有些地方config是不能编辑的
-  // editable: true,
-
-  configurable: false,
-
-  highlightWhenSelect: false
-}), _richtext2.default, _imageAd2.default, Object.assign({ limit: 1 }, _whitespace2.default), Object.assign({ limit: 2 }, _line2.default)];
-
-var groupedComponents = [Object.assign({}, _config2.default, {
-  // 是否可以拖拽
-  dragable: false,
-
-  // 是否出现在底部的添加组件区域
-  appendable: false,
-
-  // 是否可以编辑，UMP里面有些地方config是不能编辑的
-  // editable: true,
-
-  configurable: false,
-
-  highlightWhenSelect: false
-}), _index2.default.group('基础'), _richtext2.default, _imageAd2.default, _index2.default.group('其他'), Object.assign({ limit: 1 }, _whitespace2.default), Object.assign({ limit: 2 }, _line2.default)];
+var groupedComponents = [_config2.default, _index2.default.group('基础'), _richtext2.default, _imageAd2.default, _index2.default.group('其他'), _whitespace2.default, _line2.default];
 
 var Simple = function (_React$Component) {
   _inherits(Simple, _React$Component);
@@ -12245,7 +12219,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   type: _ConfigEditor2.default.designType,
   editor: _ConfigEditor2.default,
-  preview: _ConfigPreview2.default
+  preview: _ConfigPreview2.default,
+  // 是否可以拖拽
+  dragable: false,
+
+  // 是否出现在底部的添加组件区域
+  appendable: false,
+
+  // 是否可以编辑，UMP里面有些地方config是不能编辑的
+  editable: true,
+
+  configurable: false,
+
+  highlightWhenSelect: false
 };
 
 /***/ }),
@@ -14455,7 +14441,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   type: _RichtextEditor2.default.designType,
   editor: _RichtextEditor2.default,
-  preview: _RichtextPreview2.default
+  preview: _RichtextPreview2.default,
+  limit: 1
 };
 
 /***/ }),
@@ -14684,7 +14671,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   type: _WhitespaceEditor2.default.designType,
   editor: _WhitespaceEditor2.default,
-  preview: _WhitespacePreview2.default
+  preview: _WhitespacePreview2.default,
+  limit: 1
 };
 
 /***/ }),
