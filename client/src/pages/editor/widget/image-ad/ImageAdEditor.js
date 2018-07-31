@@ -5,7 +5,7 @@ import createObjectURL from 'zent/lib/utils/createObjectURL';
 import findIndex from 'lodash/findIndex';
 import isEmpty from 'lodash/isEmpty';
 
-import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
+import { DesignEditor, ControlGroup } from '../../components/design/editor/DesignEditor';
 import {
   IMAGE_SIZE,
   IMAGE_AD_LIMIT,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Slider}  from 'zent';
 
-import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
+import { DesignEditor, ControlGroup } from '../../components/design/editor/DesignEditor';
 
 export default class WhitespaceEditor extends DesignEditor {
   render() {

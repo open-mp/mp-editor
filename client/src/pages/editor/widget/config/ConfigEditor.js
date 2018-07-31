@@ -5,8 +5,8 @@ import {Button} from 'zent';
 import {Input} from 'zent';
 import {ColorPicker} from 'zent';
 
-import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
-import { DEFAULT_BACKGROUND } from '../../preview/constants';
+import { DesignEditor, ControlGroup } from '../../components/design/editor/DesignEditor';
+import { DEFAULT_BACKGROUND } from '../../components/design/preview/constants';
 
 export default class ConfigEditor extends DesignEditor {
   render() {

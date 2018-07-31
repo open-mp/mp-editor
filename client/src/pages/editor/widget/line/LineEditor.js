@@ -1,7 +1,7 @@
 import React from 'react';
 import {Radio, ColorPicker} from 'zent';
 
-import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
+import { DesignEditor, ControlGroup } from '../../components/design/editor/DesignEditor';
 
 const RadioGroup = Radio.Group;
 const DEFAULT_COLOR = '#e5e5e5';

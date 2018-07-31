@@ -1,7 +1,7 @@
 import React from 'react';
 import {ColorPicker, Button, Checkbox} from 'zent';
 
-import { DesignEditor, ControlGroup } from '../../editor/DesignEditor';
+import { DesignEditor, ControlGroup } from '../../components/design/editor/DesignEditor';
 import Richtext from './editor';
 
 const reserColor = '#f9f9f9';

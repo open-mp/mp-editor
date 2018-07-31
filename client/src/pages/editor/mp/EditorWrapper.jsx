@@ -1,13 +1,13 @@
 import React from 'react'
-import Design from '../common/components/design/index'
-import { Button } from 'zent';
+import Design from '../components/design/index'
+import { Button, Notify } from 'zent';
 
-import configConf from '../common/components/design/components/config';
-import ConfigEditor from '../common/components/design/components/config/ConfigEditor';
-import whitespaceConf from '../common/components/design/components/whitespace';
-import lineConf from '../common/components/design/components/line';
-import richtextConf from '../common/components/design/components/richtext';
-import imageAdConf from '../common/components/design/components/image-ad';
+import configConf from '../widget/config';
+import ConfigEditor from '../widget/config/ConfigEditor';
+import whitespaceConf from '../widget/whitespace';
+import lineConf from '../widget/line';
+import richtextConf from '../widget/richtext';
+import imageAdConf from '../widget/image-ad';
 
 import 'zent/css/design-config.css';
 import 'zent/css/design-whitespace.css';
