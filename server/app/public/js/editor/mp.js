@@ -11775,10 +11775,7 @@ var Simple = function (_React$Component) {
       grouped: true,
       value: [_extends({
         type: _config2.default.type
-      }, _ConfigEditor2.default.getInitialValue())],
-      settings: {
-        // previewBackground: 'red'
-      }
+      }, _ConfigEditor2.default.getInitialValue())]
     }, _this.onChange = function (newValue) {
       _this.setState({
         value: newValue
@@ -11797,7 +11794,7 @@ var Simple = function (_React$Component) {
     }, _this.saveDesign = function (instance) {
       _this.design = instance && instance.getDecoratedComponentInstance();
     }, _this.submit = function () {
-      _this.triggerDesignValidation().then(function () {
+      _this.design.validate().then(function () {
         var data = _index2.default.stripUUID(_this.state.value);
         console.log(data);
         // submit this.state.value to server
@@ -11826,7 +11823,6 @@ var Simple = function (_React$Component) {
           components: grouped ? groupedComponents : components,
           value: this.state.value,
           onChange: this.onChange,
-          settings: this.state.settings,
           onSettingsChange: this.onSettingsChange,
           scrollTopOffset: -270,
           globalConfig: window._global
@@ -11861,11 +11857,6 @@ var Simple = function (_React$Component) {
     key: 'notImplemented',
     value: function notImplemented() {
       _notify2.default.error('仅作为演示，功能未开发');
-    }
-  }, {
-    key: 'triggerDesignValidation',
-    value: function triggerDesignValidation() {
-      return this.design.validate();
     }
   }]);
 

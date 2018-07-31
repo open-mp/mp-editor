@@ -35,10 +35,7 @@ class Simple extends React.Component {
         type: configConf.type,
         ...ConfigEditor.getInitialValue()
       }
-    ],
-    settings: {
-      // previewBackground: 'red'
-    }
+    ]
   };
 
   onChange = newValue => {
@@ -74,7 +71,6 @@ class Simple extends React.Component {
           components={grouped ? groupedComponents : components}
           value={this.state.value}
           onChange={this.onChange}
-          settings={this.state.settings}
           onSettingsChange={this.onSettingsChange}
           scrollTopOffset={-270}
           globalConfig={window._global}
@@ -105,12 +101,8 @@ class Simple extends React.Component {
     this.design = instance && instance.getDecoratedComponentInstance();
   };
 
-  triggerDesignValidation() {
-    return this.design.validate();
-  }
-
   submit = () => {
-    this.triggerDesignValidation()
+    this.design.validate()
       .then(() => {
         const data = Design.stripUUID(this.state.value);
         console.log(data);
