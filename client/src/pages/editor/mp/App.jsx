@@ -1,17 +1,15 @@
 import React from 'react'
-import { Layout } from 'antd';
 import EditorWrapper from './EditorWrapper.jsx'
-const { Header, Footer, Sider, Content } = Layout;
 class App extends React.Component {
     render() {
             return (
-            <Layout style={{height: "100vh"}}>
-                <Sider width="300">
-                </Sider>
-                <Content Class="editor-content">
+            <div  className="mp-workspace">
+                <div className="mp-workspace--toolbox">
+                </div>
+                <div className="mp-workspace--editor-wrapper">
                     <EditorWrapper />
-                </Content>
-            </Layout>)
+                </div>
+            </div>)
     }
 }
 export default App;

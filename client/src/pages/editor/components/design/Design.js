@@ -177,8 +177,6 @@ export default class Design extends PureComponent {
     // 滚动到左侧时的偏移量
     scrollLeftOffset: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
 
-    children: PropTypes.node,
-
     className: PropTypes.string,
 
     prefix: PropTypes.string,
@@ -263,6 +261,7 @@ export default class Design extends PureComponent {
 
     return (
       <div className={cls} style={{ paddingBottom: bottomGap }}>
+        {/* 缓存提示 */}
         {showRestoreFromCache && (
           <Alert
             className={`${prefix}-design__restore-cache-alert`}
@@ -280,10 +279,58 @@ export default class Design extends PureComponent {
             </a>
           </Alert>
         )}
+        {/* 预览区渲染 */}
         {this.renderPreview(preview)}
-        {children}
       </div>
     );
+  }
+
+  renderPreview(preview) {
+    const {
+      components,
+      value,
+      disabled,
+      settings,
+      previewFooter,
+      globalConfig,
+    } = this.props;
+    const {
+      selectedUUID,
+      appendableComponents,
+      showAddComponentOverlay,
+      addComponentOverlayPosition,
+      validations,
+      showError,
+      settings: managedSettings,
+      componentInstanceCount,
+    } = this.state;
+
+    return React.createElement(preview, {
+      components,
+      value,
+      validations,
+      showError,
+      settings: settings || managedSettings,
+      onSettingsChange: this.onSettingsChange,
+      footer: previewFooter,
+      componentInstanceCount,
+      onComponentValueChange: this.onComponentValueChange,
+      onAddComponent: this.onAdd,
+      appendableComponents,
+      selectedUUID,
+      getUUIDFromValue: this.getUUIDFromValue,
+      showAddComponentOverlay,
+      addComponentOverlayPosition,
+      onAdd: this.onShowAddComponentOverlay,
+      onEdit: this.onShowEditComponentOverlay,
+      onSelect: this.onSelect,
+      onMove: this.onMove,
+      onDelete: this.onDelete,
+      design: this.design,
+      globalConfig,
+      disabled,
+      ref: this.savePreview,
+    });
   }
 
   componentWillMount() {
@@ -344,56 +391,6 @@ export default class Design extends PureComponent {
       appendableComponents: components.filter(
         c => c.appendable === undefined || c.appendable
       ),
-    });
-  }
-
-  renderPreview(preview) {
-    const {
-      components,
-      prefix,
-      value,
-      disabled,
-      settings,
-      previewFooter,
-      globalConfig,
-    } = this.props;
-    const {
-      selectedUUID,
-      appendableComponents,
-      showAddComponentOverlay,
-      addComponentOverlayPosition,
-      validations,
-      showError,
-      settings: managedSettings,
-      componentInstanceCount,
-    } = this.state;
-
-    return React.createElement(preview, {
-      prefix,
-      components,
-      value,
-      validations,
-      showError,
-      settings: settings || managedSettings,
-      onSettingsChange: this.onSettingsChange,
-      footer: previewFooter,
-      componentInstanceCount,
-      onComponentValueChange: this.onComponentValueChange,
-      onAddComponent: this.onAdd,
-      appendableComponents,
-      selectedUUID,
-      getUUIDFromValue: this.getUUIDFromValue,
-      showAddComponentOverlay,
-      addComponentOverlayPosition,
-      onAdd: this.onShowAddComponentOverlay,
-      onEdit: this.onShowEditComponentOverlay,
-      onSelect: this.onSelect,
-      onMove: this.onMove,
-      onDelete: this.onDelete,
-      design: this.design,
-      globalConfig,
-      disabled,
-      ref: this.savePreview,
     });
   }
 
@@ -967,6 +964,10 @@ export default class Design extends PureComponent {
     };
   })();
 }
+
+// ================================================
+// 工具函数
+// ================================================
 
 function tagValuesWithUUID(values) {
   values.forEach(v => {

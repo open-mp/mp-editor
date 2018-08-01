@@ -11,10 +11,10 @@ export default {
   // 是否出现在底部的添加组件区域
   appendable: false,
 
-  // 是否可以编辑，UMP里面有些地方config是不能编辑的
+  // 是否可以编辑数据
   editable: true,
-
-  configurable: false,
-
+  // 鼠标在组件上时 是否展示快捷操作面板
+  configurable: true,
+  // 选中时是否高亮
   highlightWhenSelect: false
 };

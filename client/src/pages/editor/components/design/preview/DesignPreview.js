@@ -78,13 +78,16 @@ class DesignPreview extends PureComponent {
     background: '#f9f9f9',
     disabled: false,
     appendableComponents: [],
-    prefix: 'zent',
+    prefix: 'mp',
   };
 
   previewItems = {};
   editorItems = {};
   editors = {};
 
+  /**
+   * 流程
+   */
   render() {
     const {
       components,
