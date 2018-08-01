@@ -9777,6 +9777,11 @@ var DesignPreview = function (_PureComponent) {
 
   _createClass(DesignPreview, [{
     key: 'render',
+
+
+    /**
+     * 流程
+     */
     value: function render() {
       var _this2 = this,
           _cx3;

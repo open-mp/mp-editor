@@ -85,6 +85,9 @@ class DesignPreview extends PureComponent {
   editorItems = {};
   editors = {};
 
+  /**
+   * 流程
+   */
   render() {
     const {
       components,
