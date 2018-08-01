@@ -11006,11 +11006,11 @@ var App = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { Class: 'mp-workspace' },
-                _react2.default.createElement('div', { Class: 'mp-workspace--toolbox' }),
+                { className: 'mp-workspace' },
+                _react2.default.createElement('div', { className: 'mp-workspace--toolbox' }),
                 _react2.default.createElement(
                     'div',
-                    { Class: 'mp-workspace--editor-wrapper' },
+                    { className: 'mp-workspace--editor-wrapper' },
                     _react2.default.createElement(_EditorWrapper2.default, null)
                 )
             );
