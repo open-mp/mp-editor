@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+const prefix = 'mp';
 
 export default class ConfigPreview extends PureComponent {
   static propTypes = {
@@ -8,11 +9,10 @@ export default class ConfigPreview extends PureComponent {
     // 用来和 Design 交互
     design: PropTypes.object,
 
-    prefix: PropTypes.string,
   };
 
   render() {
-    const { value, prefix } = this.props;
+    const { value } = this.props;
 
     return (
       <div className={`${prefix}-design-component-config-preview`}>

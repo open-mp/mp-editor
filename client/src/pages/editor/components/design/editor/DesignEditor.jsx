@@ -1,5 +1,4 @@
 import React, { PureComponent, Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 import reorder from 'zent/lib/utils/reorder';

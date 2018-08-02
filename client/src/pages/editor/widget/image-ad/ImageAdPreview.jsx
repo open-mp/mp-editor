@@ -3,10 +3,11 @@ import cx from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { IMAGE_SIZE, IMAGE_AD_ENTRY_UUID_KEY } from './constants';
+const prefix = 'mp';
 
 export default class ImageAdPreview extends Component {
   render() {
-    const { value, prefix } = this.props;
+    const { value } = this.props;
     const { size, images } = value;
 
     if (isEmpty(images)) {

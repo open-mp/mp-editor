@@ -6,10 +6,11 @@ import get from 'lodash/get';
 import {Draggable} from 'react-beautiful-dnd';
 import {DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND} from './constants';
 
+const prefix = 'mp';
+
 class DesignPreviewController extends PureComponent {
 
     static defaultProps = {
-        prefix: 'mp',
     };
 
     render() {
@@ -23,7 +24,6 @@ class DesignPreviewController extends PureComponent {
             component: PreviewComponent,
             previewProps,
             settings,
-            prefix,
             id,
             index,
             allowHoverEffects,
@@ -71,7 +71,6 @@ class DesignPreviewController extends PureComponent {
                                 className={`${prefix}-design-preview-controller__drag-handle`}
                             >
                                 <PreviewComponent
-                                    prefix={prefix}
                                     {...previewProps}
                                     {...props}
                                 />
@@ -80,7 +79,7 @@ class DesignPreviewController extends PureComponent {
 
                             {showButtons &&
                             canDelete && (
-                                <DeleteButton prefix={prefix} onDelete={this.onDelete}/>
+                                <DeleteButton onDelete={this.onDelete}/>
                             )}
                         </div>
                     );
@@ -97,12 +96,12 @@ class DesignPreviewController extends PureComponent {
                         `${prefix}-design-preview-controller__drag-handle--inactive`
                     )}
                 >
-                    <PreviewComponent prefix={prefix} {...previewProps} {...props} />
+                    <PreviewComponent {...previewProps} {...props} />
                 </div>
 
                 {configurable &&
                 canDelete && (
-                    <DeleteButton prefix={prefix} onDelete={this.onDelete}/>
+                    <DeleteButton onDelete={this.onDelete}/>
                 )}
             </div>
         );
@@ -134,7 +133,7 @@ class DesignPreviewController extends PureComponent {
     }
 }
 
-function DeleteButton({prefix, onDelete}) {
+function DeleteButton({onDelete}) {
     return (
         <Pop
             content="确定删除？"
@@ -144,22 +143,13 @@ function DeleteButton({prefix, onDelete}) {
             onConfirm={onDelete}
             wrapperClassName={`${prefix}-design-preview-controller__action-btn-delete`}
         >
-            <IconDelete prefix={prefix} onClick={stopEventPropagation}/>
-        </Pop>
-    );
-}
-
-class IconDelete extends PureComponent {
-    render() {
-        const {prefix, onClick} = this.props;
-        return (
             <svg
                 width="20"
                 height="20"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
                 className={`${prefix}-design-preview-controller__icon-delete`}
-                onClick={onClick}
+                onClick={(evt)=>{ evt && evt.stopPropagation();}}
             >
                 <g fill="none" fillRule="evenodd">
                     <circle cx="10" cy="10" r="10"/>
@@ -169,12 +159,8 @@ class IconDelete extends PureComponent {
                     />
                 </g>
             </svg>
-        );
-    }
-}
-
-function stopEventPropagation(evt) {
-    evt && evt.stopPropagation();
+        </Pop>
+    );
 }
 
 export default DesignPreviewController;

@@ -9771,10 +9771,6 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -10116,7 +10112,7 @@ function isEventLikeObject(evt) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10143,54 +10139,52 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
+
 var DesignEditorItem = function (_PureComponent) {
-  _inherits(DesignEditorItem, _PureComponent);
+    _inherits(DesignEditorItem, _PureComponent);
 
-  function DesignEditorItem() {
-    _classCallCheck(this, DesignEditorItem);
+    function DesignEditorItem() {
+        _classCallCheck(this, DesignEditorItem);
 
-    return _possibleConstructorReturn(this, (DesignEditorItem.__proto__ || Object.getPrototypeOf(DesignEditorItem)).apply(this, arguments));
-  }
-
-  _createClass(DesignEditorItem, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          disabled = _props.disabled,
-          prefix = _props.prefix,
-          className = _props.className;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: (0, _classnames2.default)(prefix + '-design-editor-item', className) },
-        disabled && _react2.default.createElement('div', { className: prefix + '-design__disabled-mask' }),
-        this.props.children
-      );
+        return _possibleConstructorReturn(this, (DesignEditorItem.__proto__ || Object.getPrototypeOf(DesignEditorItem)).apply(this, arguments));
     }
-  }, {
-    key: 'getBoundingBox',
-    value: function getBoundingBox() {
-      var node = (0, _reactDom.findDOMNode)(this);
-      return node && node.getBoundingClientRect();
-    }
-  }]);
 
-  return DesignEditorItem;
+    _createClass(DesignEditorItem, [{
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                disabled = _props.disabled,
+                className = _props.className;
+
+
+            return _react2.default.createElement(
+                'div',
+                { className: (0, _classnames2.default)(prefix + '-design-editor-item', className) },
+                disabled && _react2.default.createElement('div', { className: prefix + '-design__disabled-mask' }),
+                this.props.children
+            );
+        }
+    }, {
+        key: 'getBoundingBox',
+        value: function getBoundingBox() {
+            var node = (0, _reactDom.findDOMNode)(this);
+            return node && node.getBoundingClientRect();
+        }
+    }]);
+
+    return DesignEditorItem;
 }(_react.PureComponent);
 
 DesignEditorItem.propTypes = {
-  children: _propTypes2.default.node.isRequired,
+    children: _propTypes2.default.node.isRequired,
 
-  disabled: _propTypes2.default.bool,
+    disabled: _propTypes2.default.bool,
 
-  prefix: _propTypes2.default.string,
-
-  className: _propTypes2.default.string
+    className: _propTypes2.default.string
 };
 DesignEditorItem.defaultProps = {
-  disabled: false,
-  prefix: 'zent'
+    disabled: false
 };
 exports.default = DesignEditorItem;
 
@@ -10472,7 +10466,6 @@ var DesignPreview = function (_PureComponent) {
                     selected && _react2.default.createElement(
                       EditorItem,
                       {
-                        prefix: prefix,
                         disabled: disabled,
                         ref: _this2.saveEditorItem(id)
                       },
@@ -10605,6 +10598,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
+
 var DesignPreviewController = function (_PureComponent) {
     _inherits(DesignPreviewController, _PureComponent);
 
@@ -10647,7 +10642,6 @@ var DesignPreviewController = function (_PureComponent) {
                 PreviewComponent = _props.component,
                 previewProps = _props.previewProps,
                 settings = _props.settings,
-                prefix = _props.prefix,
                 id = _props.id,
                 index = _props.index,
                 allowHoverEffects = _props.allowHoverEffects;
@@ -10685,12 +10679,10 @@ var DesignPreviewController = function (_PureComponent) {
                                 }),
                                 className: prefix + '-design-preview-controller__drag-handle'
                             }),
-                            _react2.default.createElement(PreviewComponent, _extends({
-                                prefix: prefix
-                            }, previewProps, props))
+                            _react2.default.createElement(PreviewComponent, _extends({}, previewProps, props))
                         ),
                         provided.placeholder,
-                        showButtons && canDelete && _react2.default.createElement(DeleteButton, { prefix: prefix, onDelete: _this2.onDelete })
+                        showButtons && canDelete && _react2.default.createElement(DeleteButton, { onDelete: _this2.onDelete })
                     );
                 }
             ) : _react2.default.createElement(
@@ -10704,9 +10696,9 @@ var DesignPreviewController = function (_PureComponent) {
                     {
                         className: (0, _classnames2.default)(prefix + '-design-preview-controller__drag-handle', prefix + '-design-preview-controller__drag-handle--inactive')
                     },
-                    _react2.default.createElement(PreviewComponent, _extends({ prefix: prefix }, previewProps, props))
+                    _react2.default.createElement(PreviewComponent, _extends({}, previewProps, props))
                 ),
-                configurable && canDelete && _react2.default.createElement(DeleteButton, { prefix: prefix, onDelete: this.onDelete })
+                configurable && canDelete && _react2.default.createElement(DeleteButton, { onDelete: this.onDelete })
             );
 
             return tree;
@@ -10733,14 +10725,11 @@ var DesignPreviewController = function (_PureComponent) {
     return DesignPreviewController;
 }(_react.PureComponent);
 
-DesignPreviewController.defaultProps = {
-    prefix: 'mp'
-};
+DesignPreviewController.defaultProps = {};
 
 
 function DeleteButton(_ref2) {
-    var prefix = _ref2.prefix,
-        onDelete = _ref2.onDelete;
+    var onDelete = _ref2.onDelete;
 
     return _react2.default.createElement(
         _pop2.default,
@@ -10752,54 +10741,29 @@ function DeleteButton(_ref2) {
             onConfirm: onDelete,
             wrapperClassName: prefix + '-design-preview-controller__action-btn-delete'
         },
-        _react2.default.createElement(IconDelete, { prefix: prefix, onClick: stopEventPropagation })
+        _react2.default.createElement(
+            'svg',
+            {
+                width: '20',
+                height: '20',
+                viewBox: '0 0 20 20',
+                xmlns: 'http://www.w3.org/2000/svg',
+                className: prefix + '-design-preview-controller__icon-delete',
+                onClick: function onClick(evt) {
+                    evt && evt.stopPropagation();
+                }
+            },
+            _react2.default.createElement(
+                'g',
+                { fill: 'none', fillRule: 'evenodd' },
+                _react2.default.createElement('circle', { cx: '10', cy: '10', r: '10' }),
+                _react2.default.createElement('path', {
+                    fill: '#FFF',
+                    d: 'M13.75 7.188l-.937-.938L10 9.063 7.188 6.25l-.938.937L9.062 10 6.25 12.812l.937.938L10 10.938l2.812 2.812.938-.937L10.938 10'
+                })
+            )
+        )
     );
-}
-
-var IconDelete = function (_PureComponent2) {
-    _inherits(IconDelete, _PureComponent2);
-
-    function IconDelete() {
-        _classCallCheck(this, IconDelete);
-
-        return _possibleConstructorReturn(this, (IconDelete.__proto__ || Object.getPrototypeOf(IconDelete)).apply(this, arguments));
-    }
-
-    _createClass(IconDelete, [{
-        key: 'render',
-        value: function render() {
-            var _props2 = this.props,
-                prefix = _props2.prefix,
-                onClick = _props2.onClick;
-
-            return _react2.default.createElement(
-                'svg',
-                {
-                    width: '20',
-                    height: '20',
-                    viewBox: '0 0 20 20',
-                    xmlns: 'http://www.w3.org/2000/svg',
-                    className: prefix + '-design-preview-controller__icon-delete',
-                    onClick: onClick
-                },
-                _react2.default.createElement(
-                    'g',
-                    { fill: 'none', fillRule: 'evenodd' },
-                    _react2.default.createElement('circle', { cx: '10', cy: '10', r: '10' }),
-                    _react2.default.createElement('path', {
-                        fill: '#FFF',
-                        d: 'M13.75 7.188l-.937-.938L10 9.063 7.188 6.25l-.938.937L9.062 10 6.25 12.812l.937.938L10 10.938l2.812 2.812.938-.937L10.938 10'
-                    })
-                )
-            );
-        }
-    }]);
-
-    return IconDelete;
-}(_react.PureComponent);
-
-function stopEventPropagation(evt) {
-    evt && evt.stopPropagation();
 }
 
 exports.default = DesignPreviewController;
@@ -11567,6 +11531,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable no-script-url */
 
+var prefix = 'mp';
+
 var ConfigEditor = function (_DesignEditor) {
   _inherits(ConfigEditor, _DesignEditor);
 
@@ -11602,7 +11568,6 @@ var ConfigEditor = function (_DesignEditor) {
       var _props = this.props,
           value = _props.value,
           settings = _props.settings,
-          prefix = _props.prefix,
           showError = _props.showError,
           validation = _props.validation;
 
@@ -11719,10 +11684,10 @@ function getBackground(value, settings) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/config/ConfigPreview.js":
-/*!*********************************************************!*\
-  !*** ./src/pages/editor/widget/config/ConfigPreview.js ***!
-  \*********************************************************/
+/***/ "./src/pages/editor/widget/config/ConfigPreview.jsx":
+/*!**********************************************************!*\
+  !*** ./src/pages/editor/widget/config/ConfigPreview.jsx ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11751,6 +11716,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
+
 var ConfigPreview = function (_PureComponent) {
   _inherits(ConfigPreview, _PureComponent);
 
@@ -11763,9 +11730,7 @@ var ConfigPreview = function (_PureComponent) {
   _createClass(ConfigPreview, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          prefix = _props.prefix;
+      var value = this.props.value;
 
 
       return _react2.default.createElement(
@@ -11787,9 +11752,8 @@ ConfigPreview.propTypes = {
   value: _propTypes2.default.object,
 
   // 用来和 Design 交互
-  design: _propTypes2.default.object,
+  design: _propTypes2.default.object
 
-  prefix: _propTypes2.default.string
 };
 exports.default = ConfigPreview;
 
@@ -11813,7 +11777,7 @@ var _ConfigEditor = __webpack_require__(/*! ./ConfigEditor */ "./src/pages/edito
 
 var _ConfigEditor2 = _interopRequireDefault(_ConfigEditor);
 
-var _ConfigPreview = __webpack_require__(/*! ./ConfigPreview */ "./src/pages/editor/widget/config/ConfigPreview.js");
+var _ConfigPreview = __webpack_require__(/*! ./ConfigPreview */ "./src/pages/editor/widget/config/ConfigPreview.jsx");
 
 var _ConfigPreview2 = _interopRequireDefault(_ConfigPreview);
 
@@ -12255,6 +12219,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
+
 var ImageAdPreview = function (_Component) {
   _inherits(ImageAdPreview, _Component);
 
@@ -12269,9 +12235,7 @@ var ImageAdPreview = function (_Component) {
     value: function render() {
       var _cx;
 
-      var _props = this.props,
-          value = _props.value,
-          prefix = _props.prefix;
+      var value = this.props.value;
       var size = value.size,
           images = value.images;
 
@@ -12676,6 +12640,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var RadioGroup = _radio2.default.Group;
 var DEFAULT_COLOR = '#e5e5e5';
+var prefix = 'mp';
 
 var LineEditor = function (_DesignEditor) {
   _inherits(LineEditor, _DesignEditor);
@@ -12700,7 +12665,6 @@ var LineEditor = function (_DesignEditor) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          prefix = _props.prefix,
           value = _props.value,
           showError = _props.showError,
           validation = _props.validation;
@@ -12829,6 +12793,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
+
 var LinePreview = function (_PureComponent) {
   _inherits(LinePreview, _PureComponent);
 
@@ -12841,9 +12807,7 @@ var LinePreview = function (_PureComponent) {
   _createClass(LinePreview, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          prefix = _props.prefix;
+      var value = this.props.value;
 
 
       return _react2.default.createElement(

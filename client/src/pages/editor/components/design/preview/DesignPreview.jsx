@@ -128,7 +128,6 @@ class DesignPreview extends PureComponent {
 
                         {selected && (
                             <EditorItem
-                              prefix={prefix}
                               disabled={disabled}
                               ref={this.saveEditorItem(id)}
                             >

@@ -5,10 +5,11 @@ import { DesignEditor, ControlGroup } from '../../components/design/editor/Desig
 
 const RadioGroup = Radio.Group;
 const DEFAULT_COLOR = '#e5e5e5';
+const prefix = 'mp';
 
 export default class LineEditor extends DesignEditor {
   render() {
-    const { prefix, value, showError, validation } = this.props;
+    const {  value, showError, validation } = this.props;
 
     return (
       <div className={`${prefix}-design-component-line-editor`}>

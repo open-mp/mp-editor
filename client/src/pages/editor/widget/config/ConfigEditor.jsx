@@ -7,10 +7,11 @@ import {ColorPicker} from 'zent';
 
 import { DesignEditor, ControlGroup } from '../../components/design/editor/DesignEditor';
 import { DEFAULT_BACKGROUND } from '../../components/design/preview/constants';
+const prefix = 'mp';
 
 export default class ConfigEditor extends DesignEditor {
   render() {
-    const { value, settings, prefix, showError, validation } = this.props;
+    const { value, settings, showError, validation } = this.props;
 
     return (
       <div className={`${prefix}-design-component-config-editor`}>
