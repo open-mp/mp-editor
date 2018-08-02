@@ -7582,6 +7582,10 @@ var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/
 
 var _uuid2 = _interopRequireDefault(_uuid);
 
+var _DesignEditorAddComponent = __webpack_require__(/*! ./editor/DesignEditorAddComponent */ "./src/pages/editor/components/design/editor/DesignEditorAddComponent.jsx");
+
+var _DesignEditorAddComponent2 = _interopRequireDefault(_DesignEditorAddComponent);
+
 var _DesignPreview = __webpack_require__(/*! ./preview/DesignPreview */ "./src/pages/editor/components/design/preview/DesignPreview.jsx");
 
 var _DesignPreview2 = _interopRequireDefault(_DesignPreview);
@@ -7702,14 +7706,15 @@ var Design = function (_PureComponent) {
     _createClass(Design, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var _props = this.props,
                 className = _props.className,
                 cacheRestoreMessage = _props.cacheRestoreMessage,
                 components = _props.components,
                 value = _props.value,
                 disabled = _props.disabled,
-                settings = _props.settings,
-                previewFooter = _props.previewFooter;
+                settings = _props.settings;
             var _state = this.state,
                 showRestoreFromCache = _state.showRestoreFromCache,
                 bottomGap = _state.bottomGap,
@@ -7754,7 +7759,6 @@ var Design = function (_PureComponent) {
                     showError: showError,
                     settings: settings || managedSettings,
                     onSettingsChange: this.onSettingsChange,
-                    footer: previewFooter,
                     componentInstanceCount: componentInstanceCount,
                     onComponentValueChange: this.onComponentValueChange,
                     onAddComponent: this.onAdd,
@@ -7771,7 +7775,21 @@ var Design = function (_PureComponent) {
                     design: this.design,
                     disabled: disabled,
                     ref: this.savePreview
-                })
+                }),
+                appendableComponents.length > 0 && _react2.default.createElement(
+                    'div',
+                    {
+                        className: (0, _classnames2.default)(prefix + '-design__add', prefix + '-design__add--mixed')
+                    },
+                    _react2.default.createElement(_DesignEditorAddComponent2.default, {
+                        prefix: prefix,
+                        componentInstanceCount: componentInstanceCount,
+                        components: appendableComponents,
+                        onAddComponent: function onAddComponent(component, fromSelected) {
+                            _this2.onAdd(component, fromSelected);
+                        }
+                    })
+                )
             );
         }
     }, {
@@ -7844,6 +7862,16 @@ var Design = function (_PureComponent) {
 
 
         // 选中一个组件
+
+    }, {
+        key: 'addInstance',
+
+
+        /**
+         *  外部调用接口 创建插件实例，
+         */
+        value: function addInstance(bundleId) {}
+        // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
 
 
         // 添加一个新组件
@@ -8060,10 +8088,10 @@ Design.defaultProps = {
 };
 
 var _initialiseProps = function _initialiseProps() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.onSettingsChange = function (value) {
-        var _props4 = _this2.props,
+        var _props4 = _this3.props,
             settings = _props4.settings,
             onSettingsChange = _props4.onSettingsChange;
 
@@ -8078,8 +8106,8 @@ var _initialiseProps = function _initialiseProps() {
         }
 
         if (!settings) {
-            _this2.setState({
-                settings: _extends({}, _this2.state.settings, value)
+            _this3.setState({
+                settings: _extends({}, _this3.state.settings, value)
             });
         }
     };
@@ -8087,25 +8115,25 @@ var _initialiseProps = function _initialiseProps() {
     this.onComponentValueChange = function (identity) {
         return function (diff) {
             var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-            var value = _this2.props.value;
+            var value = _this3.props.value;
 
-            var newComponentValue = replace ? (0, _assign3.default)(_defineProperty({}, UUID_KEY, _this2.getUUIDFromValue(identity)), diff) : (0, _assign3.default)({}, identity, diff);
+            var newComponentValue = replace ? (0, _assign3.default)(_defineProperty({}, UUID_KEY, _this3.getUUIDFromValue(identity)), diff) : (0, _assign3.default)({}, identity, diff);
             var newValue = value.map(function (v) {
                 return v === identity ? newComponentValue : v;
             });
             var changedProps = Object.keys(diff);
 
-            _this2.trackValueChange(newValue);
-            _this2.validateComponentValue(newComponentValue, identity, changedProps).then(function (errors) {
-                var id = _this2.getUUIDFromValue(newComponentValue);
-                _this2.setValidation(_defineProperty({}, id, errors));
+            _this3.trackValueChange(newValue);
+            _this3.validateComponentValue(newComponentValue, identity, changedProps).then(function (errors) {
+                var id = _this3.getUUIDFromValue(newComponentValue);
+                _this3.setValidation(_defineProperty({}, id, errors));
             });
         };
     };
 
     this.validateComponentValue = function (value, prevValue, changedProps) {
         var type = value.type;
-        var components = _this2.props.components;
+        var components = _this3.props.components;
 
         var comp = (0, _find2.default)(components, function (c) {
             return (0, _designType.isExpectedDesginType)(c, type);
@@ -8118,36 +8146,36 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onShowAddComponentOverlay = function (component, addPosition) {
-        _this2.toggleEditOrAdd(component, true, addPosition);
+        _this3.toggleEditOrAdd(component, true, addPosition);
     };
 
     this.onShowEditComponentOverlay = function (component) {
-        _this2.toggleEditOrAdd(component, false);
+        _this3.toggleEditOrAdd(component, false);
 
         // 将当前组件滚动到顶部
-        var id = _this2.getUUIDFromValue(component);
-        _this2.scrollToPreviewItem(id);
+        var id = _this3.getUUIDFromValue(component);
+        _this3.scrollToPreviewItem(id);
     };
 
     this.onSelect = function (component) {
-        var id = _this2.getUUIDFromValue(component);
-        var showAddComponentOverlay = _this2.state.showAddComponentOverlay;
+        var id = _this3.getUUIDFromValue(component);
+        var showAddComponentOverlay = _this3.state.showAddComponentOverlay;
 
 
-        if (_this2.isSelected(component) && !showAddComponentOverlay) {
+        if (_this3.isSelected(component) && !showAddComponentOverlay) {
             return;
         }
 
-        _this2.setState({
+        _this3.setState({
             selectedUUID: id,
             showAddComponentOverlay: false
         });
 
-        _this2.adjustHeight();
+        _this3.adjustHeight();
     };
 
     this.onAdd = function (component, fromSelected) {
-        var _props5 = _this2.props,
+        var _props5 = _this3.props,
             value = _props5.value,
             settings = _props5.settings;
         var editor = component.editor,
@@ -8158,7 +8186,7 @@ var _initialiseProps = function _initialiseProps() {
         });
         instance.type = (0, _designType.getDesignType)(editor, defaultType);
         var id = (0, _uuid2.default)();
-        _this2.setUUIDForValue(instance, id);
+        _this3.setUUIDForValue(instance, id);
 
         /**
          * 添加有两种来源：底部区域或者弹层。
@@ -8167,8 +8195,8 @@ var _initialiseProps = function _initialiseProps() {
         var newValue = void 0;
         if (fromSelected) {
             newValue = value.slice();
-            var addComponentOverlayPosition = _this2.state.addComponentOverlayPosition;
-            var selectedUUID = _this2.state.selectedUUID;
+            var addComponentOverlayPosition = _this3.state.addComponentOverlayPosition;
+            var selectedUUID = _this3.state.selectedUUID;
 
             var selectedIndex = (0, _findIndex3.default)(value, _defineProperty({}, UUID_KEY, selectedUUID));
 
@@ -8179,12 +8207,12 @@ var _initialiseProps = function _initialiseProps() {
             newValue = value.concat(instance);
         }
 
-        _this2.trackValueChange(newValue);
-        _this2.onSelect(instance);
+        _this3.trackValueChange(newValue);
+        _this3.onSelect(instance);
     };
 
     this.onDelete = function (component) {
-        var _props6 = _this2.props,
+        var _props6 = _this3.props,
             value = _props6.value,
             components = _props6.components;
 
@@ -8202,17 +8230,17 @@ var _initialiseProps = function _initialiseProps() {
         };
 
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
-        var componentUUID = _this2.getUUIDFromValue(component);
-        if (componentUUID === _this2.state.selectedUUID) {
+        var componentUUID = _this3.getUUIDFromValue(component);
+        if (componentUUID === _this3.state.selectedUUID) {
             var nextSelectedValue = findFirstEditableSibling(newValue, components, nextIndex);
-            var nextUUID = _this2.getUUIDFromValue(nextSelectedValue);
+            var nextUUID = _this3.getUUIDFromValue(nextSelectedValue);
             newState.selectedUUID = nextUUID;
         }
 
-        _this2.trackValueChange(newValue);
-        _this2.setState(newState);
+        _this3.trackValueChange(newValue);
+        _this3.setState(newState);
 
-        _this2.adjustHeight();
+        _this3.adjustHeight();
     };
 
     this.onMove = function (fromIndex, toIndex) {
@@ -8220,7 +8248,7 @@ var _initialiseProps = function _initialiseProps() {
             return;
         }
 
-        var _props7 = _this2.props,
+        var _props7 = _this3.props,
             value = _props7.value,
             components = _props7.components;
 
@@ -8301,26 +8329,26 @@ var _initialiseProps = function _initialiseProps() {
             }
         }
 
-        _this2.trackValueChange(newValue);
+        _this3.trackValueChange(newValue);
     };
 
     this.setValidation = function (validation) {
-        _this2.setState({
-            validations: (0, _assign3.default)({}, _this2.state.validations, validation)
+        _this3.setState({
+            validations: (0, _assign3.default)({}, _this3.state.validations, validation)
         });
 
-        _this2.adjustHeight();
+        _this3.adjustHeight();
     };
 
     this.validate = function () {
-        var _props8 = _this2.props,
+        var _props8 = _this3.props,
             value = _props8.value,
             components = _props8.components;
 
 
         return new Promise(function (resolve, reject) {
             return Promise.all(value.map(function (v) {
-                var id = _this2.getUUIDFromValue(v);
+                var id = _this3.getUUIDFromValue(v);
                 var type = v.type;
 
                 var comp = (0, _find2.default)(components, function (c) {
@@ -8331,13 +8359,13 @@ var _initialiseProps = function _initialiseProps() {
                     return Promise.resolve(_defineProperty({}, id, {}));
                 }
 
-                return _this2.validateComponentValue(v, v, {}).then(function (errors) {
+                return _this3.validateComponentValue(v, v, {}).then(function (errors) {
                     return _defineProperty({}, id, errors);
                 });
             })).then(function (validationList) {
                 var validations = _assign3.default.apply(undefined, [{}].concat(_toConsumableArray(validationList)));
 
-                _this2.setState({
+                _this3.setState({
                     showError: true,
                     validations: validations
                 }, function () {
@@ -8346,17 +8374,17 @@ var _initialiseProps = function _initialiseProps() {
 
                     if (firstError) {
                         var id = Object.keys(firstError)[0];
-                        _this2.scrollToPreviewItem(id);
+                        _this3.scrollToPreviewItem(id);
 
                         // 选中第一个有错误的组件
-                        _this2.setState({
+                        _this3.setState({
                             selectedUUID: id,
                             showAddComponentOverlay: false,
                             onShowEditComponentOverlay: true
                         });
                     }
 
-                    _this2.adjustHeight();
+                    _this3.adjustHeight();
                 });
 
                 // 过滤所有错误信息，将数组合并为一个对象，key 是每个组件的 id
@@ -8380,30 +8408,30 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.markAsSaved = function () {
-        _this2._dirty = false;
-        _this2.removeCache();
+        _this3._dirty = false;
+        _this3.removeCache();
     };
 
     this.selectByIndex = function (index, value) {
-        value = value || _this2.props.value;
-        index = (0, _isUndefined2.default)(index) ? _this2.props.defaultSelectedIndex : index;
+        value = value || _this3.props.value;
+        index = (0, _isUndefined2.default)(index) ? _this3.props.defaultSelectedIndex : index;
         var safeIndex = getSafeSelectedValueIndex(index, value);
         var safeValue = value[safeIndex];
 
-        _this2.setState({
-            selectedUUID: _this2.getUUIDFromValue(safeValue),
+        _this3.setState({
+            selectedUUID: _this3.getUUIDFromValue(safeValue),
             showAddComponentOverlay: false
         });
     };
 
     this.isSelected = function (value) {
-        var selectedUUID = _this2.state.selectedUUID;
+        var selectedUUID = _this3.state.selectedUUID;
 
-        return _this2.getUUIDFromValue(value) === selectedUUID;
+        return _this3.getUUIDFromValue(value) === selectedUUID;
     };
 
     this.hasSelected = function () {
-        var selectedUUID = _this2.state.selectedUUID;
+        var selectedUUID = _this3.state.selectedUUID;
 
 
         return !!selectedUUID;
@@ -8413,34 +8441,34 @@ var _initialiseProps = function _initialiseProps() {
         if (instance && instance.getDecoratedComponentInstance) {
             instance = instance.getDecoratedComponentInstance();
         }
-        _this2.preview = instance;
+        _this3.preview = instance;
     };
 
     this.adjustHeight = function (id) {
         // 不要重复执行
-        if (_this2.adjustHeightTimer) {
-            clearTimeout(_this2.adjustHeightTimer);
-            _this2.adjustHeightTimer = undefined;
+        if (_this3.adjustHeightTimer) {
+            clearTimeout(_this3.adjustHeightTimer);
+            _this3.adjustHeightTimer = undefined;
         }
 
-        _this2.adjustHeightTimer = setTimeout(function () {
-            id = id || _this2.state.selectedUUID;
-            if (_this2.preview && _this2.preview.getEditorBoundingBox) {
-                var editorBB = _this2.preview.getEditorBoundingBox(id);
+        _this3.adjustHeightTimer = setTimeout(function () {
+            id = id || _this3.state.selectedUUID;
+            if (_this3.preview && _this3.preview.getEditorBoundingBox) {
+                var editorBB = _this3.preview.getEditorBoundingBox(id);
                 if (!editorBB) {
-                    return _this2.setState({
+                    return _this3.setState({
                         bottomGap: 0
                     });
                 }
 
-                var previewNode = (0, _reactDom.findDOMNode)(_this2.preview);
+                var previewNode = (0, _reactDom.findDOMNode)(_this3.preview);
                 var previewBB = previewNode && previewNode.getBoundingClientRect();
                 if (!previewBB) {
                     return;
                 }
 
                 var gap = Math.max(0, editorBB.bottom - previewBB.bottom);
-                _this2.setState({
+                _this3.setState({
                     bottomGap: gap
                 });
             }
@@ -8448,7 +8476,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onBeforeWindowUnload = function (evt) {
-        if (!_this2._dirty) {
+        if (!_this3._dirty) {
             return;
         }
 
@@ -8459,7 +8487,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onRestoreCacheAlertClose = function () {
-        _this2.setState({
+        _this3.setState({
             showRestoreFromCache: false
         });
     };
@@ -8467,13 +8495,13 @@ var _initialiseProps = function _initialiseProps() {
     this.restoreCache = function (evt) {
         evt.preventDefault();
 
-        var cachedValue = _this2.readCache();
+        var cachedValue = _this3.readCache();
         if (cachedValue !== storage.NOT_FOUND) {
-            _this2.trackValueChange(cachedValue, false);
-            _this2.setState({
+            _this3.trackValueChange(cachedValue, false);
+            _this3.setState({
                 showRestoreFromCache: false
             });
-            _this2.removeCache();
+            _this3.removeCache();
         }
     };
 
@@ -8488,15 +8516,15 @@ var _initialiseProps = function _initialiseProps() {
                 }
             },
 
-            getUUID: _this2.getUUIDFromValue,
+            getUUID: _this3.getUUIDFromValue,
 
-            validateComponentValue: _this2.validateComponentValue,
+            validateComponentValue: _this3.validateComponentValue,
 
-            setValidation: _this2.setValidation,
+            setValidation: _this3.setValidation,
 
-            markAsSaved: _this2.markAsSaved,
+            markAsSaved: _this3.markAsSaved,
 
-            adjustPreviewHeight: _this2.adjustHeight
+            adjustPreviewHeight: _this3.adjustHeight
         };
     }();
 };
@@ -9451,10 +9479,6 @@ var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnam
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
 
 var _find2 = _interopRequireDefault(_find);
@@ -9489,10 +9513,6 @@ var _DesignEditorItem = __webpack_require__(/*! ../editor/DesignEditorItem */ ".
 
 var _DesignEditorItem2 = _interopRequireDefault(_DesignEditorItem);
 
-var _DesignEditorAddComponent = __webpack_require__(/*! ../editor/DesignEditorAddComponent */ "./src/pages/editor/components/design/editor/DesignEditorAddComponent.jsx");
-
-var _DesignEditorAddComponent2 = _interopRequireDefault(_DesignEditorAddComponent);
-
 var _designType = __webpack_require__(/*! ../utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
 
 var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/components/design/preview/constants.js");
@@ -9501,19 +9521,19 @@ var _constants2 = __webpack_require__(/*! ../constants */ "./src/pages/editor/co
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
 /**
  * DesignPreview 和 config 组件是相互关联的
  *
  * 这个组件里的一些 props 是需要 config 组件提供的
  */
+
 var DesignPreview = function (_PureComponent) {
   _inherits(DesignPreview, _PureComponent);
 
@@ -9578,8 +9598,7 @@ var DesignPreview = function (_PureComponent) {
      * 流程
      */
     value: function render() {
-      var _this2 = this,
-          _cx3;
+      var _this2 = this;
 
       var _props = this.props,
           components = _props.components,
@@ -9589,7 +9608,6 @@ var DesignPreview = function (_PureComponent) {
           settings = _props.settings,
           onSettingsChange = _props.onSettingsChange,
           onComponentValueChange = _props.onComponentValueChange,
-          componentInstanceCount = _props.componentInstanceCount,
           design = _props.design,
           appendableComponents = _props.appendableComponents,
           showAddComponentOverlay = _props.showAddComponentOverlay,
@@ -9603,13 +9621,9 @@ var DesignPreview = function (_PureComponent) {
           onAdd = _props.onAdd,
           onMove = _props.onMove,
           className = _props.className,
-          prefix = _props.prefix,
-          disabled = _props.disabled,
-          footer = _props.footer;
+          disabled = _props.disabled;
 
-      var isComponentsGrouped = false;
       var cls = (0, _classnames2.default)(prefix + '-design-preview', className);
-      var hasAppendableComponent = appendableComponents.length > 0;
 
       return _react2.default.createElement(
         _reactBeautifulDnd.DragDropContext,
@@ -9638,11 +9652,9 @@ var DesignPreview = function (_PureComponent) {
                 _extends({
                   ref: provided.innerRef
                 }, provided.droppableProps, {
-                  className: (0, _classnames2.default)(prefix + '-design__item-list', _defineProperty({}, prefix + '-design__item-list--full-height', !hasAppendableComponent))
+                  className: (0, _classnames2.default)(prefix + '-design__item-list', prefix + '-design__item-list--full-height')
                 }),
                 value.map(function (v) {
-                  var _cx2;
-
                   var valueType = v.type;
                   var comp = (0, _find2.default)(components, function (c) {
                     return (0, _designType.isExpectedDesginType)(c, valueType);
@@ -9657,7 +9669,6 @@ var DesignPreview = function (_PureComponent) {
                   return _react2.default.createElement(
                     PreviewItem,
                     {
-                      prefix: prefix,
                       key: id,
                       id: id,
                       ref: _this2.savePreviewItem(id)
@@ -9703,41 +9714,13 @@ var DesignPreview = function (_PureComponent) {
                         showError: showError,
                         prefix: prefix
                       }))
-                    ),
-                    selected && showAddComponentOverlay && _react2.default.createElement(
-                      _DesignEditorItem2.default,
-                      {
-                        ref: _this2.saveEditorItem(id),
-                        prefix: prefix,
-                        className: (0, _classnames2.default)(prefix + '-design-add-component-overlay', (_cx2 = {}, _defineProperty(_cx2, prefix + '-design-add-component-overlay--top', addComponentOverlayPosition === _constants2.ADD_COMPONENT_OVERLAY_POSITION.TOP), _defineProperty(_cx2, prefix + '-design-add-component-overlay--bottom', addComponentOverlayPosition === _constants2.ADD_COMPONENT_OVERLAY_POSITION.BOTTOM), _defineProperty(_cx2, prefix + '-design-add-component-overlay--grouped', isComponentsGrouped), _defineProperty(_cx2, prefix + '-design-add-component-overlay--mixed', !isComponentsGrouped), _cx2))
-                      },
-                      _react2.default.createElement(_DesignEditorAddComponent2.default, {
-                        prefix: prefix,
-                        fromSelected: true,
-                        componentInstanceCount: componentInstanceCount,
-                        components: appendableComponents,
-                        onAddComponent: onAddComponent
-                      })
                     )
                   );
                 }),
                 provided.placeholder
               );
             }
-          ),
-          hasAppendableComponent && _react2.default.createElement(
-            'div',
-            {
-              className: (0, _classnames2.default)(prefix + '-design__add', (_cx3 = {}, _defineProperty(_cx3, prefix + '-design__add--grouped', isComponentsGrouped), _defineProperty(_cx3, prefix + '-design__add--mixed', !isComponentsGrouped), _cx3))
-            },
-            _react2.default.createElement(_DesignEditorAddComponent2.default, {
-              prefix: prefix,
-              componentInstanceCount: componentInstanceCount,
-              components: appendableComponents,
-              onAddComponent: onAddComponent
-            })
-          ),
-          footer
+          )
         )
       );
     }
@@ -9773,60 +9756,10 @@ var DesignPreview = function (_PureComponent) {
   return DesignPreview;
 }(_react.PureComponent);
 
-DesignPreview.propTypes = {
-  className: _propTypes2.default.string,
-
-  prefix: _propTypes2.default.string,
-
-  design: _propTypes2.default.object.isRequired,
-
-  components: _propTypes2.default.array.isRequired,
-
-  value: _propTypes2.default.array.isRequired,
-
-  settings: _propTypes2.default.object,
-
-  onSettingsChange: _propTypes2.default.func,
-
-  footer: _propTypes2.default.node,
-
-  appendableComponents: _propTypes2.default.array,
-
-  showAddComponentOverlay: _propTypes2.default.bool.isRequired,
-
-  addComponentOverlayPosition: _propTypes2.default.number.isRequired,
-
-  selectedUUID: _propTypes2.default.string,
-
-  getUUIDFromValue: _propTypes2.default.func.isRequired,
-
-  onSelect: _propTypes2.default.func.isRequired,
-
-  // 处理添加按钮的回调函数
-  onAdd: _propTypes2.default.func.isRequired,
-
-  // 添加新组件
-  onAddComponent: _propTypes2.default.func.isRequired,
-
-  onDelete: _propTypes2.default.func.isRequired,
-
-  onEdit: _propTypes2.default.func.isRequired,
-
-  onMove: _propTypes2.default.func.isRequired,
-
-  disabled: _propTypes2.default.bool,
-
-  // 每个组件的实例数量
-  componentInstanceCount: _propTypes2.default.object,
-
-  // 以下 props 由 config 组件提供
-  background: _propTypes2.default.string
-};
 DesignPreview.defaultProps = {
   background: '#f9f9f9',
   disabled: false,
-  appendableComponents: [],
-  prefix: 'mp'
+  appendableComponents: []
 };
 
 
@@ -10059,70 +9992,6 @@ var DesignPreviewController = function (_PureComponent) {
   return DesignPreviewController;
 }(_react.PureComponent);
 
-DesignPreviewController.propTypes = {
-  // 这个组件的唯一标示，不随位置变化而变化
-  id: _propTypes2.default.string.isRequired,
-
-  // 组件的下标，-1 如果不可拖拽
-  index: _propTypes2.default.number,
-
-  // 是否允许 hover 效果，不允许的话不会显示各种按钮
-  // 拖拽的时候用
-  allowHoverEffects: _propTypes2.default.bool.isRequired,
-
-  // 是否可以编辑，UMP里面有些地方config是不能编辑的
-  editable: _propTypes2.default.bool,
-
-  // 组件是否可以拖拽
-  dragable: _propTypes2.default.bool,
-
-  // 是否显示右下角的编辑区域
-  configurable: _propTypes2.default.bool,
-
-  // 时候现实删除按钮
-  canDelete: _propTypes2.default.bool,
-
-  // 是否吸纳事添加组件按钮
-  canInsert: _propTypes2.default.bool,
-
-  // 选中时是否高亮
-  highlightWhenSelect: _propTypes2.default.bool,
-
-  // 当前是否选中
-  isSelected: _propTypes2.default.bool.isRequired,
-
-  // 这个组件对应的值
-  value: _propTypes2.default.object.isRequired,
-
-  // Design 组件的全局配置
-  settings: _propTypes2.default.object,
-
-  // 选中的会掉函数
-  onSelect: _propTypes2.default.func.isRequired,
-
-  // 编辑的回调函数
-  onEdit: _propTypes2.default.func.isRequired,
-
-  // 添加新组件的回调函数
-  onAdd: _propTypes2.default.func.isRequired,
-
-  // 删除组件的回调函数
-  onDelete: _propTypes2.default.func.isRequired,
-
-  // 拖拽时移动组件的回调函数
-  onMove: _propTypes2.default.func.isRequired,
-
-  // design 组件暴露的方法
-  design: _propTypes2.default.object.isRequired,
-
-  // 用来渲染预览的组件
-  component: _propTypes2.default.func.isRequired,
-
-  // preview 额外的 props
-  previewProps: _propTypes2.default.object,
-
-  prefix: _propTypes2.default.string
-};
 DesignPreviewController.defaultProps = {
   prefix: 'mp'
 };
@@ -10266,7 +10135,7 @@ exports.default = DesignPreviewController;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10301,54 +10170,51 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
+
 function scrollNodeToTop(node, offsets) {
-  var pos = (0, _offset2.default)(node);
-  var top = (0, _isFunction2.default)(offsets.top) ? offsets.top(pos.top) : pos.top + offsets.top;
-  var left = (0, _isFunction2.default)(offsets.left) ? offsets.left(pos.left) : pos.left + offsets.left;
-  (0, _scroll2.default)(document.body, left, top);
+    var pos = (0, _offset2.default)(node);
+    var top = (0, _isFunction2.default)(offsets.top) ? offsets.top(pos.top) : pos.top + offsets.top;
+    var left = (0, _isFunction2.default)(offsets.left) ? offsets.left(pos.left) : pos.left + offsets.left;
+    (0, _scroll2.default)(document.body, left, top);
 }
 
 var DesignPreviewItem = function (_PureComponent) {
-  _inherits(DesignPreviewItem, _PureComponent);
+    _inherits(DesignPreviewItem, _PureComponent);
 
-  function DesignPreviewItem() {
-    _classCallCheck(this, DesignPreviewItem);
+    function DesignPreviewItem() {
+        _classCallCheck(this, DesignPreviewItem);
 
-    return _possibleConstructorReturn(this, (DesignPreviewItem.__proto__ || Object.getPrototypeOf(DesignPreviewItem)).apply(this, arguments));
-  }
-
-  _createClass(DesignPreviewItem, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          children = _props.children,
-          prefix = _props.prefix;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-preview-item' },
-        children
-      );
+        return _possibleConstructorReturn(this, (DesignPreviewItem.__proto__ || Object.getPrototypeOf(DesignPreviewItem)).apply(this, arguments));
     }
-  }, {
-    key: 'scrollTop',
-    value: function scrollTop(offsets) {
-      var node = (0, _reactDom.findDOMNode)(this);
-      scrollNodeToTop(node, offsets);
-    }
-  }]);
 
-  return DesignPreviewItem;
+    _createClass(DesignPreviewItem, [{
+        key: 'render',
+        value: function render() {
+            var children = this.props.children;
+
+
+            return _react2.default.createElement(
+                'div',
+                { className: prefix + '-design-preview-item' },
+                children
+            );
+        }
+    }, {
+        key: 'scrollTop',
+        value: function scrollTop(offsets) {
+            var node = (0, _reactDom.findDOMNode)(this);
+            scrollNodeToTop(node, offsets);
+        }
+    }]);
+
+    return DesignPreviewItem;
 }(_react.PureComponent);
 
 DesignPreviewItem.propTypes = {
-  children: _propTypes2.default.node.isRequired,
-  prefix: _propTypes2.default.string
+    children: _propTypes2.default.node.isRequired
 };
-DesignPreviewItem.defaultProps = {
-  prefix: 'zent'
-};
+DesignPreviewItem.defaultProps = {};
 exports.default = DesignPreviewItem;
 
 /***/ }),

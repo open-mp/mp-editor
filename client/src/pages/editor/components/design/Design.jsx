@@ -38,6 +38,8 @@ import defaultTo from 'lodash/defaultTo';
 import isFunction from 'lodash/isFunction';
 import * as storage from 'zent/lib/utils/storage';
 import uuid from 'zent/lib/utils/uuid';
+import DesignEditorAddComponent from './editor/DesignEditorAddComponent';
+
 
 import DesignPreview from './preview/DesignPreview';
 import {
@@ -53,6 +55,8 @@ const CACHE_KEY = '__zent-design-cache-storage__';
 
 const hasValidateError = v => !isEmpty(v[Object.keys(v)[0]]);
 const prefix = 'mp';
+
+
 export default class Design extends PureComponent {
 
     static defaultProps = {
@@ -127,7 +131,6 @@ export default class Design extends PureComponent {
             value,
             disabled,
             settings,
-            previewFooter,
         } = this.props;
 
         const {
@@ -172,7 +175,6 @@ export default class Design extends PureComponent {
                     showError,
                     settings: settings || managedSettings,
                     onSettingsChange: this.onSettingsChange,
-                    footer: previewFooter,
                     componentInstanceCount,
                     onComponentValueChange: this.onComponentValueChange,
                     onAddComponent: this.onAdd,
@@ -190,6 +192,20 @@ export default class Design extends PureComponent {
                     disabled,
                     ref: this.savePreview,
                 })}
+                {appendableComponents.length > 0 && (
+                    <div
+                        className={cx(`${prefix}-design__add`, `${prefix}-design__add--mixed`)}
+                    >
+                        <DesignEditorAddComponent
+                            prefix={prefix}
+                            componentInstanceCount={componentInstanceCount}
+                            components={appendableComponents}
+                            onAddComponent={(component, fromSelected)=>{
+                                this.onAdd(component, fromSelected);
+                            }}
+                        />
+                    </div>
+                )}
             </div>
         );
     }
@@ -337,6 +353,13 @@ export default class Design extends PureComponent {
 
         this.adjustHeight();
     };
+
+    /**
+     *  外部调用接口 创建插件实例，
+     */
+    addInstance(bundleId) {
+        // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
+    }
 
     // 添加一个新组件
     onAdd = (component, fromSelected) => {

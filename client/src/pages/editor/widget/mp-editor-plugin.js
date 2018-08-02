@@ -4,7 +4,7 @@
 
 let definition = {
     // 所述bundle
-    bundle: {
+    bundleId: {
         groupId: '',
         artifactId: '',
         version: '',
