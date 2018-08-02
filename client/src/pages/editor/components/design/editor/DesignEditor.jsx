@@ -9,29 +9,6 @@ const NOT_EVENT_MSG =
   'onInputChange expects an `Event` with { target: { name, value } } as argument';
 
 export class DesignEditor extends Component {
-  static propTypes = {
-    value: PropTypes.object,
-
-    onChange: PropTypes.func.isRequired,
-
-    // 验证状态
-    validation: PropTypes.object.isRequired,
-
-    // 是否强制显示所有错误
-    showError: PropTypes.bool.isRequired,
-
-    // 用来和 Design 交互
-    design: PropTypes.object.isRequired,
-
-    // 自定义全局配置，Design 不会改变这个对象的值
-    globalConfig: PropTypes.object,
-
-    // Design 全剧配置，和 globalConfig 的区别是 Design 组件可以 修改 settings 的值
-    settings: PropTypes.object,
-
-    // 修改 settings 的回调函数
-    onSettingsChange: PropTypes.func,
-  };
 
   // 以下属性需要子类重写
 
@@ -193,23 +170,6 @@ export class DesignEditor extends Component {
  * 表单每个域的基础样式
  */
 export class ControlGroup extends PureComponent {
-  static propTypes = {
-    showError: PropTypes.bool,
-    error: PropTypes.node,
-    showLabel: PropTypes.bool,
-    helpDesc: PropTypes.node,
-    label: PropTypes.node,
-
-    // 自定义label对齐方式
-    labelAlign: PropTypes.string,
-
-    // 点击 label 区域时是否 focus 到 control 的 input 上
-    focusOnLabelClick: PropTypes.bool,
-
-    required: PropTypes.bool,
-    className: PropTypes.string,
-    prefix: PropTypes.string,
-  };
 
   static defaultProps = {
     required: false,

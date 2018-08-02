@@ -6,8 +6,8 @@ import isFunction from 'lodash/isFunction';
 import isNumber from 'lodash/isNumber';
 import noop from 'lodash/noop';
 
-import LazyMap from '../utils/LazyMap';
-import { serializeDesignType } from '../utils/design-type';
+import LazyMap from './utils/LazyMap';
+import { serializeDesignType } from './utils/design-type';
 
 export default class DesignEditorAddComponent extends PureComponent {
   static propTypes = {

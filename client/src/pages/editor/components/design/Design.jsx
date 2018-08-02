@@ -38,7 +38,7 @@ import defaultTo from 'lodash/defaultTo';
 import isFunction from 'lodash/isFunction';
 import * as storage from 'zent/lib/utils/storage';
 import uuid from 'zent/lib/utils/uuid';
-import DesignEditorAddComponent from './editor/DesignEditorAddComponent';
+import DesignEditorAddComponent from './DesignEditorAddComponent';
 
 
 import DesignPreview from './preview/DesignPreview';
