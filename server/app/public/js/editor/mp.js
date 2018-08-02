@@ -9556,9 +9556,6 @@ var DesignPreview = function (_PureComponent) {
           getUUIDFromValue = _props.getUUIDFromValue,
           onSelect = _props.onSelect,
           onDelete = _props.onDelete,
-          onEdit = _props.onEdit,
-          onAdd = _props.onAdd,
-          onMove = _props.onMove,
           className = _props.className,
           disabled = _props.disabled;
 
@@ -9628,9 +9625,6 @@ var DesignPreview = function (_PureComponent) {
                       isSelected: selected,
                       onSelect: onSelect,
                       onDelete: onDelete,
-                      onEdit: onEdit,
-                      onAdd: onAdd,
-                      onMove: onMove,
                       component: comp.preview,
                       previewProps: getAdditionalProps(comp.previewProps, v)
                     }),

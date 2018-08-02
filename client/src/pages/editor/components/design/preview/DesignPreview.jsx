@@ -48,9 +48,6 @@ class DesignPreview extends PureComponent {
       getUUIDFromValue,
       onSelect,
       onDelete,
-      onEdit,
-      onAdd,
-      onMove,
       className,
       disabled,
     } = this.props;
@@ -122,9 +119,6 @@ class DesignPreview extends PureComponent {
                           isSelected={selected}
                           onSelect={onSelect}
                           onDelete={onDelete}
-                          onEdit={onEdit}
-                          onAdd={onAdd}
-                          onMove={onMove}
                           component={comp.preview}
                           previewProps={getAdditionalProps(
                             comp.previewProps,
