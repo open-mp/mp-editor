@@ -9613,7 +9613,6 @@ var DesignPreview = function (_PureComponent) {
                       ref: _this2.savePreviewItem(id)
                     },
                     _react2.default.createElement(PreviewController, {
-                      prefix: prefix,
                       value: v,
                       settings: settings,
                       design: design,
@@ -9814,7 +9813,6 @@ var DesignPreviewController = function (_PureComponent) {
           configurable = _props.configurable,
           editable = _props.editable,
           canDelete = _props.canDelete,
-          canInsert = _props.canInsert,
           highlightWhenSelect = _props.highlightWhenSelect,
           isSelected = _props.isSelected,
           PreviewComponent = _props.component,
@@ -9926,65 +9924,6 @@ function DeleteButton(_ref2) {
       wrapperClassName: prefix + '-design-preview-controller__action-btn-delete'
     },
     _react2.default.createElement(IconDelete, { prefix: prefix, onClick: stopEventPropagation })
-  );
-}
-
-function AddButton(_ref3) {
-  var prefix = _ref3.prefix,
-      onAdd = _ref3.onAdd,
-      className = _ref3.className;
-
-  return _react2.default.createElement(
-    'div',
-    {
-      className: (0, _classnames2.default)(prefix + '-design-preview-controller__action-btn-add-container', className)
-    },
-    _react2.default.createElement(
-      'a',
-      {
-        className: prefix + '-design-preview-controller__action-btn-add',
-        onClick: onAdd
-      },
-      _react2.default.createElement(IconAdd, { prefix: prefix })
-    ),
-    _react2.default.createElement(AddMarker, { prefix: prefix })
-  );
-}
-
-function AddMarker(_ref4) {
-  var prefix = _ref4.prefix;
-
-  return _react2.default.createElement(
-    'div',
-    { className: prefix + '-design-preview-controller__add-marker' },
-    _react2.default.createElement('i', {
-      className: (0, _classnames2.default)(prefix + '-design-preview-controller__add-marker-circle', prefix + '-design-preview-controller__add-marker-circle--left')
-    }),
-    _react2.default.createElement('div', { className: prefix + '-design-preview-controller__add-marker-line' }),
-    _react2.default.createElement('i', {
-      className: (0, _classnames2.default)(prefix + '-design-preview-controller__add-marker-circle', prefix + '-design-preview-controller__add-marker-circle--right')
-    })
-  );
-}
-
-function IconAdd(_ref5) {
-  var prefix = _ref5.prefix;
-
-  return _react2.default.createElement(
-    'svg',
-    {
-      width: '17',
-      height: '17',
-      viewBox: '0 0 17 17',
-      xmlns: 'http://www.w3.org/2000/svg',
-      className: prefix + '-design-preview-controller__icon-add'
-    },
-    _react2.default.createElement(
-      'g',
-      { fill: 'none', fillRule: 'evenodd' },
-      _react2.default.createElement('circle', { cx: '8.5', cy: '8.5', r: '8.5' }),
-      _react2.default.createElement('path', { d: 'M8 8H5v1h3v3h1V9h3V8H9V5H8v3z', fill: '#FFF' })
-    )
   );
 }
 

@@ -104,7 +104,6 @@ class DesignPreview extends PureComponent {
                         ref={this.savePreviewItem(id)}
                       >
                         <PreviewController
-                          prefix={prefix}
                           value={v}
                           settings={settings}
                           design={design}

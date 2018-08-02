@@ -20,7 +20,6 @@ class DesignPreviewController extends PureComponent {
       configurable,
       editable,
       canDelete,
-      canInsert,
       highlightWhenSelect,
       isSelected,
       component: PreviewComponent,
@@ -149,62 +148,6 @@ function DeleteButton({ prefix, onDelete }) {
     >
       <IconDelete prefix={prefix} onClick={stopEventPropagation} />
     </Pop>
-  );
-}
-
-function AddButton({ prefix, onAdd, className }) {
-  return (
-    <div
-      className={cx(
-        `${prefix}-design-preview-controller__action-btn-add-container`,
-        className
-      )}
-    >
-      <a
-        className={`${prefix}-design-preview-controller__action-btn-add`}
-        onClick={onAdd}
-      >
-        <IconAdd prefix={prefix} />
-      </a>
-      <AddMarker prefix={prefix} />
-    </div>
-  );
-}
-
-function AddMarker({ prefix }) {
-  return (
-    <div className={`${prefix}-design-preview-controller__add-marker`}>
-      <i
-        className={cx(
-          `${prefix}-design-preview-controller__add-marker-circle`,
-          `${prefix}-design-preview-controller__add-marker-circle--left`
-        )}
-      />
-      <div className={`${prefix}-design-preview-controller__add-marker-line`} />
-      <i
-        className={cx(
-          `${prefix}-design-preview-controller__add-marker-circle`,
-          `${prefix}-design-preview-controller__add-marker-circle--right`
-        )}
-      />
-    </div>
-  );
-}
-
-function IconAdd({ prefix }) {
-  return (
-    <svg
-      width="17"
-      height="17"
-      viewBox="0 0 17 17"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`${prefix}-design-preview-controller__icon-add`}
-    >
-      <g fill="none" fillRule="evenodd">
-        <circle cx="8.5" cy="8.5" r="8.5" />
-        <path d="M8 8H5v1h3v3h1V9h3V8H9V5H8v3z" fill="#FFF" />
-      </g>
-    </svg>
   );
 }
 
