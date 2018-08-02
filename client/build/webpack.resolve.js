@@ -1,5 +1,5 @@
-module.exports = function(config) {
-  return {
-    
-  }
-}
+module.exports = function (config) {
+    return {
+        extensions: ['.jsx', '.js']
+    };
+};
