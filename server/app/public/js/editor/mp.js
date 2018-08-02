@@ -9517,8 +9517,6 @@ var _designType = __webpack_require__(/*! ../utils/design-type */ "./src/pages/e
 
 var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/components/design/preview/constants.js");
 
-var _constants2 = __webpack_require__(/*! ../constants */ "./src/pages/editor/components/design/constants.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9609,12 +9607,9 @@ var DesignPreview = function (_PureComponent) {
           onSettingsChange = _props.onSettingsChange,
           onComponentValueChange = _props.onComponentValueChange,
           design = _props.design,
-          appendableComponents = _props.appendableComponents,
           showAddComponentOverlay = _props.showAddComponentOverlay,
-          addComponentOverlayPosition = _props.addComponentOverlayPosition,
           selectedUUID = _props.selectedUUID,
           getUUIDFromValue = _props.getUUIDFromValue,
-          onAddComponent = _props.onAddComponent,
           onSelect = _props.onSelect,
           onDelete = _props.onDelete,
           onEdit = _props.onEdit,

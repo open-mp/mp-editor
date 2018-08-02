@@ -12,7 +12,6 @@ import DesignPreviewController from './DesignPreviewController';
 import DesignEditorItem from '../editor/DesignEditorItem';
 import { isExpectedDesginType } from '../utils/design-type';
 import { DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND } from './constants';
-import { ADD_COMPONENT_OVERLAY_POSITION } from '../constants';
 
 const prefix = 'mp';
 /**
@@ -45,12 +44,9 @@ class DesignPreview extends PureComponent {
       onSettingsChange,
       onComponentValueChange,
       design,
-      appendableComponents,
       showAddComponentOverlay,
-      addComponentOverlayPosition,
       selectedUUID,
       getUUIDFromValue,
-      onAddComponent,
       onSelect,
       onDelete,
       onEdit,
