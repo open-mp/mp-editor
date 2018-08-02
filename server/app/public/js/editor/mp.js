@@ -9650,8 +9650,7 @@ var DesignPreview = function (_PureComponent) {
                         onSettingsChange: onSettingsChange,
                         design: design,
                         validation: validations[id] || {},
-                        showError: showError,
-                        prefix: prefix
+                        showError: showError
                       }))
                     )
                   );
@@ -11085,10 +11084,10 @@ exports.default = {
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/image-ad/ImageAdEditor.js":
-/*!***********************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/ImageAdEditor.js ***!
-  \***********************************************************/
+/***/ "./src/pages/editor/widget/image-ad/ImageAdEditor.jsx":
+/*!************************************************************!*\
+  !*** ./src/pages/editor/widget/image-ad/ImageAdEditor.jsx ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11144,6 +11143,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var RadioGroup = _radio2.default.Group;
+var prefix = 'mp';
 
 var ImageAdEditor = function (_DesignEditor) {
   _inherits(ImageAdEditor, _DesignEditor);
@@ -11252,7 +11252,6 @@ var ImageAdEditor = function (_DesignEditor) {
       var _this2 = this;
 
       var _props = this.props,
-          prefix = _props.prefix,
           showError = _props.showError,
           validation = _props.validation,
           value = _props.value;
@@ -11448,10 +11447,10 @@ exports.default = ImageAdEditor;
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/image-ad/ImageAdPreview.js":
-/*!************************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/ImageAdPreview.js ***!
-  \************************************************************/
+/***/ "./src/pages/editor/widget/image-ad/ImageAdPreview.jsx":
+/*!*************************************************************!*\
+  !*** ./src/pages/editor/widget/image-ad/ImageAdPreview.jsx ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11829,11 +11828,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ImageAdEditor = __webpack_require__(/*! ./ImageAdEditor */ "./src/pages/editor/widget/image-ad/ImageAdEditor.js");
+var _ImageAdEditor = __webpack_require__(/*! ./ImageAdEditor */ "./src/pages/editor/widget/image-ad/ImageAdEditor.jsx");
 
 var _ImageAdEditor2 = _interopRequireDefault(_ImageAdEditor);
 
-var _ImageAdPreview = __webpack_require__(/*! ./ImageAdPreview */ "./src/pages/editor/widget/image-ad/ImageAdPreview.js");
+var _ImageAdPreview = __webpack_require__(/*! ./ImageAdPreview */ "./src/pages/editor/widget/image-ad/ImageAdPreview.jsx");
 
 var _ImageAdPreview2 = _interopRequireDefault(_ImageAdPreview);
 

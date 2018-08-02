@@ -149,7 +149,6 @@ class DesignPreview extends PureComponent {
                                 design={design}
                                 validation={validations[id] || {}}
                                 showError={showError}
-                                prefix={prefix}
                               />
                             </EditorItem>
                           )}

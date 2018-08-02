@@ -15,7 +15,7 @@ import {
 import { ImageEntry, createEmptyImageEntry } from './ImageEntry';
 
 const RadioGroup = Radio.Group;
-
+let prefix = 'mp';
 export default class ImageAdEditor extends DesignEditor {
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ export default class ImageAdEditor extends DesignEditor {
   }
 
   render() {
-    const { prefix, showError, validation, value } = this.props;
+    const {showError, validation, value } = this.props;
     const { localImage } = this.state;
     const imageErrors = validation.images;
     const allowAddImage = this.isAddImageEntryAllowed();
