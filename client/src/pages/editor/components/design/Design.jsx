@@ -138,7 +138,6 @@ export default class Design extends PureComponent {
             bottomGap,
             selectedUUID,
             appendableComponents,
-            showAddComponentOverlay,
             addComponentOverlayPosition,
             validations,
             showError,
@@ -181,7 +180,6 @@ export default class Design extends PureComponent {
                     appendableComponents,
                     selectedUUID,
                     getUUIDFromValue: this.getUUIDFromValue,
-                    showAddComponentOverlay,
                     addComponentOverlayPosition,
                     onAdd: this.onShowAddComponentOverlay,
                     onEdit: this.onShowEditComponentOverlay,
@@ -201,7 +199,7 @@ export default class Design extends PureComponent {
                             componentInstanceCount={componentInstanceCount}
                             components={appendableComponents}
                             onAddComponent={(component, fromSelected)=>{
-                                this.onAdd(component, fromSelected);
+                                this.onAddComponent(component, fromSelected);
                             }}
                         />
                     </div>

@@ -7720,7 +7720,6 @@ var Design = function (_PureComponent) {
                 bottomGap = _state.bottomGap,
                 selectedUUID = _state.selectedUUID,
                 appendableComponents = _state.appendableComponents,
-                showAddComponentOverlay = _state.showAddComponentOverlay,
                 addComponentOverlayPosition = _state.addComponentOverlayPosition,
                 validations = _state.validations,
                 showError = _state.showError,
@@ -7765,7 +7764,6 @@ var Design = function (_PureComponent) {
                     appendableComponents: appendableComponents,
                     selectedUUID: selectedUUID,
                     getUUIDFromValue: this.getUUIDFromValue,
-                    showAddComponentOverlay: showAddComponentOverlay,
                     addComponentOverlayPosition: addComponentOverlayPosition,
                     onAdd: this.onShowAddComponentOverlay,
                     onEdit: this.onShowEditComponentOverlay,
@@ -7786,7 +7784,7 @@ var Design = function (_PureComponent) {
                         componentInstanceCount: componentInstanceCount,
                         components: appendableComponents,
                         onAddComponent: function onAddComponent(component, fromSelected) {
-                            _this2.onAdd(component, fromSelected);
+                            _this2.onAddComponent(component, fromSelected);
                         }
                     })
                 )
@@ -9607,7 +9605,6 @@ var DesignPreview = function (_PureComponent) {
           onSettingsChange = _props.onSettingsChange,
           onComponentValueChange = _props.onComponentValueChange,
           design = _props.design,
-          showAddComponentOverlay = _props.showAddComponentOverlay,
           selectedUUID = _props.selectedUUID,
           getUUIDFromValue = _props.getUUIDFromValue,
           onSelect = _props.onSelect,
@@ -9691,7 +9688,7 @@ var DesignPreview = function (_PureComponent) {
                       component: comp.preview,
                       previewProps: getAdditionalProps(comp.previewProps, v)
                     }),
-                    selected && !showAddComponentOverlay && _react2.default.createElement(
+                    selected && _react2.default.createElement(
                       EditorItem,
                       {
                         prefix: prefix,

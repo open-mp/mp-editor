@@ -44,7 +44,6 @@ class DesignPreview extends PureComponent {
       onSettingsChange,
       onComponentValueChange,
       design,
-      showAddComponentOverlay,
       selectedUUID,
       getUUIDFromValue,
       onSelect,
@@ -134,8 +133,7 @@ class DesignPreview extends PureComponent {
                           )}
                         />
 
-                        {selected &&
-                          !showAddComponentOverlay && (
+                        {selected && (
                             <EditorItem
                               prefix={prefix}
                               disabled={disabled}
