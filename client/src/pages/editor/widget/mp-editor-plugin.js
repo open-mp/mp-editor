@@ -17,8 +17,6 @@ let definition = {
     quikAction: {
         allowDrag: true, // 是否可以拖拽
         allowDelete: false,
-        allowAddBefore: false,
-        allowAddAfter: false
     },
 
     plugin: {
