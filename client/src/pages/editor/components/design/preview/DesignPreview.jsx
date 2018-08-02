@@ -111,7 +111,6 @@ class DesignPreview extends PureComponent {
       onMove,
       className,
       prefix,
-      globalConfig,
       disabled,
       footer,
     } = this.props;
@@ -172,7 +171,6 @@ class DesignPreview extends PureComponent {
                         <PreviewController
                           prefix={prefix}
                           value={v}
-                          globalConfig={globalConfig}
                           settings={settings}
                           design={design}
                           id={id}
@@ -214,7 +212,6 @@ class DesignPreview extends PureComponent {
                                 onChange={onComponentValueChange(v)}
                                 settings={settings}
                                 onSettingsChange={onSettingsChange}
-                                globalConfig={globalConfig}
                                 design={design}
                                 validation={validations[id] || {}}
                                 showError={showError}

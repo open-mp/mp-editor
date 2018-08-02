@@ -68,9 +68,6 @@ class DesignPreviewController extends PureComponent {
     // 用来渲染预览的组件
     component: PropTypes.func.isRequired,
 
-    // 自定义配置
-    globalConfig: PropTypes.object,
-
     // preview 额外的 props
     previewProps: PropTypes.object,
 
@@ -78,7 +75,7 @@ class DesignPreviewController extends PureComponent {
   };
 
   static defaultProps = {
-    prefix: 'zent',
+    prefix: 'mp',
   };
 
   render() {
@@ -101,7 +98,6 @@ class DesignPreviewController extends PureComponent {
     const props = pick(this.props, [
       'value',
       'design',
-      'globalConfig',
       'settings',
     ]);
     const getClassName = highlight =>
