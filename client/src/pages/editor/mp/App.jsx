@@ -66,7 +66,7 @@ class App extends React.Component {
     }
 
     onAddComponent() {
-
+        // 通知design增加组件
     }
 
     notImplemented() {

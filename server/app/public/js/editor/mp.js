@@ -12010,7 +12010,9 @@ var App = function (_React$Component) {
         }
     }, {
         key: 'onAddComponent',
-        value: function onAddComponent() {}
+        value: function onAddComponent() {
+            // 通知design增加组件
+        }
     }, {
         key: 'notImplemented',
         value: function notImplemented() {
