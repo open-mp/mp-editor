@@ -8,7 +8,6 @@ import noop from 'lodash/noop';
 
 import LazyMap from '../utils/LazyMap';
 import { serializeDesignType } from '../utils/design-type';
-import { splitGroup, isGrouped } from '../utils/component-group';
 
 export default class DesignEditorAddComponent extends PureComponent {
   static propTypes = {
@@ -58,10 +57,6 @@ export default class DesignEditorAddComponent extends PureComponent {
       return null;
     }
 
-    if (isGrouped(components)) {
-      return this.renderGrouped();
-    }
-
     return (
       <div
         className={`${prefix}-design-editor-add-component ${prefix}-design-editor-add-component--mixed`}
@@ -88,31 +83,6 @@ export default class DesignEditorAddComponent extends PureComponent {
             );
           })}
         </div>
-      </div>
-    );
-  }
-
-  renderGrouped() {
-    const { components, prefix, componentInstanceCount } = this.props;
-    const { popVisibleMap } = this.state;
-    const groups = splitGroup(components);
-
-    return (
-      <div
-        className={`${prefix}-design-editor-add-component ${prefix}-design-editor-add-component--grouped`}
-      >
-        {groups.map(g => (
-          <ComponentGroup
-            prefix={prefix}
-            key={g.group.name}
-            group={g.group}
-            components={g.components}
-            componentInstanceCount={componentInstanceCount}
-            onAdd={this.onAdd}
-            popVisibleMap={popVisibleMap}
-            onPopVisibleChange={this.onPopVisibleChange}
-          />
-        ))}
       </div>
     );
   }

@@ -13,7 +13,6 @@ import DesignPreviewController from './DesignPreviewController';
 import DesignEditorItem from '../editor/DesignEditorItem';
 import DesignEditorAddComponent from '../editor/DesignEditorAddComponent';
 import { isExpectedDesginType } from '../utils/design-type';
-import { isGrouped } from '../utils/component-group';
 import { DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND } from './constants';
 import { ADD_COMPONENT_OVERLAY_POSITION } from '../constants';
 
@@ -116,7 +115,7 @@ class DesignPreview extends PureComponent {
       disabled,
       footer,
     } = this.props;
-    const isComponentsGrouped = isGrouped(appendableComponents);
+    const isComponentsGrouped = false;
     const cls = cx(`${prefix}-design-preview`, className);
     const hasAppendableComponent = appendableComponents.length > 0;
 

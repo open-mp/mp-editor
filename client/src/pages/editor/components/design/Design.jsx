@@ -254,7 +254,6 @@ export default class Design extends PureComponent {
       prefix,
       preview,
       cacheRestoreMessage,
-      children,
     } = this.props;
     const { showRestoreFromCache, bottomGap } = this.state;
     const cls = cx(`${prefix}-design`, className);
