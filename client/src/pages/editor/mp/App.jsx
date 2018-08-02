@@ -48,7 +48,6 @@ class App extends React.Component {
                         onChange={this.onChange}
                         onSettingsChange={this.onSettingsChange}
                         scrollTopOffset={-270}
-                        globalConfig={window._global}
                     />
                     <div className="design-example-actions">
                         <Button type="primary" onClick={this.submit}>
