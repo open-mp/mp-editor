@@ -7678,9 +7678,6 @@ var Design = function (_PureComponent) {
             // 外面没传的时候用 state 上的 settings
             settings: {},
 
-            // 是否显示添加组件的浮层
-            showAddComponentOverlay: false,
-
             // 添加组件浮层的位置
             addComponentOverlayPosition: _constants.ADD_COMPONENT_OVERLAY_POSITION.UNKNOWN,
 
@@ -7760,13 +7757,10 @@ var Design = function (_PureComponent) {
                     onSettingsChange: this.onSettingsChange,
                     componentInstanceCount: componentInstanceCount,
                     onComponentValueChange: this.onComponentValueChange,
-                    onAddComponent: this.onAdd,
                     appendableComponents: appendableComponents,
                     selectedUUID: selectedUUID,
                     getUUIDFromValue: this.getUUIDFromValue,
                     addComponentOverlayPosition: addComponentOverlayPosition,
-                    onAdd: this.onShowAddComponentOverlay,
-                    onEdit: this.onShowEditComponentOverlay,
                     onSelect: this.onSelect,
                     onMove: this.onMove,
                     onDelete: this.onDelete,
@@ -7784,7 +7778,7 @@ var Design = function (_PureComponent) {
                         componentInstanceCount: componentInstanceCount,
                         components: appendableComponents,
                         onAddComponent: function onAddComponent(component, fromSelected) {
-                            _this2.onAddComponent(component, fromSelected);
+                            _this2.onAdd(component, fromSelected);
                         }
                     })
                 )
@@ -7853,12 +7847,6 @@ var Design = function (_PureComponent) {
             });
         }
 
-        // 打开右侧添加新组件的弹层
-
-
-        // 编辑一个已有组件
-
-
         // 选中一个组件
 
     }, {
@@ -7889,27 +7877,6 @@ var Design = function (_PureComponent) {
 
         // 保存数据后请调用这个函数通知组件数据已经保存
 
-    }, {
-        key: 'toggleEditOrAdd',
-        value: function toggleEditOrAdd(component, showAdd) {
-            var addPosition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _constants.ADD_COMPONENT_OVERLAY_POSITION.UNKNOWN;
-            var _state2 = this.state,
-                showAddComponentOverlay = _state2.showAddComponentOverlay,
-                addComponentOverlayPosition = _state2.addComponentOverlayPosition;
-
-            var id = this.getUUIDFromValue(component);
-
-            if (this.isSelected(component) && showAddComponentOverlay === showAdd && addPosition === addComponentOverlayPosition) {
-                return;
-            }
-
-            this.setState({
-                selectedUUID: id,
-                showAddComponentOverlay: showAdd,
-                addComponentOverlayPosition: addPosition
-            });
-            this.adjustHeight();
-        }
     }, {
         key: 'getUUIDFromValue',
         value: function getUUIDFromValue(value) {
@@ -8143,30 +8110,15 @@ var _initialiseProps = function _initialiseProps() {
         return p;
     };
 
-    this.onShowAddComponentOverlay = function (component, addPosition) {
-        _this3.toggleEditOrAdd(component, true, addPosition);
-    };
-
-    this.onShowEditComponentOverlay = function (component) {
-        _this3.toggleEditOrAdd(component, false);
-
-        // 将当前组件滚动到顶部
-        var id = _this3.getUUIDFromValue(component);
-        _this3.scrollToPreviewItem(id);
-    };
-
     this.onSelect = function (component) {
         var id = _this3.getUUIDFromValue(component);
-        var showAddComponentOverlay = _this3.state.showAddComponentOverlay;
 
-
-        if (_this3.isSelected(component) && !showAddComponentOverlay) {
+        if (_this3.isSelected(component)) {
             return;
         }
 
         _this3.setState({
-            selectedUUID: id,
-            showAddComponentOverlay: false
+            selectedUUID: id
         });
 
         _this3.adjustHeight();
@@ -8223,9 +8175,7 @@ var _initialiseProps = function _initialiseProps() {
             return skip;
         });
 
-        var newState = {
-            showAddComponentOverlay: false
-        };
+        var newState = {};
 
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
         var componentUUID = _this3.getUUIDFromValue(component);
@@ -8376,9 +8326,7 @@ var _initialiseProps = function _initialiseProps() {
 
                         // 选中第一个有错误的组件
                         _this3.setState({
-                            selectedUUID: id,
-                            showAddComponentOverlay: false,
-                            onShowEditComponentOverlay: true
+                            selectedUUID: id
                         });
                     }
 
@@ -8417,8 +8365,7 @@ var _initialiseProps = function _initialiseProps() {
         var safeValue = value[safeIndex];
 
         _this3.setState({
-            selectedUUID: _this3.getUUIDFromValue(safeValue),
-            showAddComponentOverlay: false
+            selectedUUID: _this3.getUUIDFromValue(safeValue)
         });
     };
 
@@ -9853,10 +9800,6 @@ var DesignPreviewController = function (_PureComponent) {
       }
 
       _this.invokeCallback('onSelect', evt, false);
-    }, _this.onPrepend = function (evt) {
-      _this.invokeCallback('onAdd', evt, true, _constants2.ADD_COMPONENT_OVERLAY_POSITION.TOP);
-    }, _this.onAppend = function (evt) {
-      _this.invokeCallback('onAdd', evt, true, _constants2.ADD_COMPONENT_OVERLAY_POSITION.BOTTOM);
     }, _this.onDelete = function () {
       _this.invokeCallback('onDelete', null, true);
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -9921,17 +9864,7 @@ var DesignPreviewController = function (_PureComponent) {
               }, previewProps, props))
             ),
             provided.placeholder,
-            showButtons && canDelete && _react2.default.createElement(DeleteButton, { prefix: prefix, onDelete: _this2.onDelete }),
-            showButtons && canInsert && _react2.default.createElement(AddButton, {
-              prefix: prefix,
-              onAdd: _this2.onPrepend,
-              className: prefix + '-design-preview-controller__prepend'
-            }),
-            showButtons && canInsert && _react2.default.createElement(AddButton, {
-              prefix: prefix,
-              onAdd: _this2.onAppend,
-              className: prefix + '-design-preview-controller__append'
-            })
+            showButtons && canDelete && _react2.default.createElement(DeleteButton, { prefix: prefix, onDelete: _this2.onDelete })
           );
         }
       ) : _react2.default.createElement(
@@ -9947,17 +9880,7 @@ var DesignPreviewController = function (_PureComponent) {
           },
           _react2.default.createElement(PreviewComponent, _extends({ prefix: prefix }, previewProps, props))
         ),
-        configurable && canDelete && _react2.default.createElement(DeleteButton, { prefix: prefix, onDelete: this.onDelete }),
-        configurable && canInsert && _react2.default.createElement(AddButton, {
-          prefix: prefix,
-          onAdd: this.onPrepend,
-          className: prefix + '-design-preview-controller__prepend'
-        }),
-        configurable && canInsert && _react2.default.createElement(AddButton, {
-          prefix: prefix,
-          onAdd: this.onAppend,
-          className: prefix + '-design-preview-controller__append'
-        })
+        configurable && canDelete && _react2.default.createElement(DeleteButton, { prefix: prefix, onDelete: this.onDelete })
       );
 
       return tree;

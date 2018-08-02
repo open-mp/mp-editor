@@ -85,22 +85,6 @@ class DesignPreviewController extends PureComponent {
                 canDelete && (
                   <DeleteButton prefix={prefix} onDelete={this.onDelete} />
                 )}
-              {showButtons &&
-                canInsert && (
-                  <AddButton
-                    prefix={prefix}
-                    onAdd={this.onPrepend}
-                    className={`${prefix}-design-preview-controller__prepend`}
-                  />
-                )}
-              {showButtons &&
-                canInsert && (
-                  <AddButton
-                    prefix={prefix}
-                    onAdd={this.onAppend}
-                    className={`${prefix}-design-preview-controller__append`}
-                  />
-                )}
             </div>
           );
         }}
@@ -123,22 +107,6 @@ class DesignPreviewController extends PureComponent {
           canDelete && (
             <DeleteButton prefix={prefix} onDelete={this.onDelete} />
           )}
-        {configurable &&
-          canInsert && (
-            <AddButton
-              prefix={prefix}
-              onAdd={this.onPrepend}
-              className={`${prefix}-design-preview-controller__prepend`}
-            />
-          )}
-        {configurable &&
-          canInsert && (
-            <AddButton
-              prefix={prefix}
-              onAdd={this.onAppend}
-              className={`${prefix}-design-preview-controller__append`}
-            />
-          )}
       </div>
     );
 
@@ -152,19 +120,6 @@ class DesignPreviewController extends PureComponent {
     }
 
     this.invokeCallback('onSelect', evt, false);
-  };
-
-  onPrepend = evt => {
-    this.invokeCallback('onAdd', evt, true, ADD_COMPONENT_OVERLAY_POSITION.TOP);
-  };
-
-  onAppend = evt => {
-    this.invokeCallback(
-      'onAdd',
-      evt,
-      true,
-      ADD_COMPONENT_OVERLAY_POSITION.BOTTOM
-    );
   };
 
   onDelete = () => {

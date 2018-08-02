@@ -99,9 +99,6 @@ export default class Design extends PureComponent {
             // 外面没传的时候用 state 上的 settings
             settings: {},
 
-            // 是否显示添加组件的浮层
-            showAddComponentOverlay: false,
-
             // 添加组件浮层的位置
             addComponentOverlayPosition: ADD_COMPONENT_OVERLAY_POSITION.UNKNOWN,
 
@@ -176,13 +173,10 @@ export default class Design extends PureComponent {
                     onSettingsChange: this.onSettingsChange,
                     componentInstanceCount,
                     onComponentValueChange: this.onComponentValueChange,
-                    onAddComponent: this.onAdd,
                     appendableComponents,
                     selectedUUID,
                     getUUIDFromValue: this.getUUIDFromValue,
                     addComponentOverlayPosition,
-                    onAdd: this.onShowAddComponentOverlay,
-                    onEdit: this.onShowEditComponentOverlay,
                     onSelect: this.onSelect,
                     onMove: this.onMove,
                     onDelete: this.onDelete,
@@ -199,7 +193,7 @@ export default class Design extends PureComponent {
                             componentInstanceCount={componentInstanceCount}
                             components={appendableComponents}
                             onAddComponent={(component, fromSelected)=>{
-                                this.onAddComponent(component, fromSelected);
+                                this.onAdd(component, fromSelected);
                             }}
                         />
                     </div>
@@ -321,32 +315,16 @@ export default class Design extends PureComponent {
         return p;
     };
 
-    // 打开右侧添加新组件的弹层
-    onShowAddComponentOverlay = (component, addPosition) => {
-        this.toggleEditOrAdd(component, true, addPosition);
-    };
-
-    // 编辑一个已有组件
-    onShowEditComponentOverlay = component => {
-        this.toggleEditOrAdd(component, false);
-
-        // 将当前组件滚动到顶部
-        const id = this.getUUIDFromValue(component);
-        this.scrollToPreviewItem(id);
-    };
-
     // 选中一个组件
     onSelect = component => {
         const id = this.getUUIDFromValue(component);
-        const {showAddComponentOverlay} = this.state;
 
-        if (this.isSelected(component) && !showAddComponentOverlay) {
+        if (this.isSelected(component)) {
             return;
         }
 
         this.setState({
             selectedUUID: id,
-            showAddComponentOverlay: false,
         });
 
         this.adjustHeight();
@@ -408,7 +386,6 @@ export default class Design extends PureComponent {
         });
 
         const newState = {
-            showAddComponentOverlay: false,
         };
 
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
@@ -553,8 +530,6 @@ export default class Design extends PureComponent {
                             // 选中第一个有错误的组件
                             this.setState({
                                 selectedUUID: id,
-                                showAddComponentOverlay: false,
-                                onShowEditComponentOverlay: true,
                             });
                         }
 
@@ -590,30 +565,6 @@ export default class Design extends PureComponent {
         this.removeCache();
     };
 
-    toggleEditOrAdd(
-        component,
-        showAdd,
-        addPosition = ADD_COMPONENT_OVERLAY_POSITION.UNKNOWN
-    ) {
-        const {showAddComponentOverlay, addComponentOverlayPosition} = this.state;
-        const id = this.getUUIDFromValue(component);
-
-        if (
-            this.isSelected(component) &&
-            showAddComponentOverlay === showAdd &&
-            addPosition === addComponentOverlayPosition
-        ) {
-            return;
-        }
-
-        this.setState({
-            selectedUUID: id,
-            showAddComponentOverlay: showAdd,
-            addComponentOverlayPosition: addPosition,
-        });
-        this.adjustHeight();
-    }
-
     selectByIndex = (index, value) => {
         value = value || this.props.value;
         index = isUndefined(index) ? this.props.defaultSelectedIndex : index;
@@ -622,7 +573,6 @@ export default class Design extends PureComponent {
 
         this.setState({
             selectedUUID: this.getUUIDFromValue(safeValue),
-            showAddComponentOverlay: false,
         });
     };
 
