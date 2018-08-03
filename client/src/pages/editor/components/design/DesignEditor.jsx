@@ -75,7 +75,7 @@ class DesignEditor extends PureComponent {
                     >
                         {(provided, snapshot) => {
                             let draggableIndex = 0;
-
+debugger
                             return (
                                 <div
                                     ref={provided.innerRef}

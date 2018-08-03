@@ -8698,7 +8698,7 @@ var DesignEditor = function (_PureComponent) {
                         },
                         function (provided, snapshot) {
                             var draggableIndex = 0;
-
+                            debugger;
                             return _react2.default.createElement(
                                 'div',
                                 _extends({
