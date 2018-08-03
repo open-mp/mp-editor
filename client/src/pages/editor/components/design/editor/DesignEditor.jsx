@@ -4,6 +4,7 @@ import assign from 'lodash/assign';
 import reorder from 'zent/lib/utils/reorder';
 import shallowEqual from 'zent/lib/utils/shallowEqual';
 
+const prefix = 'mp';
 const NOT_EVENT_MSG =
   'onInputChange expects an `Event` with { target: { name, value } } as argument';
 
@@ -175,14 +176,12 @@ export class ControlGroup extends PureComponent {
     showError: false,
     showLabel: true,
     focusOnLabelClick: true,
-    error: '',
-    prefix: 'zent',
+    error: ''
   };
 
   render() {
     const {
       className,
-      prefix,
       showError,
       error,
       showLabel,

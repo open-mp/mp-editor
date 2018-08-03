@@ -7,19 +7,21 @@ import isFunction from 'lodash/isFunction';
 import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import DesignPreviewItem from './DesignPreviewItem';
-import DesignPreviewController from './DesignPreviewController';
-import DesignEditorItem from '../editor/DesignEditorItem';
-import { isExpectedDesginType } from '../utils/design-type';
-import { DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND } from './constants';
+import DesignPreviewItem from './preview/DesignPreviewItem';
+import DesignPreviewController from './preview/DesignPreviewController';
+import DesignEditorItem from './editor/DesignEditorItem';
+import { isExpectedDesginType } from './utils/design-type';
+import { DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND } from './preview/constants';
 
 const prefix = 'mp';
 /**
  * DesignPreview 和 config 组件是相互关联的
  *
  * 这个组件里的一些 props 是需要 config 组件提供的
+ *
+ * 负责实例的预览、编辑
  */
-class DesignPreview extends PureComponent {
+class DesignEditor extends PureComponent {
   // All props in this component are injected by Design
   static defaultProps = {
     background: '#f9f9f9',
@@ -235,4 +237,4 @@ function saveRef(map, id, instance) {
   }
 }
 
-export default DesignPreview;
+export default DesignEditor;
