@@ -10430,21 +10430,19 @@ var DesignPreview = function (_PureComponent) {
                   var comp = (0, _find2.default)(components, function (c) {
                     return (0, _designType.isExpectedDesginType)(c, valueType);
                   });
-                  var PreviewItem = comp.previewItem || _DesignPreviewItem2.default;
-                  var EditorItem = comp.editorItem || _DesignEditorItem2.default;
                   var id = getUUIDFromValue(v);
                   var selected = id === selectedUUID;
-                  var PreviewController = comp.previewController || _DesignPreviewController2.default;
+
                   var draggable = (0, _defaultTo2.default)(comp.dragable, true);
 
                   return _react2.default.createElement(
-                    PreviewItem,
+                    _DesignPreviewItem2.default,
                     {
                       key: id,
                       id: id,
                       ref: _this2.savePreviewItem(id)
                     },
-                    _react2.default.createElement(PreviewController, {
+                    _react2.default.createElement(_DesignPreviewController2.default, {
                       value: v,
                       settings: settings,
                       design: design,
@@ -10464,7 +10462,7 @@ var DesignPreview = function (_PureComponent) {
                       previewProps: getAdditionalProps(comp.previewProps, v)
                     }),
                     selected && _react2.default.createElement(
-                      EditorItem,
+                      _DesignEditorItem2.default,
                       {
                         disabled: disabled,
                         ref: _this2.saveEditorItem(id)
@@ -10523,8 +10521,7 @@ var DesignPreview = function (_PureComponent) {
 
 DesignPreview.defaultProps = {
   background: '#f9f9f9',
-  disabled: false,
-  appendableComponents: []
+  disabled: false
 };
 
 

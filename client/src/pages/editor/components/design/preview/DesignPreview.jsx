@@ -24,7 +24,6 @@ class DesignPreview extends PureComponent {
   static defaultProps = {
     background: '#f9f9f9',
     disabled: false,
-    appendableComponents: [],
   };
 
   previewItems = {};
@@ -86,21 +85,18 @@ class DesignPreview extends PureComponent {
                     const comp = find(components, c =>
                       isExpectedDesginType(c, valueType)
                     );
-                    const PreviewItem = comp.previewItem || DesignPreviewItem;
-                    const EditorItem = comp.editorItem || DesignEditorItem;
                     const id = getUUIDFromValue(v);
                     const selected = id === selectedUUID;
-                    const PreviewController =
-                      comp.previewController || DesignPreviewController;
+
                     const draggable = defaultTo(comp.dragable, true);
 
                     return (
-                      <PreviewItem
+                      <DesignPreviewItem
                         key={id}
                         id={id}
                         ref={this.savePreviewItem(id)}
                       >
-                        <PreviewController
+                        <DesignPreviewController
                           value={v}
                           settings={settings}
                           design={design}
@@ -127,7 +123,7 @@ class DesignPreview extends PureComponent {
                         />
 
                         {selected && (
-                            <EditorItem
+                            <DesignEditorItem
                               disabled={disabled}
                               ref={this.saveEditorItem(id)}
                             >
@@ -142,9 +138,9 @@ class DesignPreview extends PureComponent {
                                 validation={validations[id] || {}}
                                 showError={showError}
                               />
-                            </EditorItem>
+                            </DesignEditorItem>
                           )}
-                      </PreviewItem>
+                      </DesignPreviewItem>
                     );
                   })}
                   {provided.placeholder}
