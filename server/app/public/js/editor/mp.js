@@ -7648,7 +7648,7 @@ var Design = function (_PureComponent) {
         _this.state = {
             // 当前选中的组件对应的 UUID
             selectedUUID: _this.getUUIDFromValue(selectedValue),
-            pluginList: [], // 插件列表
+            pluginMap: {}, // 已经安装的插件 id => 插件配置
             pluginInstanceCount: new _LazyMap2.default(0), // plugin创建的实例数
 
             // 每个组件当前已经添加的个数
@@ -8535,7 +8535,7 @@ function getSafeSelectedValueIndex(index, value) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8597,6 +8597,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var prefix = 'mp';
+
 /**
  * DesignPreview 和 config 组件是相互关联的
  *
@@ -8606,230 +8607,209 @@ var prefix = 'mp';
  */
 
 var DesignEditor = function (_PureComponent) {
-  _inherits(DesignEditor, _PureComponent);
+    _inherits(DesignEditor, _PureComponent);
 
-  function DesignEditor() {
-    var _ref;
+    function DesignEditor() {
+        var _ref;
 
-    var _temp, _this, _ret;
+        var _temp, _this, _ret;
 
-    _classCallCheck(this, DesignEditor);
+        _classCallCheck(this, DesignEditor);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.editors = {}, _this.dispatchDragEnd = function (result) {
-      var type = result.type;
-
-      if (type === _constants.DND_PREVIEW_CONTROLLER) {
-        _this.onPreviewDragEnd(result);
-        return;
-      }
-
-      // Let editors handle their dnd actions
-      (0, _some2.default)(_this.editors, function (editor) {
-        if ((0, _isFunction2.default)(editor.shouldHandleDragEnd) && editor.shouldHandleDragEnd(type)) {
-          (0, _isFunction2.default)(editor.onDragEnd) && editor.onDragEnd(result);
-          return true;
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
         }
 
-        return false;
-      });
-    }, _this.savePreviewItem = function (id) {
-      return function (instance) {
-        saveRef(_this.previewItems, id, instance);
-      };
-    }, _this.saveEditorItem = function (id) {
-      return function (instance) {
-        saveRef(_this.editorItems, id, instance);
-      };
-    }, _this.saveEditor = function (id) {
-      return function (instance) {
-        saveRef(_this.editors, id, instance);
-      };
-    }, _this.scrollToItem = function (id, offsets) {
-      var item = _this.previewItems[id];
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.dispatchDragEnd = function (result) {
+            var type = result.type;
 
-      if (!item) {
-        return;
-      }
-
-      item.scrollTop(offsets);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-  // All props in this component are injected by Design
-
-
-  _createClass(DesignEditor, [{
-    key: 'render',
-
-
-    /**
-     * 流程
-     */
-    value: function render() {
-      var _this2 = this;
-
-      var _props = this.props,
-          components = _props.components,
-          value = _props.value,
-          validations = _props.validations,
-          showError = _props.showError,
-          settings = _props.settings,
-          onSettingsChange = _props.onSettingsChange,
-          onComponentValueChange = _props.onComponentValueChange,
-          design = _props.design,
-          selectedUUID = _props.selectedUUID,
-          getUUIDFromValue = _props.getUUIDFromValue,
-          onSelect = _props.onSelect,
-          onDelete = _props.onDelete,
-          className = _props.className,
-          disabled = _props.disabled;
-
-      var cls = (0, _classnames2.default)(prefix + '-design-preview', className);
-
-      return _react2.default.createElement(
-        _reactBeautifulDnd.DragDropContext,
-        { onDragEnd: this.dispatchDragEnd },
-        _react2.default.createElement(
-          'div',
-          {
-            className: cls,
-            style: {
-              backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
+            if (type === _constants.DND_PREVIEW_CONTROLLER) {
+                _this.onPreviewDragEnd(result);
+                return;
             }
-          },
-          disabled && _react2.default.createElement('div', { className: prefix + '-design__disabled-mask' }),
-          _react2.default.createElement(
-            _reactBeautifulDnd.Droppable,
-            {
-              droppableId: prefix + '-design-preview-list',
-              type: _constants.DND_PREVIEW_CONTROLLER,
-              direction: 'vertical'
-            },
-            function (provided, snapshot) {
-              var draggableIndex = 0;
+        }, _this.savePreviewItem = function (id) {
+            return function (instance) {
+                saveRef(_this.previewItems, id, instance);
+            };
+        }, _this.saveEditorItem = function (id) {
+            return function (instance) {
+                saveRef(_this.editorItems, id, instance);
+            };
+        }, _this.scrollToItem = function (id, offsets) {
+            var item = _this.previewItems[id];
 
-              return _react2.default.createElement(
-                'div',
-                _extends({
-                  ref: provided.innerRef
-                }, provided.droppableProps, {
-                  className: (0, _classnames2.default)(prefix + '-design__item-list', prefix + '-design__item-list--full-height')
-                }),
-                value.map(function (v) {
-                  var valueType = v.type;
-                  var comp = (0, _find2.default)(components, function (c) {
-                    return (0, _designType.isExpectedDesginType)(c, valueType);
-                  });
-                  var id = getUUIDFromValue(v);
-                  var selected = id === selectedUUID;
+            if (!item) {
+                return;
+            }
 
-                  var draggable = (0, _defaultTo2.default)(comp.dragable, true);
+            item.scrollTop(offsets);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+    // All props in this component are injected by Design
+    // 记录预览组件实例 id -> instance
 
-                  return _react2.default.createElement(
-                    _DesignPreviewItem2.default,
+
+    _createClass(DesignEditor, [{
+        key: 'render',
+        // 记录编辑表单实例 id -> instance
+
+        /**
+         * 流程
+         */
+        value: function render() {
+            var _this2 = this;
+
+            var _props = this.props,
+                components = _props.components,
+                value = _props.value,
+                validations = _props.validations,
+                showError = _props.showError,
+                settings = _props.settings,
+                onSettingsChange = _props.onSettingsChange,
+                onComponentValueChange = _props.onComponentValueChange,
+                design = _props.design,
+                selectedUUID = _props.selectedUUID,
+                getUUIDFromValue = _props.getUUIDFromValue,
+                onSelect = _props.onSelect,
+                onDelete = _props.onDelete,
+                className = _props.className,
+                disabled = _props.disabled;
+
+            var cls = (0, _classnames2.default)(prefix + '-design-preview', className);
+
+            return _react2.default.createElement(
+                _reactBeautifulDnd.DragDropContext,
+                { onDragEnd: this.dispatchDragEnd },
+                _react2.default.createElement(
+                    'div',
                     {
-                      key: id,
-                      id: id,
-                      ref: _this2.savePreviewItem(id)
+                        className: cls,
+                        style: {
+                            backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
+                        }
                     },
-                    _react2.default.createElement(_DesignPreviewController2.default, {
-                      value: v,
-                      settings: settings,
-                      design: design,
-                      id: id,
-                      index: draggable ? draggableIndex++ : -1,
-                      allowHoverEffects: !snapshot.isDraggingOver,
-                      dragable: draggable,
-                      editable: (0, _defaultTo2.default)(comp.editable, true),
-                      configurable: (0, _defaultTo2.default)(comp.configurable, true),
-                      canDelete: (0, _defaultTo2.default)(comp.canDelete, true),
-                      canInsert: (0, _defaultTo2.default)(comp.canInsert, true),
-                      highlightWhenSelect: (0, _defaultTo2.default)(comp.highlightWhenSelect, true),
-                      isSelected: selected,
-                      onSelect: onSelect,
-                      onDelete: onDelete,
-                      component: comp.preview,
-                      previewProps: getAdditionalProps(comp.previewProps, v)
-                    }),
-                    selected && _react2.default.createElement(
-                      _DesignEditorItem2.default,
-                      {
-                        disabled: disabled,
-                        ref: _this2.saveEditorItem(id)
-                      },
-                      _react2.default.createElement(comp.editor, _extends({}, getAdditionalProps(comp.editorProps, v), {
-                        ref: _this2.saveEditor(id),
-                        value: v,
-                        onChange: onComponentValueChange(v),
-                        settings: settings,
-                        onSettingsChange: onSettingsChange,
-                        design: design,
-                        validation: validations[id] || {},
-                        showError: showError
-                      }))
+                    disabled && _react2.default.createElement('div', { className: prefix + '-design__disabled-mask' }),
+                    _react2.default.createElement(
+                        _reactBeautifulDnd.Droppable,
+                        {
+                            droppableId: prefix + '-design-preview-list',
+                            type: _constants.DND_PREVIEW_CONTROLLER,
+                            direction: 'vertical'
+                        },
+                        function (provided, snapshot) {
+                            var draggableIndex = 0;
+
+                            return _react2.default.createElement(
+                                'div',
+                                _extends({
+                                    ref: provided.innerRef
+                                }, provided.droppableProps, {
+                                    className: (0, _classnames2.default)(prefix + '-design__item-list', prefix + '-design__item-list--full-height')
+                                }),
+                                value.map(function (v) {
+                                    var valueType = v.type;
+                                    var comp = (0, _find2.default)(components, function (c) {
+                                        return (0, _designType.isExpectedDesginType)(c, valueType);
+                                    });
+                                    var id = getUUIDFromValue(v);
+                                    var selected = id === selectedUUID;
+
+                                    var draggable = (0, _defaultTo2.default)(comp.dragable, true);
+
+                                    return _react2.default.createElement(
+                                        _DesignPreviewItem2.default,
+                                        {
+                                            key: id,
+                                            id: id,
+                                            ref: _this2.savePreviewItem(id)
+                                        },
+                                        _react2.default.createElement(_DesignPreviewController2.default, {
+                                            value: v,
+                                            settings: settings,
+                                            design: design,
+                                            id: id,
+                                            index: draggable ? draggableIndex++ : -1,
+                                            allowHoverEffects: !snapshot.isDraggingOver,
+                                            dragable: draggable,
+                                            editable: (0, _defaultTo2.default)(comp.editable, true),
+                                            configurable: (0, _defaultTo2.default)(comp.configurable, true),
+                                            canDelete: (0, _defaultTo2.default)(comp.canDelete, true),
+                                            canInsert: (0, _defaultTo2.default)(comp.canInsert, true),
+                                            highlightWhenSelect: (0, _defaultTo2.default)(comp.highlightWhenSelect, true),
+                                            isSelected: selected,
+                                            onSelect: onSelect,
+                                            onDelete: onDelete,
+                                            component: comp.preview
+                                        }),
+                                        selected && _react2.default.createElement(
+                                            _DesignEditorItem2.default,
+                                            {
+                                                disabled: disabled,
+                                                ref: _this2.saveEditorItem(id)
+                                            },
+                                            _react2.default.createElement(comp.editor, {
+                                                value: v,
+                                                onChange: onComponentValueChange(v),
+                                                settings: settings,
+                                                onSettingsChange: onSettingsChange,
+                                                design: design,
+                                                validation: validations[id] || {},
+                                                showError: showError
+                                            })
+                                        )
+                                    );
+                                }),
+                                provided.placeholder
+                            );
+                        }
                     )
-                  );
-                }),
-                provided.placeholder
-              );
+                )
+            );
+        }
+    }, {
+        key: 'onPreviewDragEnd',
+        value: function onPreviewDragEnd(result) {
+            var source = result.source,
+                destination = result.destination;
+
+            // dropped outside
+
+            if (!destination) {
+                return;
             }
-          )
-        )
-      );
-    }
-  }, {
-    key: 'onPreviewDragEnd',
-    value: function onPreviewDragEnd(result) {
-      var source = result.source,
-          destination = result.destination;
 
-      // dropped outside
+            var onMove = this.props.onMove;
 
-      if (!destination) {
-        return;
-      }
+            onMove(source.index, destination.index);
+        }
+    }, {
+        key: 'getEditorBoundingBox',
+        value: function getEditorBoundingBox(id) {
+            var item = this.editorItems[id];
 
-      var onMove = this.props.onMove;
+            if (!item) {
+                return;
+            }
 
-      onMove(source.index, destination.index);
-    }
-  }, {
-    key: 'getEditorBoundingBox',
-    value: function getEditorBoundingBox(id) {
-      var item = this.editorItems[id];
+            return item.getBoundingBox();
+        }
+    }]);
 
-      if (!item) {
-        return;
-      }
-
-      return item.getBoundingBox();
-    }
-  }]);
-
-  return DesignEditor;
+    return DesignEditor;
 }(_react.PureComponent);
 
 DesignEditor.defaultProps = {
-  background: '#f9f9f9',
-  disabled: false
+    background: '#f9f9f9',
+    disabled: false
 };
 
 
-function getAdditionalProps(propsOrFn, value) {
-  var props = (0, _isFunction2.default)(propsOrFn) ? propsOrFn(value) : propsOrFn;
-
-  return props || {};
-}
-
 function saveRef(map, id, instance) {
-  if (!instance) {
-    delete map[id];
-  } else {
-    map[id] = instance;
-  }
+    if (!instance) {
+        delete map[id];
+    } else {
+        map[id] = instance;
+    }
 }
 
 exports.default = DesignEditor;
@@ -12433,10 +12413,10 @@ exports.default = RichText;
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.js":
-/*!********************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Emotion.js ***!
-  \********************************************************************/
+/***/ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx":
+/*!*********************************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12655,10 +12635,10 @@ var Emotion = function (_Component) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Link.js":
-/*!*****************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Link.js ***!
-  \*****************************************************************/
+/***/ "./src/pages/editor/widget/richtext/editor/plugins/Link.jsx":
+/*!******************************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/editor/plugins/Link.jsx ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12803,10 +12783,10 @@ var LinkForm = createForm({})(function (_React$Component) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Video.js":
-/*!******************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Video.js ***!
-  \******************************************************************/
+/***/ "./src/pages/editor/widget/richtext/editor/plugins/Video.jsx":
+/*!*******************************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/editor/plugins/Video.jsx ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13065,15 +13045,15 @@ var VideoForm = createForm({})(function (_Component) {
 "use strict";
 
 
-var _Link = __webpack_require__(/*! ./Link */ "./src/pages/editor/widget/richtext/editor/plugins/Link.js");
+var _Link = __webpack_require__(/*! ./Link */ "./src/pages/editor/widget/richtext/editor/plugins/Link.jsx");
 
 var _Link2 = _interopRequireDefault(_Link);
 
-var _Emotion = __webpack_require__(/*! ./Emotion */ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.js");
+var _Emotion = __webpack_require__(/*! ./Emotion */ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx");
 
 var _Emotion2 = _interopRequireDefault(_Emotion);
 
-var _Video = __webpack_require__(/*! ./Video */ "./src/pages/editor/widget/richtext/editor/plugins/Video.js");
+var _Video = __webpack_require__(/*! ./Video */ "./src/pages/editor/widget/richtext/editor/plugins/Video.jsx");
 
 var _Video2 = _interopRequireDefault(_Video);
 

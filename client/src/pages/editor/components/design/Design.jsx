@@ -62,7 +62,7 @@ export default class Design extends PureComponent {
         this.state = {
             // 当前选中的组件对应的 UUID
             selectedUUID: this.getUUIDFromValue(selectedValue),
-            pluginList: [], // 插件列表
+            pluginMap: {}, // 已经安装的插件 id => 插件配置
             pluginInstanceCount: new LazyMap(0), // plugin创建的实例数
 
             // 每个组件当前已经添加的个数
