@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! core-js/library/fn/object/assign */ "./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/assign.js");
+module.exports = __webpack_require__(/*! core-js/library/fn/object/assign */ "./node_modules/core-js/library/fn/object/assign.js");
 
 /***/ }),
 
@@ -104,7 +104,7 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/assign */ "./
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! core-js/library/fn/object/create */ "./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/create.js");
+module.exports = __webpack_require__(/*! core-js/library/fn/object/create */ "./node_modules/core-js/library/fn/object/create.js");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/create */ "./
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/keys.js");
+module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "./node_modules/core-js/library/fn/object/keys.js");
 
 /***/ }),
 
@@ -173,920 +173,6 @@ function _inheritsLoose(subClass, superClass) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/assign.js":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/assign.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es6.object.assign */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.assign.js");
-module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js").Object.assign;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/create.js":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/create.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es6.object.create */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.create.js");
-var $Object = __webpack_require__(/*! ../../modules/_core */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js").Object;
-module.exports = function create(P, D) {
-  return $Object.create(P, D);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/keys.js":
-/*!************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/fn/object/keys.js ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es6.object.keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.keys.js");
-module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js").Object.keys;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_a-function.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_a-function.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (it) {
-  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
-  return it;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_an-object.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_an-object.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_is-object.js");
-module.exports = function (it) {
-  if (!isObject(it)) throw TypeError(it + ' is not an object!');
-  return it;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_array-includes.js":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_array-includes.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// false -> Array#indexOf
-// true  -> Array#includes
-var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-iobject.js");
-var toLength = __webpack_require__(/*! ./_to-length */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-length.js");
-var toAbsoluteIndex = __webpack_require__(/*! ./_to-absolute-index */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-absolute-index.js");
-module.exports = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = toIObject($this);
-    var length = toLength(O.length);
-    var index = toAbsoluteIndex(fromIndex, length);
-    var value;
-    // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare
-    if (IS_INCLUDES && el != el) while (length > index) {
-      value = O[index++];
-      // eslint-disable-next-line no-self-compare
-      if (value != value) return true;
-    // Array#indexOf ignores holes, Array#includes - not
-    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
-      if (O[index] === el) return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_cof.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_cof.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var core = module.exports = { version: '2.5.7' };
-if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_ctx.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_ctx.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// optional / simple context binding
-var aFunction = __webpack_require__(/*! ./_a-function */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_a-function.js");
-module.exports = function (fn, that, length) {
-  aFunction(fn);
-  if (that === undefined) return fn;
-  switch (length) {
-    case 1: return function (a) {
-      return fn.call(that, a);
-    };
-    case 2: return function (a, b) {
-      return fn.call(that, a, b);
-    };
-    case 3: return function (a, b, c) {
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function (/* ...args */) {
-    return fn.apply(that, arguments);
-  };
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_defined.js":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_defined.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_descriptors.js":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_descriptors.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(/*! ./_fails */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_fails.js")(function () {
-  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_dom-create.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_dom-create.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_is-object.js");
-var document = __webpack_require__(/*! ./_global */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_global.js").document;
-// typeof document.createElement is 'object' in old IE
-var is = isObject(document) && isObject(document.createElement);
-module.exports = function (it) {
-  return is ? document.createElement(it) : {};
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_enum-bug-keys.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_enum-bug-keys.js ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// IE 8- don't enum bug keys
-module.exports = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_export.js":
-/*!*************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_export.js ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(/*! ./_global */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_global.js");
-var core = __webpack_require__(/*! ./_core */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js");
-var ctx = __webpack_require__(/*! ./_ctx */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_ctx.js");
-var hide = __webpack_require__(/*! ./_hide */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_hide.js");
-var has = __webpack_require__(/*! ./_has */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_has.js");
-var PROTOTYPE = 'prototype';
-
-var $export = function (type, name, source) {
-  var IS_FORCED = type & $export.F;
-  var IS_GLOBAL = type & $export.G;
-  var IS_STATIC = type & $export.S;
-  var IS_PROTO = type & $export.P;
-  var IS_BIND = type & $export.B;
-  var IS_WRAP = type & $export.W;
-  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
-  var expProto = exports[PROTOTYPE];
-  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
-  var key, own, out;
-  if (IS_GLOBAL) source = name;
-  for (key in source) {
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    if (own && has(exports, key)) continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
-    // bind timers to global for call from export context
-    : IS_BIND && own ? ctx(out, global)
-    // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function (C) {
-      var F = function (a, b, c) {
-        if (this instanceof C) {
-          switch (arguments.length) {
-            case 0: return new C();
-            case 1: return new C(a);
-            case 2: return new C(a, b);
-          } return new C(a, b, c);
-        } return C.apply(this, arguments);
-      };
-      F[PROTOTYPE] = C[PROTOTYPE];
-      return F;
-    // make static versions for prototype methods
-    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if (IS_PROTO) {
-      (exports.virtual || (exports.virtual = {}))[key] = out;
-      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
-    }
-  }
-};
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library`
-module.exports = $export;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_fails.js":
-/*!************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_fails.js ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (exec) {
-  try {
-    return !!exec();
-  } catch (e) {
-    return true;
-  }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_global.js":
-/*!*************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_global.js ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self
-  // eslint-disable-next-line no-new-func
-  : Function('return this')();
-if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_has.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_has.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_hide.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_hide.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(/*! ./_object-dp */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dp.js");
-var createDesc = __webpack_require__(/*! ./_property-desc */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_property-desc.js");
-module.exports = __webpack_require__(/*! ./_descriptors */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_descriptors.js") ? function (object, key, value) {
-  return dP.f(object, key, createDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_html.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_html.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var document = __webpack_require__(/*! ./_global */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_global.js").document;
-module.exports = document && document.documentElement;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_ie8-dom-define.js":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_ie8-dom-define.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = !__webpack_require__(/*! ./_descriptors */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_descriptors.js") && !__webpack_require__(/*! ./_fails */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_fails.js")(function () {
-  return Object.defineProperty(__webpack_require__(/*! ./_dom-create */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_dom-create.js")('div'), 'a', { get: function () { return 7; } }).a != 7;
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_iobject.js":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_iobject.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(/*! ./_cof */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_cof.js");
-// eslint-disable-next-line no-prototype-builtins
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_is-object.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_is-object.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_library.js":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_library.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = true;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-assign.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-assign.js ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__(/*! ./_object-keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys.js");
-var gOPS = __webpack_require__(/*! ./_object-gops */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-gops.js");
-var pIE = __webpack_require__(/*! ./_object-pie */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-pie.js");
-var toObject = __webpack_require__(/*! ./_to-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-object.js");
-var IObject = __webpack_require__(/*! ./_iobject */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_iobject.js");
-var $assign = Object.assign;
-
-// should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__(/*! ./_fails */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_fails.js")(function () {
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line no-undef
-  var S = Symbol();
-  var K = 'abcdefghijklmnopqrst';
-  A[S] = 7;
-  K.split('').forEach(function (k) { B[k] = k; });
-  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
-  var T = toObject(target);
-  var aLen = arguments.length;
-  var index = 1;
-  var getSymbols = gOPS.f;
-  var isEnum = pIE.f;
-  while (aLen > index) {
-    var S = IObject(arguments[index++]);
-    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
-  } return T;
-} : $assign;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-create.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-create.js ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_an-object.js");
-var dPs = __webpack_require__(/*! ./_object-dps */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dps.js");
-var enumBugKeys = __webpack_require__(/*! ./_enum-bug-keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_enum-bug-keys.js");
-var IE_PROTO = __webpack_require__(/*! ./_shared-key */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared-key.js")('IE_PROTO');
-var Empty = function () { /* empty */ };
-var PROTOTYPE = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(/*! ./_dom-create */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_dom-create.js")('iframe');
-  var i = enumBugKeys.length;
-  var lt = '<';
-  var gt = '>';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(/*! ./_html */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_html.js").appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty();
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dp.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dp.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_an-object.js");
-var IE8_DOM_DEFINE = __webpack_require__(/*! ./_ie8-dom-define */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_ie8-dom-define.js");
-var toPrimitive = __webpack_require__(/*! ./_to-primitive */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-primitive.js");
-var dP = Object.defineProperty;
-
-exports.f = __webpack_require__(/*! ./_descriptors */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_descriptors.js") ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return dP(O, P, Attributes);
-  } catch (e) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dps.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dps.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(/*! ./_object-dp */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-dp.js");
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_an-object.js");
-var getKeys = __webpack_require__(/*! ./_object-keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys.js");
-
-module.exports = __webpack_require__(/*! ./_descriptors */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_descriptors.js") ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var keys = getKeys(Properties);
-  var length = keys.length;
-  var i = 0;
-  var P;
-  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
-  return O;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-gops.js":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-gops.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-exports.f = Object.getOwnPropertySymbols;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys-internal.js":
-/*!***************************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys-internal.js ***!
-  \***************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var has = __webpack_require__(/*! ./_has */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_has.js");
-var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-iobject.js");
-var arrayIndexOf = __webpack_require__(/*! ./_array-includes */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_array-includes.js")(false);
-var IE_PROTO = __webpack_require__(/*! ./_shared-key */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared-key.js")('IE_PROTO');
-
-module.exports = function (object, names) {
-  var O = toIObject(object);
-  var i = 0;
-  var result = [];
-  var key;
-  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while (names.length > i) if (has(O, key = names[i++])) {
-    ~arrayIndexOf(result, key) || result.push(key);
-  }
-  return result;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys.js":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(/*! ./_object-keys-internal */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys-internal.js");
-var enumBugKeys = __webpack_require__(/*! ./_enum-bug-keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_enum-bug-keys.js");
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-pie.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-pie.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-exports.f = {}.propertyIsEnumerable;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-sap.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-sap.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_export.js");
-var core = __webpack_require__(/*! ./_core */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js");
-var fails = __webpack_require__(/*! ./_fails */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_fails.js");
-module.exports = function (KEY, exec) {
-  var fn = (core.Object || {})[KEY] || Object[KEY];
-  var exp = {};
-  exp[KEY] = exec(fn);
-  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_property-desc.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_property-desc.js ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared-key.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared-key.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var shared = __webpack_require__(/*! ./_shared */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared.js")('keys');
-var uid = __webpack_require__(/*! ./_uid */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_uid.js");
-module.exports = function (key) {
-  return shared[key] || (shared[key] = uid(key));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared.js":
-/*!*************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_shared.js ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var core = __webpack_require__(/*! ./_core */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_core.js");
-var global = __webpack_require__(/*! ./_global */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_global.js");
-var SHARED = '__core-js_shared__';
-var store = global[SHARED] || (global[SHARED] = {});
-
-(module.exports = function (key, value) {
-  return store[key] || (store[key] = value !== undefined ? value : {});
-})('versions', []).push({
-  version: core.version,
-  mode: __webpack_require__(/*! ./_library */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_library.js") ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-absolute-index.js":
-/*!************************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-absolute-index.js ***!
-  \************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(/*! ./_to-integer */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-integer.js");
-var max = Math.max;
-var min = Math.min;
-module.exports = function (index, length) {
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-integer.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-integer.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-module.exports = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-iobject.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-iobject.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(/*! ./_iobject */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_iobject.js");
-var defined = __webpack_require__(/*! ./_defined */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_defined.js");
-module.exports = function (it) {
-  return IObject(defined(it));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-length.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-length.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.15 ToLength
-var toInteger = __webpack_require__(/*! ./_to-integer */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-integer.js");
-var min = Math.min;
-module.exports = function (it) {
-  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-object.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-object.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.13 ToObject(argument)
-var defined = __webpack_require__(/*! ./_defined */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_defined.js");
-module.exports = function (it) {
-  return Object(defined(it));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-primitive.js":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-primitive.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_is-object.js");
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function (it, S) {
-  if (!isObject(it)) return it;
-  var fn, val;
-  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_uid.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/_uid.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.assign.js":
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.assign.js ***!
-  \***********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_export.js");
-
-$export($export.S + $export.F, 'Object', { assign: __webpack_require__(/*! ./_object-assign */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-assign.js") });
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.create.js":
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.create.js ***!
-  \***********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_export.js");
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', { create: __webpack_require__(/*! ./_object-create */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-create.js") });
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.keys.js":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/core-js/library/modules/es6.object.keys.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__(/*! ./_to-object */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_to-object.js");
-var $keys = __webpack_require__(/*! ./_object-keys */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-keys.js");
-
-__webpack_require__(/*! ./_object-sap */ "./node_modules/@babel/runtime/node_modules/core-js/library/modules/_object-sap.js")('keys', function () {
-  return function keys(it) {
-    return $keys(toObject(it));
-  };
-});
-
-
-/***/ }),
-
 /***/ "./node_modules/babel-runtime/helpers/typeof.js":
 /*!*********************************************************************************************!*\
   !*** delegated ./node_modules/babel-runtime/helpers/typeof.js from dll-reference _dll_base ***!
@@ -1106,6 +192,39 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(7);
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/fn/object/assign.js":
+/*!*************************************************************************************************!*\
+  !*** delegated ./node_modules/core-js/library/fn/object/assign.js from dll-reference _dll_base ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(536);
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/fn/object/create.js":
+/*!*************************************************************************************************!*\
+  !*** delegated ./node_modules/core-js/library/fn/object/create.js from dll-reference _dll_base ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(569);
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/fn/object/keys.js":
+/*!***********************************************************************************************!*\
+  !*** delegated ./node_modules/core-js/library/fn/object/keys.js from dll-reference _dll_base ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(810);
 
 /***/ }),
 
@@ -8467,9 +7586,9 @@ var _DesignEditorAddComponent = __webpack_require__(/*! ./DesignEditorAddCompone
 
 var _DesignEditorAddComponent2 = _interopRequireDefault(_DesignEditorAddComponent);
 
-var _DesignPreview = __webpack_require__(/*! ./preview/DesignPreview */ "./src/pages/editor/components/design/preview/DesignPreview.jsx");
+var _DesignEditor = __webpack_require__(/*! ./DesignEditor */ "./src/pages/editor/components/design/DesignEditor.jsx");
 
-var _DesignPreview2 = _interopRequireDefault(_DesignPreview);
+var _DesignEditor2 = _interopRequireDefault(_DesignEditor);
 
 var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
 
@@ -8491,32 +7610,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 设计文档
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 预览
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * `DesignPreview` 组件是整个预览块的包裹层，负责渲染左侧预览的框架。`DesignPreview` 和 `config`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 子组件是相关的，`config` 组件是知道 `DesignPreview` 的存在的；而 `DesignPreview` 的渲染是
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 根据 `config` 生成的数据进行的。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * ⚠️注意：`config` 自身有相应的负责渲染预览的模块，这个和 `DesignPreview` 不冲突，可以理解成
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * `config` 可以控制一些预览界面的全局样式。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 预览界面中按模块分成很多区域，每个区域是一个 `DesignPreviewItem`，默认的 `DesignPreviewItem`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 实现可以由外部覆盖。负责每个区域的事件交互的是另一个组件 `DesignPreviewController`，这个组件
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 负责处理添加、删除、编辑、选中以及拖拽操作，`DesignPreviewController` 的实现也是可以由外部覆盖的。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * ⚠️注意：重写的时候所有交互都需要再这个组件里面处理。`DesignPreviewController` 内部会渲染该区域
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 对应组件的预览模块，预览模块有两个参数：`value` 和 `design`。`value` 是当前的值，`design` 是
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  `Design` 组件提供的一些操作，一般用不到。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 编辑
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * `DesignEditorItem` 是每个区域对应的编辑区域，这个区域的显示隐藏由 `Design` 控制。`DesignEditorItem`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 可以由外部覆盖重写。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * `DesignEditorAddComponent` 这个组件负责枚举所有**可以添加的组件**，暂不支持由外部自定义组件实现。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * `DesignEditor` 是所有编辑组件的基类，这个类提供了一些常用的方法（例如 `onChange` 事件的处理函数），
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 在子类里面可以直接使用。
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var UUID_KEY = '__zent-design-uuid__';
 var CACHE_KEY = '__zent-design-cache-storage__';
@@ -8525,6 +7619,10 @@ var hasValidateError = function hasValidateError(v) {
     return !(0, _isEmpty2.default)(v[Object.keys(v)[0]]);
 };
 var prefix = 'mp';
+
+/**
+ * 负责数据处理
+ */
 
 var Design = function (_PureComponent) {
     _inherits(Design, _PureComponent);
@@ -8550,7 +7648,7 @@ var Design = function (_PureComponent) {
         _this.state = {
             // 当前选中的组件对应的 UUID
             selectedUUID: _this.getUUIDFromValue(selectedValue),
-            pluginList: [], // 插件列表
+            pluginMap: {}, // 已经安装的插件 id => 插件配置
             pluginInstanceCount: new _LazyMap2.default(0), // plugin创建的实例数
 
             // 每个组件当前已经添加的个数
@@ -8629,7 +7727,7 @@ var Design = function (_PureComponent) {
                         '\u4F7F\u7528'
                     )
                 ),
-                _react2.default.createElement(_DesignPreview2.default, {
+                _react2.default.createElement(_DesignEditor2.default, {
                     components: components,
                     value: value,
                     validations: validations,
@@ -9426,6 +8524,298 @@ function getSafeSelectedValueIndex(index, value) {
 
 /***/ }),
 
+/***/ "./src/pages/editor/components/design/DesignEditor.jsx":
+/*!*************************************************************!*\
+  !*** ./src/pages/editor/components/design/DesignEditor.jsx ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var _find2 = _interopRequireDefault(_find);
+
+var _some = __webpack_require__(/*! lodash/some */ "./node_modules/lodash/some.js");
+
+var _some2 = _interopRequireDefault(_some);
+
+var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
+
+var _defaultTo2 = _interopRequireDefault(_defaultTo);
+
+var _isFunction = __webpack_require__(/*! lodash/isFunction */ "./node_modules/lodash/isFunction.js");
+
+var _isFunction2 = _interopRequireDefault(_isFunction);
+
+var _get = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
+
+var _get2 = _interopRequireDefault(_get);
+
+var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+
+var _DesignPreviewItem = __webpack_require__(/*! ./preview/DesignPreviewItem */ "./src/pages/editor/components/design/preview/DesignPreviewItem.jsx");
+
+var _DesignPreviewItem2 = _interopRequireDefault(_DesignPreviewItem);
+
+var _DesignPreviewController = __webpack_require__(/*! ./preview/DesignPreviewController */ "./src/pages/editor/components/design/preview/DesignPreviewController.jsx");
+
+var _DesignPreviewController2 = _interopRequireDefault(_DesignPreviewController);
+
+var _DesignEditorItem = __webpack_require__(/*! ./editor/DesignEditorItem */ "./src/pages/editor/components/design/editor/DesignEditorItem.jsx");
+
+var _DesignEditorItem2 = _interopRequireDefault(_DesignEditorItem);
+
+var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
+
+var _constants = __webpack_require__(/*! ./preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var prefix = 'mp';
+
+/**
+ * DesignPreview 和 config 组件是相互关联的
+ *
+ * 这个组件里的一些 props 是需要 config 组件提供的
+ *
+ * 负责实例的预览、编辑
+ */
+
+var DesignEditor = function (_PureComponent) {
+    _inherits(DesignEditor, _PureComponent);
+
+    function DesignEditor() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, DesignEditor);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.dispatchDragEnd = function (result) {
+            var type = result.type;
+
+            if (type === _constants.DND_PREVIEW_CONTROLLER) {
+                _this.onPreviewDragEnd(result);
+                return;
+            }
+        }, _this.savePreviewItem = function (id) {
+            return function (instance) {
+                saveRef(_this.previewItems, id, instance);
+            };
+        }, _this.saveEditorItem = function (id) {
+            return function (instance) {
+                saveRef(_this.editorItems, id, instance);
+            };
+        }, _this.scrollToItem = function (id, offsets) {
+            var item = _this.previewItems[id];
+
+            if (!item) {
+                return;
+            }
+
+            item.scrollTop(offsets);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+    // All props in this component are injected by Design
+    // 记录预览组件实例 id -> instance
+
+
+    _createClass(DesignEditor, [{
+        key: 'render',
+        // 记录编辑表单实例 id -> instance
+
+        /**
+         * 流程
+         */
+        value: function render() {
+            var _this2 = this;
+
+            var _props = this.props,
+                components = _props.components,
+                value = _props.value,
+                validations = _props.validations,
+                showError = _props.showError,
+                settings = _props.settings,
+                onSettingsChange = _props.onSettingsChange,
+                onComponentValueChange = _props.onComponentValueChange,
+                design = _props.design,
+                selectedUUID = _props.selectedUUID,
+                getUUIDFromValue = _props.getUUIDFromValue,
+                onSelect = _props.onSelect,
+                onDelete = _props.onDelete,
+                className = _props.className,
+                disabled = _props.disabled;
+
+            var cls = (0, _classnames2.default)(prefix + '-design-preview', className);
+
+            return _react2.default.createElement(
+                _reactBeautifulDnd.DragDropContext,
+                { onDragEnd: this.dispatchDragEnd },
+                _react2.default.createElement(
+                    'div',
+                    {
+                        className: cls,
+                        style: {
+                            backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
+                        }
+                    },
+                    disabled && _react2.default.createElement('div', { className: prefix + '-design__disabled-mask' }),
+                    _react2.default.createElement(
+                        _reactBeautifulDnd.Droppable,
+                        {
+                            droppableId: prefix + '-design-preview-list',
+                            type: _constants.DND_PREVIEW_CONTROLLER,
+                            direction: 'vertical'
+                        },
+                        function (provided, snapshot) {
+                            var draggableIndex = 0;
+                            debugger;
+                            return _react2.default.createElement(
+                                'div',
+                                _extends({
+                                    ref: provided.innerRef
+                                }, provided.droppableProps, {
+                                    className: (0, _classnames2.default)(prefix + '-design__item-list', prefix + '-design__item-list--full-height')
+                                }),
+                                value.map(function (v) {
+                                    var valueType = v.type;
+                                    var comp = (0, _find2.default)(components, function (c) {
+                                        return (0, _designType.isExpectedDesginType)(c, valueType);
+                                    });
+                                    var id = getUUIDFromValue(v);
+                                    var selected = id === selectedUUID;
+
+                                    var draggable = (0, _defaultTo2.default)(comp.dragable, true);
+
+                                    return _react2.default.createElement(
+                                        _DesignPreviewItem2.default,
+                                        {
+                                            key: id,
+                                            id: id,
+                                            ref: _this2.savePreviewItem(id)
+                                        },
+                                        _react2.default.createElement(_DesignPreviewController2.default, {
+                                            value: v,
+                                            settings: settings,
+                                            design: design,
+                                            id: id,
+                                            index: draggable ? draggableIndex++ : -1,
+                                            allowHoverEffects: !snapshot.isDraggingOver,
+                                            dragable: draggable,
+                                            editable: (0, _defaultTo2.default)(comp.editable, true),
+                                            configurable: (0, _defaultTo2.default)(comp.configurable, true),
+                                            canDelete: (0, _defaultTo2.default)(comp.canDelete, true),
+                                            canInsert: (0, _defaultTo2.default)(comp.canInsert, true),
+                                            highlightWhenSelect: (0, _defaultTo2.default)(comp.highlightWhenSelect, true),
+                                            isSelected: selected,
+                                            onSelect: onSelect,
+                                            onDelete: onDelete,
+                                            component: comp.preview
+                                        }),
+                                        selected && _react2.default.createElement(
+                                            _DesignEditorItem2.default,
+                                            {
+                                                disabled: disabled,
+                                                ref: _this2.saveEditorItem(id)
+                                            },
+                                            _react2.default.createElement(comp.editor, {
+                                                value: v,
+                                                onChange: onComponentValueChange(v),
+                                                settings: settings,
+                                                onSettingsChange: onSettingsChange,
+                                                design: design,
+                                                validation: validations[id] || {},
+                                                showError: showError
+                                            })
+                                        )
+                                    );
+                                }),
+                                provided.placeholder
+                            );
+                        }
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'onPreviewDragEnd',
+        value: function onPreviewDragEnd(result) {
+            var source = result.source,
+                destination = result.destination;
+
+            // dropped outside
+
+            if (!destination) {
+                return;
+            }
+
+            var onMove = this.props.onMove;
+
+            onMove(source.index, destination.index);
+        }
+    }, {
+        key: 'getEditorBoundingBox',
+        value: function getEditorBoundingBox(id) {
+            var item = this.editorItems[id];
+
+            if (!item) {
+                return;
+            }
+
+            return item.getBoundingBox();
+        }
+    }]);
+
+    return DesignEditor;
+}(_react.PureComponent);
+
+DesignEditor.defaultProps = {
+    background: '#f9f9f9',
+    disabled: false
+};
+
+
+function saveRef(map, id, instance) {
+    if (!instance) {
+        delete map[id];
+    } else {
+        map[id] = instance;
+    }
+}
+
+exports.default = DesignEditor;
+
+/***/ }),
+
 /***/ "./src/pages/editor/components/design/DesignEditorAddComponent.jsx":
 /*!*************************************************************************!*\
   !*** ./src/pages/editor/components/design/DesignEditorAddComponent.jsx ***!
@@ -9797,6 +9187,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var prefix = 'mp';
 var NOT_EVENT_MSG = 'onInputChange expects an `Event` with { target: { name, value } } as argument';
 
 var DesignEditor = exports.DesignEditor = function (_Component) {
@@ -10025,7 +9416,6 @@ var ControlGroup = exports.ControlGroup = function (_PureComponent) {
     value: function render() {
       var _props2 = this.props,
           className = _props2.className,
-          prefix = _props2.prefix,
           showError = _props2.showError,
           error = _props2.error,
           showLabel = _props2.showLabel,
@@ -10090,8 +9480,7 @@ ControlGroup.defaultProps = {
   showError: false,
   showLabel: true,
   focusOnLabelClick: true,
-  error: '',
-  prefix: 'zent'
+  error: ''
 };
 
 
@@ -10230,316 +9619,6 @@ exports.default = _Design2.default;
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/editor/components/design/preview/DesignPreview.jsx":
-/*!**********************************************************************!*\
-  !*** ./src/pages/editor/components/design/preview/DesignPreview.jsx ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
-
-var _find2 = _interopRequireDefault(_find);
-
-var _some = __webpack_require__(/*! lodash/some */ "./node_modules/lodash/some.js");
-
-var _some2 = _interopRequireDefault(_some);
-
-var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
-
-var _defaultTo2 = _interopRequireDefault(_defaultTo);
-
-var _isFunction = __webpack_require__(/*! lodash/isFunction */ "./node_modules/lodash/isFunction.js");
-
-var _isFunction2 = _interopRequireDefault(_isFunction);
-
-var _get = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
-
-var _get2 = _interopRequireDefault(_get);
-
-var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-
-var _DesignPreviewItem = __webpack_require__(/*! ./DesignPreviewItem */ "./src/pages/editor/components/design/preview/DesignPreviewItem.jsx");
-
-var _DesignPreviewItem2 = _interopRequireDefault(_DesignPreviewItem);
-
-var _DesignPreviewController = __webpack_require__(/*! ./DesignPreviewController */ "./src/pages/editor/components/design/preview/DesignPreviewController.jsx");
-
-var _DesignPreviewController2 = _interopRequireDefault(_DesignPreviewController);
-
-var _DesignEditorItem = __webpack_require__(/*! ../editor/DesignEditorItem */ "./src/pages/editor/components/design/editor/DesignEditorItem.jsx");
-
-var _DesignEditorItem2 = _interopRequireDefault(_DesignEditorItem);
-
-var _designType = __webpack_require__(/*! ../utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
-
-var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/components/design/preview/constants.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var prefix = 'mp';
-/**
- * DesignPreview 和 config 组件是相互关联的
- *
- * 这个组件里的一些 props 是需要 config 组件提供的
- */
-
-var DesignPreview = function (_PureComponent) {
-  _inherits(DesignPreview, _PureComponent);
-
-  function DesignPreview() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, DesignPreview);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignPreview.__proto__ || Object.getPrototypeOf(DesignPreview)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.editors = {}, _this.dispatchDragEnd = function (result) {
-      var type = result.type;
-
-      if (type === _constants.DND_PREVIEW_CONTROLLER) {
-        _this.onPreviewDragEnd(result);
-        return;
-      }
-
-      // Let editors handle their dnd actions
-      (0, _some2.default)(_this.editors, function (editor) {
-        if ((0, _isFunction2.default)(editor.shouldHandleDragEnd) && editor.shouldHandleDragEnd(type)) {
-          (0, _isFunction2.default)(editor.onDragEnd) && editor.onDragEnd(result);
-          return true;
-        }
-
-        return false;
-      });
-    }, _this.savePreviewItem = function (id) {
-      return function (instance) {
-        saveRef(_this.previewItems, id, instance);
-      };
-    }, _this.saveEditorItem = function (id) {
-      return function (instance) {
-        saveRef(_this.editorItems, id, instance);
-      };
-    }, _this.saveEditor = function (id) {
-      return function (instance) {
-        saveRef(_this.editors, id, instance);
-      };
-    }, _this.scrollToItem = function (id, offsets) {
-      var item = _this.previewItems[id];
-
-      if (!item) {
-        return;
-      }
-
-      item.scrollTop(offsets);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-  // All props in this component are injected by Design
-
-
-  _createClass(DesignPreview, [{
-    key: 'render',
-
-
-    /**
-     * 流程
-     */
-    value: function render() {
-      var _this2 = this;
-
-      var _props = this.props,
-          components = _props.components,
-          value = _props.value,
-          validations = _props.validations,
-          showError = _props.showError,
-          settings = _props.settings,
-          onSettingsChange = _props.onSettingsChange,
-          onComponentValueChange = _props.onComponentValueChange,
-          design = _props.design,
-          selectedUUID = _props.selectedUUID,
-          getUUIDFromValue = _props.getUUIDFromValue,
-          onSelect = _props.onSelect,
-          onDelete = _props.onDelete,
-          className = _props.className,
-          disabled = _props.disabled;
-
-      var cls = (0, _classnames2.default)(prefix + '-design-preview', className);
-
-      return _react2.default.createElement(
-        _reactBeautifulDnd.DragDropContext,
-        { onDragEnd: this.dispatchDragEnd },
-        _react2.default.createElement(
-          'div',
-          {
-            className: cls,
-            style: {
-              backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
-            }
-          },
-          disabled && _react2.default.createElement('div', { className: prefix + '-design__disabled-mask' }),
-          _react2.default.createElement(
-            _reactBeautifulDnd.Droppable,
-            {
-              droppableId: prefix + '-design-preview-list',
-              type: _constants.DND_PREVIEW_CONTROLLER,
-              direction: 'vertical'
-            },
-            function (provided, snapshot) {
-              var draggableIndex = 0;
-
-              return _react2.default.createElement(
-                'div',
-                _extends({
-                  ref: provided.innerRef
-                }, provided.droppableProps, {
-                  className: (0, _classnames2.default)(prefix + '-design__item-list', prefix + '-design__item-list--full-height')
-                }),
-                value.map(function (v) {
-                  var valueType = v.type;
-                  var comp = (0, _find2.default)(components, function (c) {
-                    return (0, _designType.isExpectedDesginType)(c, valueType);
-                  });
-                  var id = getUUIDFromValue(v);
-                  var selected = id === selectedUUID;
-
-                  var draggable = (0, _defaultTo2.default)(comp.dragable, true);
-
-                  return _react2.default.createElement(
-                    _DesignPreviewItem2.default,
-                    {
-                      key: id,
-                      id: id,
-                      ref: _this2.savePreviewItem(id)
-                    },
-                    _react2.default.createElement(_DesignPreviewController2.default, {
-                      value: v,
-                      settings: settings,
-                      design: design,
-                      id: id,
-                      index: draggable ? draggableIndex++ : -1,
-                      allowHoverEffects: !snapshot.isDraggingOver,
-                      dragable: draggable,
-                      editable: (0, _defaultTo2.default)(comp.editable, true),
-                      configurable: (0, _defaultTo2.default)(comp.configurable, true),
-                      canDelete: (0, _defaultTo2.default)(comp.canDelete, true),
-                      canInsert: (0, _defaultTo2.default)(comp.canInsert, true),
-                      highlightWhenSelect: (0, _defaultTo2.default)(comp.highlightWhenSelect, true),
-                      isSelected: selected,
-                      onSelect: onSelect,
-                      onDelete: onDelete,
-                      component: comp.preview,
-                      previewProps: getAdditionalProps(comp.previewProps, v)
-                    }),
-                    selected && _react2.default.createElement(
-                      _DesignEditorItem2.default,
-                      {
-                        disabled: disabled,
-                        ref: _this2.saveEditorItem(id)
-                      },
-                      _react2.default.createElement(comp.editor, _extends({}, getAdditionalProps(comp.editorProps, v), {
-                        ref: _this2.saveEditor(id),
-                        value: v,
-                        onChange: onComponentValueChange(v),
-                        settings: settings,
-                        onSettingsChange: onSettingsChange,
-                        design: design,
-                        validation: validations[id] || {},
-                        showError: showError
-                      }))
-                    )
-                  );
-                }),
-                provided.placeholder
-              );
-            }
-          )
-        )
-      );
-    }
-  }, {
-    key: 'onPreviewDragEnd',
-    value: function onPreviewDragEnd(result) {
-      var source = result.source,
-          destination = result.destination;
-
-      // dropped outside
-
-      if (!destination) {
-        return;
-      }
-
-      var onMove = this.props.onMove;
-
-      onMove(source.index, destination.index);
-    }
-  }, {
-    key: 'getEditorBoundingBox',
-    value: function getEditorBoundingBox(id) {
-      var item = this.editorItems[id];
-
-      if (!item) {
-        return;
-      }
-
-      return item.getBoundingBox();
-    }
-  }]);
-
-  return DesignPreview;
-}(_react.PureComponent);
-
-DesignPreview.defaultProps = {
-  background: '#f9f9f9',
-  disabled: false
-};
-
-
-function getAdditionalProps(propsOrFn, value) {
-  var props = (0, _isFunction2.default)(propsOrFn) ? propsOrFn(value) : propsOrFn;
-
-  return props || {};
-}
-
-function saveRef(map, id, instance) {
-  if (!instance) {
-    delete map[id];
-  } else {
-    map[id] = instance;
-  }
-}
-
-exports.default = DesignPreview;
 
 /***/ }),
 
@@ -13334,10 +12413,10 @@ exports.default = RichText;
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.js":
-/*!********************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Emotion.js ***!
-  \********************************************************************/
+/***/ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx":
+/*!*********************************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13556,10 +12635,10 @@ var Emotion = function (_Component) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Link.js":
-/*!*****************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Link.js ***!
-  \*****************************************************************/
+/***/ "./src/pages/editor/widget/richtext/editor/plugins/Link.jsx":
+/*!******************************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/editor/plugins/Link.jsx ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13704,10 +12783,10 @@ var LinkForm = createForm({})(function (_React$Component) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Video.js":
-/*!******************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Video.js ***!
-  \******************************************************************/
+/***/ "./src/pages/editor/widget/richtext/editor/plugins/Video.jsx":
+/*!*******************************************************************!*\
+  !*** ./src/pages/editor/widget/richtext/editor/plugins/Video.jsx ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13966,15 +13045,15 @@ var VideoForm = createForm({})(function (_Component) {
 "use strict";
 
 
-var _Link = __webpack_require__(/*! ./Link */ "./src/pages/editor/widget/richtext/editor/plugins/Link.js");
+var _Link = __webpack_require__(/*! ./Link */ "./src/pages/editor/widget/richtext/editor/plugins/Link.jsx");
 
 var _Link2 = _interopRequireDefault(_Link);
 
-var _Emotion = __webpack_require__(/*! ./Emotion */ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.js");
+var _Emotion = __webpack_require__(/*! ./Emotion */ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx");
 
 var _Emotion2 = _interopRequireDefault(_Emotion);
 
-var _Video = __webpack_require__(/*! ./Video */ "./src/pages/editor/widget/richtext/editor/plugins/Video.js");
+var _Video = __webpack_require__(/*! ./Video */ "./src/pages/editor/widget/richtext/editor/plugins/Video.jsx");
 
 var _Video2 = _interopRequireDefault(_Video);
 
