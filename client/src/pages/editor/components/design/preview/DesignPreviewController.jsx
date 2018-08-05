@@ -52,7 +52,7 @@ class DesignPreviewController extends PureComponent {
                     // 拖拽的时候隐藏各种按钮，会很丑
                     const showButtons =
                         configurable && allowHoverEffects && !snapshot.isDragging;
-                    const cls = getClassName(allowHoverEffects && highlightWhenSelect);
+                    const cls = getClassName(allowHoverEffects && highlightWhenSelect); // 拖动的时候不展示快捷操作按钮
 
                     return (
                         <div className={cls} onClick={this.onSelect}>

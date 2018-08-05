@@ -1,17 +1,15 @@
 import React, {PureComponent} from 'react';
 import cx from 'classnames';
 import find from 'lodash/find';
-import some from 'lodash/some';
 import defaultTo from 'lodash/defaultTo';
-import isFunction from 'lodash/isFunction';
-import get from 'lodash/get';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
+import get from 'lodash/get';
 
 import DesignPreviewItem from './preview/DesignPreviewItem';
 import DesignPreviewController from './preview/DesignPreviewController';
 import DesignEditorItem from './editor/DesignEditorItem';
 import {isExpectedDesginType} from './utils/design-type';
-import {DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND} from './preview/constants';
+import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
 
 const prefix = 'mp';
 
@@ -26,7 +24,7 @@ class DesignEditor extends PureComponent {
     // All props in this component are injected by Design
     static defaultProps = {
         background: '#f9f9f9',
-        disabled: false,
+        disabled: false
     };
 
     previewItems = {}; // 记录预览组件实例 id -> instance
@@ -50,7 +48,7 @@ class DesignEditor extends PureComponent {
             onSelect,
             onDelete,
             className,
-            disabled,
+            disabled
         } = this.props;
         const cls = cx(`${prefix}-design-preview`, className);
 
@@ -63,9 +61,8 @@ class DesignEditor extends PureComponent {
                             settings,
                             'previewBackground',
                             DEFAULT_BACKGROUND
-                        ),
-                    }}
-                >
+                        )
+                    }}>
                     {disabled && <div className={`${prefix}-design__disabled-mask`}/>}
 
                     <Droppable
@@ -75,7 +72,6 @@ class DesignEditor extends PureComponent {
                     >
                         {(provided, snapshot) => {
                             let draggableIndex = 0;
-debugger
                             return (
                                 <div
                                     ref={provided.innerRef}
@@ -87,9 +83,11 @@ debugger
                                         const comp = find(components, c =>
                                             isExpectedDesginType(c, valueType)
                                         );
+                                        // 实例id
                                         const id = getUUIDFromValue(v);
+                                        // 是否被选中
                                         const selected = id === selectedUUID;
-
+                                        // 是否可拖动
                                         const draggable = defaultTo(comp.dragable, true);
 
                                         return (
@@ -109,7 +107,6 @@ debugger
                                                     editable={defaultTo(comp.editable, true)}
                                                     configurable={defaultTo(comp.configurable, true)}
                                                     canDelete={defaultTo(comp.canDelete, true)}
-                                                    canInsert={defaultTo(comp.canInsert, true)}
                                                     highlightWhenSelect={defaultTo(
                                                         comp.highlightWhenSelect,
                                                         true
@@ -152,7 +149,7 @@ debugger
     }
 
     dispatchDragEnd = result => {
-        const {type} = result;
+        const { type } = result;
         if (type === DND_PREVIEW_CONTROLLER) {
             this.onPreviewDragEnd(result);
             return;
@@ -160,14 +157,14 @@ debugger
     };
 
     onPreviewDragEnd(result) {
-        const {source, destination} = result;
+        const { source, destination } = result;
 
         // dropped outside
         if (!destination) {
             return;
         }
 
-        const {onMove} = this.props;
+        const { onMove } = this.props;
         onMove(source.index, destination.index);
     }
 

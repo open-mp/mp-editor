@@ -71,7 +71,7 @@ export default class Design extends PureComponent {
                 props.components
             ),
 
-            // 外面没传的时候用 state 上的 settings
+            // 页面设置，比如页面背景色
             settings: {},
 
             // 添加组件浮层的位置
@@ -329,7 +329,7 @@ export default class Design extends PureComponent {
          */
         let newValue;
         if (fromSelected) {
-            newValue = value.slice();
+            index = value.slice();
             const {addComponentOverlayPosition} = this.state;
             const {selectedUUID} = this.state;
             const selectedIndex = findIndex(value, {[UUID_KEY]: selectedUUID});
@@ -385,11 +385,9 @@ export default class Design extends PureComponent {
         if (fromIndex === toIndex) {
             return;
         }
-
         const {value, components} = this.props;
         const newValue = [];
         let tmp;
-
         /**
          * 这个算法不是仅仅交换两个位置的节点，所有中间节点都需要移位
          * 需要考虑数组中间有不可拖拽节点的情况，这种情况下 fromIndex, toIndex 的值是不包括这些节点的
@@ -398,7 +396,7 @@ export default class Design extends PureComponent {
         let passedFromIndex = false;
         let passedToIndex = false;
 
-        if (fromIndex < toIndex) {
+        if (fromIndex < toIndex) {// 从上拖到下面
             for (let i = 0, dragableIndex = -1; i < value.length; i++) {
                 const val = value[i];
 
@@ -422,7 +420,7 @@ export default class Design extends PureComponent {
                     newValue[i] = val;
                 }
             }
-        } else {
+        } else { // 从下往上托
             let toInsetIndex;
 
             for (let i = 0, dragableIndex = -1; i < value.length; i++) {
@@ -551,9 +549,9 @@ export default class Design extends PureComponent {
         });
     };
 
-    isSelected = value => {
+    isSelected = instance => {
         const {selectedUUID} = this.state;
-        return this.getUUIDFromValue(value) === selectedUUID;
+        return this.getUUIDFromValue(instance) === selectedUUID;
     };
 
     hasSelected = () => {

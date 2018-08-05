@@ -7,7 +7,7 @@ export default {
   editor: Editor,
   preview: Preview,
   // 是否可以拖拽
-  dragable: true,
+  dragable: false,
 
 
   // 是否可以编辑数据
