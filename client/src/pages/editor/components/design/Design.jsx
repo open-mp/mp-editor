@@ -97,20 +97,17 @@ export default class Design extends PureComponent {
 
     render() {
         const {
-            className,
             cacheRestoreMessage,
             components,
             value,
             disabled,
             settings,
         } = this.props;
-
         const {
             showRestoreFromCache,
             bottomGap,
             selectedUUID,
             appendableComponents,
-            addComponentOverlayPosition,
             validations,
             showError,
             settings: managedSettings,
@@ -118,7 +115,7 @@ export default class Design extends PureComponent {
         } = this.state;
 
 
-        const cls = cx(`${prefix}-design`, className);
+        const cls = cx(`${prefix}-design`);
 
         return (
             <div className={cls} style={{paddingBottom: bottomGap}}>
@@ -145,16 +142,13 @@ export default class Design extends PureComponent {
                     validations,
                     showError,
                     settings: settings || managedSettings,
-                    onSettingsChange: this.onSettingsChange,
-                    componentInstanceCount,
-                    onComponentValueChange: this.onComponentValueChange,
-                    appendableComponents,
                     selectedUUID,
                     getUUIDFromValue: this.getUUIDFromValue,
-                    addComponentOverlayPosition,
                     onSelect: this.onSelect,
                     onMove: this.onMove,
                     onDelete: this.onDelete,
+                    onSettingsChange: this.onSettingsChange,
+                    onComponentValueChange: this.onComponentValueChange,
                     design: this.design,
                     disabled,
                     ref: this.savePreview,

@@ -47,11 +47,9 @@ class DesignEditor extends PureComponent {
             getUUIDFromValue,
             onSelect, // 选择
             onDelete, // 删除
-            className,
             disabled
         } = this.props;
-        const cls = cx(`${prefix}-design-preview`, className);
-
+        const cls = cx(`${prefix}-design-preview`);
         return (
             <DragDropContext onDragEnd={this.dispatchDragEnd}>
                 <div
@@ -196,7 +194,7 @@ class DesignEditor extends PureComponent {
         return item.getBoundingBox();
     }
 }
-
+// 保存实例对应的js组件对象
 function saveRef(map, id, instance) {
     if (!instance) {
         delete map[id];
