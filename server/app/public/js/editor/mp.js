@@ -8007,10 +8007,10 @@ var Design = function (_PureComponent) {
 // ================================================
 
 Design.defaultProps = {
-    value: [], // 初始配置数据
-    defaultSelectedIndex: -1,
-    confirmUnsavedLeave: true,
-    cacheRestoreMessage: '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？',
+    value: [], // 实例
+    defaultSelectedIndex: -1, // 默认选择的实例索引
+    confirmUnsavedLeave: true, // 有未保存类容离开页面时是否要确认
+    cacheRestoreMessage: '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？', // 存在缓存时的提示内容
     scrollTopOffset: -10,
     scrollLeftOffset: -10
 };
