@@ -745,17 +745,6 @@ export default class Design extends PureComponent {
     // Actions on design
     design = (() => {
         return {
-            injections: {
-                getPreviewProps: (/* implementation */) => {
-                    // eslint-disable-next-line
-                    console.warn(
-                        'Design injections are no longer supported, use `settings` and `onSettingsChange` instead.'
-                    );
-
-                    // this.getPreviewProps = implementation;
-                },
-            },
-
             getUUID: this.getUUIDFromValue,
 
             validateComponentValue: this.validateComponentValue,

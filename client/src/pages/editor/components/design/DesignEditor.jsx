@@ -45,8 +45,8 @@ class DesignEditor extends PureComponent {
             design,
             selectedUUID,
             getUUIDFromValue,
-            onSelect,
-            onDelete,
+            onSelect, // 选择
+            onDelete, // 删除
             className,
             disabled
         } = this.props;

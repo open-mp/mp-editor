@@ -9301,15 +9301,6 @@ var _initialiseProps = function _initialiseProps() {
 
     this.design = function () {
         return {
-            injections: {
-                getPreviewProps: function getPreviewProps() /* implementation */{
-                    // eslint-disable-next-line
-                    console.warn('Design injections are no longer supported, use `settings` and `onSettingsChange` instead.');
-
-                    // this.getPreviewProps = implementation;
-                }
-            },
-
             getUUID: _this3.getUUIDFromValue,
 
             validateComponentValue: _this3.validateComponentValue,
