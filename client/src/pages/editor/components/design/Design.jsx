@@ -35,11 +35,11 @@ const prefix = 'mp';
 export default class Design extends PureComponent {
 
     static defaultProps = {
-        value: [], // 初始配置数据
-        defaultSelectedIndex: -1,
-        confirmUnsavedLeave: true,
+        value: [], // 实例
+        defaultSelectedIndex: -1, // 默认选择的实例索引
+        confirmUnsavedLeave: true, // 有未保存类容离开页面时是否要确认
         cacheRestoreMessage:
-            '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？',
+            '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？', // 存在缓存时的提示内容
         scrollTopOffset: -10,
         scrollLeftOffset: -10,
     };
@@ -97,20 +97,17 @@ export default class Design extends PureComponent {
 
     render() {
         const {
-            className,
             cacheRestoreMessage,
             components,
             value,
             disabled,
             settings,
         } = this.props;
-
         const {
             showRestoreFromCache,
             bottomGap,
             selectedUUID,
             appendableComponents,
-            addComponentOverlayPosition,
             validations,
             showError,
             settings: managedSettings,
@@ -118,7 +115,7 @@ export default class Design extends PureComponent {
         } = this.state;
 
 
-        const cls = cx(`${prefix}-design`, className);
+        const cls = cx(`${prefix}-design`);
 
         return (
             <div className={cls} style={{paddingBottom: bottomGap}}>
@@ -145,16 +142,13 @@ export default class Design extends PureComponent {
                     validations,
                     showError,
                     settings: settings || managedSettings,
-                    onSettingsChange: this.onSettingsChange,
-                    componentInstanceCount,
-                    onComponentValueChange: this.onComponentValueChange,
-                    appendableComponents,
                     selectedUUID,
                     getUUIDFromValue: this.getUUIDFromValue,
-                    addComponentOverlayPosition,
                     onSelect: this.onSelect,
                     onMove: this.onMove,
                     onDelete: this.onDelete,
+                    onSettingsChange: this.onSettingsChange,
+                    onComponentValueChange: this.onComponentValueChange,
                     design: this.design,
                     disabled,
                     ref: this.savePreview,
