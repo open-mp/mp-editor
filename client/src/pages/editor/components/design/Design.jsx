@@ -588,6 +588,7 @@ export default class Design extends PureComponent {
     // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
     // 实际并未改变高度，而是设置了margin/padding
     adjustHeight = id => {
+        debugger
         // 不要重复执行
         if (this.adjustHeightTimer) {
             clearTimeout(this.adjustHeightTimer);
