@@ -8547,28 +8547,27 @@ var DesignEditor = function (_PureComponent) {
             var _this2 = this;
 
             var _props = this.props,
-                components = _props.components,
-                value = _props.value,
+                settings = _props.settings,
+                pluginMap = _props.pluginMap,
+                selectedUUID = _props.selectedUUID,
+                instanceList = _props.instanceList,
                 validations = _props.validations,
                 showError = _props.showError,
-                settings = _props.settings,
+                onSelect = _props.onSelect,
+                onMove = _props.onMove,
+                onDelete = _props.onDelete,
                 onSettingsChange = _props.onSettingsChange,
                 onComponentValueChange = _props.onComponentValueChange,
                 design = _props.design,
-                selectedUUID = _props.selectedUUID,
-                getUUIDFromValue = _props.getUUIDFromValue,
-                onSelect = _props.onSelect,
-                onDelete = _props.onDelete,
                 disabled = _props.disabled;
 
-            var cls = (0, _classnames2.default)('mp-design-preview');
             return _react2.default.createElement(
                 _reactBeautifulDnd.DragDropContext,
                 { onDragEnd: this.dispatchDragEnd },
                 _react2.default.createElement(
                     'div',
                     {
-                        className: cls,
+                        className: 'mp-design-preview',
                         style: {
                             backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
                         } },

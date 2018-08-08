@@ -28,25 +28,24 @@ class DesignEditor extends PureComponent {
      */
     render() {
         const {
-            components,
-            value,
+            settings,
+            pluginMap,
+            selectedUUID,
+            instanceList,
             validations,
             showError,
-            settings,
+            onSelect,
+            onMove,
+            onDelete,
             onSettingsChange,
             onComponentValueChange,
             design,
-            selectedUUID,
-            getUUIDFromValue,
-            onSelect, // 选择
-            onDelete, // 删除
             disabled
         } = this.props;
-        const cls = cx(`mp-design-preview`);
         return (
             <DragDropContext onDragEnd={this.dispatchDragEnd}>
                 <div
-                    className={cls}
+                    className="mp-design-preview"
                     style={{
                         backgroundColor: get(
                             settings,
