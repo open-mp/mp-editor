@@ -161,7 +161,7 @@ export default class Design extends PureComponent {
                             prefix={prefix}
                             componentInstanceCount={componentInstanceCount}
                             components={appendableComponents}
-                            onAddComponent={(component, fromSelected)=>{
+                            onAddComponent={(component, fromSelected) => {
                                 this.onAdd(component, fromSelected);
                             }}
                         />
@@ -259,10 +259,13 @@ export default class Design extends PureComponent {
 
     onComponentValueChange = identity => (diff, replace = false) => {
         const {value} = this.props;
+        // 得到新的值
         const newComponentValue = replace
             ? assign({[UUID_KEY]: this.getUUIDFromValue(identity)}, diff)
             : assign({}, identity, diff);
+        // 产生新的instanceList
         const newValue = value.map(v => (v === identity ? newComponentValue : v));
+        // 改变的key
         const changedProps = Object.keys(diff);
 
         this.trackValueChange(newValue);
@@ -323,6 +326,7 @@ export default class Design extends PureComponent {
          */
         let newValue;
         if (fromSelected) {
+            // 复制一封实例
             index = value.slice();
             const {addComponentOverlayPosition} = this.state;
             const {selectedUUID} = this.state;
@@ -342,7 +346,7 @@ export default class Design extends PureComponent {
         this.onSelect(instance);
     };
 
-    // 删除一个组件
+    // 删除一个组件, 删除后如果没有选中的组件则默认选一个
     onDelete = component => {
         const {value, components} = this.props;
         let nextIndex = -1;
@@ -354,8 +358,7 @@ export default class Design extends PureComponent {
             return skip;
         });
 
-        const newState = {
-        };
+        const newState = {};
 
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
         const componentUUID = this.getUUIDFromValue(component);
@@ -588,7 +591,6 @@ export default class Design extends PureComponent {
     // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
     // 实际并未改变高度，而是设置了margin/padding
     adjustHeight = id => {
-        debugger
         // 不要重复执行
         if (this.adjustHeightTimer) {
             clearTimeout(this.adjustHeightTimer);
@@ -622,7 +624,7 @@ export default class Design extends PureComponent {
     // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
     trackValueChange(newValue, writeCache = true) {
         const {onChange} = this.props;
-        onChange(newValue);
+        onChange(newValue); // 通知外面数据变化
 
         if (!this._dirty) {
             this._dirty = true;
