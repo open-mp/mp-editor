@@ -483,7 +483,6 @@ export default class Design extends PureComponent {
                 })
             ).then(validationList => {
                 const validations = assign({}, ...validationList);
-
                 this.setState(
                     {
                         showError: true,

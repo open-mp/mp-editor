@@ -7884,7 +7884,7 @@ var Design = function (_PureComponent) {
             var writeCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
             var onChange = this.props.onChange;
 
-            onChange(newValue);
+            onChange(newValue); // 通知外面数据变化
 
             if (!this._dirty) {
                 this._dirty = true;
@@ -8044,11 +8044,14 @@ var _initialiseProps = function _initialiseProps() {
         return function (diff) {
             var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
             var value = _this3.props.value;
+            // 得到新的值
 
             var newComponentValue = replace ? (0, _assign3.default)(_defineProperty({}, UUID_KEY, _this3.getUUIDFromValue(identity)), diff) : (0, _assign3.default)({}, identity, diff);
+            // 产生新的instanceList
             var newValue = value.map(function (v) {
                 return v === identity ? newComponentValue : v;
             });
+            // 改变的key
             var changedProps = Object.keys(diff);
 
             _this3.trackValueChange(newValue);
@@ -8107,6 +8110,7 @@ var _initialiseProps = function _initialiseProps() {
          */
         var newValue = void 0;
         if (fromSelected) {
+            // 复制一封实例
             index = value.slice();
             var addComponentOverlayPosition = _this3.state.addComponentOverlayPosition;
             var selectedUUID = _this3.state.selectedUUID;
@@ -8275,7 +8279,6 @@ var _initialiseProps = function _initialiseProps() {
                 });
             })).then(function (validationList) {
                 var validations = _assign3.default.apply(undefined, [{}].concat(_toConsumableArray(validationList)));
-
                 _this3.setState({
                     showError: true,
                     validations: validations
@@ -8353,7 +8356,6 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.adjustHeight = function (id) {
-        debugger;
         // 不要重复执行
         if (_this3.adjustHeightTimer) {
             clearTimeout(_this3.adjustHeightTimer);
