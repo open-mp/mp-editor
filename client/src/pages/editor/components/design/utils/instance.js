@@ -2,6 +2,7 @@ import {isExpectedDesginType, serializeDesignType} from "./design-type";
 import find from "lodash/find";
 import defaultTo from "lodash/defaultTo";
 import LazyMap from "./LazyMap";
+import uuid from 'zent/lib/utils/uuid';
 
 /**
  * instance工具函数
@@ -91,5 +92,9 @@ export function getSafeSelectedValueIndex(index, value) {
 }
 
 export function generateUUID() {
-    return Math.min(index, value.length - 1);
+    return uuid();
+}
+
+export function getPluginIdFromInstace(instance) {
+
 }

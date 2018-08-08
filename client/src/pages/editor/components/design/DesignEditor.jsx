@@ -11,14 +11,7 @@ import DesignEditorItem from './editor/DesignEditorItem';
 import {isExpectedDesginType} from './utils/design-type';
 import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
 
-const prefix = 'mp';
-
 /**
- * DesignPreview 和 config 组件是相互关联的
- *
- * 这个组件里的一些 props 是需要 config 组件提供的
- *
- * 负责实例的预览、编辑
  */
 class DesignEditor extends PureComponent {
     // All props in this component are injected by Design
@@ -49,7 +42,7 @@ class DesignEditor extends PureComponent {
             onDelete, // 删除
             disabled
         } = this.props;
-        const cls = cx(`${prefix}-design-preview`);
+        const cls = cx(`mp-design-preview`);
         return (
             <DragDropContext onDragEnd={this.dispatchDragEnd}>
                 <div
@@ -61,10 +54,10 @@ class DesignEditor extends PureComponent {
                             DEFAULT_BACKGROUND
                         )
                     }}>
-                    {disabled && <div className={`${prefix}-design__disabled-mask`}/>}
+                    {disabled && <div className={`mp-design__disabled-mask`}/>}
 
                     <Droppable
-                        droppableId={`${prefix}-design-preview-list`}
+                        droppableId={`mp-design-preview-list`}
                         type={DND_PREVIEW_CONTROLLER}
                         direction="vertical"
                     >
@@ -74,7 +67,7 @@ class DesignEditor extends PureComponent {
                                 <div
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    className={cx(`${prefix}-design__item-list`, `${prefix}-design__item-list--full-height`)}
+                                    className={cx(`mp-design__item-list`, `mp-design__item-list--full-height`)}
                                 >
                                     {value.map(v => {
                                         const valueType = v.type;

@@ -10,8 +10,8 @@ import isUndefined from 'lodash/isUndefined';
 import defaultTo from 'lodash/defaultTo';
 import isFunction from 'lodash/isFunction';
 import * as storage from 'zent/lib/utils/storage';
-import uuid from 'zent/lib/utils/uuid';
-import DesignEditorAddComponent from './DesignEditorAddComponent';
+import * as InstanceUtils from './utils/instance';
+import * as PluginLoader from '../loader/index'
 
 
 import DesignEditor from './DesignEditor';
@@ -27,7 +27,6 @@ const UUID_KEY = '__zent-design-uuid__';
 const CACHE_KEY = '__zent-design-cache-storage__';
 
 const hasValidateError = v => !isEmpty(v[Object.keys(v)[0]]);
-const prefix = 'mp';
 
 /**
  * 负责数据处理
@@ -35,8 +34,6 @@ const prefix = 'mp';
 export default class Design extends PureComponent {
 
     static defaultProps = {
-        value: [], // 实例
-        defaultSelectedIndex: -1, // 默认选择的实例索引
         confirmUnsavedLeave: true, // 有未保存类容离开页面时是否要确认
         cacheRestoreMessage:
             '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？', // 存在缓存时的提示内容
@@ -44,74 +41,63 @@ export default class Design extends PureComponent {
         scrollLeftOffset: -10,
     };
 
+
     constructor(props) {
         super(props);
 
-        const {value, defaultSelectedIndex} = props;
-
         this.validateCacheProps(props);
 
-        tagValuesWithUUID(value);
-
-        const safeValueIndex = getSafeSelectedValueIndex(
-            defaultSelectedIndex,
-            value
-        );
-        const selectedValue = value[safeValueIndex];
-
         this.state = {
-            // 当前选中的组件对应的 UUID
-            selectedUUID: this.getUUIDFromValue(selectedValue),
+            showRestoreFromCache: false,// 是否显示从缓存中恢复的提示
+            settings: {},// 页面设置，比如页面背景色
+            selectedUUID: '', // 当前选中的组件对应的 UUID
             pluginMap: {}, // 已经安装的插件 id => 插件配置
+            instanceList: [], // 插件实例
             pluginInstanceCount: new LazyMap(0), // plugin创建的实例数
-
-            // 每个组件当前已经添加的个数
-            componentInstanceCount: makeInstanceCountMapFromValue(
-                props.value,
-                props.components
-            ),
-
-            // 页面设置，比如页面背景色
-            settings: {},
-
-            // 添加组件浮层的位置
-            addComponentOverlayPosition: ADD_COMPONENT_OVERLAY_POSITION.UNKNOWN,
-
-            // 可添加的组件列表
-            appendableComponents: [],
-
-            // 当前所有组件的 validation 信息
-            // key 是 value 的 UUID
-            validations: {},
-
-            // 是否强制显示错误
-            showError: false,
-
-            // 是否显示从缓存中恢复的提示
-            showRestoreFromCache: false,
-
-            // 当 preview 很长时，为了对齐 preview 底部需要的额外空间
-            bottomGap: 0,
+            validations: {}, // 当前所有组件的 validation 信息;  key 是 value 的 UUID
+            showError: false, // 是否强制显示错误
+            bottomGap: 0,// 当 preview 很长时，为了对齐 preview 底部需要的额外空间
         };
+    }
+
+    /**
+     * 设置实例列表
+     * @param instanceList
+     */
+    async setInstanceList(instanceList) {
+        let pluginMap = {};
+        let pluginInstanceCount = new LazyMap(0);
+        let newInstanceList = [];
+        for (let i = 0; i < instanceList.length; i++) {
+            let instance = instanceList[i];
+            let pluginId = InstanceUtils.getPluginIdFromInstace(intance);
+            // 找出plugin 并加载
+            let plugin = await PluginLoader.loadMpComponentFromBundle(pluginId);
+            let pluginStringID = pluginId.getStringId();
+            pluginMap[pluginStringID] = plugin;
+            pluginInstanceCount.inc(pluginStringID);
+            // 加上uuid
+            InstanceUtils.setUUIDForInstance(instance, InstanceUtils.generateUUID());
+            newInstanceList.push(instance);
+        }
+        this.setState({
+            pluginMap, pluginInstanceCount, instanceList: newInstanceList
+        })
     }
 
     render() {
         const {
             cacheRestoreMessage,
-            components,
-            value,
             disabled,
-            settings,
         } = this.props;
         const {
             showRestoreFromCache,
             bottomGap,
             selectedUUID,
-            appendableComponents,
             validations,
             showError,
-            settings: managedSettings,
-            componentInstanceCount,
+            settings,
+            pluginMap, instanceList
         } = this.state;
 
 
@@ -121,14 +107,14 @@ export default class Design extends PureComponent {
             <div className={cls} style={{paddingBottom: bottomGap}}>
                 {showRestoreFromCache && (
                     <Alert
-                        className={`${prefix}-design__restore-cache-alert`}
+                        className={`mp-design__restore-cache-alert`}
                         closable
                         onClose={this.onRestoreCacheAlertClose}
                         type="warning"
                     >
                         {cacheRestoreMessage}
                         <a
-                            className={`${prefix}-design__restore-cache-alert-use`}
+                            className={`mp-design__restore-cache-alert-use`}
                             onClick={this.restoreCache}
                             href="javascript:void(0);"
                         >
@@ -137,13 +123,12 @@ export default class Design extends PureComponent {
                     </Alert>
                 )}
                 {React.createElement(DesignEditor, {
-                    components,
-                    value,
+                    settings,
+                    pluginMap,
+                    selectedUUID,
+                    instanceList,
                     validations,
                     showError,
-                    settings: settings || managedSettings,
-                    selectedUUID,
-                    getUUIDFromValue: this.getUUIDFromValue,
                     onSelect: this.onSelect,
                     onMove: this.onMove,
                     onDelete: this.onDelete,
@@ -153,20 +138,6 @@ export default class Design extends PureComponent {
                     disabled,
                     ref: this.savePreview,
                 })}
-                {appendableComponents.length > 0 && (
-                    <div
-                        className={cx(`${prefix}-design__add`, `${prefix}-design__add--mixed`)}
-                    >
-                        <DesignEditorAddComponent
-                            prefix={prefix}
-                            componentInstanceCount={componentInstanceCount}
-                            components={appendableComponents}
-                            onAddComponent={(component, fromSelected) => {
-                                this.onAdd(component, fromSelected);
-                            }}
-                        />
-                    </div>
-                )}
             </div>
         );
     }
@@ -547,7 +518,7 @@ export default class Design extends PureComponent {
 
     isSelected = instance => {
         const {selectedUUID} = this.state;
-        return this.getUUIDFromValue(instance) === selectedUUID;
+        return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
     };
 
     hasSelected = () => {
@@ -556,17 +527,6 @@ export default class Design extends PureComponent {
         return !!selectedUUID;
     };
 
-    getUUIDFromValue(value) {
-        return value && value[UUID_KEY];
-    }
-
-    setUUIDForValue(value, id) {
-        if (value) {
-            value[UUID_KEY] = id;
-        }
-
-        return value;
-    }
 
     savePreview = instance => {
         if (instance && instance.getDecoratedComponentInstance) {
@@ -754,70 +714,3 @@ export default class Design extends PureComponent {
     })();
 }
 
-// ================================================
-// 工具函数
-// ================================================
-
-function tagValuesWithUUID(values) {
-    values.forEach(v => {
-        if (!v[UUID_KEY]) {
-            v[UUID_KEY] = uuid();
-        }
-    });
-}
-
-/**
- * 从 startIndex 开始往前找到第一个可以选中的值
- * @param {array} value 当前的值
- * @param {array} components 当前可用的组件列表
- * @param {number} startIndex 开始搜索的下标
- */
-function findFirstEditableSibling(value, components, startIndex) {
-    const loop = i => {
-        const val = value[i];
-        const type = val.type;
-        const comp = find(components, c => isExpectedDesginType(c, type));
-        if (comp && defaultTo(comp.editable, true)) {
-            return val;
-        }
-    };
-
-    const valueLength = value.length;
-    // 往前找
-    for (let i = startIndex; i >= 0 && i < valueLength; i--) {
-        const val = loop(i);
-        if (val) {
-            return val;
-        }
-    }
-
-    // 往后找
-    for (let i = startIndex + 1; i < valueLength; i++) {
-        const val = loop(i);
-        if (val) {
-            return val;
-        }
-    }
-
-    return null;
-}
-
-/**
- * 根据当前的值生成一个组件使用计数
- * @param {Array} value Design 当前的值
- * @param {Array} components Design 支持的组件列表
- */
-function makeInstanceCountMapFromValue(value, components) {
-    const instanceCountMap = new LazyMap(0);
-
-    (value || []).forEach(val => {
-        const comp = find(components, c => isExpectedDesginType(c, val.type));
-        instanceCountMap.inc(serializeDesignType(comp.type));
-    });
-
-    return instanceCountMap;
-}
-
-function getSafeSelectedValueIndex(index, value) {
-    return Math.min(index, value.length - 1);
-}
