@@ -15,43 +15,41 @@ class DesignPreviewController extends PureComponent {
 
     render() {
         const {
-            dragable,
-            configurable,
+            draggable,
             editable,
             canDelete,
             highlightWhenSelect,
             isSelected,
             component: PreviewComponent,
-            previewProps,
             settings,
             id,
             index,
             allowHoverEffects,
         } = this.props;
         const props = pick(this.props, [
-            'value',
+            'instance',
             'design',
             'settings',
         ]);
         const getClassName = highlight =>
-            cx(`${prefix}-design-preview-controller`, {
-                [`${prefix}-design-preview-controller--editable`]: editable,
-                [`${prefix}-design-preview-controller--selected`]: isSelected,
-                [`${prefix}-design-preview-controller--highlight`]: highlight,
-                [`${prefix}-design-preview-controller--dragable`]: dragable,
+            cx(`mp-design-preview-controller`, {
+                [`mp-design-preview-controller--editable`]: editable,
+                [`mp-design-preview-controller--selected`]: isSelected,
+                [`mp-design-preview-controller--highlight`]: highlight,
+                [`mp-design-preview-controller--dragable`]: draggable,
             });
 
-        const tree = dragable ? (
+        const tree = draggable ? (
             <Draggable
                 draggableId={id}
                 type={DND_PREVIEW_CONTROLLER}
-                isDragDisabled={!dragable}
+                isDragDisabled={!draggable}
                 index={index}
             >
                 {(provided, snapshot) => {
                     // 拖拽的时候隐藏各种按钮，会很丑
-                    const showButtons =
-                        configurable && allowHoverEffects && !snapshot.isDragging;
+                    const showDeleteButtons =
+                        canDelete && allowHoverEffects && !snapshot.isDragging;
                     const cls = getClassName(allowHoverEffects && highlightWhenSelect); // 拖动的时候不展示快捷操作按钮
 
                     return (
@@ -68,17 +66,15 @@ class DesignPreviewController extends PureComponent {
                                         DEFAULT_BACKGROUND
                                     ),
                                 }}
-                                className={`${prefix}-design-preview-controller__drag-handle`}
+                                className={`mp-design-preview-controller__drag-handle`}
                             >
                                 <PreviewComponent
-                                    {...previewProps}
                                     {...props}
                                 />
                             </div>
                             {provided.placeholder}
 
-                            {showButtons &&
-                            canDelete && (
+                            { showDeleteButtons && (
                                 <DeleteButton onDelete={this.onDelete}/>
                             )}
                         </div>
@@ -92,15 +88,14 @@ class DesignPreviewController extends PureComponent {
             >
                 <div
                     className={cx(
-                        `${prefix}-design-preview-controller__drag-handle`,
-                        `${prefix}-design-preview-controller__drag-handle--inactive`
+                        `mp-design-preview-controller__drag-handle`,
+                        `mp-design-preview-controller__drag-handle--inactive`
                     )}
                 >
-                    <PreviewComponent {...previewProps} {...props} />
+                    <PreviewComponent {...props} />
                 </div>
 
-                {configurable &&
-                canDelete && (
+                {canDelete && (
                     <DeleteButton onDelete={this.onDelete}/>
                 )}
             </div>

@@ -101,7 +101,7 @@ class DesignEditor extends PureComponent {
                                                     id={id}
                                                     index={draggable ? draggableIndex++ : -1}
                                                     allowHoverEffects={!snapshot.isDraggingOver}
-                                                    dragable={draggable}
+                                                    draggable={draggable}
                                                     editable={defaultTo(instance.editable, true)}
                                                     canDelete={defaultTo(instance.canDelete, true)}
                                                     highlightWhenSelect={defaultTo(

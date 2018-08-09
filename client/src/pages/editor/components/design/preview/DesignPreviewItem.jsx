@@ -6,7 +6,6 @@ import scroll from 'zent/lib/utils/scroll';
 
 import offset from '../utils/offset';
 
-const prefix = 'mp';
 
 function scrollNodeToTop(node, offsets) {
     const pos = offset(node);
@@ -29,7 +28,7 @@ export default class DesignPreviewItem extends PureComponent {
     render() {
         const {children} = this.props;
 
-        return <div className={`${prefix}-design-preview-item`}>{children}</div>;
+        return <div className={`mp-design-preview-item`}>{children}</div>;
     }
 
     scrollTop(offsets) {
