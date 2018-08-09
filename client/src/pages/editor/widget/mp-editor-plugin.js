@@ -16,12 +16,10 @@ let definition = {
     previewType: 'react',
     editForm: null, // 数据编辑表单
     editFormType: 'react',
-    isEditable: false, // 组件数据是否可编辑
+    editable: false, // 组件数据是否可编辑
+    canDelete: false, // 组件数据是否可编辑
+    dragable: true, // 是否可以拖拽
     highlightWhenSelect: true, // 选择后是否高亮
-    quikAction: {
-        allowDrag: true, // 是否可以拖拽
-        allowDelete: false,
-    },
     // 获取初始值
     getInitialValue() {
 

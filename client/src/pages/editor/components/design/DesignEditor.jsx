@@ -4,13 +4,22 @@ import find from 'lodash/find';
 import defaultTo from 'lodash/defaultTo';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import get from 'lodash/get';
-
+import * as InstanceUtils from './utils/instance';
 import DesignPreviewItem from './preview/DesignPreviewItem';
 import DesignPreviewController from './preview/DesignPreviewController';
 import DesignEditorItem from './editor/DesignEditorItem';
 import {isExpectedDesginType} from './utils/design-type';
 import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
 
+
+// 保存实例对应的js组件对象
+function saveRef(map, id, instance) {
+    if (!instance) {
+        delete map[id];
+    } else {
+        map[id] = instance;
+    }
+}
 /**
  */
 class DesignEditor extends PureComponent {
@@ -68,17 +77,16 @@ class DesignEditor extends PureComponent {
                                     {...provided.droppableProps}
                                     className={cx(`mp-design__item-list`, `mp-design__item-list--full-height`)}
                                 >
-                                    {value.map(v => {
-                                        const valueType = v.type;
-                                        const comp = find(components, c =>
-                                            isExpectedDesginType(c, valueType)
-                                        );
+                                    {instanceList.map(instance => {
+                                        let pluginId = InstanceUtils.getPluginIdFromInstace(instance);
+                                        let pluginStringID = pluginId.getStringId();
+                                        const plugin = pluginMap[pluginStringID];
                                         // 实例id
-                                        const id = getUUIDFromValue(v);
+                                        const id = InstanceUtils.getUUIDFromInstance(instance);
                                         // 是否被选中
                                         const selected = id === selectedUUID;
                                         // 是否可拖动
-                                        const draggable = defaultTo(comp.dragable, true);
+                                        const draggable = defaultTo(plugin.dragable, true);
 
                                         return (
                                             <DesignPreviewItem
@@ -87,24 +95,23 @@ class DesignEditor extends PureComponent {
                                                 ref={this.savePreviewItem(id)}
                                             >
                                                 <DesignPreviewController
-                                                    value={v}
+                                                    instance={instance}
                                                     settings={settings}
                                                     design={design}
                                                     id={id}
                                                     index={draggable ? draggableIndex++ : -1}
                                                     allowHoverEffects={!snapshot.isDraggingOver}
                                                     dragable={draggable}
-                                                    editable={defaultTo(comp.editable, true)}
-                                                    configurable={defaultTo(comp.configurable, true)}
-                                                    canDelete={defaultTo(comp.canDelete, true)}
+                                                    editable={defaultTo(instance.editable, true)}
+                                                    canDelete={defaultTo(instance.canDelete, true)}
                                                     highlightWhenSelect={defaultTo(
-                                                        comp.highlightWhenSelect,
+                                                        instance.highlightWhenSelect,
                                                         true
                                                     )}
                                                     isSelected={selected}
                                                     onSelect={onSelect}
                                                     onDelete={onDelete}
-                                                    component={comp.preview}
+                                                    component={instance.preview}
                                                 />
 
                                                 {selected && (
@@ -113,8 +120,8 @@ class DesignEditor extends PureComponent {
                                                         ref={this.saveEditorItem(id)}
                                                     >
                                                         <comp.editor
-                                                            value={v}
-                                                            onChange={onComponentValueChange(v)}
+                                                            instance={instance}
+                                                            onChange={onComponentValueChange(instance)}
                                                             settings={settings}
                                                             onSettingsChange={onSettingsChange}
                                                             design={design}
@@ -186,13 +193,6 @@ class DesignEditor extends PureComponent {
         return item.getBoundingBox();
     }
 }
-// 保存实例对应的js组件对象
-function saveRef(map, id, instance) {
-    if (!instance) {
-        delete map[id];
-    } else {
-        map[id] = instance;
-    }
-}
+
 
 export default DesignEditor;

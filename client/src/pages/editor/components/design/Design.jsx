@@ -70,7 +70,7 @@ export default class Design extends PureComponent {
         let newInstanceList = [];
         for (let i = 0; i < instanceList.length; i++) {
             let instance = instanceList[i];
-            let pluginId = InstanceUtils.getPluginIdFromInstace(intance);
+            let pluginId = InstanceUtils.getPluginIdFromInstace(instance);
             // 找出plugin 并加载
             let plugin = await PluginLoader.loadMpComponentFromBundle(pluginId);
             let pluginStringID = pluginId.getStringId();
