@@ -119,7 +119,7 @@ class DesignEditor extends PureComponent {
                                                         disabled={disabled}
                                                         ref={this.saveEditorItem(id)}
                                                     >
-                                                        <comp.editor
+                                                        <instance.editForm
                                                             instance={instance}
                                                             onChange={onComponentValueChange(instance)}
                                                             settings={settings}
