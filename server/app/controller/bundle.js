@@ -2,11 +2,12 @@ const Controller = require('egg').Controller;
 
 class EditorController extends Controller {
     /**
-     * 新增bundle
+     * 保存bundle
      */
-    async addBundle() {
-
+    async saveBundle() {
+        let {bundleId, name, description, uri, type} = this.ctx.request.body;
     }
+
 
     /**
      * 删除bundle
@@ -16,9 +17,16 @@ class EditorController extends Controller {
     }
 
     /**
-     * 获取插件url
+     * 获取插件url,告诉小程序编辑器到哪加载插件代码
      */
     async getMpEditorPluginUrl() {
+        let {
+            groupId,
+            artifactId,
+            version,
+            classifier
+        } = this.ctx.query;
+        return ``;
 
     }
 
