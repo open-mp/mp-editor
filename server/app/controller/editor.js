@@ -2,8 +2,8 @@
 const Controller = require('egg').Controller;
 
 class EditorController extends Controller {
-  async mp() {
-    await this.ctx.render('editor/mp.html');
+  async mpHtml() {
+    await this.ctx.render('editor/mp.html',{});
   }
 }
 

@@ -1,6 +1,6 @@
 const Controller = require('egg').Controller;
 
-class EditorController extends Controller {
+class BundleController extends Controller {
     /**
      * 保存bundle
      */
@@ -34,8 +34,18 @@ class EditorController extends Controller {
      * 返回插件内容，本地开发用
      */
     async getMpEditorPluginContent() {
+        let {
+            groupId,
+            artifactId,
+            version,
+            classifier
+        } = this.ctx.query;
+        // 计算bundle在本地的存放路径
 
+        // 读取bundle的配置文件，拼接mp editor插件路径
+
+        // 返回插件
     }
 }
 
-module.exports = EditorController;
+module.exports = BundleController;

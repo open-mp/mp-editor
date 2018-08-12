@@ -8077,7 +8077,7 @@ var Design = function (_PureComponent) {
                                 }
 
                                 instance = instanceList[i];
-                                pluginId = InstanceUtils.getPluginIdFromInstace(intance);
+                                pluginId = InstanceUtils.getPluginIdFromInstace(instance);
                                 // 找出plugin 并加载
 
                                 _context.next = 9;
@@ -8467,6 +8467,10 @@ var _get = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js")
 
 var _get2 = _interopRequireDefault(_get);
 
+var _instance = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
+
+var InstanceUtils = _interopRequireWildcard(_instance);
+
 var _DesignPreviewItem = __webpack_require__(/*! ./preview/DesignPreviewItem */ "./src/pages/editor/components/design/preview/DesignPreviewItem.jsx");
 
 var _DesignPreviewItem2 = _interopRequireDefault(_DesignPreviewItem);
@@ -8483,6 +8487,8 @@ var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/ed
 
 var _constants = __webpack_require__(/*! ./preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8491,8 +8497,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// 保存实例对应的js组件对象
+function saveRef(map, id, instance) {
+    if (!instance) {
+        delete map[id];
+    } else {
+        map[id] = instance;
+    }
+}
 /**
  */
+
 var DesignEditor = function (_PureComponent) {
     _inherits(DesignEditor, _PureComponent);
 
@@ -8588,17 +8603,16 @@ var DesignEditor = function (_PureComponent) {
                                 }, provided.droppableProps, {
                                     className: (0, _classnames2.default)('mp-design__item-list', 'mp-design__item-list--full-height')
                                 }),
-                                value.map(function (v) {
-                                    var valueType = v.type;
-                                    var comp = (0, _find2.default)(components, function (c) {
-                                        return (0, _designType.isExpectedDesginType)(c, valueType);
-                                    });
+                                instanceList.map(function (instance) {
+                                    var pluginId = InstanceUtils.getPluginIdFromInstace(instance);
+                                    var pluginStringID = pluginId.getStringId();
+                                    var plugin = pluginMap[pluginStringID];
                                     // 实例id
-                                    var id = getUUIDFromValue(v);
+                                    var id = InstanceUtils.getUUIDFromInstance(instance);
                                     // 是否被选中
                                     var selected = id === selectedUUID;
                                     // 是否可拖动
-                                    var draggable = (0, _defaultTo2.default)(comp.dragable, true);
+                                    var draggable = (0, _defaultTo2.default)(plugin.dragable, true);
 
                                     return _react2.default.createElement(
                                         _DesignPreviewItem2.default,
@@ -8608,21 +8622,20 @@ var DesignEditor = function (_PureComponent) {
                                             ref: _this2.savePreviewItem(id)
                                         },
                                         _react2.default.createElement(_DesignPreviewController2.default, {
-                                            value: v,
+                                            instance: instance,
                                             settings: settings,
                                             design: design,
                                             id: id,
                                             index: draggable ? draggableIndex++ : -1,
                                             allowHoverEffects: !snapshot.isDraggingOver,
-                                            dragable: draggable,
-                                            editable: (0, _defaultTo2.default)(comp.editable, true),
-                                            configurable: (0, _defaultTo2.default)(comp.configurable, true),
-                                            canDelete: (0, _defaultTo2.default)(comp.canDelete, true),
-                                            highlightWhenSelect: (0, _defaultTo2.default)(comp.highlightWhenSelect, true),
+                                            draggable: draggable,
+                                            editable: (0, _defaultTo2.default)(instance.editable, true),
+                                            canDelete: (0, _defaultTo2.default)(instance.canDelete, true),
+                                            highlightWhenSelect: (0, _defaultTo2.default)(instance.highlightWhenSelect, true),
                                             isSelected: selected,
                                             onSelect: onSelect,
                                             onDelete: onDelete,
-                                            component: comp.preview
+                                            component: instance.preview
                                         }),
                                         selected && _react2.default.createElement(
                                             _DesignEditorItem2.default,
@@ -8630,9 +8643,9 @@ var DesignEditor = function (_PureComponent) {
                                                 disabled: disabled,
                                                 ref: _this2.saveEditorItem(id)
                                             },
-                                            _react2.default.createElement(comp.editor, {
-                                                value: v,
-                                                onChange: onComponentValueChange(v),
+                                            _react2.default.createElement(instance.editForm, {
+                                                instance: instance,
+                                                onChange: onComponentValueChange(instance),
                                                 settings: settings,
                                                 onSettingsChange: onSettingsChange,
                                                 design: design,
@@ -8680,21 +8693,11 @@ var DesignEditor = function (_PureComponent) {
 
     return DesignEditor;
 }(_react.PureComponent);
-// 保存实例对应的js组件对象
-
 
 DesignEditor.defaultProps = {
     background: '#f9f9f9',
     disabled: false
 };
-function saveRef(map, id, instance) {
-    if (!instance) {
-        delete map[id];
-    } else {
-        map[id] = instance;
-    }
-}
-
 exports.default = DesignEditor;
 
 /***/ }),
@@ -9289,37 +9292,35 @@ var DesignPreviewController = function (_PureComponent) {
             var _this2 = this;
 
             var _props = this.props,
-                dragable = _props.dragable,
-                configurable = _props.configurable,
+                draggable = _props.draggable,
                 editable = _props.editable,
                 canDelete = _props.canDelete,
                 highlightWhenSelect = _props.highlightWhenSelect,
                 isSelected = _props.isSelected,
                 PreviewComponent = _props.component,
-                previewProps = _props.previewProps,
                 settings = _props.settings,
                 id = _props.id,
                 index = _props.index,
                 allowHoverEffects = _props.allowHoverEffects;
 
-            var props = (0, _pick2.default)(this.props, ['value', 'design', 'settings']);
+            var props = (0, _pick2.default)(this.props, ['instance', 'design', 'settings']);
             var getClassName = function getClassName(highlight) {
                 var _cx;
 
-                return (0, _classnames2.default)(prefix + '-design-preview-controller', (_cx = {}, _defineProperty(_cx, prefix + '-design-preview-controller--editable', editable), _defineProperty(_cx, prefix + '-design-preview-controller--selected', isSelected), _defineProperty(_cx, prefix + '-design-preview-controller--highlight', highlight), _defineProperty(_cx, prefix + '-design-preview-controller--dragable', dragable), _cx));
+                return (0, _classnames2.default)('mp-design-preview-controller', (_cx = {}, _defineProperty(_cx, 'mp-design-preview-controller--editable', editable), _defineProperty(_cx, 'mp-design-preview-controller--selected', isSelected), _defineProperty(_cx, 'mp-design-preview-controller--highlight', highlight), _defineProperty(_cx, 'mp-design-preview-controller--dragable', draggable), _cx));
             };
 
-            var tree = dragable ? _react2.default.createElement(
+            var tree = draggable ? _react2.default.createElement(
                 _reactBeautifulDnd.Draggable,
                 {
                     draggableId: id,
                     type: _constants.DND_PREVIEW_CONTROLLER,
-                    isDragDisabled: !dragable,
+                    isDragDisabled: !draggable,
                     index: index
                 },
                 function (provided, snapshot) {
                     // 拖拽的时候隐藏各种按钮，会很丑
-                    var showButtons = configurable && allowHoverEffects && !snapshot.isDragging;
+                    var showDeleteButtons = canDelete && allowHoverEffects && !snapshot.isDragging;
                     var cls = getClassName(allowHoverEffects && highlightWhenSelect); // 拖动的时候不展示快捷操作按钮
 
                     return _react2.default.createElement(
@@ -9333,12 +9334,12 @@ var DesignPreviewController = function (_PureComponent) {
                                 style: _extends({}, provided.draggableProps.style, {
                                     backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
                                 }),
-                                className: prefix + '-design-preview-controller__drag-handle'
+                                className: 'mp-design-preview-controller__drag-handle'
                             }),
-                            _react2.default.createElement(PreviewComponent, _extends({}, previewProps, props))
+                            _react2.default.createElement(PreviewComponent, props)
                         ),
                         provided.placeholder,
-                        showButtons && canDelete && _react2.default.createElement(DeleteButton, { onDelete: _this2.onDelete })
+                        showDeleteButtons && _react2.default.createElement(DeleteButton, { onDelete: _this2.onDelete })
                     );
                 }
             ) : _react2.default.createElement(
@@ -9350,11 +9351,11 @@ var DesignPreviewController = function (_PureComponent) {
                 _react2.default.createElement(
                     'div',
                     {
-                        className: (0, _classnames2.default)(prefix + '-design-preview-controller__drag-handle', prefix + '-design-preview-controller__drag-handle--inactive')
+                        className: (0, _classnames2.default)('mp-design-preview-controller__drag-handle', 'mp-design-preview-controller__drag-handle--inactive')
                     },
-                    _react2.default.createElement(PreviewComponent, _extends({}, previewProps, props))
+                    _react2.default.createElement(PreviewComponent, props)
                 ),
-                configurable && canDelete && _react2.default.createElement(DeleteButton, { onDelete: this.onDelete })
+                canDelete && _react2.default.createElement(DeleteButton, { onDelete: this.onDelete })
             );
 
             return tree;
@@ -9472,8 +9473,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var prefix = 'mp';
-
 function scrollNodeToTop(node, offsets) {
     var pos = (0, _offset2.default)(node);
     var top = (0, _isFunction2.default)(offsets.top) ? offsets.top(pos.top) : pos.top + offsets.top;
@@ -9498,7 +9497,7 @@ var DesignPreviewItem = function (_PureComponent) {
 
             return _react2.default.createElement(
                 'div',
-                { className: prefix + '-design-preview-item' },
+                { className: 'mp-design-preview-item' },
                 children
             );
         }
@@ -11598,10 +11597,10 @@ exports.default = LineEditor;
 
 /***/ }),
 
-/***/ "./src/pages/editor/widget/line/LinePreview.js":
-/*!*****************************************************!*\
-  !*** ./src/pages/editor/widget/line/LinePreview.js ***!
-  \*****************************************************/
+/***/ "./src/pages/editor/widget/line/LinePreview.jsx":
+/*!******************************************************!*\
+  !*** ./src/pages/editor/widget/line/LinePreview.jsx ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11692,7 +11691,7 @@ var _LineEditor = __webpack_require__(/*! ./LineEditor */ "./src/pages/editor/wi
 
 var _LineEditor2 = _interopRequireDefault(_LineEditor);
 
-var _LinePreview = __webpack_require__(/*! ./LinePreview */ "./src/pages/editor/widget/line/LinePreview.js");
+var _LinePreview = __webpack_require__(/*! ./LinePreview */ "./src/pages/editor/widget/line/LinePreview.jsx");
 
 var _LinePreview2 = _interopRequireDefault(_LinePreview);
 
