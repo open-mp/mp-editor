@@ -11,7 +11,7 @@ const columns = [{
     title: '类型',
     name: 'description',
     bodyRender(data) {
-        return (<span>{data.type == 'static' ? '静态结构页' : '动态结构'}</span>)
+        return (<span>{data.structure == 'static' ? '静态结构页' : '动态结构'}</span>)
     }
 }, {
     title: '描述',
@@ -25,7 +25,21 @@ const columns = [{
     title: '操作',
     width: '200px',
     bodyRender(data) {
-        return (<a href={`/mp/detail?mpId=${data.id}`} target="_blank"><Button type="primary" outline>编辑</Button></a>)
+        // 动态结构页
+        // 静态结构页
+        if (data.structure == 'static') {
+            return (<div>
+                <Button type="primary" outline>页面设置</Button>
+                <a href={`/mp/detail?mpId=${data.id}`} target="_blank"><Button type="primary" outline>编辑</Button></a>
+            </div>)
+        } else {
+            return (<div>
+                <Button type="primary" outline>页面设置</Button>
+                <Button type="primary" outline>编辑页面组件</Button>
+                <a href={`/mp/content-list?mpId=${data.id}`}><Button type="primary" outline>内容列表</Button></a>
+            </div>)
+        }
+
     }
 }];
 

@@ -27,7 +27,7 @@ const Pages = [
         id: 1, // 页面id
         name: '商品详情页',
         description: '',
-        type: 'static',
+        structure: 'static',
         config: {
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black",
@@ -42,7 +42,7 @@ const Pages = [
         id: 2, // 页面id
         name: '微页面',
         description: '',
-        type: 'dynamic',
+        structure: 'dynamic',
         config: {
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black",
@@ -71,7 +71,9 @@ class UserController extends Controller {
     async pageListHtml() {
         await this.ctx.render('mp/page-list.html', {});
     }
-
+    async contentListHtml() {
+        await this.ctx.render('mp/content-list.html', {});
+    }
     async getMpList() {
         this.ctx.body = {
             code: 0,
@@ -87,6 +89,17 @@ class UserController extends Controller {
         this.ctx.body = {
             code: 0,
             data: mpPageList
+        };
+    }
+
+    async getMpDynamicPageContentList() {
+        let {pageId} = this.ctx.query;
+        let mpContentList = DynamicContent.filter(content => {
+            return content.pageId == pageId;
+        });
+        this.ctx.body = {
+            code: 0,
+            data: mpContentList
         };
     }
 }

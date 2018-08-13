@@ -12,6 +12,7 @@ module.exports = app => {
     router.get('/mp/list', controller.mp.listHtml);
     router.get('/mp/detail', controller.mp.detailHtml);
     router.get('/mp/page-list', controller.mp.pageListHtml);
+    router.get('/mp/content-list', controller.mp.contentListHtml);
     router.get('/mp/get-mp-list', controller.mp.getMpList);
     router.get('/mp/get-mp-page-list', controller.mp.getMpPageList);
 
