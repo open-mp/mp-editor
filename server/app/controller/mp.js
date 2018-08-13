@@ -68,6 +68,10 @@ class UserController extends Controller {
         await this.ctx.render('mp/detail.html', {});
     }
 
+    async pageListHtml() {
+        await this.ctx.render('mp/page-list.html', {});
+    }
+
     async getMpList() {
         this.ctx.body = {
             code: 0,

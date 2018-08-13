@@ -1234,12 +1234,25 @@ var columns = [{
     width: '200px',
     bodyRender: function bodyRender(data) {
         return _react2.default.createElement(
-            'a',
-            { href: '/mp/detail?mpId=' + data.id, target: '_blank' },
+            'div',
+            null,
             _react2.default.createElement(
-                _button2.default,
-                { type: 'primary', outline: true },
-                '\u7F16\u8F91'
+                'a',
+                { href: '/mp/page-list?mpId=' + data.id, target: '_blank' },
+                _react2.default.createElement(
+                    _button2.default,
+                    { type: 'primary', outline: true },
+                    '\u9875\u9762\u5217\u8868'
+                )
+            ),
+            _react2.default.createElement(
+                'a',
+                { href: '/mp/detail?mpId=' + data.id, target: '_blank' },
+                _react2.default.createElement(
+                    _button2.default,
+                    { type: 'primary', outline: true },
+                    '\u5C0F\u7A0B\u5E8F\u8BE6\u60C5'
+                )
             )
         );
     }

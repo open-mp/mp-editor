@@ -1255,57 +1255,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var columns = [{
-    title: '页面名字',
-    name: 'name',
-    width: '200px'
-}, {
-    title: '类型',
-    name: 'description',
-    bodyRender: function bodyRender(data) {
-        return _react2.default.createElement(
-            'span',
-            null,
-            data.type == 'static' ? '静态结构页' : '动态结构'
-        );
-    }
-}, {
-    title: '描述',
-    name: 'description'
-}, {
-    title: '最后修改时间',
-    name: 'lastModified',
-    width: '100px',
-    textAlign: 'center'
-}, {
-    title: '操作',
-    width: '200px',
-    bodyRender: function bodyRender(data) {
-        return _react2.default.createElement(
-            'a',
-            { href: '/mp/detail?mpId=' + data.id, target: '_blank' },
-            _react2.default.createElement(
-                _button2.default,
-                { type: 'primary', outline: true },
-                '\u7F16\u8F91'
-            )
-        );
-    }
-}];
-
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
     function App(props) {
         _classCallCheck(this, App);
 
-        // 加载小程序
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.state = {
-            mpPageList: []
-        };
-        _this.loadMpList();
+        _this.state = {};
         return _this;
     }
 
@@ -1314,33 +1272,25 @@ var App = function (_React$Component) {
         value: function render() {
             var mpPageList = this.state.mpPageList;
 
-            return _react2.default.createElement(_table2.default, {
-                columns: columns,
-                pageInfo: null,
-                datasets: mpPageList,
-                rowKey: 'id'
-            });
+            return _react2.default.createElement(
+                'div',
+                null,
+                '\u5C0F\u7A0B\u5E8F\u8BE6\u60C5'
+            );
         }
     }, {
         key: 'loadMpList',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var _getQuery, mpId, mpPageList;
+                var _getQuery, mpId;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _getQuery = (0, _url.getQuery)(), mpId = _getQuery.mpId;
-                                _context.next = 3;
-                                return mpApi.getMpPageList(mpId);
 
-                            case 3:
-                                mpPageList = _context.sent;
-
-                                this.setState({ mpPageList: mpPageList });
-
-                            case 5:
+                            case 1:
                             case 'end':
                                 return _context.stop();
                         }
