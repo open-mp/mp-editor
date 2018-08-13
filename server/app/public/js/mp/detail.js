@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/pages/mp/list/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/pages/mp/detail/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1048,6 +1048,42 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /***/ }),
 
+/***/ "./src/common/api/url.js":
+/*!*******************************!*\
+  !*** ./src/common/api/url.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getQuery = getQuery;
+exports.getHash = getHash;
+exports.setHash = setHash;
+var queryString = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
+
+function getQuery() {
+  var parsed = queryString.parse(location.search);
+  return parsed;
+}
+
+function getHash() {
+  var parsed = queryString.parse(location.hash);
+  return parsed;
+}
+
+function setHash(key, value) {
+  var parsed = queryString.parse(location.hash);
+  parsed[key] = value;
+  location.hash = queryString.stringify(parsed);
+}
+
+/***/ }),
+
 /***/ "./src/common/layouts/BasicLayout.jsx":
 /*!********************************************!*\
   !*** ./src/common/layouts/BasicLayout.jsx ***!
@@ -1173,10 +1209,10 @@ exports.default = BasicLayout;
 
 /***/ }),
 
-/***/ "./src/pages/mp/list/App.jsx":
-/*!***********************************!*\
-  !*** ./src/pages/mp/list/App.jsx ***!
-  \***********************************/
+/***/ "./src/pages/mp/detail/App.jsx":
+/*!*************************************!*\
+  !*** ./src/pages/mp/detail/App.jsx ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1205,6 +1241,8 @@ var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/li
 
 var _button2 = _interopRequireDefault(_button);
 
+var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1218,9 +1256,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var columns = [{
-    title: '小程序名字',
+    title: '页面名字',
     name: 'name',
     width: '200px'
+}, {
+    title: '类型',
+    name: 'description',
+    bodyRender: function bodyRender(data) {
+        return _react2.default.createElement(
+            'span',
+            null,
+            data.type == 'static' ? '静态结构页' : '动态结构'
+        );
+    }
 }, {
     title: '描述',
     name: 'description'
@@ -1255,7 +1303,7 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            mpList: []
+            mpPageList: []
         };
         _this.loadMpList();
         return _this;
@@ -1264,12 +1312,12 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            var mpList = this.state.mpList;
+            var mpPageList = this.state.mpPageList;
 
             return _react2.default.createElement(_table2.default, {
                 columns: columns,
                 pageInfo: null,
-                datasets: mpList,
+                datasets: mpPageList,
                 rowKey: 'id'
             });
         }
@@ -1277,20 +1325,22 @@ var App = function (_React$Component) {
         key: 'loadMpList',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var mpList;
+                var _getQuery, mpId, mpPageList;
+
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _context.next = 2;
-                                return mpApi.getMpList();
+                                _getQuery = (0, _url.getQuery)(), mpId = _getQuery.mpId;
+                                _context.next = 3;
+                                return mpApi.getMpPageList(mpId);
 
-                            case 2:
-                                mpList = _context.sent;
+                            case 3:
+                                mpPageList = _context.sent;
 
-                                this.setState({ mpList: mpList });
+                                this.setState({ mpPageList: mpPageList });
 
-                            case 4:
+                            case 5:
                             case 'end':
                                 return _context.stop();
                         }
@@ -1313,10 +1363,10 @@ exports.default = App;
 
 /***/ }),
 
-/***/ "./src/pages/mp/list/main.js":
-/*!***********************************!*\
-  !*** ./src/pages/mp/list/main.js ***!
-  \***********************************/
+/***/ "./src/pages/mp/detail/main.js":
+/*!*************************************!*\
+  !*** ./src/pages/mp/detail/main.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1337,11 +1387,11 @@ var _BasicLayout = __webpack_require__(/*! ../../../common/layouts/BasicLayout.j
 
 var _BasicLayout2 = _interopRequireDefault(_BasicLayout);
 
-var _App = __webpack_require__(/*! ./App.jsx */ "./src/pages/mp/list/App.jsx");
+var _App = __webpack_require__(/*! ./App.jsx */ "./src/pages/mp/detail/App.jsx");
 
 var _App2 = _interopRequireDefault(_App);
 
-__webpack_require__(/*! ./main.pcss */ "./src/pages/mp/list/main.pcss");
+__webpack_require__(/*! ./main.pcss */ "./src/pages/mp/detail/main.pcss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1353,10 +1403,10 @@ _reactDom2.default.render(_react2.default.createElement(
 
 /***/ }),
 
-/***/ "./src/pages/mp/list/main.pcss":
-/*!*************************************!*\
-  !*** ./src/pages/mp/list/main.pcss ***!
-  \*************************************/
+/***/ "./src/pages/mp/detail/main.pcss":
+/*!***************************************!*\
+  !*** ./src/pages/mp/detail/main.pcss ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

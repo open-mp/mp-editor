@@ -3,8 +3,8 @@ const Controller = require('egg').Controller;
 
 const MPList = [{
     id: 1,
-    name: '',
-    description: ''
+    name: '测试小程序',
+    description: '用来测试的小程序'
 }]; // 小程序列表
 const MPConfig = {
     1: {
@@ -70,6 +70,7 @@ class UserController extends Controller {
 
     async getMpList() {
         this.ctx.body = {
+            code: 0,
             data: MPList
         };
     }
@@ -80,6 +81,7 @@ class UserController extends Controller {
             return page.mpId == mpId;
         });
         this.ctx.body = {
+            code: 0,
             data: mpPageList
         };
     }

@@ -1,11 +1,18 @@
 import React from 'react';
 import * as mpApi from 'src/common/api/mp'
 import {Table, Button} from 'zent'
+import {getQuery} from 'src/common/api/url'
 
 const columns = [{
-    title: '小程序名字',
+    title: '页面名字',
     name: 'name',
     width: '200px'
+}, {
+    title: '类型',
+    name: 'description',
+    bodyRender(data) {
+        return (<span>{data.type == 'static' ? '静态结构页' : '动态结构'}</span>)
+    }
 }, {
     title: '描述',
     name: 'description',
@@ -24,7 +31,7 @@ const columns = [{
 
 class App extends React.Component {
     state = {
-        mpList: []
+        mpPageList: []
     }
 
     constructor(props) {
@@ -34,18 +41,19 @@ class App extends React.Component {
     }
 
     render() {
-        let {mpList} = this.state;
+        let {mpPageList} = this.state;
         return (<Table
             columns={columns}
             pageInfo={null}
-            datasets={mpList}
+            datasets={mpPageList}
             rowKey="id"
         />);
     }
 
     async loadMpList() {
-        let mpList = await mpApi.getMpList();
-        this.setState({mpList});
+        let {mpId} = getQuery();
+        let mpPageList = await mpApi.getMpPageList(mpId);
+        this.setState({mpPageList});
     }
 }
 

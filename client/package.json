@@ -39,6 +39,7 @@
     "react-beautiful-dnd": "^8.0.5",
     "react-dom": "^16.4.1",
     "react-transition-group": "^2.4.0",
+    "regenerator-runtime": "^0.12.1",
     "tinycolor2": "^1.4.1",
     "zan-utils": "^1.2.8",
     "zent": "^6.0.1"
