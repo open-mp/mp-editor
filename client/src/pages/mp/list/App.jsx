@@ -30,7 +30,7 @@ const columns = [{
     bodyRender(data) {
         return (<div>
             <a href={`/mp/page-list?mpId=${data.id}`} target="_blank"><Button type="primary" outline>页面列表</Button></a>
-            <Button type="primary" outline>小程序详情</Button>
+            <a href={`/mp/setting?mpId=${data.id}`} target="_blank"><Button type="primary" outline>小程序设置</Button></a>
             <Button type="primary" outline>生成小程序代码</Button>
         </div>)
     }

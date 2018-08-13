@@ -100,6 +100,10 @@ class UserController extends Controller {
         await this.ctx.render('mp/list.html', {});
     }
 
+    async settingHtml() {
+        await this.ctx.render('mp/setting.html', {});
+    }
+
     async detailHtml() {
         await this.ctx.render('mp/detail.html', {});
     }

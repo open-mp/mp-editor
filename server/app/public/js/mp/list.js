@@ -1283,9 +1283,13 @@ var columns = [{
                 )
             ),
             _react2.default.createElement(
-                _button2.default,
-                { type: 'primary', outline: true },
-                '\u5C0F\u7A0B\u5E8F\u8BE6\u60C5'
+                'a',
+                { href: '/mp/setting?mpId=' + data.id, target: '_blank' },
+                _react2.default.createElement(
+                    _button2.default,
+                    { type: 'primary', outline: true },
+                    '\u5C0F\u7A0B\u5E8F\u8BBE\u7F6E'
+                )
             ),
             _react2.default.createElement(
                 _button2.default,
