@@ -11086,7 +11086,8 @@ var App = function (_React$Component) {
         }
     }, {
         key: 'onAddComponent',
-        value: function onAddComponent() {
+        value: function onAddComponent(bundleId) {
+            console.log(bundleId);
             // 通知design增加组件
         }
     }, {

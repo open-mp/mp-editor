@@ -81,7 +81,8 @@ class App extends React.Component {
             </div>);
     }
 
-    onAddComponent() {
+    onAddComponent(bundleId) {
+        console.log(bundleId)
         // 通知design增加组件
     }
 

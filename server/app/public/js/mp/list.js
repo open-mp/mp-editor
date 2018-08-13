@@ -1177,6 +1177,16 @@ var BasicLayout = function (_React$PureComponent) {
                     MenuItem,
                     { key: '1' },
                     '\u5C0F\u7A0B\u5E8F\u5217\u8868'
+                ),
+                _react2.default.createElement(
+                    MenuItem,
+                    { key: '2' },
+                    '\u6211\u7684Bundle'
+                ),
+                _react2.default.createElement(
+                    MenuItem,
+                    { key: '3' },
+                    'Bundle\u5E02\u573A'
                 )
             );
         }

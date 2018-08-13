@@ -42,6 +42,12 @@ export default class BasicLayout extends React.PureComponent {
                 <MenuItem key="1">
                     小程序列表
                 </MenuItem>
+                <MenuItem key="2">
+                    我的Bundle
+                </MenuItem>
+                <MenuItem key="3">
+                    Bundle市场
+                </MenuItem>
             </Menu>
         )
     }

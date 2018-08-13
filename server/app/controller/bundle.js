@@ -56,19 +56,39 @@ class BundleController extends Controller {
                 list: [
                     {
                         name: '图片广告',
-                        bundleId: {}
+                        bundleId: {
+                            groupId: '',
+                            artifactId: '',
+                            version: '',
+                            classifier: ''
+                        }
                     },
                     {
                         name: '富文本',
-                        bundleId: {}
+                        bundleId: {
+                            groupId: '',
+                            artifactId: '',
+                            version: '',
+                            classifier: ''
+                        }
                     },
                     {
                         name: '分隔符',
-                        bundleId: {}
+                        bundleId: {
+                            groupId: '',
+                            artifactId: '',
+                            version: '',
+                            classifier: ''
+                        }
                     },
                     {
                         name: '空白行',
-                        bundleId: {}
+                        bundleId: {
+                            groupId: '',
+                            artifactId: '',
+                            version: '',
+                            classifier: ''
+                        }
                     }
                 ]
             }
