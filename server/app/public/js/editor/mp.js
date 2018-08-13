@@ -11036,14 +11036,16 @@ var App = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
+            var bundleList = this.state.bundleList;
+
             return _react2.default.createElement(
                 'div',
                 { className: 'mp-workspace' },
                 _react2.default.createElement(
                     'div',
                     { className: 'mp-workspace--toolbox' },
-                    _react2.default.createElement(_ComponentList2.default, { onAddComponent: function onAddComponent(component) {
-                            _this2.onAddComponent(component);
+                    _react2.default.createElement(_ComponentList2.default, { bundleList: bundleList, onAddComponent: function onAddComponent(bundleId) {
+                            _this2.onAddComponent(bundleId);
                         } })
                 ),
                 _react2.default.createElement(
@@ -11101,22 +11103,23 @@ var App = function (_React$Component) {
          */
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var _state, pageId, pageSize, pageNo, key, bundleList;
+                var _state, pageId, pageSize, pageNo, bundleSerchKey, _ref2, bundleList;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _state = this.state, pageId = _state.pageId, pageSize = _state.pageSize, pageNo = _state.pageNo, key = _state.key;
+                                _state = this.state, pageId = _state.pageId, pageSize = _state.pageSize, pageNo = _state.pageNo, bundleSerchKey = _state.bundleSerchKey;
                                 _context.next = 3;
-                                return bundleAPi.queryBundle({ pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: key });
+                                return bundleAPi.queryBundle({ pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: bundleSerchKey });
 
                             case 3:
-                                bundleList = _context.sent;
+                                _ref2 = _context.sent;
+                                bundleList = _ref2.list;
 
                                 this.setState({ bundleList: bundleList });
 
-                            case 5:
+                            case 6:
                             case 'end':
                                 return _context.stop();
                         }
@@ -11179,43 +11182,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var components = [{
-    name: '页面顶部配置',
-    description: '',
-    groupId: '',
-    artifactId: '',
-    version: '',
-    classifier: ''
-}, {
-    name: '图片广告',
-    description: '',
-    groupId: '',
-    artifactId: '',
-    version: '',
-    classifier: ''
-}, {
-    name: '富文本',
-    description: '',
-    groupId: '',
-    artifactId: '',
-    version: '',
-    classifier: ''
-}, {
-    name: '分割线',
-    description: '',
-    groupId: '',
-    artifactId: '',
-    version: '',
-    classifier: ''
-}, {
-    name: '空白行',
-    description: '',
-    groupId: '',
-    artifactId: '',
-    version: '',
-    classifier: ''
-}];
-
 var ComponentList = function (_React$Component) {
     _inherits(ComponentList, _React$Component);
 
@@ -11230,14 +11196,17 @@ var ComponentList = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            return components.map(function (component) {
+            var bundleList = this.props.bundleList;
+
+
+            return bundleList.map(function (bundle) {
                 return _react2.default.createElement(
                     'div',
                     { className: 'component-panel' },
                     _react2.default.createElement(
                         'div',
                         null,
-                        component.name
+                        bundle.name
                     ),
                     _react2.default.createElement(
                         'div',
@@ -11245,7 +11214,7 @@ var ComponentList = function (_React$Component) {
                         _react2.default.createElement(
                             _button2.default,
                             { type: 'success', onClick: function onClick() {
-                                    _this2.props.onAddComponent && _this2.props.onAddComponent(component);
+                                    _this2.props.onAddComponent && _this2.props.onAddComponent(bundle.bundleId);
                                 }, outline: true },
                             '\u4F7F\u7528'
                         )

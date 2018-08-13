@@ -46,11 +46,12 @@ class App extends React.Component {
     }
 
     render() {
+        let {bundleList} = this.state;
         return (
             <div className="mp-workspace">
                 <div className="mp-workspace--toolbox">
-                    <ComponentList onAddComponent={(component) => {
-                        this.onAddComponent(component);
+                    <ComponentList bundleList={bundleList} onAddComponent={(bundleId) => {
+                        this.onAddComponent(bundleId);
                     }}/>
                 </div>
                 <div className="mp-workspace--editor-wrapper">
@@ -122,8 +123,8 @@ class App extends React.Component {
      * 加载bundle
      */
     async loadBundleList() {
-        let {pageId, pageSize, pageNo, key} = this.state;
-        let bundleList = await bundleAPi.queryBundle({pageId, pageSize, pageNo, key});
+        let {pageId, pageSize, pageNo, bundleSerchKey} = this.state;
+        let {list: bundleList} = await bundleAPi.queryBundle({pageId, pageSize, pageNo, key: bundleSerchKey});
         this.setState({bundleList});
     }
 
