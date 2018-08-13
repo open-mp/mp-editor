@@ -4,7 +4,6 @@ import assign from 'lodash/assign';
 import reorder from 'zent/lib/utils/reorder';
 import shallowEqual from 'zent/lib/utils/shallowEqual';
 
-const prefix = 'mp';
 const NOT_EVENT_MSG =
   'onInputChange expects an `Event` with { target: { name, value } } as argument';
 
@@ -197,26 +196,26 @@ export class ControlGroup extends PureComponent {
 
     return (
       <div
-        className={cx(`${prefix}-design-editor__control-group`, className, {
+        className={cx(`mp-design-editor__control-group`, className, {
           'has-error': errorVisible,
         })}
       >
         {React.createElement(
           focusOnLabelClick ? 'label' : 'div',
           {
-            className: `${prefix}-design-editor__control-group-container`,
+            className: `mp-design-editor__control-group-container`,
           },
           showLabel ? (
             <div
               className={cx(
-                `${prefix}-design-editor__control-group-label`,
+                `mp-design-editor__control-group-label`,
                 labelAlign &&
-                  `${prefix}-design-editor__control-group-label--${labelAlign}`
+                  `mp-design-editor__control-group-label--${labelAlign}`
               )}
             >
               {required && (
                 <span
-                  className={`${prefix}-design-editor__control-group-required-star`}
+                  className={`mp-design-editor__control-group-required-star`}
                 >
                   *
                 </span>
@@ -224,11 +223,11 @@ export class ControlGroup extends PureComponent {
               {label}
             </div>
           ) : null,
-          <div className={`${prefix}-design-editor__control-group-control`}>
+          <div className={`mp-design-editor__control-group-control`}>
             {children}
             {helpDesc && (
               <div
-                className={`${prefix}-design-editor__control-group-help-desc`}
+                className={`mp-design-editor__control-group-help-desc`}
               >
                 {helpDesc}
               </div>
@@ -236,7 +235,7 @@ export class ControlGroup extends PureComponent {
           </div>
         )}
         {errorVisible && (
-          <div className={`${prefix}-design-editor__control-group-error`}>
+          <div className={`mp-design-editor__control-group-error`}>
             {error}
           </div>
         )}

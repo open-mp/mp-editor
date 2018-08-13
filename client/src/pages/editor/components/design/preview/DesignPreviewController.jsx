@@ -136,14 +136,14 @@ function DeleteButton({onDelete}) {
             position="left-center"
             centerArrow
             onConfirm={onDelete}
-            wrapperClassName={`${prefix}-design-preview-controller__action-btn-delete`}
+            wrapperClassName={`mp-design-preview-controller__action-btn-delete`}
         >
             <svg
                 width="20"
                 height="20"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className={`${prefix}-design-preview-controller__icon-delete`}
+                className={`mp-design-preview-controller__icon-delete`}
                 onClick={(evt)=>{ evt && evt.stopPropagation();}}
             >
                 <g fill="none" fillRule="evenodd">

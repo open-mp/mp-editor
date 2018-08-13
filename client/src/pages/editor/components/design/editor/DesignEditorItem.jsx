@@ -3,7 +3,6 @@ import {findDOMNode} from 'react-dom';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const prefix = 'mp';
 
 export default class DesignEditorItem extends PureComponent {
     static propTypes = {
@@ -22,8 +21,8 @@ export default class DesignEditorItem extends PureComponent {
         const { disabled, className } = this.props;
 
         return (
-            <div className={cx(`${prefix}-design-editor-item`, className)}>
-                {disabled && <div className={`${prefix}-design__disabled-mask`}/>}
+            <div className={cx(`mp-design-editor-item`, className)}>
+                {disabled && <div className={`mp-design__disabled-mask`}/>}
                 {this.props.children}
             </div>
         );

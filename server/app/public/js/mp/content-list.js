@@ -982,7 +982,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getMpPageList = exports.getMpList = undefined;
+exports.getDynamicPageContentList = exports.getMpPageList = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1038,6 +1038,33 @@ var getMpPageList = exports.getMpPageList = function () {
     };
 }();
 
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(pageId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        _context3.next = 2;
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+
+                    case 2:
+                        result = _context3.sent;
+                        return _context3.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function getDynamicPageContentList(_x2) {
+        return _ref3.apply(this, arguments);
+    };
+}();
+
 var _api = __webpack_require__(/*! ./api */ "./src/common/api/api.js");
 
 var api = _interopRequireWildcard(_api);
@@ -1045,6 +1072,42 @@ var api = _interopRequireWildcard(_api);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+/***/ }),
+
+/***/ "./src/common/api/url.js":
+/*!*******************************!*\
+  !*** ./src/common/api/url.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getQuery = getQuery;
+exports.getHash = getHash;
+exports.setHash = setHash;
+var queryString = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
+
+function getQuery() {
+  var parsed = queryString.parse(location.search);
+  return parsed;
+}
+
+function getHash() {
+  var parsed = queryString.parse(location.hash);
+  return parsed;
+}
+
+function setHash(key, value) {
+  var parsed = queryString.parse(location.hash);
+  parsed[key] = value;
+  location.hash = queryString.stringify(parsed);
+}
 
 /***/ }),
 
@@ -1205,6 +1268,8 @@ var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/li
 
 var _button2 = _interopRequireDefault(_button);
 
+var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1218,7 +1283,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var columns = [{
-    title: '小程序名字',
+    title: '动态页名字',
     name: 'name',
     width: '200px'
 }, {
@@ -1227,8 +1292,7 @@ var columns = [{
 }, {
     title: '最后修改时间',
     name: 'lastModified',
-    width: '100px',
-    textAlign: 'center'
+    width: '100px'
 }, {
     title: '操作',
     width: '200px',
@@ -1237,21 +1301,17 @@ var columns = [{
             'div',
             null,
             _react2.default.createElement(
-                'a',
-                { href: '/mp/page-list?mpId=' + data.id, target: '_blank' },
-                _react2.default.createElement(
-                    _button2.default,
-                    { type: 'primary', outline: true },
-                    '\u9875\u9762\u5217\u8868'
-                )
+                _button2.default,
+                { type: 'primary', outline: true },
+                '\u9875\u9762\u8BBE\u7F6E'
             ),
             _react2.default.createElement(
                 'a',
-                { href: '/mp/detail?mpId=' + data.id, target: '_blank' },
+                { href: '/editor/mp?pageId=' + data.pageId + '&contentId=' + data.id + '&structure=dynamic' },
                 _react2.default.createElement(
                     _button2.default,
                     { type: 'primary', outline: true },
-                    '\u5C0F\u7A0B\u5E8F\u8BE6\u60C5'
+                    '\u7F16\u8F91'
                 )
             )
         );
@@ -1290,20 +1350,22 @@ var App = function (_React$Component) {
         key: 'loadMpList',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var mpList;
+                var _getQuery, pageId, mpList;
+
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _context.next = 2;
-                                return mpApi.getMpList();
+                                _getQuery = (0, _url.getQuery)(), pageId = _getQuery.pageId;
+                                _context.next = 3;
+                                return mpApi.getDynamicPageContentList(pageId);
 
-                            case 2:
+                            case 3:
                                 mpList = _context.sent;
 
                                 this.setState({ mpList: mpList });
 
-                            case 4:
+                            case 5:
                             case 'end':
                                 return _context.stop();
                         }

@@ -101,7 +101,7 @@ export default class Design extends PureComponent {
         } = this.state;
 
 
-        const cls = cx(`${prefix}-design`);
+        const cls = cx(`mp-design`);
 
         return (
             <div className={cls} style={{paddingBottom: bottomGap}}>

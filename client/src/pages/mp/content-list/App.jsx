@@ -1,9 +1,10 @@
 import React from 'react';
 import * as mpApi from 'src/common/api/mp'
 import {Table, Button} from 'zent'
+import {getQuery} from "src/common/api/url";
 
 const columns = [{
-    title: '小程序名字',
+    title: '动态页名字',
     name: 'name',
     width: '200px'
 }, {
@@ -13,14 +14,13 @@ const columns = [{
     title: '最后修改时间',
     name: 'lastModified',
     width: '100px',
-    textAlign: 'center',
 }, {
     title: '操作',
     width: '200px',
     bodyRender(data) {
         return (<div>
-            <a href={`/mp/page-list?mpId=${data.id}`} target="_blank"><Button type="primary" outline>页面列表</Button></a>
-            <a href={`/mp/detail?mpId=${data.id}`} target="_blank"><Button type="primary" outline>小程序详情</Button></a>
+            <Button type="primary" outline>页面设置</Button>
+            <a href={`/editor/mp?pageId=${data.pageId}&contentId=${data.id}&structure=dynamic`}><Button type="primary" outline>编辑</Button></a>
         </div>)
     }
 }];
@@ -47,7 +47,8 @@ class App extends React.Component {
     }
 
     async loadMpList() {
-        let mpList = await mpApi.getMpList();
+        let {pageId} = getQuery();
+        let mpList = await mpApi.getDynamicPageContentList(pageId);
         this.setState({mpList});
     }
 }

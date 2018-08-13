@@ -982,7 +982,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getMpPageList = exports.getMpList = undefined;
+exports.getDynamicPageContentList = exports.getMpPageList = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1035,6 +1035,33 @@ var getMpPageList = exports.getMpPageList = function () {
 
     return function getMpPageList(_x) {
         return _ref2.apply(this, arguments);
+    };
+}();
+
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(pageId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        _context3.next = 2;
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+
+                    case 2:
+                        result = _context3.sent;
+                        return _context3.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function getDynamicPageContentList(_x2) {
+        return _ref3.apply(this, arguments);
     };
 }();
 
@@ -1280,10 +1307,10 @@ var columns = [{
 }, {
     title: '操作',
     width: '200px',
-    bodyRender: function bodyRender(data) {
+    bodyRender: function bodyRender(page) {
         // 动态结构页
         // 静态结构页
-        if (data.structure == 'static') {
+        if (page.structure == 'static') {
             return _react2.default.createElement(
                 'div',
                 null,
@@ -1294,7 +1321,7 @@ var columns = [{
                 ),
                 _react2.default.createElement(
                     'a',
-                    { href: '/mp/detail?mpId=' + data.id, target: '_blank' },
+                    { href: '/editor/mp?pageId=' + page.id + '&structure=static', target: '_blank' },
                     _react2.default.createElement(
                         _button2.default,
                         { type: 'primary', outline: true },
@@ -1318,7 +1345,7 @@ var columns = [{
                 ),
                 _react2.default.createElement(
                     'a',
-                    { href: '/mp/content-list?mpId=' + data.id },
+                    { href: '/mp/content-list?pageId=' + page.id },
                     _react2.default.createElement(
                         _button2.default,
                         { type: 'primary', outline: true },

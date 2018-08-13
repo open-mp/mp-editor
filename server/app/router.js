@@ -15,6 +15,7 @@ module.exports = app => {
     router.get('/mp/content-list', controller.mp.contentListHtml);
     router.get('/mp/get-mp-list', controller.mp.getMpList);
     router.get('/mp/get-mp-page-list', controller.mp.getMpPageList);
+    router.get('/mp/get-mp-dynamicpage-content-list', controller.mp.getMpDynamicPageContentList);
 
     // 编辑器
     router.get('/editor/mp', controller.editor.mpHtml);

@@ -51,10 +51,46 @@ const Pages = [
             "backgroundTextStyle": "light"
         },
         bundleList: []
+    },{
+        mpId: 1, // 关联的小程序id
+        id: 3, // 页面id
+        name: '下单',
+        description: '',
+        structure: 'static',
+        config: {
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black",
+            "navigationBarTitleText": "微信接口功能演示",
+            "backgroundColor": "#eeeeee",
+            "backgroundTextStyle": "light"
+        },
+        instanceList: []
+    },{
+        mpId: 1, // 关联的小程序id
+        id: 3, // 页面id
+        name: '购物车',
+        description: '',
+        structure: 'static',
+        config: {
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black",
+            "navigationBarTitleText": "微信接口功能演示",
+            "backgroundColor": "#eeeeee",
+            "backgroundTextStyle": "light"
+        },
+        instanceList: []
     }]; // 小程序的页面列表
 const DynamicContent = [{
     id: 1,
     pageId: 2, // 关联的动态页id
+    name: '限时折扣专题',
+    description: '',
+    instanceList: []
+}, {
+    id: 2,
+    pageId: 2, // 关联的动态页id
+    name: '中秋活动',
+    description: '',
     instanceList: []
 }];
 
@@ -71,9 +107,11 @@ class UserController extends Controller {
     async pageListHtml() {
         await this.ctx.render('mp/page-list.html', {});
     }
+
     async contentListHtml() {
         await this.ctx.render('mp/content-list.html', {});
     }
+
     async getMpList() {
         this.ctx.body = {
             code: 0,
