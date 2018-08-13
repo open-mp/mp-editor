@@ -38,7 +38,7 @@ class App extends React.Component {
         bundleList: [], // bundle列表
         bundlePageIndex: 1,
         bundlePageSize: 10,
-        allowUserQuery: false,
+        allowUserQuery: true,
         pageId: null,
         contentId: null,
         structure: 'static',
@@ -46,11 +46,11 @@ class App extends React.Component {
     }
 
     render() {
-        let {bundleList} = this.state;
+        let {bundleList,allowUserQuery} = this.state;
         return (
             <div className="mp-workspace">
                 <div className="mp-workspace--toolbox">
-                    <ComponentList bundleList={bundleList} onAddComponent={(bundleId) => {
+                    <ComponentList bundleList={bundleList} allowUserQuery={allowUserQuery} onAddComponent={(bundleId) => {
                         this.onAddComponent(bundleId);
                     }}/>
                 </div>

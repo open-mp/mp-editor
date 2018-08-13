@@ -8084,6 +8084,17 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
+/***/ "./node_modules/zent/lib/search-input/index.js":
+/*!********************************************************************************************!*\
+  !*** delegated ./node_modules/zent/lib/search-input/index.js from dll-reference _dll_base ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(941);
+
+/***/ }),
+
 /***/ "./node_modules/zent/lib/slider/index.js":
 /*!**************************************************************************************!*\
   !*** delegated ./node_modules/zent/lib/slider/index.js from dll-reference _dll_base ***!
@@ -10981,7 +10992,7 @@ var App = function (_React$Component) {
             bundleList: [], // bundle列表
             bundlePageIndex: 1,
             bundlePageSize: 10,
-            allowUserQuery: false,
+            allowUserQuery: true,
             pageId: null,
             contentId: null,
             structure: 'static',
@@ -11036,7 +11047,9 @@ var App = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var bundleList = this.state.bundleList;
+            var _state = this.state,
+                bundleList = _state.bundleList,
+                allowUserQuery = _state.allowUserQuery;
 
             return _react2.default.createElement(
                 'div',
@@ -11044,7 +11057,7 @@ var App = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'mp-workspace--toolbox' },
-                    _react2.default.createElement(_ComponentList2.default, { bundleList: bundleList, onAddComponent: function onAddComponent(bundleId) {
+                    _react2.default.createElement(_ComponentList2.default, { bundleList: bundleList, allowUserQuery: allowUserQuery, onAddComponent: function onAddComponent(bundleId) {
                             _this2.onAddComponent(bundleId);
                         } })
                 ),
@@ -11104,13 +11117,13 @@ var App = function (_React$Component) {
          */
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var _state, pageId, pageSize, pageNo, bundleSerchKey, _ref2, bundleList;
+                var _state2, pageId, pageSize, pageNo, bundleSerchKey, _ref2, bundleList;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _state = this.state, pageId = _state.pageId, pageSize = _state.pageSize, pageNo = _state.pageNo, bundleSerchKey = _state.bundleSerchKey;
+                                _state2 = this.state, pageId = _state2.pageId, pageSize = _state2.pageSize, pageNo = _state2.pageNo, bundleSerchKey = _state2.bundleSerchKey;
                                 _context.next = 3;
                                 return bundleAPi.queryBundle({ pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: bundleSerchKey });
 
@@ -11175,6 +11188,10 @@ var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/li
 
 var _button2 = _interopRequireDefault(_button);
 
+var _searchInput = __webpack_require__(/*! zent/lib/search-input */ "./node_modules/zent/lib/search-input/index.js");
+
+var _searchInput2 = _interopRequireDefault(_searchInput);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11197,31 +11214,39 @@ var ComponentList = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var bundleList = this.props.bundleList;
+            var _props = this.props,
+                bundleList = _props.bundleList,
+                allowUserQuery = _props.allowUserQuery;
 
-
-            return bundleList.map(function (bundle) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'component-panel' },
-                    _react2.default.createElement(
+            return _react2.default.createElement(
+                'div',
+                null,
+                allowUserQuery && _react2.default.createElement(_searchInput2.default, {
+                    placeholder: '\u641C\u7D22'
+                }),
+                bundleList.map(function (bundle) {
+                    return _react2.default.createElement(
                         'div',
-                        null,
-                        bundle.name
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
+                        { className: 'component-panel' },
                         _react2.default.createElement(
-                            _button2.default,
-                            { type: 'success', onClick: function onClick() {
-                                    _this2.props.onAddComponent && _this2.props.onAddComponent(bundle.bundleId);
-                                }, outline: true },
-                            '\u4F7F\u7528'
+                            'div',
+                            null,
+                            bundle.name
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                _button2.default,
+                                { type: 'success', onClick: function onClick() {
+                                        _this2.props.onAddComponent && _this2.props.onAddComponent(bundle.bundleId);
+                                    }, outline: true },
+                                '\u4F7F\u7528'
+                            )
                         )
-                    )
-                );
-            });
+                    );
+                })
+            );
         }
     }]);
 

@@ -30,7 +30,7 @@ const columns = [{
         if (page.structure == 'static') {
             return (<div>
                 <Button type="primary" outline>页面设置</Button>
-                <a href={`/editor/mp?pageId=${page.id}&structure=static`} target="_blank">
+                <a href={`/editor/mp?pageId=${page.id}&structure=static`}>
                     <Button type="primary" outline>编辑</Button>
                 </a>
             </div>)

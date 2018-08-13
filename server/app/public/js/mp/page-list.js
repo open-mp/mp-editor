@@ -1331,7 +1331,7 @@ var columns = [{
                 ),
                 _react2.default.createElement(
                     'a',
-                    { href: '/editor/mp?pageId=' + page.id + '&structure=static', target: '_blank' },
+                    { href: '/editor/mp?pageId=' + page.id + '&structure=static' },
                     _react2.default.createElement(
                         _button2.default,
                         { type: 'primary', outline: true },
