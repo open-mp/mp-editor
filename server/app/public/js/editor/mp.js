@@ -10725,8 +10725,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -10786,24 +10784,25 @@ var components = [_config2.default, _richtext2.default, _imageAd2.default, _whit
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
-    function App() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function App(props) {
         _classCallCheck(this, App);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            value: [_extends({
-                type: _config2.default.type
-            }, _ConfigEditor2.default.getInitialValue())]
-        }, _this.saveDesign = function (instance) {
+        _this.state = {
+            bundleSerchKey: '', // bundle搜索的key
+            bundleList: [], // bundle列表
+            bundlePageIndex: 1,
+            bundlePageSize: 10,
+
+            instanceList: []
+        };
+
+        _this.saveDesign = function (instance) {
             _this.design = instance && instance.getDecoratedComponentInstance();
-        }, _this.submit = function () {
+        };
+
+        _this.submit = function () {
             _this.design.validate().then(function () {
                 var data = _index2.default.stripUUID(_this.state.value);
                 console.log(data);
@@ -10813,15 +10812,21 @@ var App = function (_React$Component) {
             }).catch(function (validations) {
                 console.log(validations);
             });
-        }, _this.onChange = function (newValue) {
+        };
+
+        _this.onChange = function (newValue) {
             _this.setState({
                 value: newValue
             });
-        }, _this.onSettingsChange = function (newSettings) {
+        };
+
+        _this.onSettingsChange = function (newSettings) {
             _this.setState({
                 settings: newSettings
             });
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        return _this;
     }
 
     _createClass(App, [{
@@ -10885,6 +10890,22 @@ var App = function (_React$Component) {
         value: function notImplemented() {
             _notify2.default.error('仅作为演示，功能未开发');
         }
+    }, {
+        key: 'loadBundleList',
+
+
+        /**
+         * 加载bundle
+         */
+        value: function loadBundleList() {}
+
+        /**
+         * 加载bundle配置
+         */
+
+    }, {
+        key: 'loadInstanceList',
+        value: function loadInstanceList() {}
     }]);
 
     return App;

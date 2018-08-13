@@ -46,6 +46,34 @@ class BundleController extends Controller {
 
         // 返回插件
     }
+
+    async queryBundleList() {
+        let {pageId, key, pageSize = 10, pageNo = 1} = this.ctx.query;
+        this.ctx.body = {
+            code: 0,
+            data: {
+                total: 4,
+                list: [
+                    {
+                        name: '图片广告',
+                        bundleId: {}
+                    },
+                    {
+                        name: '富文本',
+                        bundleId: {}
+                    },
+                    {
+                        name: '分隔符',
+                        bundleId: {}
+                    },
+                    {
+                        name: '空白行',
+                        bundleId: {}
+                    }
+                ]
+            }
+        }
+    }
 }
 
 module.exports = BundleController;

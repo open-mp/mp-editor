@@ -50,8 +50,13 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        bundleList: []
-    },{
+        bundleList: [{
+            groupId: '',
+            artifactId: '',
+            version: '',
+            classifier: ''
+        }]
+    }, {
         mpId: 1, // 关联的小程序id
         id: 3, // 页面id
         name: '下单',
@@ -65,7 +70,7 @@ const Pages = [
             "backgroundTextStyle": "light"
         },
         instanceList: []
-    },{
+    }, {
         mpId: 1, // 关联的小程序id
         id: 3, // 页面id
         name: '购物车',

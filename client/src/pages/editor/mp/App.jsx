@@ -20,14 +20,18 @@ const components = [
 ];
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     state = {
-        value: [
-            {
-                type: configConf.type,
-                ...ConfigEditor.getInitialValue()
-            }
-        ]
-    };
+        bundleSerchKey: '',// bundle搜索的key
+        bundleList: [], // bundle列表
+        bundlePageIndex: 1,
+        bundlePageSize: 10,
+
+        instanceList: [],
+    }
 
     render() {
         return (
@@ -74,7 +78,7 @@ class App extends React.Component {
 
     saveDesign = instance => {
         this.design = instance && instance.getDecoratedComponentInstance();
-    };
+    }
 
     submit = () => {
         this.design.validate()
@@ -88,19 +92,33 @@ class App extends React.Component {
             .catch(validations => {
                 console.log(validations);
             });
-    };
+    }
 
     onChange = newValue => {
         this.setState({
             value: newValue
         });
-    };
+    }
 
     onSettingsChange = newSettings => {
         this.setState({
             settings: newSettings
         });
-    };
+    }
+
+    /**
+     * 加载bundle
+     */
+    loadBundleList() {
+
+    }
+
+    /**
+     * 加载bundle配置
+     */
+    loadInstanceList() {
+
+    }
 }
 
 export default App;
