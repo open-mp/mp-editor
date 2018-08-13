@@ -173,6 +173,17 @@ function _inheritsLoose(subClass, superClass) {
 
 /***/ }),
 
+/***/ "./node_modules/axios/index.js":
+/*!****************************************************************************!*\
+  !*** delegated ./node_modules/axios/index.js from dll-reference _dll_base ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(504);
+
+/***/ }),
+
 /***/ "./node_modules/babel-runtime/helpers/typeof.js":
 /*!*********************************************************************************************!*\
   !*** delegated ./node_modules/babel-runtime/helpers/typeof.js from dll-reference _dll_base ***!
@@ -627,6 +638,17 @@ function index (resultFn) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(5);
+
+/***/ }),
+
+/***/ "./node_modules/query-string/index.js":
+/*!***********************************************************************************!*\
+  !*** delegated ./node_modules/query-string/index.js from dll-reference _dll_base ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(501);
 
 /***/ }),
 
@@ -8235,6 +8257,161 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
+/***/ "./src/common/api/api.js":
+/*!*******************************!*\
+  !*** ./src/common/api/api.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.get = get;
+exports.post = post;
+
+var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _queryString = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
+
+var _queryString2 = _interopRequireDefault(_queryString);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function get(url) {
+    var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var keylength = Object.keys(query).length;
+    if (keylength > 0) {
+        url = url + '?' + _queryString2.default.stringify(query);
+    }
+    return _axios2.default.get(url).then(function (res) {
+        var result = res.data;
+        if (result.code == 0) {
+            return result.data;
+        } else {
+            throw new Error(result.msg);
+        }
+    });
+}
+
+function post(url) {
+    var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+    var keylength = Object.keys(query).length;
+    if (keylength > 0) {
+        url = url + '?' + _queryString2.default.stringify(query);
+    }
+    return _axios2.default.post(url, data).then(function (res) {
+        var result = res.data;
+        if (result.code == 0) {
+            return result.data;
+        } else {
+            throw new Error(result.msg);
+        }
+    });
+}
+
+/***/ }),
+
+/***/ "./src/common/api/bundle.js":
+/*!**********************************!*\
+  !*** ./src/common/api/bundle.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.queryBundle = undefined;
+
+var queryBundle = exports.queryBundle = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref2) {
+        var pageId = _ref2.pageId,
+            pageSize = _ref2.pageSize,
+            pageNo = _ref2.pageNo,
+            key = _ref2.key;
+        var result;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.next = 2;
+                        return api.get('/bundle/query-bundle', { pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: key });
+
+                    case 2:
+                        result = _context.sent;
+                        return _context.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function queryBundle(_x) {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+var _api = __webpack_require__(/*! ./api */ "./src/common/api/api.js");
+
+var api = _interopRequireWildcard(_api);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+/***/ }),
+
+/***/ "./src/common/api/url.js":
+/*!*******************************!*\
+  !*** ./src/common/api/url.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getQuery = getQuery;
+exports.getHash = getHash;
+exports.setHash = setHash;
+var queryString = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
+
+function getQuery() {
+  var parsed = queryString.parse(location.search);
+  return parsed;
+}
+
+function getHash() {
+  var parsed = queryString.parse(location.hash);
+  return parsed;
+}
+
+function setHash(key, value) {
+  var parsed = queryString.parse(location.hash);
+  parsed[key] = value;
+  location.hash = queryString.stringify(parsed);
+}
+
+/***/ }),
+
 /***/ "./src/pages/editor/components/design/Design.jsx":
 /*!*******************************************************!*\
   !*** ./src/pages/editor/components/design/Design.jsx ***!
@@ -10771,7 +10948,17 @@ var _imageAd = __webpack_require__(/*! ../widget/image-ad */ "./src/pages/editor
 
 var _imageAd2 = _interopRequireDefault(_imageAd);
 
+var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
+
+var _bundle = __webpack_require__(/*! src/common/api/bundle */ "./src/common/api/bundle.js");
+
+var bundleAPi = _interopRequireWildcard(_bundle);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10794,7 +10981,10 @@ var App = function (_React$Component) {
             bundleList: [], // bundle列表
             bundlePageIndex: 1,
             bundlePageSize: 10,
-
+            allowUserQuery: false,
+            pageId: null,
+            contentId: null,
+            structure: 'static',
             instanceList: []
         };
 
@@ -10826,6 +11016,18 @@ var App = function (_React$Component) {
             });
         };
 
+        var _getQuery = (0, _url.getQuery)(),
+            pageId = _getQuery.pageId,
+            structure = _getQuery.structure,
+            contentId = _getQuery.contentId;
+        // 动态页的内容编辑不允许用户搜索
+
+
+        _this.setState({
+            pageId: pageId, structure: structure, contentId: contentId,
+            allowUserQuery: structure == 'static'
+        });
+        _this.loadBundleList();
         return _this;
     }
 
@@ -10897,7 +11099,37 @@ var App = function (_React$Component) {
         /**
          * 加载bundle
          */
-        value: function loadBundleList() {}
+        value: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var _state, pageId, pageSize, pageNo, key, bundleList;
+
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _state = this.state, pageId = _state.pageId, pageSize = _state.pageSize, pageNo = _state.pageNo, key = _state.key;
+                                _context.next = 3;
+                                return bundleAPi.queryBundle({ pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: key });
+
+                            case 3:
+                                bundleList = _context.sent;
+
+                                this.setState({ bundleList: bundleList });
+
+                            case 5:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function loadBundleList() {
+                return _ref.apply(this, arguments);
+            }
+
+            return loadBundleList;
+        }()
 
         /**
          * 加载bundle配置

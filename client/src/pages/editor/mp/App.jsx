@@ -10,6 +10,8 @@ import whitespaceConf from '../widget/whitespace';
 import lineConf from '../widget/line';
 import richtextConf from '../widget/richtext';
 import imageAdConf from '../widget/image-ad';
+import {getQuery} from "src/common/api/url";
+import * as bundleAPi from "src/common/api/bundle";
 
 const components = [
     configConf,
@@ -22,6 +24,13 @@ const components = [
 class App extends React.Component {
     constructor(props) {
         super(props);
+        let {pageId, structure, contentId} = getQuery();
+        // 动态页的内容编辑不允许用户搜索
+        this.setState({
+            pageId, structure, contentId,
+            allowUserQuery: structure == 'static'
+        });
+        this.loadBundleList();
     }
 
     state = {
@@ -29,7 +38,10 @@ class App extends React.Component {
         bundleList: [], // bundle列表
         bundlePageIndex: 1,
         bundlePageSize: 10,
-
+        allowUserQuery: false,
+        pageId: null,
+        contentId: null,
+        structure: 'static',
         instanceList: [],
     }
 
@@ -109,8 +121,10 @@ class App extends React.Component {
     /**
      * 加载bundle
      */
-    loadBundleList() {
-
+    async loadBundleList() {
+        let {pageId, pageSize, pageNo, key} = this.state;
+        let bundleList = await bundleAPi.queryBundle({pageId, pageSize, pageNo, key});
+        this.setState({bundleList});
     }
 
     /**
