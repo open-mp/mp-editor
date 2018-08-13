@@ -1180,7 +1180,7 @@ var BasicLayout = function (_React$PureComponent) {
                     _react2.default.createElement(
                         'div',
                         { className: 'mp-menu-header' },
-                        '\u5C0F\u7A0B\u5E8F'
+                        '\u5C0F\u7A0B\u5E8F\u5DE5\u5382'
                     ),
                     this.renderMenu()
                 ),

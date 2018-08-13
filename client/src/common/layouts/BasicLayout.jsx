@@ -17,7 +17,7 @@ export default class BasicLayout extends React.PureComponent {
             <div className="mp-layout mp-layout-basic">
                 <div className="mp-layout__slide">
                     <div className="mp-menu-header">
-                        小程序
+                        小程序工厂
                     </div>
                     {this.renderMenu()}
                 </div>

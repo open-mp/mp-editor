@@ -9,10 +9,20 @@ const columns = [{
 }, {
     title: '描述',
     name: 'description',
-}, {
-    title: '最后修改时间',
+},{
+    title: '最新版本号',
     name: 'lastModified',
     width: '100px',
+    textAlign: 'center',
+},{
+    title: '上次生成时间',
+    name: 'lastModified',
+    width: '100px',
+    textAlign: 'center',
+}, {
+    title: '是否需要重新生成',
+    name: 'lastModified',
+    width: '150px',
     textAlign: 'center',
 }, {
     title: '操作',
@@ -20,7 +30,8 @@ const columns = [{
     bodyRender(data) {
         return (<div>
             <a href={`/mp/page-list?mpId=${data.id}`} target="_blank"><Button type="primary" outline>页面列表</Button></a>
-            <a href={`/mp/detail?mpId=${data.id}`} target="_blank"><Button type="primary" outline>小程序详情</Button></a>
+            <Button type="primary" outline>小程序详情</Button>
+            <Button type="primary" outline>生成小程序代码</Button>
         </div>)
     }
 }];

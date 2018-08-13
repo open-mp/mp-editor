@@ -1144,7 +1144,7 @@ var BasicLayout = function (_React$PureComponent) {
                     _react2.default.createElement(
                         'div',
                         { className: 'mp-menu-header' },
-                        '\u5C0F\u7A0B\u5E8F'
+                        '\u5C0F\u7A0B\u5E8F\u5DE5\u5382'
                     ),
                     this.renderMenu()
                 ),
@@ -1252,9 +1252,19 @@ var columns = [{
     title: '描述',
     name: 'description'
 }, {
-    title: '最后修改时间',
+    title: '最新版本号',
     name: 'lastModified',
     width: '100px',
+    textAlign: 'center'
+}, {
+    title: '上次生成时间',
+    name: 'lastModified',
+    width: '100px',
+    textAlign: 'center'
+}, {
+    title: '是否需要重新生成',
+    name: 'lastModified',
+    width: '150px',
     textAlign: 'center'
 }, {
     title: '操作',
@@ -1273,13 +1283,14 @@ var columns = [{
                 )
             ),
             _react2.default.createElement(
-                'a',
-                { href: '/mp/detail?mpId=' + data.id, target: '_blank' },
-                _react2.default.createElement(
-                    _button2.default,
-                    { type: 'primary', outline: true },
-                    '\u5C0F\u7A0B\u5E8F\u8BE6\u60C5'
-                )
+                _button2.default,
+                { type: 'primary', outline: true },
+                '\u5C0F\u7A0B\u5E8F\u8BE6\u60C5'
+            ),
+            _react2.default.createElement(
+                _button2.default,
+                { type: 'primary', outline: true },
+                '\u751F\u6210\u5C0F\u7A0B\u5E8F\u4EE3\u7801'
             )
         );
     }
