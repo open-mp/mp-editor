@@ -11,7 +11,8 @@ import defaultTo from 'lodash/defaultTo';
 import isFunction from 'lodash/isFunction';
 import * as storage from 'zent/lib/utils/storage';
 import * as InstanceUtils from './utils/instance';
-import * as PluginLoader from '../loader/index'
+import * as PluginLoader from '../bundle/loader'
+import Bundle from '../bundle/bundle'
 
 
 import DesignEditor from './DesignEditor';
@@ -95,15 +96,20 @@ export default class Design extends PureComponent {
     }
 
     async loadPlugin(bundleId) {
+        let {pluginMap} = this.state;
+        let bundle = new Bundle(bundleId);
+        let bundleStringId = bundle.getStringId();
         // 检查是否存
+        if (pluginMap[bundleStringId]) {
+            return pluginMap[bundleStringId];
+        }
+        // 查询插件位置
+
+        // 加载插件
         // 找出plugin 并加载
         let plugin = await PluginLoader.loadMpComponentFromBundle(pluginId);
-        let pluginStringID = pluginId.getStringId();
         pluginMap[pluginStringID] = plugin;
     }
-
-
-
 
 
     render() {
@@ -293,7 +299,6 @@ export default class Design extends PureComponent {
 
         this.adjustHeight();
     };
-
 
 
     // 添加一个新组件

@@ -8423,6 +8423,68 @@ function setHash(key, value) {
 
 /***/ }),
 
+/***/ "./src/pages/editor/components/bundle/bundle.js":
+/*!******************************************************!*\
+  !*** ./src/pages/editor/components/bundle/bundle.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Bundle = function () {
+    function Bundle(bundleId) {
+        _classCallCheck(this, Bundle);
+
+        var groupId = bundleId.groupId,
+            artifactId = bundleId.artifactId,
+            version = bundleId.version,
+            classifier = bundleId.classifier;
+
+        this.groupId = groupId;
+        this.artifactId = artifactId;
+        this.version = version;
+        this.classifier = classifier;
+    }
+
+    _createClass(Bundle, [{
+        key: 'getStringId',
+        value: function getStringId() {
+            var preId = this.groupId + '-' + this.artifactId + '-' + this.version;
+            if (this.classifier) {
+                return preId + '-' + this.classifier;
+            }
+            return preId;
+        }
+    }]);
+
+    return Bundle;
+}();
+
+exports.default = Bundle;
+
+/***/ }),
+
+/***/ "./src/pages/editor/components/bundle/loader.js":
+/*!******************************************************!*\
+  !*** ./src/pages/editor/components/bundle/loader.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: There is no default export in zent.\n\n\u001b[0m \u001b[90m 3 | \u001b[39m\u001b[90m */\u001b[39m\n \u001b[90m 4 | \u001b[39m\u001b[36mimport\u001b[39m react from \u001b[32m'react'\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 5 | \u001b[39m\u001b[36mimport\u001b[39m zent from \u001b[32m'zent'\u001b[39m\n \u001b[90m   | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 6 | \u001b[39m\n \u001b[90m 7 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mMpEditorPluginLoader\u001b[39m {\n \u001b[90m 8 | \u001b[39m    pluginUrlMap \u001b[33m=\u001b[39m {}\u001b[33m;\u001b[39m\u001b[0m\n");
+
+/***/ }),
+
 /***/ "./src/pages/editor/components/design/Design.jsx":
 /*!*******************************************************!*\
   !*** ./src/pages/editor/components/design/Design.jsx ***!
@@ -8491,9 +8553,13 @@ var _instance = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/
 
 var InstanceUtils = _interopRequireWildcard(_instance);
 
-var _index = __webpack_require__(/*! ../loader/index */ "./src/pages/editor/components/loader/index.js");
+var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
 
-var PluginLoader = _interopRequireWildcard(_index);
+var PluginLoader = _interopRequireWildcard(_loader);
+
+var _bundle = __webpack_require__(/*! ../bundle/bundle */ "./src/pages/editor/components/bundle/bundle.js");
+
+var _bundle2 = _interopRequireDefault(_bundle);
 
 var _DesignEditor = __webpack_require__(/*! ./DesignEditor */ "./src/pages/editor/components/design/DesignEditor.jsx");
 
@@ -8980,7 +9046,7 @@ var Design = function (_PureComponent) {
         key: 'setInstanceList',
         value: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instanceList) {
-                var pluginMap, pluginInstanceCount, newInstanceList, i, instance, _pluginId, plugin, pluginStringID;
+                var pluginMap, pluginInstanceCount, newInstanceList, i, instance, _pluginId, plugin, _pluginStringID;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
@@ -9006,10 +9072,10 @@ var Design = function (_PureComponent) {
 
                             case 9:
                                 plugin = _context.sent;
-                                pluginStringID = _pluginId.getStringId();
+                                _pluginStringID = _pluginId.getStringId();
 
-                                pluginMap[pluginStringID] = plugin;
-                                pluginInstanceCount.inc(pluginStringID);
+                                pluginMap[_pluginStringID] = plugin;
+                                pluginInstanceCount.inc(_pluginStringID);
                                 // 加上uuid
                                 InstanceUtils.setUUIDForInstance(instance, InstanceUtils.generateUUID());
                                 newInstanceList.push(instance);
@@ -9055,21 +9121,33 @@ var Design = function (_PureComponent) {
         key: 'loadPlugin',
         value: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(bundleId) {
-                var plugin, pluginStringID;
+                var pluginMap, bundle, bundleStringId, plugin;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                _context2.next = 2;
+                                pluginMap = this.state.pluginMap;
+                                bundle = new _bundle2.default(bundleId);
+                                bundleStringId = bundle.getStringId();
+                                // 检查是否存
+
+                                if (!pluginMap[bundleStringId]) {
+                                    _context2.next = 5;
+                                    break;
+                                }
+
+                                return _context2.abrupt('return', pluginMap[bundleStringId]);
+
+                            case 5:
+                                _context2.next = 7;
                                 return PluginLoader.loadMpComponentFromBundle(pluginId);
 
-                            case 2:
+                            case 7:
                                 plugin = _context2.sent;
-                                pluginStringID = pluginId.getStringId();
 
                                 pluginMap[pluginStringID] = plugin;
 
-                            case 5:
+                            case 9:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -10126,7 +10204,7 @@ exports.default = DesignEditorItem;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
@@ -10146,6 +10224,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _Design2.default.stripUUID = _stripUUID2.default;
 
 exports.default = _Design2.default;
+
+
+var define = window.define;
+var _require = window.require;
+_require.config({
+    baseUrl: "/another/path",
+    paths: {
+        "some": "some/v1.0"
+    },
+    waitSeconds: 15
+});
+define('react', [], function () {
+    return 'hi react';
+});
+_require(['react'], function (react) {
+    console.log(react);
+});
 
 /***/ }),
 
@@ -10894,43 +10989,6 @@ function offset(node) {
     top: bb.top + y,
     left: bb.left + x
   };
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/components/loader/index.js":
-/*!*****************************************************!*\
-  !*** ./src/pages/editor/components/loader/index.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.loadMpEditorFromBundle = loadMpEditorFromBundle;
-exports.loadMpComponentFromBundle = loadMpComponentFromBundle;
-/**
- * 动态加载小程序组件编辑器
- */
-function loadMpEditorFromBundle(bundleDefinition) {
-    var groupId = bundleDefinition.groupId,
-        artifactId = bundleDefinition.artifactId,
-        version = bundleDefinition.version,
-        classifier = bundleDefinition.classifier;
-    // 请求代理 获取js css
-
-    // 使用requireJS加载
-}
-
-function loadMpComponentFromBundle(bundleDefinition) {
-    var groupId = bundleDefinition.groupId,
-        artifactId = bundleDefinition.artifactId,
-        version = bundleDefinition.version,
-        classifier = bundleDefinition.classifier;
 }
 
 /***/ }),
