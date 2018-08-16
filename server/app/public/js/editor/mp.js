@@ -8576,6 +8576,32 @@ var Design = function (_PureComponent) {
 
         var _this = _possibleConstructorReturn(this, (Design.__proto__ || Object.getPrototypeOf(Design)).call(this, props));
 
+        _this.addInstanceInternal = function (component) {
+            var _this$state = _this.state,
+                instanceList = _this$state.instanceList,
+                settings = _this$state.settings;
+            var editor = component.editor,
+                defaultType = component.defaultType;
+
+            var instance = editor.getInitialValue({
+                settings: settings
+            });
+            instance.type = (0, _designType.getDesignType)(editor, defaultType);
+            var id = uuid();
+            _this.setUUIDForValue(instance, id);
+
+            /**
+             * 添加有两种来源：底部区域或者弹层。
+             * 如果来自底部的话，就在当前数组最后加；如果来自弹层就在当前选中的那个组件后面加
+             */
+            var newValue = void 0;
+
+            newValue = value.concat(instance);
+
+            _this.trackValueChange(newValue);
+            _this.onSelect(instance);
+        };
+
         _this.onSettingsChange = function (value) {
             var _this$props = _this.props,
                 settings = _this$props.settings,
@@ -9258,10 +9284,10 @@ var Design = function (_PureComponent) {
             // 如果当前没有选中的并且 value 或者 defaultSelectedIndex 改变的话
             // 重新尝试设置默认值
             if (!this.hasSelected() && (nextProps.defaultSelectedIndex !== this.props.defaultSelectedIndex || nextProps.value !== this.props.value)) {
-                var value = nextProps.value,
+                var _value = nextProps.value,
                     defaultSelectedIndex = nextProps.defaultSelectedIndex;
 
-                this.selectByIndex(defaultSelectedIndex, value);
+                this.selectByIndex(defaultSelectedIndex, _value);
             }
 
             if (shouldUpdateInstanceCountMap) {

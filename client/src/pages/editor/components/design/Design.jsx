@@ -114,6 +114,28 @@ export default class Design extends PureComponent {
         return plugin;
     }
 
+    addInstanceInternal = (component) => {
+        const {instanceList, settings} = this.state;
+        const {editor, defaultType} = component;
+        const instance = editor.getInitialValue({
+            settings
+        });
+        instance.type = getDesignType(editor, defaultType);
+        const id = uuid();
+        this.setUUIDForValue(instance, id);
+
+        /**
+         * 添加有两种来源：底部区域或者弹层。
+         * 如果来自底部的话，就在当前数组最后加；如果来自弹层就在当前选中的那个组件后面加
+         */
+        let newValue;
+
+        newValue = value.concat(instance);
+
+        this.trackValueChange(newValue);
+        this.onSelect(instance);
+    };
+
 
     render() {
         const {
