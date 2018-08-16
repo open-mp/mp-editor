@@ -7963,168 +7963,14 @@ var index = (function (condition, message) {
 
 /***/ }),
 
-/***/ "./node_modules/zent/lib/alert/index.js":
-/*!*************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/alert/index.js from dll-reference _dll_base ***!
-  \*************************************************************************************/
+/***/ "./node_modules/zent/lib/index.js":
+/*!*******************************************************************************!*\
+  !*** delegated ./node_modules/zent/lib/index.js from dll-reference _dll_base ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(296);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/button/index.js":
-/*!**************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/button/index.js from dll-reference _dll_base ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(68);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/checkbox/index.js":
-/*!****************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/checkbox/index.js from dll-reference _dll_base ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(50);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/colorpicker/index.js":
-/*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/colorpicker/index.js from dll-reference _dll_base ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(348);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/dialog/index.js":
-/*!**************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/dialog/index.js from dll-reference _dll_base ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(257);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/form/index.js":
-/*!************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/form/index.js from dll-reference _dll_base ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(854);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/icon/index.js":
-/*!************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/icon/index.js from dll-reference _dll_base ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(22);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/input/index.js":
-/*!*************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/input/index.js from dll-reference _dll_base ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(35);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/notify/index.js":
-/*!**************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/notify/index.js from dll-reference _dll_base ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(160);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/pop/index.js":
-/*!***********************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/pop/index.js from dll-reference _dll_base ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(90);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/radio/index.js":
-/*!*************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/radio/index.js from dll-reference _dll_base ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(263);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/search-input/index.js":
-/*!********************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/search-input/index.js from dll-reference _dll_base ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(941);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/slider/index.js":
-/*!**************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/slider/index.js from dll-reference _dll_base ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(957);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/sweetalert/index.js":
-/*!******************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/sweetalert/index.js from dll-reference _dll_base ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(987);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/tabs/index.js":
-/*!************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/tabs/index.js from dll-reference _dll_base ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(343);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(533);
 
 /***/ }),
 
@@ -8465,6 +8311,16 @@ var Bundle = function () {
             }
             return preId;
         }
+    }, {
+        key: 'getQueryObject',
+        value: function getQueryObject() {
+            return {
+                groupId: this.groupId,
+                artifactId: this.artifactId,
+                version: this.version,
+                classifier: this.classifier
+            };
+        }
     }]);
 
     return Bundle;
@@ -8479,9 +8335,123 @@ exports.default = Bundle;
   !*** ./src/pages/editor/components/bundle/loader.js ***!
   \******************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: There is no default export in zent.\n\n\u001b[0m \u001b[90m 3 | \u001b[39m\u001b[90m */\u001b[39m\n \u001b[90m 4 | \u001b[39m\u001b[36mimport\u001b[39m react from \u001b[32m'react'\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 5 | \u001b[39m\u001b[36mimport\u001b[39m zent from \u001b[32m'zent'\u001b[39m\n \u001b[90m   | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 6 | \u001b[39m\n \u001b[90m 7 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mMpEditorPluginLoader\u001b[39m {\n \u001b[90m 8 | \u001b[39m    pluginUrlMap \u001b[33m=\u001b[39m {}\u001b[33m;\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * 动态加载小程序组件编辑器
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
+var zent = _interopRequireWildcard(_zent);
+
+var _bundle = __webpack_require__(/*! ./bundle */ "./src/pages/editor/components/bundle/bundle.js");
+
+var _bundle2 = _interopRequireDefault(_bundle);
+
+var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MpEditorPluginLoader = function () {
+    function MpEditorPluginLoader() {
+        _classCallCheck(this, MpEditorPluginLoader);
+    }
+
+    _createClass(MpEditorPluginLoader, [{
+        key: 'init',
+        value: function init() {
+            var define = window.define;
+            window.requirejs.config({
+                baseUrl: '/'
+            });
+            define('react', [], function () {
+                return _react2.default;
+            });
+            define('zent', [], function () {
+                return zent;
+            });
+        }
+    }, {
+        key: 'loadEditorPlugin',
+        value: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(bundle) {
+                var query, urlResponse, head, linkTag, url;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                query = bundle.getQueryObject();
+                                // 得到路径
+
+                                _context.next = 3;
+                                return _axios2.default.get('/bundle/get-url/mpeditor-plugin', {
+                                    params: query
+                                });
+
+                            case 3:
+                                urlResponse = _context.sent;
+
+                                // 加载css
+                                head = document.getElementsByTagName("head")[0];
+                                linkTag = document.createElement("link");
+
+                                linkTag.href = urlResponse.data.data.cssUrl;
+                                linkTag.setAttribute('rel', 'stylesheet');
+                                linkTag.setAttribute('type', 'text/css');
+                                head.appendChild(linkTag);
+                                // 加载js
+                                url = urlResponse.data.data.jsUrl;
+                                _context.next = 13;
+                                return new Promise(function (resolve, reject) {
+                                    window.require([url], function (plugin) {
+                                        resolve(plugin);
+                                    });
+                                });
+
+                            case 13:
+                                return _context.abrupt('return', _context.sent);
+
+                            case 14:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function loadEditorPlugin(_x) {
+                return _ref.apply(this, arguments);
+            }
+
+            return loadEditorPlugin;
+        }()
+    }]);
+
+    return MpEditorPluginLoader;
+}();
+
+exports.default = new MpEditorPluginLoader();
 
 /***/ }),
 
@@ -8509,9 +8479,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
-var _alert = __webpack_require__(/*! zent/lib/alert */ "./node_modules/zent/lib/alert/index.js");
-
-var _alert2 = _interopRequireDefault(_alert);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 
@@ -8555,7 +8523,7 @@ var InstanceUtils = _interopRequireWildcard(_instance);
 
 var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
 
-var PluginLoader = _interopRequireWildcard(_loader);
+var _loader2 = _interopRequireDefault(_loader);
 
 var _bundle = __webpack_require__(/*! ../bundle/bundle */ "./src/pages/editor/components/bundle/bundle.js");
 
@@ -9046,8 +9014,7 @@ var Design = function (_PureComponent) {
         key: 'setInstanceList',
         value: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instanceList) {
-                var pluginMap, pluginInstanceCount, newInstanceList, i, instance, _pluginId, plugin, _pluginStringID;
-
+                var pluginMap, pluginInstanceCount, newInstanceList, i, instance, pluginId, plugin, pluginStringID;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
@@ -9064,18 +9031,18 @@ var Design = function (_PureComponent) {
                                 }
 
                                 instance = instanceList[i];
-                                _pluginId = InstanceUtils.getPluginIdFromInstace(instance);
+                                pluginId = InstanceUtils.getPluginIdFromInstace(instance);
                                 // 找出plugin 并加载
 
                                 _context.next = 9;
-                                return PluginLoader.loadMpComponentFromBundle(_pluginId);
+                                return PluginLoader.loadMpComponentFromBundle(pluginId);
 
                             case 9:
                                 plugin = _context.sent;
-                                _pluginStringID = _pluginId.getStringId();
+                                pluginStringID = pluginId.getStringId();
 
-                                pluginMap[_pluginStringID] = plugin;
-                                pluginInstanceCount.inc(_pluginStringID);
+                                pluginMap[pluginStringID] = plugin;
+                                pluginInstanceCount.inc(pluginStringID);
                                 // 加上uuid
                                 InstanceUtils.setUUIDForInstance(instance, InstanceUtils.generateUUID());
                                 newInstanceList.push(instance);
@@ -9111,43 +9078,23 @@ var Design = function (_PureComponent) {
 
     }, {
         key: 'addInstanceByBundle',
-        value: function addInstanceByBundle(bundleId) {
-            var pluginMap = this.state.pluginMap;
-            // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-
-            console.log(bundleId); // 通知design增加组件
-        }
-    }, {
-        key: 'loadPlugin',
         value: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(bundleId) {
-                var pluginMap, bundle, bundleStringId, plugin;
+                var pluginMap;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 pluginMap = this.state.pluginMap;
-                                bundle = new _bundle2.default(bundleId);
-                                bundleStringId = bundle.getStringId();
-                                // 检查是否存
+                                // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
 
-                                if (!pluginMap[bundleStringId]) {
-                                    _context2.next = 5;
-                                    break;
-                                }
+                                _context2.next = 3;
+                                return this.loadPlugin(bundleId);
 
-                                return _context2.abrupt('return', pluginMap[bundleStringId]);
+                            case 3:
+                                console.log(bundleId); // 通知design增加组件
 
-                            case 5:
-                                _context2.next = 7;
-                                return PluginLoader.loadMpComponentFromBundle(pluginId);
-
-                            case 7:
-                                plugin = _context2.sent;
-
-                                pluginMap[pluginStringID] = plugin;
-
-                            case 9:
+                            case 4:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -9155,8 +9102,54 @@ var Design = function (_PureComponent) {
                 }, _callee2, this);
             }));
 
-            function loadPlugin(_x3) {
+            function addInstanceByBundle(_x3) {
                 return _ref3.apply(this, arguments);
+            }
+
+            return addInstanceByBundle;
+        }()
+    }, {
+        key: 'loadPlugin',
+        value: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(bundleId) {
+                var pluginMap, bundle, bundleStringId, plugin;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                pluginMap = this.state.pluginMap;
+                                bundle = new _bundle2.default(bundleId);
+                                bundleStringId = bundle.getStringId();
+                                // 检查是否存
+
+                                if (!pluginMap[bundleStringId]) {
+                                    _context3.next = 5;
+                                    break;
+                                }
+
+                                return _context3.abrupt('return', pluginMap[bundleStringId]);
+
+                            case 5:
+                                _context3.next = 7;
+                                return _loader2.default.loadEditorPlugin(bundle);
+
+                            case 7:
+                                plugin = _context3.sent;
+
+                                // 找出plugin 并加载
+                                pluginMap[bundle.getStringId()] = plugin;
+                                return _context3.abrupt('return', plugin);
+
+                            case 10:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function loadPlugin(_x4) {
+                return _ref4.apply(this, arguments);
             }
 
             return loadPlugin;
@@ -9184,7 +9177,7 @@ var Design = function (_PureComponent) {
                 'div',
                 { className: cls, style: { paddingBottom: bottomGap } },
                 showRestoreFromCache && _react2.default.createElement(
-                    _alert2.default,
+                    _zent.Alert,
                     {
                         className: 'mp-design__restore-cache-alert',
                         closable: true,
@@ -10204,7 +10197,7 @@ exports.default = DesignEditorItem;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
@@ -10219,28 +10212,16 @@ var _stripUUID2 = _interopRequireDefault(_stripUUID);
 
 __webpack_require__(/*! ./index.pcss */ "./src/pages/editor/components/design/index.pcss");
 
+var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
+
+var _loader2 = _interopRequireDefault(_loader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _Design2.default.stripUUID = _stripUUID2.default;
-
+// 初始化插件加载器
+_loader2.default.init();
 exports.default = _Design2.default;
-
-
-var define = window.define;
-var _require = window.require;
-_require.config({
-    baseUrl: "/another/path",
-    paths: {
-        "some": "some/v1.0"
-    },
-    waitSeconds: 15
-});
-define('react', [], function () {
-    return 'hi react';
-});
-_require(['react'], function (react) {
-    console.log(react);
-});
 
 /***/ }),
 
@@ -10281,9 +10262,7 @@ var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnam
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _pop = __webpack_require__(/*! zent/lib/pop */ "./node_modules/zent/lib/pop/index.js");
-
-var _pop2 = _interopRequireDefault(_pop);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _pick = __webpack_require__(/*! lodash/pick */ "./node_modules/lodash/pick.js");
 
@@ -10439,7 +10418,7 @@ function DeleteButton(_ref2) {
     var onDelete = _ref2.onDelete;
 
     return _react2.default.createElement(
-        _pop2.default,
+        _zent.Pop,
         {
             content: '\u786E\u5B9A\u5220\u9664\uFF1F',
             trigger: 'click',
@@ -11021,13 +11000,7 @@ var _index = __webpack_require__(/*! ../components/design/index */ "./src/pages/
 
 var _index2 = _interopRequireDefault(_index);
 
-var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/lib/button/index.js");
-
-var _button2 = _interopRequireDefault(_button);
-
-var _notify = __webpack_require__(/*! zent/lib/notify */ "./node_modules/zent/lib/notify/index.js");
-
-var _notify2 = _interopRequireDefault(_notify);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _config = __webpack_require__(/*! ../widget/config */ "./src/pages/editor/widget/config/index.js");
 
@@ -11103,7 +11076,7 @@ var App = function (_React$Component) {
                 console.log(data);
                 // submit this.state.value to server
                 _this.design.markAsSaved();
-                _notify2.default.success('提交成功');
+                _zent.Notify.success('提交成功');
             }).catch(function (validations) {
                 console.log(validations);
             });
@@ -11173,17 +11146,17 @@ var App = function (_React$Component) {
                         'div',
                         { className: 'design-example-actions' },
                         _react2.default.createElement(
-                            _button2.default,
+                            _zent.Button,
                             { type: 'primary', onClick: this.submit },
                             '\u4E0A\u67B6'
                         ),
                         _react2.default.createElement(
-                            _button2.default,
+                            _zent.Button,
                             { onClick: this.notImplemented },
                             '\u4FDD\u5B58\u8349\u7A3F'
                         ),
                         _react2.default.createElement(
-                            _button2.default,
+                            _zent.Button,
                             { onClick: this.notImplemented },
                             '\u9884\u89C8'
                         )
@@ -11199,7 +11172,7 @@ var App = function (_React$Component) {
     }, {
         key: 'notImplemented',
         value: function notImplemented() {
-            _notify2.default.error('仅作为演示，功能未开发');
+            _zent.Notify.error('仅作为演示，功能未开发');
         }
     }, {
         key: 'loadBundleList',
@@ -11277,13 +11250,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/lib/button/index.js");
-
-var _button2 = _interopRequireDefault(_button);
-
-var _searchInput = __webpack_require__(/*! zent/lib/search-input */ "./node_modules/zent/lib/search-input/index.js");
-
-var _searchInput2 = _interopRequireDefault(_searchInput);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11314,7 +11281,7 @@ var ComponentList = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                allowUserQuery && _react2.default.createElement(_searchInput2.default, {
+                allowUserQuery && _react2.default.createElement(_zent.SearchInput, {
                     placeholder: '\u641C\u7D22'
                 }),
                 bundleList.map(function (bundle) {
@@ -11330,7 +11297,7 @@ var ComponentList = function (_React$Component) {
                             'div',
                             null,
                             _react2.default.createElement(
-                                _button2.default,
+                                _zent.Button,
                                 { type: 'success', onClick: function onClick() {
                                         _this2.props.onAddComponent && _this2.props.onAddComponent(bundle.bundleId);
                                     }, outline: true },
@@ -11411,17 +11378,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/lib/button/index.js");
-
-var _button2 = _interopRequireDefault(_button);
-
-var _input = __webpack_require__(/*! zent/lib/input */ "./node_modules/zent/lib/input/index.js");
-
-var _input2 = _interopRequireDefault(_input);
-
-var _colorpicker = __webpack_require__(/*! zent/lib/colorpicker */ "./node_modules/zent/lib/colorpicker/index.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
 
@@ -11487,7 +11444,7 @@ var ConfigEditor = function (_DesignEditor) {
             required: true,
             label: '\u9875\u9762\u540D\u79F0:'
           },
-          _react2.default.createElement(_input2.default, {
+          _react2.default.createElement(_zent.Input, {
             value: value.title,
             onChange: this.onInputChange,
             onBlur: this.onInputBlur,
@@ -11501,7 +11458,7 @@ var ConfigEditor = function (_DesignEditor) {
             error: validation.description,
             label: '\u9875\u9762\u63CF\u8FF0:'
           },
-          _react2.default.createElement(_input2.default, {
+          _react2.default.createElement(_zent.Input, {
             value: value.description,
             onChange: this.onInputChange,
             onBlur: this.onInputBlur,
@@ -11522,12 +11479,12 @@ var ConfigEditor = function (_DesignEditor) {
             {
               className: prefix + '-design-component-config-editor__background-control'
             },
-            _react2.default.createElement(_colorpicker2.default, {
+            _react2.default.createElement(_zent.ColorPicker, {
               color: getBackground(value, settings),
               onChange: this.onBackgroundChange
             }),
             _react2.default.createElement(
-              _button2.default,
+              _zent.Button,
               { onClick: this.resetBackground },
               '\u91CD\u7F6E'
             )
@@ -11742,13 +11699,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radio = __webpack_require__(/*! zent/lib/radio */ "./node_modules/zent/lib/radio/index.js");
-
-var _radio2 = _interopRequireDefault(_radio);
-
-var _icon = __webpack_require__(/*! zent/lib/icon */ "./node_modules/zent/lib/icon/index.js");
-
-var _icon2 = _interopRequireDefault(_icon);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
 
@@ -11778,7 +11729,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RadioGroup = _radio2.default.Group;
+var RadioGroup = _zent.Radio.Group;
 var prefix = 'mp';
 
 var ImageAdEditor = function (_DesignEditor) {
@@ -11910,12 +11861,12 @@ var ImageAdEditor = function (_DesignEditor) {
             RadioGroup,
             { value: value.size, onChange: this.onInputChange },
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'size', value: _constants.IMAGE_SIZE.LARGE },
               '\u5927\u56FE'
             ),
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'size', value: _constants.IMAGE_SIZE.SMALL },
               '\u5C0F\u56FE'
             )
@@ -11953,17 +11904,17 @@ var ImageAdEditor = function (_DesignEditor) {
                     onChange: _this2.onImageEntryChange(imageId),
                     error: showError && imageErrors ? imageErrors[imageId] : ''
                   }),
-                  !snapshot.isDraggingOver && _react2.default.createElement(_icon2.default, {
+                  !snapshot.isDraggingOver && _react2.default.createElement(_zent.Icon, {
                     type: 'close-circle',
                     className: prefix + '-design-component-image-ad-editor__entry-close-btn',
                     onClick: _this2.removeImageEntry(imageId)
                   }),
-                  !snapshot.isDraggingOver && allowAddImage && _react2.default.createElement(_icon2.default, {
+                  !snapshot.isDraggingOver && allowAddImage && _react2.default.createElement(_zent.Icon, {
                     type: 'plus',
                     className: prefix + '-design-component-image-ad-editor__entry-prepend-btn',
                     onClick: _this2.prependImageEntry(imageId)
                   }),
-                  !snapshot.isDraggingOver && allowAddImage && _react2.default.createElement(_icon2.default, {
+                  !snapshot.isDraggingOver && allowAddImage && _react2.default.createElement(_zent.Icon, {
                     type: 'plus',
                     className: prefix + '-design-component-image-ad-editor__entry-append-btn',
                     onClick: _this2.appendImageEntry(imageId)
@@ -12230,9 +12181,7 @@ var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-type
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _input = __webpack_require__(/*! zent/lib/input */ "./node_modules/zent/lib/input/index.js");
-
-var _input2 = _interopRequireDefault(_input);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/lib/utils/uuid.js");
 
@@ -12372,7 +12321,7 @@ var ImageEntry = exports.ImageEntry = function (_Component) {
                     null,
                     '\u6807\u9898:'
                   ),
-                  _react2.default.createElement(_input2.default, { value: linkTitle, onChange: _this2.onTitleChange })
+                  _react2.default.createElement(_zent.Input, { value: linkTitle, onChange: _this2.onTitleChange })
                 ),
                 _react2.default.createElement(
                   'div',
@@ -12384,7 +12333,7 @@ var ImageEntry = exports.ImageEntry = function (_Component) {
                     null,
                     '\u94FE\u63A5:'
                   ),
-                  _react2.default.createElement(_input2.default, { value: linkUrl, onChange: _this2.onUrlChange })
+                  _react2.default.createElement(_zent.Input, { value: linkUrl, onChange: _this2.onUrlChange })
                 )
               ),
               error && _react2.default.createElement(
@@ -12524,13 +12473,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radio = __webpack_require__(/*! zent/lib/radio */ "./node_modules/zent/lib/radio/index.js");
-
-var _radio2 = _interopRequireDefault(_radio);
-
-var _colorpicker = __webpack_require__(/*! zent/lib/colorpicker */ "./node_modules/zent/lib/colorpicker/index.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
 
@@ -12542,7 +12485,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RadioGroup = _radio2.default.Group;
+var RadioGroup = _zent.Radio.Group;
 var DEFAULT_COLOR = '#e5e5e5';
 var prefix = 'mp';
 
@@ -12584,7 +12527,7 @@ var LineEditor = function (_DesignEditor) {
             showError: showError || this.getMetaProperty('content', 'touched'),
             error: validation.content
           },
-          _react2.default.createElement(_colorpicker2.default, {
+          _react2.default.createElement(_zent.ColorPicker, {
             className: prefix + '-design-component-line-editor_color-select',
             color: value.color,
             onChange: this.onColorChange
@@ -12609,12 +12552,12 @@ var LineEditor = function (_DesignEditor) {
             RadioGroup,
             { value: value.hasPadding, onChange: this.onInputChange },
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'hasPadding', value: false },
               '\u65E0\u8FB9\u8DDD'
             ),
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'hasPadding', value: true },
               '\u5DE6\u53F3\u7559\u8FB9'
             )
@@ -12631,17 +12574,17 @@ var LineEditor = function (_DesignEditor) {
             RadioGroup,
             { value: value.lineType, onChange: this.onInputChange },
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'lineType', value: 'solid' },
               '\u5B9E\u7EBF'
             ),
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'lineType', value: 'dashed' },
               '\u865A\u7EBF'
             ),
             _react2.default.createElement(
-              _radio2.default,
+              _zent.Radio,
               { name: 'lineType', value: 'dotted' },
               '\u70B9\u7EBF'
             )
@@ -12812,17 +12755,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _colorpicker = __webpack_require__(/*! zent/lib/colorpicker */ "./node_modules/zent/lib/colorpicker/index.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
-
-var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/lib/button/index.js");
-
-var _button2 = _interopRequireDefault(_button);
-
-var _checkbox = __webpack_require__(/*! zent/lib/checkbox */ "./node_modules/zent/lib/checkbox/index.js");
-
-var _checkbox2 = _interopRequireDefault(_checkbox);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
 
@@ -12883,13 +12816,13 @@ var RichtextEditor = function (_DesignEditor) {
           _react2.default.createElement(
             'div',
             { className: 'input-append' },
-            _react2.default.createElement(_colorpicker2.default, {
+            _react2.default.createElement(_zent.ColorPicker, {
               className: 'zent-design-component-richtext-editor__color-picker-popover',
               color: value.color,
               onChange: this.onColorChange
             }),
             _react2.default.createElement(
-              _button2.default,
+              _zent.Button,
               { onClick: this.handleResetBackground },
               '\u91CD\u7F6E'
             )
@@ -12900,7 +12833,7 @@ var RichtextEditor = function (_DesignEditor) {
             '\u662F\u5426\u5168\u5C4F\uFF1A'
           ),
           _react2.default.createElement(
-            _checkbox2.default,
+            _zent.Checkbox,
             {
               className: 'zent-design-component-richtext-editor-checkbox-wrap',
               name: 'fullscreen',
@@ -13269,13 +13202,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _dialog = __webpack_require__(/*! zent/lib/dialog */ "./node_modules/zent/lib/dialog/index.js");
-
-var _dialog2 = _interopRequireDefault(_dialog);
-
-var _tabs = __webpack_require__(/*! zent/lib/tabs */ "./node_modules/zent/lib/tabs/index.js");
-
-var _tabs2 = _interopRequireDefault(_tabs);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13285,9 +13212,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TabPanel = _tabs2.default.TabPanel;
-var openDialog = _dialog2.default.openDialog,
-    closeDialog = _dialog2.default.closeDialog;
+var TabPanel = _zent.Tabs.TabPanel;
+var openDialog = _zent.Dialog.openDialog,
+    closeDialog = _zent.Dialog.closeDialog;
 
 var dialogId = 'zent_design_component_richtext_emotion_dialog';
 
@@ -13447,7 +13374,7 @@ var Emotion = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _tabs2.default,
+        _zent.Tabs,
         {
           activeId: this.state.activeId,
           onTabChange: this.onTabChange,
@@ -13494,7 +13421,7 @@ exports.default = function (options) {
 
         // 包含http,ftp,file开头的地址，直接引用
         if (!cheackURl) {
-          _notify2.default.success('您输入的超链接中不包含http等协议名称，默认将为您添加http://前缀');
+          _zent.Notify.success('您输入的超链接中不包含http等协议名称，默认将为您添加http://前缀');
           linkUrl = 'http://' + linkUrl;
         }
         var urlInfo = {
@@ -13518,7 +13445,7 @@ exports.default = function (options) {
     });
   };
 
-  closeDialog = _sweetalert2.default.confirm({
+  closeDialog = _zent.Sweetalert.confirm({
     className: 'zent-design-component-richtext__link',
     title: '超链接',
     content: _react2.default.createElement(LinkForm, { onPressEnter: onPressEnter, ref: function ref(f) {
@@ -13532,17 +13459,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _form = __webpack_require__(/*! zent/lib/form */ "./node_modules/zent/lib/form/index.js");
-
-var _form2 = _interopRequireDefault(_form);
-
-var _sweetalert = __webpack_require__(/*! zent/lib/sweetalert */ "./node_modules/zent/lib/sweetalert/index.js");
-
-var _sweetalert2 = _interopRequireDefault(_sweetalert);
-
-var _notify = __webpack_require__(/*! zent/lib/notify */ "./node_modules/zent/lib/notify/index.js");
-
-var _notify2 = _interopRequireDefault(_notify);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13552,9 +13469,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var createForm = _form2.default.createForm,
-    Field = _form2.default.Field,
-    InputField = _form2.default.InputField;
+var createForm = _zent.Form.createForm,
+    Field = _zent.Form.Field,
+    InputField = _zent.Form.InputField;
 
 
 var LinkForm = createForm({})(function (_React$Component) {
@@ -13584,7 +13501,7 @@ var LinkForm = createForm({})(function (_React$Component) {
         'div',
         { className: 'share-content' },
         _react2.default.createElement(
-          _form2.default,
+          _zent.Form,
           { horizontal: true },
           _react2.default.createElement(Field, {
             name: 'linkUrl',
@@ -13630,7 +13547,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 exports.default = function (options) {
   var _this2 = this;
 
-  var closeDialog = _sweetalert2.default.confirm({
+  var closeDialog = _zent.Sweetalert.confirm({
     className: 'zent-design-component-richtext__video',
     title: '视频插入视频',
     content: _react2.default.createElement(VideoForm, {
@@ -13652,13 +13569,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _form = __webpack_require__(/*! zent/lib/form */ "./node_modules/zent/lib/form/index.js");
-
-var _form2 = _interopRequireDefault(_form);
-
-var _sweetalert = __webpack_require__(/*! zent/lib/sweetalert */ "./node_modules/zent/lib/sweetalert/index.js");
-
-var _sweetalert2 = _interopRequireDefault(_sweetalert);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13668,9 +13579,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var createForm = _form2.default.createForm,
-    Field = _form2.default.Field,
-    InputField = _form2.default.InputField;
+var createForm = _zent.Form.createForm,
+    Field = _zent.Form.Field,
+    InputField = _zent.Form.InputField;
 
 
 var YOUKU_IMAGE = 'http://img.yzcdn.cn/public_files/2015/09/10/04eeb56eb29cbfbe29d67042be4d21ed.jpg';
@@ -13815,7 +13726,7 @@ var VideoForm = createForm({})(function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _form2.default,
+        _zent.Form,
         {
           horizontal: true,
           className: 'video-content',
@@ -13960,9 +13871,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _slider = __webpack_require__(/*! zent/lib/slider */ "./node_modules/zent/lib/slider/index.js");
-
-var _slider2 = _interopRequireDefault(_slider);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
 
@@ -14008,7 +13917,7 @@ var WhitespaceEditor = function (_DesignEditor) {
             label: '\u7A7A\u767D\u9AD8\u5EA6:',
             className: prefix + '-design-component-whitespace-editor__height'
           },
-          _react2.default.createElement(_slider2.default, {
+          _react2.default.createElement(_zent.Slider, {
             min: 10,
             max: 100,
             value: value.height,

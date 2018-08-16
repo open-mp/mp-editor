@@ -23,6 +23,7 @@ module.exports = app => {
 
     // bundle插件
     router.get('/bundle/get-url/mpeditor-plugin', controller.bundle.getMpEditorPluginUrl);
-    router.get('/bundle/get-js/mpeditor-plugin', controller.bundle.getMpEditorPluginContent);
+    router.get('/bundle/get-js/mpeditor-plugin', controller.bundle.getMpEditorPluginJsContent);
+    router.get('/bundle/get-css/mpeditor-plugin', controller.bundle.getMpEditorPluginCssContent);
     router.get('/bundle/query-bundle', controller.bundle.queryBundleList);
 };

@@ -862,47 +862,14 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
-/***/ "./node_modules/zent/lib/button/index.js":
-/*!**************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/button/index.js from dll-reference _dll_base ***!
-  \**************************************************************************************/
+/***/ "./node_modules/zent/lib/index.js":
+/*!*******************************************************************************!*\
+  !*** delegated ./node_modules/zent/lib/index.js from dll-reference _dll_base ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(68);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/icon/index.js":
-/*!************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/icon/index.js from dll-reference _dll_base ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(22);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/menu/index.js":
-/*!************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/menu/index.js from dll-reference _dll_base ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(435);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/table/index.js":
-/*!*************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/table/index.js from dll-reference _dll_base ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(993);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(533);
 
 /***/ }),
 
@@ -1131,13 +1098,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _menu = __webpack_require__(/*! zent/lib/menu */ "./node_modules/zent/lib/menu/index.js");
-
-var _menu2 = _interopRequireDefault(_menu);
-
-var _icon = __webpack_require__(/*! zent/lib/icon */ "./node_modules/zent/lib/icon/index.js");
-
-var _icon2 = _interopRequireDefault(_icon);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 __webpack_require__(/*! ./BasicLayout.pcss */ "./src/common/layouts/BasicLayout.pcss");
 
@@ -1149,8 +1110,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MenuItem = _menu2.default.MenuItem,
-    SubMenu = _menu2.default.SubMenu;
+var MenuItem = _zent.Menu.MenuItem,
+    SubMenu = _zent.Menu.SubMenu;
 
 
 var onClick = function onClick(e, key) {
@@ -1204,7 +1165,7 @@ var BasicLayout = function (_React$PureComponent) {
         key: 'renderMenu',
         value: function renderMenu() {
             return _react2.default.createElement(
-                _menu2.default,
+                _zent.Menu,
                 {
                     mode: 'inline',
                     onClick: onClick
@@ -1270,13 +1231,7 @@ var _mp = __webpack_require__(/*! src/common/api/mp */ "./src/common/api/mp.js")
 
 var mpApi = _interopRequireWildcard(_mp);
 
-var _table = __webpack_require__(/*! zent/lib/table */ "./node_modules/zent/lib/table/index.js");
-
-var _table2 = _interopRequireDefault(_table);
-
-var _button = __webpack_require__(/*! zent/lib/button */ "./node_modules/zent/lib/button/index.js");
-
-var _button2 = _interopRequireDefault(_button);
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
 
@@ -1325,7 +1280,7 @@ var columns = [{
                 'div',
                 null,
                 _react2.default.createElement(
-                    _button2.default,
+                    _zent.Button,
                     { type: 'primary', outline: true },
                     '\u9875\u9762\u8BBE\u7F6E'
                 ),
@@ -1333,7 +1288,7 @@ var columns = [{
                     'a',
                     { href: '/editor/mp?pageId=' + page.id + '&structure=static' },
                     _react2.default.createElement(
-                        _button2.default,
+                        _zent.Button,
                         { type: 'primary', outline: true },
                         '\u7F16\u8F91'
                     )
@@ -1344,12 +1299,12 @@ var columns = [{
                 'div',
                 null,
                 _react2.default.createElement(
-                    _button2.default,
+                    _zent.Button,
                     { type: 'primary', outline: true },
                     '\u9875\u9762\u8BBE\u7F6E'
                 ),
                 _react2.default.createElement(
-                    _button2.default,
+                    _zent.Button,
                     { type: 'primary', outline: true },
                     '\u7F16\u8F91\u9875\u9762\u7EC4\u4EF6'
                 ),
@@ -1357,7 +1312,7 @@ var columns = [{
                     'a',
                     { href: '/mp/content-list?pageId=' + page.id },
                     _react2.default.createElement(
-                        _button2.default,
+                        _zent.Button,
                         { type: 'primary', outline: true },
                         '\u5185\u5BB9\u5217\u8868'
                     )
@@ -1388,7 +1343,7 @@ var App = function (_React$Component) {
         value: function render() {
             var mpPageList = this.state.mpPageList;
 
-            return _react2.default.createElement(_table2.default, {
+            return _react2.default.createElement(_zent.Table, {
                 columns: columns,
                 pageInfo: null,
                 datasets: mpPageList,

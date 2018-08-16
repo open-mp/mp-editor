@@ -11,7 +11,7 @@ import defaultTo from 'lodash/defaultTo';
 import isFunction from 'lodash/isFunction';
 import * as storage from 'zent/lib/utils/storage';
 import * as InstanceUtils from './utils/instance';
-import * as PluginLoader from '../bundle/loader'
+import pluginLoader from '../bundle/loader'
 import Bundle from '../bundle/bundle'
 
 
@@ -89,9 +89,10 @@ export default class Design extends PureComponent {
     /**
      *  外部调用接口 创建插件实例，
      */
-    addInstanceByBundle(bundleId) {
+    async addInstanceByBundle(bundleId) {
         let {pluginMap} = this.state;
         // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
+        await this.loadPlugin(bundleId);
         console.log(bundleId) // 通知design增加组件
     }
 
@@ -103,12 +104,11 @@ export default class Design extends PureComponent {
         if (pluginMap[bundleStringId]) {
             return pluginMap[bundleStringId];
         }
-        // 查询插件位置
-
         // 加载插件
+        let plugin = await pluginLoader.loadEditorPlugin(bundle);
         // 找出plugin 并加载
-        let plugin = await PluginLoader.loadMpComponentFromBundle(pluginId);
-        pluginMap[pluginStringID] = plugin;
+        pluginMap[bundle.getStringId()] = plugin;
+        return plugin;
     }
 
 

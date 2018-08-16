@@ -1,4 +1,4 @@
-export default class Bundle {
+module.exports = class Bundle {
     constructor(bundleId) {
         let {
             groupId,
