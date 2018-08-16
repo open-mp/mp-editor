@@ -85,6 +85,27 @@ export default class Design extends PureComponent {
         })
     }
 
+    /**
+     *  外部调用接口 创建插件实例，
+     */
+    addInstanceByBundle(bundleId) {
+        let {pluginMap} = this.state;
+        // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
+        console.log(bundleId) // 通知design增加组件
+    }
+
+    async loadPlugin(bundleId) {
+        // 检查是否存
+        // 找出plugin 并加载
+        let plugin = await PluginLoader.loadMpComponentFromBundle(pluginId);
+        let pluginStringID = pluginId.getStringId();
+        pluginMap[pluginStringID] = plugin;
+    }
+
+
+
+
+
     render() {
         const {
             cacheRestoreMessage,
@@ -273,12 +294,7 @@ export default class Design extends PureComponent {
         this.adjustHeight();
     };
 
-    /**
-     *  外部调用接口 创建插件实例，
-     */
-    addInstance(bundleId) {
-        // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-    }
+
 
     // 添加一个新组件
     onAdd = (component, fromSelected) => {

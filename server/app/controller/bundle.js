@@ -55,38 +55,47 @@ class BundleController extends Controller {
                 total: 4,
                 list: [
                     {
+                        name: '页面配置',
+                        bundleId: {
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'config',
+                            version: '1.0.0',
+                            classifier: ''
+                        }
+                    },
+                    {
                         name: '图片广告',
                         bundleId: {
-                            groupId: '',
-                            artifactId: '',
-                            version: '',
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'image-ad',
+                            version: '1.0.0',
                             classifier: ''
                         }
                     },
                     {
                         name: '富文本',
                         bundleId: {
-                            groupId: '',
-                            artifactId: '',
-                            version: '',
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'richtext',
+                            version: '1.0.0',
                             classifier: ''
                         }
                     },
                     {
                         name: '分隔符',
                         bundleId: {
-                            groupId: '',
-                            artifactId: '',
-                            version: '',
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'line',
+                            version: '1.0.0',
                             classifier: ''
                         }
                     },
                     {
                         name: '空白行',
                         bundleId: {
-                            groupId: '',
-                            artifactId: '',
-                            version: '',
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'whitespace',
+                            version: '1.0.0',
                             classifier: ''
                         }
                     }
