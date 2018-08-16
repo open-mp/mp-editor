@@ -92,8 +92,10 @@ export default class Design extends PureComponent {
     async addInstanceByBundle(bundleId) {
         let {pluginMap} = this.state;
         // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-        await this.loadPlugin(bundleId);
-        console.log(bundleId) // 通知design增加组件
+        let plugin = await this.loadPlugin(bundleId);
+        let initialValue = plugin.getInitialValue();
+        initialValue.bundleId = bundleId;
+
     }
 
     async loadPlugin(bundleId) {
@@ -106,6 +108,7 @@ export default class Design extends PureComponent {
         }
         // 加载插件
         let plugin = await pluginLoader.loadEditorPlugin(bundle);
+        plugin = plugin.default ? plugin.default : plugin;
         // 找出plugin 并加载
         pluginMap[bundle.getStringId()] = plugin;
         return plugin;

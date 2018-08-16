@@ -9080,7 +9080,7 @@ var Design = function (_PureComponent) {
         key: 'addInstanceByBundle',
         value: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(bundleId) {
-                var pluginMap;
+                var pluginMap, plugin, initialValue;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
@@ -9092,9 +9092,12 @@ var Design = function (_PureComponent) {
                                 return this.loadPlugin(bundleId);
 
                             case 3:
-                                console.log(bundleId); // 通知design增加组件
+                                plugin = _context2.sent;
+                                initialValue = plugin.getInitialValue();
 
-                            case 4:
+                                initialValue.bundleId = bundleId;
+
+                            case 6:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -9136,11 +9139,12 @@ var Design = function (_PureComponent) {
                             case 7:
                                 plugin = _context3.sent;
 
+                                plugin = plugin.default ? plugin.default : plugin;
                                 // 找出plugin 并加载
                                 pluginMap[bundle.getStringId()] = plugin;
                                 return _context3.abrupt('return', plugin);
 
-                            case 10:
+                            case 11:
                             case 'end':
                                 return _context3.stop();
                         }
