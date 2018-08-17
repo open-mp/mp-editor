@@ -12,6 +12,7 @@ import DesignEditor from './DesignEditor';
 import LazyMap from './utils/LazyMap';
 
 import {UUID_KEY, CACHE_KEY} from './constants'
+import Bundle from "./bundle/bundle";
 
 /**
  * 负责数据处理
@@ -53,20 +54,19 @@ export default class Design extends PureComponent {
             await pluginLoader.loadPlugin(instance.bundleId);
             InstanceUtils.tagInstanceWithUUID(instance);
         }
-
         let pluginMap = {};
         let pluginInstanceCount = new LazyMap(0);
         let newInstanceList = [];
         for (let i = 0; i < instanceList.length; i++) {
             let instance = instanceList[i];
-            let pluginId = InstanceUtils.getPluginIdFromInstace(instance);
+            let bundle = new Bundle(instance.bundleId);
             // 找出plugin 并加载
-            let plugin = await PluginLoader.loadMpComponentFromBundle(pluginId);
-            let pluginStringID = pluginId.getStringId();
-            pluginMap[pluginStringID] = plugin;
-            pluginInstanceCount.inc(pluginStringID);
+            let plugin = await pluginLoader.loadPlugin(instance.bundleId);
+            let stringID = bundle.getStringId();
+            pluginMap[stringID] = plugin;
+            pluginInstanceCount.inc(stringID);
             // 加上uuid
-            InstanceUtils.setUUIDForInstance(instance, InstanceUtils.generateUUID());
+            InstanceUtils.tagInstanceWithUUID(instance);
             newInstanceList.push(instance);
         }
         this.setState({
@@ -92,13 +92,13 @@ export default class Design extends PureComponent {
         this.setState({
             instanceList: newInstanceList
         });
-        this.trackValueChange(newInstanceList);
-        this.selectInstance(instance);
+        this._trackValueChange(newInstanceList);
+        this._selectInstance(instance);
     }
 
 
     // 选中一个组件
-    selectInstance = instance => {
+    _selectInstance = instance => {
         const id = InstanceUtils.getUUIDFromInstance(instance);
         if (this.isSelected(instance)) {
             return;
@@ -108,7 +108,17 @@ export default class Design extends PureComponent {
             selectedUUID: id,
         });
 
-        this.adjustHeight();
+        this._adjustHeight();
+    };
+
+    selectByIndex = (index) => {
+        let {instanceList} = this.state;
+        index = isUndefined(index) ? this.props.defaultSelectedIndex : index;
+        const instance = instanceList[index];
+
+        this.setState({
+            selectedUUID: InstanceUtils.getUUIDFromInstance(instance),
+        });
     };
 
     isSelected = instance => {
@@ -159,8 +169,6 @@ export default class Design extends PureComponent {
                     instanceList,
                     validations,
                     showError,
-                    onDelete: this.deleteInstance,
-                    onSettingsChange: this.setSettings,
                     design: this.design,
                     disabled,
                     ref: this.savePreview,
@@ -187,43 +195,10 @@ export default class Design extends PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        return
         this.validateCacheProps(nextProps);
-
-        let shouldUpdateInstanceCountMap = false;
-
-        if (nextProps.value !== this.props.value) {
-            tagValuesWithUUID(nextProps.value);
-            shouldUpdateInstanceCountMap = true;
-        }
-
-        if (nextProps.components !== this.props.components) {
-            this.cacheAppendableComponents(nextProps.components);
-            shouldUpdateInstanceCountMap = true;
-        }
-
-        // 如果当前没有选中的并且 value 或者 defaultSelectedIndex 改变的话
-        // 重新尝试设置默认值
-        if (
-            !this.hasSelected() &&
-            (nextProps.defaultSelectedIndex !== this.props.defaultSelectedIndex ||
-                nextProps.value !== this.props.value)
-        ) {
-            const {value, defaultSelectedIndex} = nextProps;
-            this.selectByIndex(defaultSelectedIndex, value);
-        }
-
-        if (shouldUpdateInstanceCountMap) {
-            this.setState({
-                componentInstanceCount: makeInstanceCountMapFromValue(
-                    nextProps.value,
-                    nextProps.components
-                ),
-            });
-        }
     }
 
-    setSettings = value => {
+    _setSettings = value => {
         const {settings} = this.props;
         if (!settings) {
             this.setState({
@@ -243,7 +218,7 @@ export default class Design extends PureComponent {
         }
     };
 
-    modifyInstance = async (instance, diff, replace = false) => {
+    _modifyInstance = async (instance, diff, replace = false) => {
         const {instanceList} = this.state;
         // 得到新的值
         const newInstanceValue = replace
@@ -256,15 +231,15 @@ export default class Design extends PureComponent {
         this.setState({
             instanceList: newInstanceList
         });
-        this.trackValueChange(newInstanceList);
+        this._trackValueChange(newInstanceList);
 
         let errors = await InstanceUtils.validateInstance(instance);
         let id = InstanceUtils.getUUIDFromInstance(instance);
-        this.setValidation({[id]: errors});
+        this._setValidation({[id]: errors});
     };
 
     // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
-    trackValueChange(newInstanceList, writeCache = true) {
+    _trackValueChange(newInstanceList, writeCache = true) {
         const {onChange} = this.props;
         onChange && onChange(newInstanceList); // 通知外面数据变化
 
@@ -276,11 +251,11 @@ export default class Design extends PureComponent {
             this.writeCache(newInstanceList);
         }
 
-        this.adjustHeight();
+        this._adjustHeight();
     }
 
     // 删除一个组件, 删除后如果没有选中的组件则默认选一个
-    deleteInstance = instance => {
+    _deleteInstance = instance => {
         const {instanceList, selectedUUID} = this.state;
         let nextIndex = -1;
         const newInstanceList = instanceList.filter((v, idx) => {
@@ -309,12 +284,12 @@ export default class Design extends PureComponent {
             ...newState
         });
 
-        this.trackValueChange(newInstanceList);
+        this._trackValueChange(newInstanceList);
 
-        this.adjustHeight();
+        this._adjustHeight();
     };
 
-    moveInstance = (fromIndex, toIndex) => {
+    _moveInstance = (fromIndex, toIndex) => {
         let {instanceList} = this.state;
         let newInstanceList = InstanceUtils.moveInstance(instanceList, fromIndex, toIndex);
 
@@ -323,15 +298,15 @@ export default class Design extends PureComponent {
                 instanceList: newInstanceList
             });
         }
-        this.trackValueChange(newInstanceList);
+        this._trackValueChange(newInstanceList);
     };
 
-    setValidation = validation => {
+    _setValidation = validation => {
         this.setState({
             validations: assign({}, this.state.validations, validation),
         });
 
-        this.adjustHeight();
+        this._adjustHeight();
     };
 
     // 保存数据后请调用这个函数通知组件数据已经保存
@@ -340,16 +315,7 @@ export default class Design extends PureComponent {
         this.removeCache();
     };
 
-    selectByIndex = (index, value) => {
-        value = value || this.props.value;
-        index = isUndefined(index) ? this.props.defaultSelectedIndex : index;
-        const safeIndex = getSafeSelectedValueIndex(index, value);
-        const safeValue = value[safeIndex];
 
-        this.setState({
-            selectedUUID: this.getUUIDFromValue(safeValue),
-        });
-    };
 
 
     hasSelected = () => {
@@ -380,14 +346,14 @@ export default class Design extends PureComponent {
 
     // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
     // 实际并未改变高度，而是设置了margin/padding
-    adjustHeight = id => {
+    _adjustHeight = id => {
         // 不要重复执行
-        if (this.adjustHeightTimer) {
-            clearTimeout(this.adjustHeightTimer);
-            this.adjustHeightTimer = undefined;
+        if (this._adjustHeightTimer) {
+            clearTimeout(this._adjustHeightTimer);
+            this._adjustHeightTimer = undefined;
         }
 
-        this.adjustHeightTimer = setTimeout(() => {
+        this._adjustHeightTimer = setTimeout(() => {
             id = id || this.state.selectedUUID;
             if (this.preview && this.preview.getEditorBoundingBox) {
                 const editorBB = this.preview.getEditorBoundingBox(id);
@@ -501,7 +467,7 @@ export default class Design extends PureComponent {
 
         const cachedValue = this.readCache();
         if (cachedValue !== storage.NOT_FOUND) {
-            this.trackValueChange(cachedValue, false);
+            this._trackValueChange(cachedValue, false);
             this.setState({
                 showRestoreFromCache: false,
             });
@@ -518,23 +484,17 @@ export default class Design extends PureComponent {
     design = (() => {
         return {
 
-            selectInstance: this.selectInstance,
+            selectInstance: this._selectInstance,
 
-            moveInstance: this.moveInstance,
+            moveInstance: this._moveInstance,
 
-            deleteInstance: this.deleteInstance,
+            deleteInstance: this._deleteInstance,
 
-            modifyInstance: this.modifyInstance,
+            modifyInstance: this._modifyInstance,
 
-            setSettings: this.setSettings,
+            setSettings: this._setSettings,
 
-            validateComponentValue: this.validateComponentValue,
-
-            setValidation: this.setValidation,
-
-            markAsSaved: this.markAsSaved,
-
-            adjustPreviewHeight: this.adjustHeight,
+            adjustPreviewHeight: this._adjustHeight,
         };
     })();
 }

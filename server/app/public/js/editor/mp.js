@@ -8189,6 +8189,10 @@ var _LazyMap2 = _interopRequireDefault(_LazyMap);
 
 var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/components/design/constants.js");
 
+var _bundle = __webpack_require__(/*! ./bundle/bundle */ "./src/pages/editor/components/design/bundle/bundle.js");
+
+var _bundle2 = _interopRequireDefault(_bundle);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -8216,7 +8220,7 @@ var Design = function (_PureComponent) {
 
         var _this = _possibleConstructorReturn(this, (Design.__proto__ || Object.getPrototypeOf(Design)).call(this, props));
 
-        _this.selectInstance = function (instance) {
+        _this._selectInstance = function (instance) {
             var id = InstanceUtils.getUUIDFromInstance(instance);
             if (_this.isSelected(instance)) {
                 return;
@@ -8226,7 +8230,18 @@ var Design = function (_PureComponent) {
                 selectedUUID: id
             });
 
-            _this.adjustHeight();
+            _this._adjustHeight();
+        };
+
+        _this.selectByIndex = function (index) {
+            var instanceList = _this.state.instanceList;
+
+            index = (0, _isUndefined2.default)(index) ? _this.props.defaultSelectedIndex : index;
+            var instance = instanceList[index];
+
+            _this.setState({
+                selectedUUID: InstanceUtils.getUUIDFromInstance(instance)
+            });
         };
 
         _this.isSelected = function (instance) {
@@ -8235,7 +8250,7 @@ var Design = function (_PureComponent) {
             return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
         };
 
-        _this.setSettings = function (value) {
+        _this._setSettings = function (value) {
             var settings = _this.props.settings;
 
             if (!settings) {
@@ -8249,7 +8264,7 @@ var Design = function (_PureComponent) {
             }
         };
 
-        _this.modifyInstance = function () {
+        _this._modifyInstance = function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instance, diff) {
                 var replace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
                 var instanceList, newInstanceValue, newInstanceList, errors, id;
@@ -8270,7 +8285,7 @@ var Design = function (_PureComponent) {
                                 _this.setState({
                                     instanceList: newInstanceList
                                 });
-                                _this.trackValueChange(newInstanceList);
+                                _this._trackValueChange(newInstanceList);
 
                                 _context.next = 7;
                                 return InstanceUtils.validateInstance(instance);
@@ -8279,7 +8294,7 @@ var Design = function (_PureComponent) {
                                 errors = _context.sent;
                                 id = InstanceUtils.getUUIDFromInstance(instance);
 
-                                _this.setValidation(_defineProperty({}, id, errors));
+                                _this._setValidation(_defineProperty({}, id, errors));
 
                             case 10:
                             case 'end':
@@ -8294,7 +8309,7 @@ var Design = function (_PureComponent) {
             };
         }();
 
-        _this.deleteInstance = function (instance) {
+        _this._deleteInstance = function (instance) {
             var _this$state = _this.state,
                 instanceList = _this$state.instanceList,
                 selectedUUID = _this$state.selectedUUID;
@@ -8322,12 +8337,12 @@ var Design = function (_PureComponent) {
                 instanceList: newInstanceList
             }, newState));
 
-            _this.trackValueChange(newInstanceList);
+            _this._trackValueChange(newInstanceList);
 
-            _this.adjustHeight();
+            _this._adjustHeight();
         };
 
-        _this.moveInstance = function (fromIndex, toIndex) {
+        _this._moveInstance = function (fromIndex, toIndex) {
             var instanceList = _this.state.instanceList;
 
             var newInstanceList = InstanceUtils.moveInstance(instanceList, fromIndex, toIndex);
@@ -8337,31 +8352,20 @@ var Design = function (_PureComponent) {
                     instanceList: newInstanceList
                 });
             }
-            _this.trackValueChange(newInstanceList);
+            _this._trackValueChange(newInstanceList);
         };
 
-        _this.setValidation = function (validation) {
+        _this._setValidation = function (validation) {
             _this.setState({
                 validations: (0, _assign3.default)({}, _this.state.validations, validation)
             });
 
-            _this.adjustHeight();
+            _this._adjustHeight();
         };
 
         _this.markAsSaved = function () {
             _this._dirty = false;
             _this.removeCache();
-        };
-
-        _this.selectByIndex = function (index, value) {
-            value = value || _this.props.value;
-            index = (0, _isUndefined2.default)(index) ? _this.props.defaultSelectedIndex : index;
-            var safeIndex = getSafeSelectedValueIndex(index, value);
-            var safeValue = value[safeIndex];
-
-            _this.setState({
-                selectedUUID: _this.getUUIDFromValue(safeValue)
-            });
         };
 
         _this.hasSelected = function () {
@@ -8378,14 +8382,14 @@ var Design = function (_PureComponent) {
             _this.preview = instance;
         };
 
-        _this.adjustHeight = function (id) {
+        _this._adjustHeight = function (id) {
             // 不要重复执行
-            if (_this.adjustHeightTimer) {
-                clearTimeout(_this.adjustHeightTimer);
-                _this.adjustHeightTimer = undefined;
+            if (_this._adjustHeightTimer) {
+                clearTimeout(_this._adjustHeightTimer);
+                _this._adjustHeightTimer = undefined;
             }
 
-            _this.adjustHeightTimer = setTimeout(function () {
+            _this._adjustHeightTimer = setTimeout(function () {
                 id = id || _this.state.selectedUUID;
                 if (_this.preview && _this.preview.getEditorBoundingBox) {
                     var editorBB = _this.preview.getEditorBoundingBox(id);
@@ -8431,7 +8435,7 @@ var Design = function (_PureComponent) {
 
             var cachedValue = _this.readCache();
             if (cachedValue !== storage.NOT_FOUND) {
-                _this.trackValueChange(cachedValue, false);
+                _this._trackValueChange(cachedValue, false);
                 _this.setState({
                     showRestoreFromCache: false
                 });
@@ -8442,23 +8446,17 @@ var Design = function (_PureComponent) {
         _this.design = function () {
             return {
 
-                selectInstance: _this.selectInstance,
+                selectInstance: _this._selectInstance,
 
-                moveInstance: _this.moveInstance,
+                moveInstance: _this._moveInstance,
 
-                deleteInstance: _this.deleteInstance,
+                deleteInstance: _this._deleteInstance,
 
-                modifyInstance: _this.modifyInstance,
+                modifyInstance: _this._modifyInstance,
 
-                setSettings: _this.setSettings,
+                setSettings: _this._setSettings,
 
-                validateComponentValue: _this.validateComponentValue,
-
-                setValidation: _this.setValidation,
-
-                markAsSaved: _this.markAsSaved,
-
-                adjustPreviewHeight: _this.adjustHeight
+                adjustPreviewHeight: _this._adjustHeight
             };
         }();
 
@@ -8487,7 +8485,7 @@ var Design = function (_PureComponent) {
         key: 'setInstanceList',
         value: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(instanceList) {
-                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, pluginId, plugin, pluginStringID;
+                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, bundle, plugin, stringID;
 
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -8564,20 +8562,20 @@ var Design = function (_PureComponent) {
                                 }
 
                                 _instance = instanceList[i];
-                                pluginId = InstanceUtils.getPluginIdFromInstace(_instance);
+                                bundle = new _bundle2.default(_instance.bundleId);
                                 // 找出plugin 并加载
 
                                 _context2.next = 36;
-                                return PluginLoader.loadMpComponentFromBundle(pluginId);
+                                return _loader2.default.loadPlugin(_instance.bundleId);
 
                             case 36:
                                 plugin = _context2.sent;
-                                pluginStringID = pluginId.getStringId();
+                                stringID = bundle.getStringId();
 
-                                pluginMap[pluginStringID] = plugin;
-                                pluginInstanceCount.inc(pluginStringID);
+                                pluginMap[stringID] = plugin;
+                                pluginInstanceCount.inc(stringID);
                                 // 加上uuid
-                                InstanceUtils.setUUIDForInstance(_instance, InstanceUtils.generateUUID());
+                                InstanceUtils.tagInstanceWithUUID(_instance);
                                 newInstanceList.push(_instance);
 
                             case 42:
@@ -8638,8 +8636,8 @@ var Design = function (_PureComponent) {
                                 this.setState({
                                     instanceList: newInstanceList
                                 });
-                                this.trackValueChange(newInstanceList);
-                                this.selectInstance(instance);
+                                this._trackValueChange(newInstanceList);
+                                this._selectInstance(instance);
 
                             case 13:
                             case 'end':
@@ -8704,8 +8702,6 @@ var Design = function (_PureComponent) {
                     instanceList: instanceList,
                     validations: validations,
                     showError: showError,
-                    onDelete: this.deleteInstance,
-                    onSettingsChange: this.setSettings,
                     design: this.design,
                     disabled: disabled,
                     ref: this.savePreview
@@ -8734,42 +8730,14 @@ var Design = function (_PureComponent) {
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            return;
             this.validateCacheProps(nextProps);
-
-            var shouldUpdateInstanceCountMap = false;
-
-            if (nextProps.value !== this.props.value) {
-                tagValuesWithUUID(nextProps.value);
-                shouldUpdateInstanceCountMap = true;
-            }
-
-            if (nextProps.components !== this.props.components) {
-                this.cacheAppendableComponents(nextProps.components);
-                shouldUpdateInstanceCountMap = true;
-            }
-
-            // 如果当前没有选中的并且 value 或者 defaultSelectedIndex 改变的话
-            // 重新尝试设置默认值
-            if (!this.hasSelected() && (nextProps.defaultSelectedIndex !== this.props.defaultSelectedIndex || nextProps.value !== this.props.value)) {
-                var value = nextProps.value,
-                    defaultSelectedIndex = nextProps.defaultSelectedIndex;
-
-                this.selectByIndex(defaultSelectedIndex, value);
-            }
-
-            if (shouldUpdateInstanceCountMap) {
-                this.setState({
-                    componentInstanceCount: makeInstanceCountMapFromValue(nextProps.value, nextProps.components)
-                });
-            }
         }
     }, {
-        key: 'trackValueChange',
+        key: '_trackValueChange',
 
 
         // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
-        value: function trackValueChange(newInstanceList) {
+        value: function _trackValueChange(newInstanceList) {
             var writeCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
             var onChange = this.props.onChange;
 
@@ -8783,7 +8751,7 @@ var Design = function (_PureComponent) {
                 this.writeCache(newInstanceList);
             }
 
-            this.adjustHeight();
+            this._adjustHeight();
         }
 
         // 删除一个组件, 删除后如果没有选中的组件则默认选一个
