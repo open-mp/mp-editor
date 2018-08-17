@@ -10,8 +10,8 @@ import DesignPreviewController from './preview/DesignPreviewController';
 import DesignEditorItem from './editor/DesignEditorItem';
 import {isExpectedDesginType} from './utils/design-type';
 import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
-import Bundle from "../bundle/bundle";
-import pluginLoader from '../bundle/loader'
+import Bundle from "./bundle/bundle";
+import pluginLoader from './bundle/loader'
 
 
 // 保存实例对应的js组件对象
@@ -108,8 +108,6 @@ class DesignEditor extends PureComponent {
                                                         true
                                                     )}
                                                     isSelected={selected}
-                                                    onSelect={onSelect}
-                                                    onDelete={onDelete}
                                                     component={plugin.preview}
                                                 />
 
@@ -120,7 +118,6 @@ class DesignEditor extends PureComponent {
                                                     >
                                                         <plugin.editForm
                                                             instance={instance}
-                                                            onChange={onComponentValueChange(instance)}
                                                             settings={settings}
                                                             onSettingsChange={onSettingsChange}
                                                             design={design}

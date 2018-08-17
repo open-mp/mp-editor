@@ -105,12 +105,11 @@ class DesignPreviewController extends PureComponent {
     }
 
     onSelect = evt => {
-        const {editable} = this.props;
+        const {editable, design, instance} = this.props;
         if (!editable) {
             return;
         }
-
-        this.invokeCallback('onSelect', evt, false);
+        design.selectInstance(instance);
     };
 
     onDelete = () => {

@@ -438,17 +438,6 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
-/***/ "./node_modules/lodash/findIndex.js":
-/*!*********************************************************************************!*\
-  !*** delegated ./node_modules/lodash/findIndex.js from dll-reference _dll_base ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(128);
-
-/***/ }),
-
 /***/ "./node_modules/lodash/get.js":
 /*!***************************************************************************!*\
   !*** delegated ./node_modules/lodash/get.js from dll-reference _dll_base ***!
@@ -8140,10 +8129,1072 @@ function setHash(key, value) {
 
 /***/ }),
 
-/***/ "./src/pages/editor/components/bundle/bundle.js":
-/*!******************************************************!*\
-  !*** ./src/pages/editor/components/bundle/bundle.js ***!
-  \******************************************************/
+/***/ "./src/pages/editor/components/design/Design.jsx":
+/*!*******************************************************!*\
+  !*** ./src/pages/editor/components/design/Design.jsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _assign2 = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var _assign3 = _interopRequireDefault(_assign2);
+
+var _isUndefined = __webpack_require__(/*! lodash/isUndefined */ "./node_modules/lodash/isUndefined.js");
+
+var _isUndefined2 = _interopRequireDefault(_isUndefined);
+
+var _storage = __webpack_require__(/*! zent/lib/utils/storage */ "./node_modules/zent/lib/utils/storage.js");
+
+var storage = _interopRequireWildcard(_storage);
+
+var _instance2 = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
+
+var InstanceUtils = _interopRequireWildcard(_instance2);
+
+var _loader = __webpack_require__(/*! ./bundle/loader */ "./src/pages/editor/components/design/bundle/loader.js");
+
+var _loader2 = _interopRequireDefault(_loader);
+
+var _DesignEditor = __webpack_require__(/*! ./DesignEditor */ "./src/pages/editor/components/design/DesignEditor.jsx");
+
+var _DesignEditor2 = _interopRequireDefault(_DesignEditor);
+
+var _LazyMap = __webpack_require__(/*! ./utils/LazyMap */ "./src/pages/editor/components/design/utils/LazyMap.js");
+
+var _LazyMap2 = _interopRequireDefault(_LazyMap);
+
+var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/components/design/constants.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * 负责数据处理
+ */
+var Design = function (_PureComponent) {
+    _inherits(Design, _PureComponent);
+
+    function Design(props) {
+        var _this2 = this;
+
+        _classCallCheck(this, Design);
+
+        var _this = _possibleConstructorReturn(this, (Design.__proto__ || Object.getPrototypeOf(Design)).call(this, props));
+
+        _this.selectInstance = function (instance) {
+            var id = InstanceUtils.getUUIDFromInstance(instance);
+            if (_this.isSelected(instance)) {
+                return;
+            }
+
+            _this.setState({
+                selectedUUID: id
+            });
+
+            _this.adjustHeight();
+        };
+
+        _this.isSelected = function (instance) {
+            var selectedUUID = _this.state.selectedUUID;
+
+            return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
+        };
+
+        _this.setSettings = function (value) {
+            var settings = _this.props.settings;
+
+            if (!settings) {
+                _this.setState({
+                    settings: _extends({}, _this.state.settings, value)
+                });
+            } else {
+                _this.setState({
+                    settings: _extends({}, settings, _this.state.settings, value)
+                });
+            }
+        };
+
+        _this.modifyInstance = function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instance, diff) {
+                var replace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+                var instanceList, newInstanceValue, newInstanceList, errors, id;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                instanceList = _this.state.instanceList;
+                                // 得到新的值
+
+                                newInstanceValue = replace ? (0, _assign3.default)(_defineProperty({}, _constants.UUID_KEY, _this.getUUIDFromValue(instance)), diff) : (0, _assign3.default)({}, instance, diff);
+                                // 产生新的instanceList
+
+                                newInstanceList = instanceList.map(function (instanceLooped) {
+                                    return instanceLooped === instance ? newInstanceValue : instanceLooped;
+                                });
+
+                                _this.setState({
+                                    instanceList: newInstanceList
+                                });
+                                _this.trackValueChange(newInstanceList);
+
+                                _context.next = 7;
+                                return InstanceUtils.validateInstance(instance);
+
+                            case 7:
+                                errors = _context.sent;
+                                id = InstanceUtils.getUUIDFromInstance(instance);
+
+                                _this.setValidation(_defineProperty({}, id, errors));
+
+                            case 10:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, _this2);
+            }));
+
+            return function (_x, _x2) {
+                return _ref.apply(this, arguments);
+            };
+        }();
+
+        _this.deleteInstance = function (component) {
+            var _this$props = _this.props,
+                value = _this$props.value,
+                components = _this$props.components;
+
+            var nextIndex = -1;
+            var newValue = value.filter(function (v, idx) {
+                var skip = v !== component;
+                if (!skip) {
+                    nextIndex = idx - 1;
+                }
+                return skip;
+            });
+
+            var newState = {};
+
+            // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
+            var componentUUID = _this.getUUIDFromValue(component);
+            if (componentUUID === _this.state.selectedUUID) {
+                var nextSelectedValue = findFirstEditableSibling(newValue, components, nextIndex);
+                var nextUUID = _this.getUUIDFromValue(nextSelectedValue);
+                newState.selectedUUID = nextUUID;
+            }
+
+            _this.trackValueChange(newValue);
+            _this.setState(newState);
+
+            _this.adjustHeight();
+        };
+
+        _this.moveInstance = function (fromIndex, toIndex) {};
+
+        _this.setValidation = function (validation) {
+            _this.setState({
+                validations: (0, _assign3.default)({}, _this.state.validations, validation)
+            });
+
+            _this.adjustHeight();
+        };
+
+        _this.markAsSaved = function () {
+            _this._dirty = false;
+            _this.removeCache();
+        };
+
+        _this.selectByIndex = function (index, value) {
+            value = value || _this.props.value;
+            index = (0, _isUndefined2.default)(index) ? _this.props.defaultSelectedIndex : index;
+            var safeIndex = getSafeSelectedValueIndex(index, value);
+            var safeValue = value[safeIndex];
+
+            _this.setState({
+                selectedUUID: _this.getUUIDFromValue(safeValue)
+            });
+        };
+
+        _this.hasSelected = function () {
+            var selectedUUID = _this.state.selectedUUID;
+
+
+            return !!selectedUUID;
+        };
+
+        _this.savePreview = function (instance) {
+            if (instance && instance.getDecoratedComponentInstance) {
+                instance = instance.getDecoratedComponentInstance();
+            }
+            _this.preview = instance;
+        };
+
+        _this.adjustHeight = function (id) {
+            // 不要重复执行
+            if (_this.adjustHeightTimer) {
+                clearTimeout(_this.adjustHeightTimer);
+                _this.adjustHeightTimer = undefined;
+            }
+
+            _this.adjustHeightTimer = setTimeout(function () {
+                id = id || _this.state.selectedUUID;
+                if (_this.preview && _this.preview.getEditorBoundingBox) {
+                    var editorBB = _this.preview.getEditorBoundingBox(id);
+                    if (!editorBB) {
+                        return _this.setState({
+                            bottomGap: 0
+                        });
+                    }
+
+                    var previewNode = (0, _reactDom.findDOMNode)(_this.preview);
+                    var previewBB = previewNode && previewNode.getBoundingClientRect();
+                    if (!previewBB) {
+                        return;
+                    }
+
+                    var gap = Math.max(0, editorBB.bottom - previewBB.bottom);
+                    _this.setState({
+                        bottomGap: gap
+                    });
+                }
+            }, 0);
+        };
+
+        _this.onBeforeWindowUnload = function (evt) {
+            if (!_this._dirty) {
+                return;
+            }
+
+            // 这个字符串其实不会展示给用户
+            var confirmLeaveMessage = '页面上有未保存的数据，确定要离开吗？';
+            evt.returnValue = confirmLeaveMessage;
+            return confirmLeaveMessage;
+        };
+
+        _this.onRestoreCacheAlertClose = function () {
+            _this.setState({
+                showRestoreFromCache: false
+            });
+        };
+
+        _this.restoreCache = function (evt) {
+            evt.preventDefault();
+
+            var cachedValue = _this.readCache();
+            if (cachedValue !== storage.NOT_FOUND) {
+                _this.trackValueChange(cachedValue, false);
+                _this.setState({
+                    showRestoreFromCache: false
+                });
+                _this.removeCache();
+            }
+        };
+
+        _this.design = function () {
+            return {
+
+                selectInstance: _this.selectInstance,
+
+                moveInstance: _this.moveInstance,
+
+                deleteInstance: _this.deleteInstance,
+
+                modifyInstance: _this.modifyInstance,
+
+                setSettings: _this.setSettings,
+
+                validateComponentValue: _this.validateComponentValue,
+
+                setValidation: _this.setValidation,
+
+                markAsSaved: _this.markAsSaved,
+
+                adjustPreviewHeight: _this.adjustHeight
+            };
+        }();
+
+        _this.validateCacheProps(props);
+
+        _this.state = {
+            showRestoreFromCache: false, // 是否显示从缓存中恢复的提示
+            settings: {}, // 页面设置，比如页面背景色
+            selectedUUID: '', // 当前选中的组件对应的 UUID
+            instanceList: [], // 插件实例
+            pluginInstanceCount: new _LazyMap2.default(0), // plugin创建的实例数
+            validations: {}, // 当前所有组件的 validation 信息;  key 是 value 的 UUID
+            showError: false, // 是否强制显示错误
+            bottomGap: 0 // 当 preview 很长时，为了对齐 preview 底部需要的额外空间
+        };
+        return _this;
+    }
+
+    /**
+     * 设置实例列表
+     * @param instanceList
+     */
+
+
+    _createClass(Design, [{
+        key: 'setInstanceList',
+        value: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(instanceList) {
+                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, pluginId, plugin, pluginStringID;
+
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _iteratorNormalCompletion = true;
+                                _didIteratorError = false;
+                                _iteratorError = undefined;
+                                _context2.prev = 3;
+                                _iterator = instanceList[Symbol.iterator]();
+
+                            case 5:
+                                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                    _context2.next = 13;
+                                    break;
+                                }
+
+                                instance = _step.value;
+                                _context2.next = 9;
+                                return _loader2.default.loadPlugin(instance.bundleId);
+
+                            case 9:
+                                InstanceUtils.tagInstanceWithUUID(instance);
+
+                            case 10:
+                                _iteratorNormalCompletion = true;
+                                _context2.next = 5;
+                                break;
+
+                            case 13:
+                                _context2.next = 19;
+                                break;
+
+                            case 15:
+                                _context2.prev = 15;
+                                _context2.t0 = _context2['catch'](3);
+                                _didIteratorError = true;
+                                _iteratorError = _context2.t0;
+
+                            case 19:
+                                _context2.prev = 19;
+                                _context2.prev = 20;
+
+                                if (!_iteratorNormalCompletion && _iterator.return) {
+                                    _iterator.return();
+                                }
+
+                            case 22:
+                                _context2.prev = 22;
+
+                                if (!_didIteratorError) {
+                                    _context2.next = 25;
+                                    break;
+                                }
+
+                                throw _iteratorError;
+
+                            case 25:
+                                return _context2.finish(22);
+
+                            case 26:
+                                return _context2.finish(19);
+
+                            case 27:
+                                pluginMap = {};
+                                pluginInstanceCount = new _LazyMap2.default(0);
+                                newInstanceList = [];
+                                i = 0;
+
+                            case 31:
+                                if (!(i < instanceList.length)) {
+                                    _context2.next = 45;
+                                    break;
+                                }
+
+                                _instance = instanceList[i];
+                                pluginId = InstanceUtils.getPluginIdFromInstace(_instance);
+                                // 找出plugin 并加载
+
+                                _context2.next = 36;
+                                return PluginLoader.loadMpComponentFromBundle(pluginId);
+
+                            case 36:
+                                plugin = _context2.sent;
+                                pluginStringID = pluginId.getStringId();
+
+                                pluginMap[pluginStringID] = plugin;
+                                pluginInstanceCount.inc(pluginStringID);
+                                // 加上uuid
+                                InstanceUtils.setUUIDForInstance(_instance, InstanceUtils.generateUUID());
+                                newInstanceList.push(_instance);
+
+                            case 42:
+                                i++;
+                                _context2.next = 31;
+                                break;
+
+                            case 45:
+                                this.setState({
+                                    pluginMap: pluginMap, pluginInstanceCount: pluginInstanceCount, instanceList: newInstanceList
+                                });
+
+                            case 46:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[3, 15, 19, 27], [20,, 22, 26]]);
+            }));
+
+            function setInstanceList(_x4) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return setInstanceList;
+        }()
+
+        /**
+         *  外部调用接口 创建插件实例，
+         */
+
+    }, {
+        key: 'addInstanceByBundle',
+        value: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(bundleId) {
+                var pluginMap, plugin, instance, instanceList, newInstanceList;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                pluginMap = this.state.pluginMap;
+                                // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
+
+                                _context3.next = 3;
+                                return _loader2.default.loadPlugin(bundleId);
+
+                            case 3:
+                                plugin = _context3.sent;
+                                instance = plugin.getInitialValue();
+
+                                instance.bundleId = bundleId;
+                                InstanceUtils.tagInstanceWithUUID(instance);
+
+                                instanceList = this.state.instanceList;
+                                newInstanceList = void 0;
+
+                                newInstanceList = instanceList.concat(instance);
+                                this.setState({
+                                    instanceList: newInstanceList
+                                });
+                                this.trackValueChange(newInstanceList);
+                                this.selectInstance(instance);
+
+                            case 13:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function addInstanceByBundle(_x5) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return addInstanceByBundle;
+        }()
+
+        // 选中一个组件
+
+    }, {
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                cacheRestoreMessage = _props.cacheRestoreMessage,
+                disabled = _props.disabled;
+            var _state = this.state,
+                showRestoreFromCache = _state.showRestoreFromCache,
+                bottomGap = _state.bottomGap,
+                selectedUUID = _state.selectedUUID,
+                validations = _state.validations,
+                showError = _state.showError,
+                settings = _state.settings,
+                instanceList = _state.instanceList;
+
+
+            var cls = (0, _classnames2.default)('mp-design');
+
+            return _react2.default.createElement(
+                'div',
+                { className: cls, style: { paddingBottom: bottomGap } },
+                showRestoreFromCache && _react2.default.createElement(
+                    _zent.Alert,
+                    {
+                        className: 'mp-design__restore-cache-alert',
+                        closable: true,
+                        onClose: this.onRestoreCacheAlertClose,
+                        type: 'warning'
+                    },
+                    cacheRestoreMessage,
+                    _react2.default.createElement(
+                        'a',
+                        {
+                            className: 'mp-design__restore-cache-alert-use',
+                            onClick: this.restoreCache,
+                            href: 'javascript:void(0);'
+                        },
+                        '\u4F7F\u7528'
+                    )
+                ),
+                _react2.default.createElement(_DesignEditor2.default, {
+                    settings: settings,
+                    selectedUUID: selectedUUID,
+                    instanceList: instanceList,
+                    validations: validations,
+                    showError: showError,
+                    onDelete: this.deleteInstance,
+                    onSettingsChange: this.setSettings,
+                    design: this.design,
+                    disabled: disabled,
+                    ref: this.savePreview
+                })
+            );
+        }
+    }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.setupBeforeUnloadHook();
+            this.checkCache();
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            this.setupBeforeUnloadHook();
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.uninstallBeforeUnloadHook();
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            return;
+            this.validateCacheProps(nextProps);
+
+            var shouldUpdateInstanceCountMap = false;
+
+            if (nextProps.value !== this.props.value) {
+                tagValuesWithUUID(nextProps.value);
+                shouldUpdateInstanceCountMap = true;
+            }
+
+            if (nextProps.components !== this.props.components) {
+                this.cacheAppendableComponents(nextProps.components);
+                shouldUpdateInstanceCountMap = true;
+            }
+
+            // 如果当前没有选中的并且 value 或者 defaultSelectedIndex 改变的话
+            // 重新尝试设置默认值
+            if (!this.hasSelected() && (nextProps.defaultSelectedIndex !== this.props.defaultSelectedIndex || nextProps.value !== this.props.value)) {
+                var value = nextProps.value,
+                    defaultSelectedIndex = nextProps.defaultSelectedIndex;
+
+                this.selectByIndex(defaultSelectedIndex, value);
+            }
+
+            if (shouldUpdateInstanceCountMap) {
+                this.setState({
+                    componentInstanceCount: makeInstanceCountMapFromValue(nextProps.value, nextProps.components)
+                });
+            }
+        }
+    }, {
+        key: 'trackValueChange',
+
+
+        // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
+        value: function trackValueChange(newInstanceList) {
+            var writeCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+            var onChange = this.props.onChange;
+
+            onChange && onChange(newInstanceList); // 通知外面数据变化
+
+            if (!this._dirty) {
+                this._dirty = true;
+            }
+
+            if (writeCache) {
+                this.writeCache(newInstanceList);
+            }
+
+            this.adjustHeight();
+        }
+
+        // 删除一个组件, 删除后如果没有选中的组件则默认选一个
+
+
+        // 保存数据后请调用这个函数通知组件数据已经保存
+
+    }, {
+        key: 'scrollToPreviewItem',
+
+
+        // 滚动到第一个有错误的组件
+        value: function scrollToPreviewItem(id) {
+            if (this.preview) {
+                var _props2 = this.props,
+                    scrollTopOffset = _props2.scrollTopOffset,
+                    scrollLeftOffset = _props2.scrollLeftOffset;
+
+                this.preview.scrollToItem && this.preview.scrollToItem(id, {
+                    top: scrollTopOffset,
+                    left: scrollLeftOffset
+                });
+            }
+        }
+
+        // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
+        // 实际并未改变高度，而是设置了margin/padding
+
+    }, {
+        key: 'setupBeforeUnloadHook',
+        value: function setupBeforeUnloadHook() {
+            var confirmUnsavedLeave = this.props.confirmUnsavedLeave;
+
+
+            if (this._hasBeforeUnloadHook || !confirmUnsavedLeave) {
+                return;
+            }
+
+            window.addEventListener('beforeunload', this.onBeforeWindowUnload);
+            this._hasBeforeUnloadHook = true;
+        }
+    }, {
+        key: 'uninstallBeforeUnloadHook',
+        value: function uninstallBeforeUnloadHook() {
+            window.removeEventListener('beforeunload', this.onBeforeWindowUnload);
+            this._hasBeforeUnloadHook = false;
+        }
+    }, {
+        key: 'validateCacheProps',
+
+
+        // 检查缓存相关的属性是否设置正确
+        value: function validateCacheProps(props) {
+            props = props || this.props;
+            var _props3 = props,
+                cache = _props3.cache,
+                cacheId = _props3.cacheId;
+
+            if (cache && !cacheId) {
+                throw new Error('Design: cacheId is required when cache is on');
+            }
+        }
+    }, {
+        key: 'checkCache',
+        value: function checkCache() {
+            var cache = this.props.cache;
+
+
+            if (cache) {
+                var cachedValue = this.readCache();
+
+                if (cachedValue !== storage.NOT_FOUND) {
+                    this.setState({
+                        showRestoreFromCache: true
+                    });
+                }
+            }
+        }
+    }, {
+        key: 'readCache',
+        value: function readCache() {
+            var cache = this.props.cache;
+
+            if (!cache) {
+                return storage.NOT_FOUND;
+            }
+
+            var cacheId = this.props.cacheId;
+
+            return storage.read(_constants.CACHE_KEY, cacheId);
+        }
+    }, {
+        key: 'writeCache',
+        value: function writeCache(value) {
+            var cache = this.props.cache;
+
+            if (!cache) {
+                return false;
+            }
+
+            var cacheId = this.props.cacheId;
+
+            return storage.write(_constants.CACHE_KEY, cacheId, value);
+        }
+    }, {
+        key: 'removeCache',
+        value: function removeCache() {
+            // 这个函数不需要检查有没有开启缓存，强制清除
+            var cacheId = this.props.cacheId;
+
+            return storage.write(_constants.CACHE_KEY, cacheId, undefined);
+        }
+
+        // 关闭提示，但是不清楚缓存
+
+
+        // 恢复缓存的数据并删除缓存
+
+    }, {
+        key: 'getDecoratedComponentInstance',
+
+
+        // Dummy method to make Design and DesignWithDnd compatible at source code level
+        value: function getDecoratedComponentInstance() {
+            return this;
+        }
+
+        // Actions on design
+
+    }]);
+
+    return Design;
+}(_react.PureComponent);
+
+Design.defaultProps = {
+    confirmUnsavedLeave: true, // 有未保存类容离开页面时是否要确认
+    cacheRestoreMessage: '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？', // 存在缓存时的提示内容
+    scrollTopOffset: -10,
+    scrollLeftOffset: -10
+};
+exports.default = Design;
+
+/***/ }),
+
+/***/ "./src/pages/editor/components/design/DesignEditor.jsx":
+/*!*************************************************************!*\
+  !*** ./src/pages/editor/components/design/DesignEditor.jsx ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var _find2 = _interopRequireDefault(_find);
+
+var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
+
+var _defaultTo2 = _interopRequireDefault(_defaultTo);
+
+var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+
+var _get = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
+
+var _get2 = _interopRequireDefault(_get);
+
+var _instance = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
+
+var InstanceUtils = _interopRequireWildcard(_instance);
+
+var _DesignPreviewItem = __webpack_require__(/*! ./preview/DesignPreviewItem */ "./src/pages/editor/components/design/preview/DesignPreviewItem.jsx");
+
+var _DesignPreviewItem2 = _interopRequireDefault(_DesignPreviewItem);
+
+var _DesignPreviewController = __webpack_require__(/*! ./preview/DesignPreviewController */ "./src/pages/editor/components/design/preview/DesignPreviewController.jsx");
+
+var _DesignPreviewController2 = _interopRequireDefault(_DesignPreviewController);
+
+var _DesignEditorItem = __webpack_require__(/*! ./editor/DesignEditorItem */ "./src/pages/editor/components/design/editor/DesignEditorItem.jsx");
+
+var _DesignEditorItem2 = _interopRequireDefault(_DesignEditorItem);
+
+var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
+
+var _constants = __webpack_require__(/*! ./preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
+
+var _bundle = __webpack_require__(/*! ./bundle/bundle */ "./src/pages/editor/components/design/bundle/bundle.js");
+
+var _bundle2 = _interopRequireDefault(_bundle);
+
+var _loader = __webpack_require__(/*! ./bundle/loader */ "./src/pages/editor/components/design/bundle/loader.js");
+
+var _loader2 = _interopRequireDefault(_loader);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// 保存实例对应的js组件对象
+function saveRef(map, id, instance) {
+    if (!instance) {
+        delete map[id];
+    } else {
+        map[id] = instance;
+    }
+}
+/**
+ */
+
+var DesignEditor = function (_PureComponent) {
+    _inherits(DesignEditor, _PureComponent);
+
+    function DesignEditor() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, DesignEditor);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.dispatchDragEnd = function (result) {
+            var type = result.type;
+
+            if (type === _constants.DND_PREVIEW_CONTROLLER) {
+                _this.onPreviewDragEnd(result);
+                return;
+            }
+        }, _this.savePreviewItem = function (id) {
+            return function (instance) {
+                saveRef(_this.previewItems, id, instance);
+            };
+        }, _this.saveEditorItem = function (id) {
+            return function (instance) {
+                saveRef(_this.editorItems, id, instance);
+            };
+        }, _this.scrollToItem = function (id, offsets) {
+            var item = _this.previewItems[id];
+
+            if (!item) {
+                return;
+            }
+
+            item.scrollTop(offsets);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+    // All props in this component are injected by Design
+    // 记录预览组件实例 id -> instance
+
+
+    _createClass(DesignEditor, [{
+        key: 'render',
+        // 记录编辑表单实例 id -> instance
+
+        /**
+         * 流程
+         */
+        value: function render() {
+            var _this2 = this;
+
+            var _props = this.props,
+                settings = _props.settings,
+                pluginMap = _props.pluginMap,
+                selectedUUID = _props.selectedUUID,
+                instanceList = _props.instanceList,
+                validations = _props.validations,
+                showError = _props.showError,
+                onSelect = _props.onSelect,
+                onMove = _props.onMove,
+                onDelete = _props.onDelete,
+                onSettingsChange = _props.onSettingsChange,
+                onComponentValueChange = _props.onComponentValueChange,
+                design = _props.design,
+                disabled = _props.disabled;
+
+            return _react2.default.createElement(
+                _reactBeautifulDnd.DragDropContext,
+                { onDragEnd: this.dispatchDragEnd },
+                _react2.default.createElement(
+                    'div',
+                    {
+                        className: 'mp-design-preview',
+                        style: {
+                            backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
+                        } },
+                    disabled && _react2.default.createElement('div', { className: 'mp-design__disabled-mask' }),
+                    _react2.default.createElement(
+                        _reactBeautifulDnd.Droppable,
+                        {
+                            droppableId: 'mp-design-preview-list',
+                            type: _constants.DND_PREVIEW_CONTROLLER,
+                            direction: 'vertical'
+                        },
+                        function (provided, snapshot) {
+                            var draggableIndex = 0;
+                            return _react2.default.createElement(
+                                'div',
+                                _extends({
+                                    ref: provided.innerRef
+                                }, provided.droppableProps, {
+                                    className: (0, _classnames2.default)('mp-design__item-list', 'mp-design__item-list--full-height')
+                                }),
+                                instanceList.map(function (instance) {
+                                    var plugin = _loader2.default.getPluginByInstance(instance);
+                                    // 实例id
+                                    var id = InstanceUtils.getUUIDFromInstance(instance);
+                                    // 是否被选中
+                                    var selected = id === selectedUUID;
+                                    // 是否可拖动
+                                    var draggable = (0, _defaultTo2.default)(plugin.dragable, true);
+                                    return _react2.default.createElement(
+                                        _DesignPreviewItem2.default,
+                                        {
+                                            key: id,
+                                            id: id,
+                                            ref: _this2.savePreviewItem(id)
+                                        },
+                                        _react2.default.createElement(_DesignPreviewController2.default, {
+                                            instance: instance,
+                                            settings: settings,
+                                            design: design,
+                                            id: id,
+                                            index: draggable ? draggableIndex++ : -1,
+                                            allowHoverEffects: !snapshot.isDraggingOver,
+                                            draggable: draggable,
+                                            editable: (0, _defaultTo2.default)(instance.editable, true),
+                                            canDelete: (0, _defaultTo2.default)(instance.canDelete, true),
+                                            highlightWhenSelect: (0, _defaultTo2.default)(instance.highlightWhenSelect, true),
+                                            isSelected: selected,
+                                            component: plugin.preview
+                                        }),
+                                        selected && _react2.default.createElement(
+                                            _DesignEditorItem2.default,
+                                            {
+                                                disabled: disabled,
+                                                ref: _this2.saveEditorItem(id)
+                                            },
+                                            _react2.default.createElement(plugin.editForm, {
+                                                instance: instance,
+                                                settings: settings,
+                                                onSettingsChange: onSettingsChange,
+                                                design: design,
+                                                validation: validations[id] || {},
+                                                showError: showError
+                                            })
+                                        )
+                                    );
+                                }),
+                                provided.placeholder
+                            );
+                        }
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'onPreviewDragEnd',
+        value: function onPreviewDragEnd(result) {
+            var source = result.source,
+                destination = result.destination;
+
+            // dropped outside
+
+            if (!destination) {
+                return;
+            }
+
+            var onMove = this.props.onMove;
+
+            onMove(source.index, destination.index);
+        }
+    }, {
+        key: 'getEditorBoundingBox',
+        value: function getEditorBoundingBox(id) {
+            var item = this.editorItems[id];
+
+            if (!item) {
+                return;
+            }
+
+            return item.getBoundingBox();
+        }
+    }]);
+
+    return DesignEditor;
+}(_react.PureComponent);
+
+DesignEditor.defaultProps = {
+    background: '#f9f9f9',
+    disabled: false
+};
+exports.default = DesignEditor;
+
+/***/ }),
+
+/***/ "./src/pages/editor/components/design/bundle/bundle.js":
+/*!*************************************************************!*\
+  !*** ./src/pages/editor/components/design/bundle/bundle.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8201,10 +9252,10 @@ exports.default = Bundle;
 
 /***/ }),
 
-/***/ "./src/pages/editor/components/bundle/loader.js":
-/*!******************************************************!*\
-  !*** ./src/pages/editor/components/bundle/loader.js ***!
-  \******************************************************/
+/***/ "./src/pages/editor/components/design/bundle/loader.js":
+/*!*************************************************************!*\
+  !*** ./src/pages/editor/components/design/bundle/loader.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8228,7 +9279,7 @@ var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var zent = _interopRequireWildcard(_zent);
 
-var _bundle = __webpack_require__(/*! ./bundle */ "./src/pages/editor/components/bundle/bundle.js");
+var _bundle = __webpack_require__(/*! ./bundle */ "./src/pages/editor/components/design/bundle/bundle.js");
 
 var _bundle2 = _interopRequireDefault(_bundle);
 
@@ -8388,1259 +9439,6 @@ exports.default = new MpEditorPluginLoader();
 
 /***/ }),
 
-/***/ "./src/pages/editor/components/design/Design.jsx":
-/*!*******************************************************!*\
-  !*** ./src/pages/editor/components/design/Design.jsx ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _assign2 = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
-
-var _assign3 = _interopRequireDefault(_assign2);
-
-var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
-
-var _find2 = _interopRequireDefault(_find);
-
-var _findIndex = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
-
-var _findIndex2 = _interopRequireDefault(_findIndex);
-
-var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
-
-var _isEmpty2 = _interopRequireDefault(_isEmpty);
-
-var _isUndefined = __webpack_require__(/*! lodash/isUndefined */ "./node_modules/lodash/isUndefined.js");
-
-var _isUndefined2 = _interopRequireDefault(_isUndefined);
-
-var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
-
-var _defaultTo2 = _interopRequireDefault(_defaultTo);
-
-var _isFunction = __webpack_require__(/*! lodash/isFunction */ "./node_modules/lodash/isFunction.js");
-
-var _isFunction2 = _interopRequireDefault(_isFunction);
-
-var _storage = __webpack_require__(/*! zent/lib/utils/storage */ "./node_modules/zent/lib/utils/storage.js");
-
-var storage = _interopRequireWildcard(_storage);
-
-var _instance2 = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
-
-var InstanceUtils = _interopRequireWildcard(_instance2);
-
-var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
-
-var _loader2 = _interopRequireDefault(_loader);
-
-var _bundle = __webpack_require__(/*! ../bundle/bundle */ "./src/pages/editor/components/bundle/bundle.js");
-
-var _bundle2 = _interopRequireDefault(_bundle);
-
-var _DesignEditor = __webpack_require__(/*! ./DesignEditor */ "./src/pages/editor/components/design/DesignEditor.jsx");
-
-var _DesignEditor2 = _interopRequireDefault(_DesignEditor);
-
-var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
-
-var _LazyMap = __webpack_require__(/*! ./utils/LazyMap */ "./src/pages/editor/components/design/utils/LazyMap.js");
-
-var _LazyMap2 = _interopRequireDefault(_LazyMap);
-
-var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/components/design/constants.js");
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var UUID_KEY = '__zent-design-uuid__';
-var CACHE_KEY = '__zent-design-cache-storage__';
-
-var hasValidateError = function hasValidateError(v) {
-    return !(0, _isEmpty2.default)(v[Object.keys(v)[0]]);
-};
-
-/**
- * 负责数据处理
- */
-
-var Design = function (_PureComponent) {
-    _inherits(Design, _PureComponent);
-
-    function Design(props) {
-        _classCallCheck(this, Design);
-
-        var _this = _possibleConstructorReturn(this, (Design.__proto__ || Object.getPrototypeOf(Design)).call(this, props));
-
-        _this.selectInstance = function (instance) {
-            var id = InstanceUtils.getUUIDFromInstance(instance);
-
-            if (_this.isSelected(instance)) {
-                return;
-            }
-
-            _this.setState({
-                selectedUUID: id
-            });
-
-            _this.adjustHeight();
-        };
-
-        _this.isSelected = function (instance) {
-            var selectedUUID = _this.state.selectedUUID;
-
-            return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
-        };
-
-        _this.setSettings = function (value) {
-            var _this$props = _this.props,
-                settings = _this$props.settings,
-                onSettingsChange = _this$props.onSettingsChange;
-
-            var onSettingsChangeExists = (0, _isFunction2.default)(onSettingsChange);
-
-            if (settings && !onSettingsChangeExists) {
-                throw new Error('Expects onSettingsChange to be a function');
-            }
-
-            if (settings && onSettingsChangeExists) {
-                onSettingsChange(_extends({}, settings, value));
-            }
-
-            if (!settings) {
-                _this.setState({
-                    settings: _extends({}, _this.state.settings, value)
-                });
-            }
-        };
-
-        _this.setInstance = function (instance) {
-            return function (diff) {
-                var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-                var value = _this.props.value;
-                // 得到新的值
-
-                var newComponentValue = replace ? (0, _assign3.default)(_defineProperty({}, UUID_KEY, _this.getUUIDFromValue(instance)), diff) : (0, _assign3.default)({}, instance, diff);
-                // 产生新的instanceList
-                var newValue = value.map(function (v) {
-                    return v === instance ? newComponentValue : v;
-                });
-                // 改变的key
-                var changedProps = Object.keys(diff);
-
-                _this.trackValueChange(newValue);
-                _this.validateComponentValue(newComponentValue, instance, changedProps).then(function (errors) {
-                    var id = _this.getUUIDFromValue(newComponentValue);
-                    _this.setValidation(_defineProperty({}, id, errors));
-                });
-            };
-        };
-
-        _this.validateComponentValue = function (value, prevValue, changedProps) {
-            var type = value.type;
-            var components = _this.props.components;
-
-            var comp = (0, _find2.default)(components, function (c) {
-                return (0, _designType.isExpectedDesginType)(c, type);
-            });
-            var validate = comp.editor.validate;
-
-            var p = validate(value, prevValue, changedProps);
-
-            return p;
-        };
-
-        _this.deleteInstance = function (component) {
-            var _this$props2 = _this.props,
-                value = _this$props2.value,
-                components = _this$props2.components;
-
-            var nextIndex = -1;
-            var newValue = value.filter(function (v, idx) {
-                var skip = v !== component;
-                if (!skip) {
-                    nextIndex = idx - 1;
-                }
-                return skip;
-            });
-
-            var newState = {};
-
-            // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
-            var componentUUID = _this.getUUIDFromValue(component);
-            if (componentUUID === _this.state.selectedUUID) {
-                var nextSelectedValue = findFirstEditableSibling(newValue, components, nextIndex);
-                var nextUUID = _this.getUUIDFromValue(nextSelectedValue);
-                newState.selectedUUID = nextUUID;
-            }
-
-            _this.trackValueChange(newValue);
-            _this.setState(newState);
-
-            _this.adjustHeight();
-        };
-
-        _this.moveInstance = function (fromIndex, toIndex) {
-            if (fromIndex === toIndex) {
-                return;
-            }
-            var _this$props3 = _this.props,
-                value = _this$props3.value,
-                components = _this$props3.components;
-
-            var newValue = [];
-            var tmp = void 0;
-            /**
-             * 这个算法不是仅仅交换两个位置的节点，所有中间节点都需要移位
-             * 需要考虑数组中间有不可拖拽节点的情况，这种情况下 fromIndex, toIndex 的值是不包括这些节点的
-             * 例如 [1, 0, 0, 1, 0, 0, 1]: fromIndex = 0, toIndex = 1 表示移动第一个和第二个 1。
-             */
-            var passedFromIndex = false;
-            var passedToIndex = false;
-
-            if (fromIndex < toIndex) {
-                var _loop = function _loop(i, _dragableIndex) {
-                    var val = value[i];
-
-                    var comp = (0, _find2.default)(components, function (c) {
-                        return (0, _designType.isExpectedDesginType)(c, val.type);
-                    });
-                    var dragable = comp && (0, _defaultTo2.default)(comp.dragable, true);
-                    if (dragable) {
-                        _dragableIndex++;
-                    }
-
-                    /* Invariant: Each step copies one value, except one copies 2 and another doesn't copy */
-                    if (_dragableIndex === fromIndex && !passedFromIndex) {
-                        tmp = val;
-                        passedFromIndex = true;
-                    } else if (_dragableIndex < toIndex && passedFromIndex) {
-                        newValue[i - 1] = val;
-                    } else if (_dragableIndex === toIndex && !passedToIndex) {
-                        newValue[i - 1] = val;
-                        newValue[i] = tmp;
-                        passedToIndex = true;
-                    } else {
-                        newValue[i] = val;
-                    }
-                    dragableIndex = _dragableIndex;
-                };
-
-                // 从上拖到下面
-                for (var i = 0, dragableIndex = -1; i < value.length; i++) {
-                    _loop(i, dragableIndex);
-                }
-            } else {
-                // 从下往上托
-                var toInsetIndex = void 0;
-
-                var _loop2 = function _loop2(i, _dragableIndex3) {
-                    var val = value[i];
-
-                    var comp = (0, _find2.default)(components, function (c) {
-                        return (0, _designType.isExpectedDesginType)(c, val.type);
-                    });
-                    var dragable = comp && (0, _defaultTo2.default)(comp.dragable, true);
-                    if (dragable) {
-                        _dragableIndex3++;
-                    }
-
-                    /* Invariant: each step copies one value */
-                    if (_dragableIndex3 === toIndex && !passedToIndex) {
-                        toInsetIndex = i;
-                        newValue[i + 1] = val;
-                        passedToIndex = true;
-                    } else if (_dragableIndex3 < fromIndex && passedToIndex) {
-                        newValue[i + 1] = val;
-                    } else if (_dragableIndex3 === fromIndex && !passedFromIndex) {
-                        newValue[toInsetIndex] = val;
-                        passedFromIndex = true;
-                    } else {
-                        newValue[i] = val;
-                    }
-                    _dragableIndex2 = _dragableIndex3;
-                };
-
-                for (var i = 0, _dragableIndex2 = -1; i < value.length; i++) {
-                    _loop2(i, _dragableIndex2);
-                }
-            }
-
-            _this.trackValueChange(newValue);
-        };
-
-        _this.setValidation = function (validation) {
-            _this.setState({
-                validations: (0, _assign3.default)({}, _this.state.validations, validation)
-            });
-
-            _this.adjustHeight();
-        };
-
-        _this.validate = function () {
-            var _this$props4 = _this.props,
-                value = _this$props4.value,
-                components = _this$props4.components;
-
-
-            return new Promise(function (resolve, reject) {
-                return Promise.all(value.map(function (v) {
-                    var id = _this.getUUIDFromValue(v);
-                    var type = v.type;
-
-                    var comp = (0, _find2.default)(components, function (c) {
-                        return (0, _designType.isExpectedDesginType)(c, type);
-                    });
-                    // 假如组件设置了 editable: false，不处罚校验
-                    if (!(0, _defaultTo2.default)(comp.editable, true)) {
-                        return Promise.resolve(_defineProperty({}, id, {}));
-                    }
-
-                    return _this.validateComponentValue(v, v, {}).then(function (errors) {
-                        return _defineProperty({}, id, errors);
-                    });
-                })).then(function (validationList) {
-                    var validations = _assign3.default.apply(undefined, [{}].concat(_toConsumableArray(validationList)));
-                    _this.setState({
-                        showError: true,
-                        validations: validations
-                    }, function () {
-                        // 跳转到第一个有错误的组件
-                        var firstError = (0, _find2.default)(validationList, hasValidateError);
-
-                        if (firstError) {
-                            var id = Object.keys(firstError)[0];
-                            _this.scrollToPreviewItem(id);
-
-                            // 选中第一个有错误的组件
-                            _this.setState({
-                                selectedUUID: id
-                            });
-                        }
-
-                        _this.adjustHeight();
-                    });
-
-                    // 过滤所有错误信息，将数组合并为一个对象，key 是每个组件的 id
-                    var validationErrors = validationList.filter(hasValidateError);
-                    var hasError = !(0, _isEmpty2.default)(validationErrors);
-
-                    if (!hasError) {
-                        resolve();
-                    } else {
-                        reject(validationErrors.reduce(function (err, v) {
-                            var key = Object.keys(v)[0];
-                            if (key) {
-                                err[key] = v[key];
-                            }
-
-                            return err;
-                        }, {}));
-                    }
-                });
-            });
-        };
-
-        _this.markAsSaved = function () {
-            _this._dirty = false;
-            _this.removeCache();
-        };
-
-        _this.selectByIndex = function (index, value) {
-            value = value || _this.props.value;
-            index = (0, _isUndefined2.default)(index) ? _this.props.defaultSelectedIndex : index;
-            var safeIndex = getSafeSelectedValueIndex(index, value);
-            var safeValue = value[safeIndex];
-
-            _this.setState({
-                selectedUUID: _this.getUUIDFromValue(safeValue)
-            });
-        };
-
-        _this.hasSelected = function () {
-            var selectedUUID = _this.state.selectedUUID;
-
-
-            return !!selectedUUID;
-        };
-
-        _this.savePreview = function (instance) {
-            if (instance && instance.getDecoratedComponentInstance) {
-                instance = instance.getDecoratedComponentInstance();
-            }
-            _this.preview = instance;
-        };
-
-        _this.adjustHeight = function (id) {
-            // 不要重复执行
-            if (_this.adjustHeightTimer) {
-                clearTimeout(_this.adjustHeightTimer);
-                _this.adjustHeightTimer = undefined;
-            }
-
-            _this.adjustHeightTimer = setTimeout(function () {
-                id = id || _this.state.selectedUUID;
-                if (_this.preview && _this.preview.getEditorBoundingBox) {
-                    var editorBB = _this.preview.getEditorBoundingBox(id);
-                    if (!editorBB) {
-                        return _this.setState({
-                            bottomGap: 0
-                        });
-                    }
-
-                    var previewNode = (0, _reactDom.findDOMNode)(_this.preview);
-                    var previewBB = previewNode && previewNode.getBoundingClientRect();
-                    if (!previewBB) {
-                        return;
-                    }
-
-                    var gap = Math.max(0, editorBB.bottom - previewBB.bottom);
-                    _this.setState({
-                        bottomGap: gap
-                    });
-                }
-            }, 0);
-        };
-
-        _this.onBeforeWindowUnload = function (evt) {
-            if (!_this._dirty) {
-                return;
-            }
-
-            // 这个字符串其实不会展示给用户
-            var confirmLeaveMessage = '页面上有未保存的数据，确定要离开吗？';
-            evt.returnValue = confirmLeaveMessage;
-            return confirmLeaveMessage;
-        };
-
-        _this.onRestoreCacheAlertClose = function () {
-            _this.setState({
-                showRestoreFromCache: false
-            });
-        };
-
-        _this.restoreCache = function (evt) {
-            evt.preventDefault();
-
-            var cachedValue = _this.readCache();
-            if (cachedValue !== storage.NOT_FOUND) {
-                _this.trackValueChange(cachedValue, false);
-                _this.setState({
-                    showRestoreFromCache: false
-                });
-                _this.removeCache();
-            }
-        };
-
-        _this.design = function () {
-            return {
-                getUUID: _this.getUUIDFromValue,
-
-                validateComponentValue: _this.validateComponentValue,
-
-                setValidation: _this.setValidation,
-
-                markAsSaved: _this.markAsSaved,
-
-                adjustPreviewHeight: _this.adjustHeight
-            };
-        }();
-
-        _this.validateCacheProps(props);
-
-        _this.state = {
-            showRestoreFromCache: false, // 是否显示从缓存中恢复的提示
-            settings: {}, // 页面设置，比如页面背景色
-            selectedUUID: '', // 当前选中的组件对应的 UUID
-            instanceList: [], // 插件实例
-            pluginInstanceCount: new _LazyMap2.default(0), // plugin创建的实例数
-            validations: {}, // 当前所有组件的 validation 信息;  key 是 value 的 UUID
-            showError: false, // 是否强制显示错误
-            bottomGap: 0 // 当 preview 很长时，为了对齐 preview 底部需要的额外空间
-        };
-        return _this;
-    }
-
-    /**
-     * 设置实例列表
-     * @param instanceList
-     */
-
-
-    _createClass(Design, [{
-        key: 'setInstanceList',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instanceList) {
-                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, pluginId, plugin, pluginStringID;
-
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _iteratorNormalCompletion = true;
-                                _didIteratorError = false;
-                                _iteratorError = undefined;
-                                _context.prev = 3;
-                                _iterator = instanceList[Symbol.iterator]();
-
-                            case 5:
-                                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                    _context.next = 13;
-                                    break;
-                                }
-
-                                instance = _step.value;
-                                _context.next = 9;
-                                return _loader2.default.loadPlugin(instance.bundleId);
-
-                            case 9:
-                                InstanceUtils.tagInstanceWithUUID(instance);
-
-                            case 10:
-                                _iteratorNormalCompletion = true;
-                                _context.next = 5;
-                                break;
-
-                            case 13:
-                                _context.next = 19;
-                                break;
-
-                            case 15:
-                                _context.prev = 15;
-                                _context.t0 = _context['catch'](3);
-                                _didIteratorError = true;
-                                _iteratorError = _context.t0;
-
-                            case 19:
-                                _context.prev = 19;
-                                _context.prev = 20;
-
-                                if (!_iteratorNormalCompletion && _iterator.return) {
-                                    _iterator.return();
-                                }
-
-                            case 22:
-                                _context.prev = 22;
-
-                                if (!_didIteratorError) {
-                                    _context.next = 25;
-                                    break;
-                                }
-
-                                throw _iteratorError;
-
-                            case 25:
-                                return _context.finish(22);
-
-                            case 26:
-                                return _context.finish(19);
-
-                            case 27:
-                                pluginMap = {};
-                                pluginInstanceCount = new _LazyMap2.default(0);
-                                newInstanceList = [];
-                                i = 0;
-
-                            case 31:
-                                if (!(i < instanceList.length)) {
-                                    _context.next = 45;
-                                    break;
-                                }
-
-                                _instance = instanceList[i];
-                                pluginId = InstanceUtils.getPluginIdFromInstace(_instance);
-                                // 找出plugin 并加载
-
-                                _context.next = 36;
-                                return PluginLoader.loadMpComponentFromBundle(pluginId);
-
-                            case 36:
-                                plugin = _context.sent;
-                                pluginStringID = pluginId.getStringId();
-
-                                pluginMap[pluginStringID] = plugin;
-                                pluginInstanceCount.inc(pluginStringID);
-                                // 加上uuid
-                                InstanceUtils.setUUIDForInstance(_instance, InstanceUtils.generateUUID());
-                                newInstanceList.push(_instance);
-
-                            case 42:
-                                i++;
-                                _context.next = 31;
-                                break;
-
-                            case 45:
-                                this.setState({
-                                    pluginMap: pluginMap, pluginInstanceCount: pluginInstanceCount, instanceList: newInstanceList
-                                });
-
-                            case 46:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[3, 15, 19, 27], [20,, 22, 26]]);
-            }));
-
-            function setInstanceList(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return setInstanceList;
-        }()
-
-        /**
-         *  外部调用接口 创建插件实例，
-         */
-
-    }, {
-        key: 'addInstanceByBundle',
-        value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(bundleId) {
-                var pluginMap, plugin, instance, instanceList, newInstanceList;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                pluginMap = this.state.pluginMap;
-                                // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-
-                                _context2.next = 3;
-                                return _loader2.default.loadPlugin(bundleId);
-
-                            case 3:
-                                plugin = _context2.sent;
-                                instance = plugin.getInitialValue();
-
-                                instance.bundleId = bundleId;
-                                InstanceUtils.tagInstanceWithUUID(instance);
-
-                                instanceList = this.state.instanceList;
-                                newInstanceList = void 0;
-
-                                newInstanceList = instanceList.concat(instance);
-                                this.setState({
-                                    instanceList: newInstanceList
-                                });
-                                this.trackValueChange(newInstanceList);
-                                this.selectInstance(instance);
-
-                            case 13:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function addInstanceByBundle(_x3) {
-                return _ref3.apply(this, arguments);
-            }
-
-            return addInstanceByBundle;
-        }()
-
-        // 选中一个组件
-
-    }, {
-        key: 'render',
-        value: function render() {
-            var _props = this.props,
-                cacheRestoreMessage = _props.cacheRestoreMessage,
-                disabled = _props.disabled;
-            var _state = this.state,
-                showRestoreFromCache = _state.showRestoreFromCache,
-                bottomGap = _state.bottomGap,
-                selectedUUID = _state.selectedUUID,
-                validations = _state.validations,
-                showError = _state.showError,
-                settings = _state.settings,
-                instanceList = _state.instanceList;
-
-
-            var cls = (0, _classnames2.default)('mp-design');
-
-            return _react2.default.createElement(
-                'div',
-                { className: cls, style: { paddingBottom: bottomGap } },
-                showRestoreFromCache && _react2.default.createElement(
-                    _zent.Alert,
-                    {
-                        className: 'mp-design__restore-cache-alert',
-                        closable: true,
-                        onClose: this.onRestoreCacheAlertClose,
-                        type: 'warning'
-                    },
-                    cacheRestoreMessage,
-                    _react2.default.createElement(
-                        'a',
-                        {
-                            className: 'mp-design__restore-cache-alert-use',
-                            onClick: this.restoreCache,
-                            href: 'javascript:void(0);'
-                        },
-                        '\u4F7F\u7528'
-                    )
-                ),
-                _react2.default.createElement(_DesignEditor2.default, {
-                    settings: settings,
-                    selectedUUID: selectedUUID,
-                    instanceList: instanceList,
-                    validations: validations,
-                    showError: showError,
-                    onSelect: this.selectInstance,
-                    onMove: this.moveInstance,
-                    onDelete: this.deleteInstance,
-                    onSettingsChange: this.setSettings,
-                    onComponentValueChange: this.setInstance,
-                    design: this.design,
-                    disabled: disabled,
-                    ref: this.savePreview
-                })
-            );
-        }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {}
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.setupBeforeUnloadHook();
-            this.checkCache();
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            this.setupBeforeUnloadHook();
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.uninstallBeforeUnloadHook();
-        }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            return;
-            this.validateCacheProps(nextProps);
-
-            var shouldUpdateInstanceCountMap = false;
-
-            if (nextProps.value !== this.props.value) {
-                tagValuesWithUUID(nextProps.value);
-                shouldUpdateInstanceCountMap = true;
-            }
-
-            if (nextProps.components !== this.props.components) {
-                this.cacheAppendableComponents(nextProps.components);
-                shouldUpdateInstanceCountMap = true;
-            }
-
-            // 如果当前没有选中的并且 value 或者 defaultSelectedIndex 改变的话
-            // 重新尝试设置默认值
-            if (!this.hasSelected() && (nextProps.defaultSelectedIndex !== this.props.defaultSelectedIndex || nextProps.value !== this.props.value)) {
-                var value = nextProps.value,
-                    defaultSelectedIndex = nextProps.defaultSelectedIndex;
-
-                this.selectByIndex(defaultSelectedIndex, value);
-            }
-
-            if (shouldUpdateInstanceCountMap) {
-                this.setState({
-                    componentInstanceCount: makeInstanceCountMapFromValue(nextProps.value, nextProps.components)
-                });
-            }
-        }
-    }, {
-        key: 'trackValueChange',
-
-
-        // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
-        value: function trackValueChange(newInstanceList) {
-            var writeCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-            var onChange = this.props.onChange;
-
-            onChange && onChange(newInstanceList); // 通知外面数据变化
-
-            if (!this._dirty) {
-                this._dirty = true;
-            }
-
-            if (writeCache) {
-                this.writeCache(newInstanceList);
-            }
-
-            this.adjustHeight();
-        }
-
-        // 删除一个组件, 删除后如果没有选中的组件则默认选一个
-
-
-        // 验证所有组件，如果有错误选中并跳转到第一个有错误的组件。
-        // 如果没有错误，Promise resolve；如果有错误，Promise reject。
-        // reject 的是个数组，
-        // [
-        //   { '508516bf-d3e5-40a5-812e-834d3dee1d54': {} },
-        //   { 'c7c72599-2ac5-41bb-9ba0-45e8178ff5a6': { content: '请填写公告内容' } }
-        // ]
-
-
-        // 保存数据后请调用这个函数通知组件数据已经保存
-
-    }, {
-        key: 'scrollToPreviewItem',
-
-
-        // 滚动到第一个有错误的组件
-        value: function scrollToPreviewItem(id) {
-            if (this.preview) {
-                var _props2 = this.props,
-                    scrollTopOffset = _props2.scrollTopOffset,
-                    scrollLeftOffset = _props2.scrollLeftOffset;
-
-                this.preview.scrollToItem && this.preview.scrollToItem(id, {
-                    top: scrollTopOffset,
-                    left: scrollLeftOffset
-                });
-            }
-        }
-
-        // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
-        // 实际并未改变高度，而是设置了margin/padding
-
-    }, {
-        key: 'setupBeforeUnloadHook',
-        value: function setupBeforeUnloadHook() {
-            var confirmUnsavedLeave = this.props.confirmUnsavedLeave;
-
-
-            if (this._hasBeforeUnloadHook || !confirmUnsavedLeave) {
-                return;
-            }
-
-            window.addEventListener('beforeunload', this.onBeforeWindowUnload);
-            this._hasBeforeUnloadHook = true;
-        }
-    }, {
-        key: 'uninstallBeforeUnloadHook',
-        value: function uninstallBeforeUnloadHook() {
-            window.removeEventListener('beforeunload', this.onBeforeWindowUnload);
-            this._hasBeforeUnloadHook = false;
-        }
-    }, {
-        key: 'validateCacheProps',
-
-
-        // 检查缓存相关的属性是否设置正确
-        value: function validateCacheProps(props) {
-            props = props || this.props;
-            var _props3 = props,
-                cache = _props3.cache,
-                cacheId = _props3.cacheId;
-
-            if (cache && !cacheId) {
-                throw new Error('Design: cacheId is required when cache is on');
-            }
-        }
-    }, {
-        key: 'checkCache',
-        value: function checkCache() {
-            var cache = this.props.cache;
-
-
-            if (cache) {
-                var cachedValue = this.readCache();
-
-                if (cachedValue !== storage.NOT_FOUND) {
-                    this.setState({
-                        showRestoreFromCache: true
-                    });
-                }
-            }
-        }
-    }, {
-        key: 'readCache',
-        value: function readCache() {
-            var cache = this.props.cache;
-
-            if (!cache) {
-                return storage.NOT_FOUND;
-            }
-
-            var cacheId = this.props.cacheId;
-
-            return storage.read(CACHE_KEY, cacheId);
-        }
-    }, {
-        key: 'writeCache',
-        value: function writeCache(value) {
-            var cache = this.props.cache;
-
-            if (!cache) {
-                return false;
-            }
-
-            var cacheId = this.props.cacheId;
-
-            return storage.write(CACHE_KEY, cacheId, value);
-        }
-    }, {
-        key: 'removeCache',
-        value: function removeCache() {
-            // 这个函数不需要检查有没有开启缓存，强制清除
-            var cacheId = this.props.cacheId;
-
-            return storage.write(CACHE_KEY, cacheId, undefined);
-        }
-
-        // 关闭提示，但是不清楚缓存
-
-
-        // 恢复缓存的数据并删除缓存
-
-    }, {
-        key: 'getDecoratedComponentInstance',
-
-
-        // Dummy method to make Design and DesignWithDnd compatible at source code level
-        value: function getDecoratedComponentInstance() {
-            return this;
-        }
-
-        // Actions on design
-
-    }]);
-
-    return Design;
-}(_react.PureComponent);
-
-Design.defaultProps = {
-    confirmUnsavedLeave: true, // 有未保存类容离开页面时是否要确认
-    cacheRestoreMessage: '提示：在浏览器中发现未提交的内容，是否使用该内容替换当前内容？', // 存在缓存时的提示内容
-    scrollTopOffset: -10,
-    scrollLeftOffset: -10
-};
-exports.default = Design;
-
-/***/ }),
-
-/***/ "./src/pages/editor/components/design/DesignEditor.jsx":
-/*!*************************************************************!*\
-  !*** ./src/pages/editor/components/design/DesignEditor.jsx ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
-
-var _find2 = _interopRequireDefault(_find);
-
-var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
-
-var _defaultTo2 = _interopRequireDefault(_defaultTo);
-
-var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-
-var _get = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
-
-var _get2 = _interopRequireDefault(_get);
-
-var _instance = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
-
-var InstanceUtils = _interopRequireWildcard(_instance);
-
-var _DesignPreviewItem = __webpack_require__(/*! ./preview/DesignPreviewItem */ "./src/pages/editor/components/design/preview/DesignPreviewItem.jsx");
-
-var _DesignPreviewItem2 = _interopRequireDefault(_DesignPreviewItem);
-
-var _DesignPreviewController = __webpack_require__(/*! ./preview/DesignPreviewController */ "./src/pages/editor/components/design/preview/DesignPreviewController.jsx");
-
-var _DesignPreviewController2 = _interopRequireDefault(_DesignPreviewController);
-
-var _DesignEditorItem = __webpack_require__(/*! ./editor/DesignEditorItem */ "./src/pages/editor/components/design/editor/DesignEditorItem.jsx");
-
-var _DesignEditorItem2 = _interopRequireDefault(_DesignEditorItem);
-
-var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
-
-var _constants = __webpack_require__(/*! ./preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
-
-var _bundle = __webpack_require__(/*! ../bundle/bundle */ "./src/pages/editor/components/bundle/bundle.js");
-
-var _bundle2 = _interopRequireDefault(_bundle);
-
-var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
-
-var _loader2 = _interopRequireDefault(_loader);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// 保存实例对应的js组件对象
-function saveRef(map, id, instance) {
-    if (!instance) {
-        delete map[id];
-    } else {
-        map[id] = instance;
-    }
-}
-/**
- */
-
-var DesignEditor = function (_PureComponent) {
-    _inherits(DesignEditor, _PureComponent);
-
-    function DesignEditor() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
-        _classCallCheck(this, DesignEditor);
-
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.dispatchDragEnd = function (result) {
-            var type = result.type;
-
-            if (type === _constants.DND_PREVIEW_CONTROLLER) {
-                _this.onPreviewDragEnd(result);
-                return;
-            }
-        }, _this.savePreviewItem = function (id) {
-            return function (instance) {
-                saveRef(_this.previewItems, id, instance);
-            };
-        }, _this.saveEditorItem = function (id) {
-            return function (instance) {
-                saveRef(_this.editorItems, id, instance);
-            };
-        }, _this.scrollToItem = function (id, offsets) {
-            var item = _this.previewItems[id];
-
-            if (!item) {
-                return;
-            }
-
-            item.scrollTop(offsets);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
-    }
-    // All props in this component are injected by Design
-    // 记录预览组件实例 id -> instance
-
-
-    _createClass(DesignEditor, [{
-        key: 'render',
-        // 记录编辑表单实例 id -> instance
-
-        /**
-         * 流程
-         */
-        value: function render() {
-            var _this2 = this;
-
-            var _props = this.props,
-                settings = _props.settings,
-                pluginMap = _props.pluginMap,
-                selectedUUID = _props.selectedUUID,
-                instanceList = _props.instanceList,
-                validations = _props.validations,
-                showError = _props.showError,
-                onSelect = _props.onSelect,
-                onMove = _props.onMove,
-                onDelete = _props.onDelete,
-                onSettingsChange = _props.onSettingsChange,
-                onComponentValueChange = _props.onComponentValueChange,
-                design = _props.design,
-                disabled = _props.disabled;
-
-            return _react2.default.createElement(
-                _reactBeautifulDnd.DragDropContext,
-                { onDragEnd: this.dispatchDragEnd },
-                _react2.default.createElement(
-                    'div',
-                    {
-                        className: 'mp-design-preview',
-                        style: {
-                            backgroundColor: (0, _get2.default)(settings, 'previewBackground', _constants.DEFAULT_BACKGROUND)
-                        } },
-                    disabled && _react2.default.createElement('div', { className: 'mp-design__disabled-mask' }),
-                    _react2.default.createElement(
-                        _reactBeautifulDnd.Droppable,
-                        {
-                            droppableId: 'mp-design-preview-list',
-                            type: _constants.DND_PREVIEW_CONTROLLER,
-                            direction: 'vertical'
-                        },
-                        function (provided, snapshot) {
-                            var draggableIndex = 0;
-                            return _react2.default.createElement(
-                                'div',
-                                _extends({
-                                    ref: provided.innerRef
-                                }, provided.droppableProps, {
-                                    className: (0, _classnames2.default)('mp-design__item-list', 'mp-design__item-list--full-height')
-                                }),
-                                instanceList.map(function (instance) {
-                                    var plugin = _loader2.default.getPluginByInstance(instance);
-                                    // 实例id
-                                    var id = InstanceUtils.getUUIDFromInstance(instance);
-                                    // 是否被选中
-                                    var selected = id === selectedUUID;
-                                    // 是否可拖动
-                                    var draggable = (0, _defaultTo2.default)(plugin.dragable, true);
-                                    return _react2.default.createElement(
-                                        _DesignPreviewItem2.default,
-                                        {
-                                            key: id,
-                                            id: id,
-                                            ref: _this2.savePreviewItem(id)
-                                        },
-                                        _react2.default.createElement(_DesignPreviewController2.default, {
-                                            instance: instance,
-                                            settings: settings,
-                                            design: design,
-                                            id: id,
-                                            index: draggable ? draggableIndex++ : -1,
-                                            allowHoverEffects: !snapshot.isDraggingOver,
-                                            draggable: draggable,
-                                            editable: (0, _defaultTo2.default)(instance.editable, true),
-                                            canDelete: (0, _defaultTo2.default)(instance.canDelete, true),
-                                            highlightWhenSelect: (0, _defaultTo2.default)(instance.highlightWhenSelect, true),
-                                            isSelected: selected,
-                                            onSelect: onSelect,
-                                            onDelete: onDelete,
-                                            component: plugin.preview
-                                        }),
-                                        selected && _react2.default.createElement(
-                                            _DesignEditorItem2.default,
-                                            {
-                                                disabled: disabled,
-                                                ref: _this2.saveEditorItem(id)
-                                            },
-                                            _react2.default.createElement(plugin.editForm, {
-                                                instance: instance,
-                                                onChange: onComponentValueChange(instance),
-                                                settings: settings,
-                                                onSettingsChange: onSettingsChange,
-                                                design: design,
-                                                validation: validations[id] || {},
-                                                showError: showError
-                                            })
-                                        )
-                                    );
-                                }),
-                                provided.placeholder
-                            );
-                        }
-                    )
-                )
-            );
-        }
-    }, {
-        key: 'onPreviewDragEnd',
-        value: function onPreviewDragEnd(result) {
-            var source = result.source,
-                destination = result.destination;
-
-            // dropped outside
-
-            if (!destination) {
-                return;
-            }
-
-            var onMove = this.props.onMove;
-
-            onMove(source.index, destination.index);
-        }
-    }, {
-        key: 'getEditorBoundingBox',
-        value: function getEditorBoundingBox(id) {
-            var item = this.editorItems[id];
-
-            if (!item) {
-                return;
-            }
-
-            return item.getBoundingBox();
-        }
-    }]);
-
-    return DesignEditor;
-}(_react.PureComponent);
-
-DesignEditor.defaultProps = {
-    background: '#f9f9f9',
-    disabled: false
-};
-exports.default = DesignEditor;
-
-/***/ }),
-
 /***/ "./src/pages/editor/components/design/constants.js":
 /*!*********************************************************!*\
   !*** ./src/pages/editor/components/design/constants.js ***!
@@ -9659,6 +9457,8 @@ var ADD_COMPONENT_OVERLAY_POSITION = exports.ADD_COMPONENT_OVERLAY_POSITION = {
   BOTTOM: 2,
   UNKNOWN: -1
 };
+var UUID_KEY = exports.UUID_KEY = '__zent-design-uuid__';
+var CACHE_KEY = exports.CACHE_KEY = '__zent-design-cache-storage__';
 
 /***/ }),
 
@@ -9775,7 +9575,7 @@ var _stripUUID2 = _interopRequireDefault(_stripUUID);
 
 __webpack_require__(/*! ./index.pcss */ "./src/pages/editor/components/design/index.pcss");
 
-var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
+var _loader = __webpack_require__(/*! ./bundle/loader */ "./src/pages/editor/components/design/bundle/loader.js");
 
 var _loader2 = _interopRequireDefault(_loader);
 
@@ -9866,13 +9666,15 @@ var DesignPreviewController = function (_PureComponent) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignPreviewController.__proto__ || Object.getPrototypeOf(DesignPreviewController)).call.apply(_ref, [this].concat(args))), _this), _this.onSelect = function (evt) {
-            var editable = _this.props.editable;
+            var _this$props = _this.props,
+                editable = _this$props.editable,
+                design = _this$props.design,
+                instance = _this$props.instance;
 
             if (!editable) {
                 return;
             }
-
-            _this.invokeCallback('onSelect', evt, false);
+            design.selectInstance(instance);
         }, _this.onDelete = function () {
             _this.invokeCallback('onDelete', null, true);
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -10382,9 +10184,137 @@ function serializeDesignType(designType) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.validateInstanceList = exports.validateInstance = undefined;
+
+var validateInstance = exports.validateInstance = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instance) {
+        var plugin, errors;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        plugin = _loader2.default.getPluginByInstance(instance);
+                        _context.next = 3;
+                        return plugin.validate(instance);
+
+                    case 3:
+                        errors = _context.sent;
+                        return _context.abrupt("return", errors);
+
+                    case 5:
+                    case "end":
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function validateInstance(_x) {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+// 验证所有组件，如果有错误选中并跳转到第一个有错误的组件。
+// 如果没有错误，Promise resolve；如果有错误，Promise reject。
+// reject 的是个数组，
+// [
+//   { '508516bf-d3e5-40a5-812e-834d3dee1d54': {} },
+//   { 'c7c72599-2ac5-41bb-9ba0-45e8178ff5a6': { content: '请填写公告内容' } }
+// ]
+
+
+var validateInstanceList = exports.validateInstanceList = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(instance) {
+        var _this = this;
+
+        var _props2, value, components;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _props2 = this.props, value = _props2.value, components = _props2.components;
+                        return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                            return Promise.all(value.map(function (v) {
+                                var id = _this.getUUIDFromValue(v);
+                                var type = v.type;
+
+                                var comp = (0, _find2.default)(components, function (c) {
+                                    return (0, _designType.isExpectedDesginType)(c, type);
+                                });
+                                // 假如组件设置了 editable: false，不处罚校验
+                                if (!(0, _defaultTo2.default)(comp.editable, true)) {
+                                    return Promise.resolve(_defineProperty({}, id, {}));
+                                }
+
+                                return _this.validateComponentValue(v, v, {}).then(function (errors) {
+                                    return _defineProperty({}, id, errors);
+                                });
+                            })).then(function (validationList) {
+                                var validations = _assign2.default.apply(undefined, [{}].concat(_toConsumableArray(validationList)));
+                                _this.setState({
+                                    showError: true,
+                                    validations: validations
+                                }, function () {
+                                    // 跳转到第一个有错误的组件
+                                    var firstError = (0, _find2.default)(validationList, hasValidateError);
+
+                                    if (firstError) {
+                                        var id = Object.keys(firstError)[0];
+                                        _this.scrollToPreviewItem(id);
+
+                                        // 选中第一个有错误的组件
+                                        _this.setState({
+                                            selectedUUID: id
+                                        });
+                                    }
+
+                                    _this.adjustHeight();
+                                });
+
+                                // 过滤所有错误信息，将数组合并为一个对象，key 是每个组件的 id
+                                var validationErrors = validationList.filter(hasValidateError);
+                                var hasError = !(0, _isEmpty2.default)(validationErrors);
+
+                                if (!hasError) {
+                                    resolve();
+                                } else {
+                                    reject(validationErrors.reduce(function (err, v) {
+                                        var key = Object.keys(v)[0];
+                                        if (key) {
+                                            err[key] = v[key];
+                                        }
+
+                                        return err;
+                                    }, {}));
+                                }
+                            });
+                        }));
+
+                    case 2:
+                    case "end":
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
+
+    return function validateInstanceList(_x2) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+/**
+ * 从 startIndex 开始往前找到第一个可以选中的值
+ * @param {array} value 当前的值
+ * @param {array} components 当前可用的组件列表
+ * @param {number} startIndex 开始搜索的下标
+ */
+
+
 exports.getUUIDFromInstance = getUUIDFromInstance;
 exports.tagInstanceWithUUID = tagInstanceWithUUID;
-exports.tagInstanceListWithUUID = tagInstanceListWithUUID;
+exports.moveInstance = moveInstance;
 exports.findFirstEditableSibling = findFirstEditableSibling;
 exports.makeInstanceCountMapFromValue = makeInstanceCountMapFromValue;
 exports.getSafeSelectedValueIndex = getSafeSelectedValueIndex;
@@ -10408,7 +10338,25 @@ var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/
 
 var _uuid2 = _interopRequireDefault(_uuid);
 
+var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/design/bundle/loader.js");
+
+var _loader2 = _interopRequireDefault(_loader);
+
+var _assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 /**
  * instance工具函数
@@ -10429,23 +10377,99 @@ function tagInstanceWithUUID(instance) {
 }
 
 /**
- * 为实例加上uuid
+ * 移动实例
+ * 不是仅仅交换两个位置的节点，所有中间节点都需要移位
+ * 需要考虑数组中间有不可拖拽节点的情况，这种情况下 fromIndex, toIndex 的值是不包括这些节点的
+ * 例如 [1, 0, 0, 1, 0, 0, 1]: fromIndex = 0, toIndex = 1 表示移动第一个和第二个 1。
  * @param instanceList
+ * @param fromIndex
+ * @param toIndex
  */
-function tagInstanceListWithUUID(instanceList) {
-    instanceList.forEach(function (v) {
-        if (!v[UUID_KEY]) {
-            v[UUID_KEY] = (0, _uuid2.default)();
+function moveInstance(instanceList, fromIndex, toIndex) {
+    if (fromIndex === toIndex) {
+        return;
+    }
+    var _props = this.props,
+        value = _props.value,
+        components = _props.components;
+
+    var newValue = [];
+    var tmp = void 0;
+
+    var passedFromIndex = false;
+    var passedToIndex = false;
+
+    if (fromIndex < toIndex) {
+        var _loop = function _loop(i, _dragableIndex) {
+            var val = value[i];
+
+            var comp = (0, _find2.default)(components, function (c) {
+                return (0, _designType.isExpectedDesginType)(c, val.type);
+            });
+            var dragable = comp && (0, _defaultTo2.default)(comp.dragable, true);
+            if (dragable) {
+                _dragableIndex++;
+            }
+
+            /* Invariant: Each step copies one value, except one copies 2 and another doesn't copy */
+            if (_dragableIndex === fromIndex && !passedFromIndex) {
+                tmp = val;
+                passedFromIndex = true;
+            } else if (_dragableIndex < toIndex && passedFromIndex) {
+                newValue[i - 1] = val;
+            } else if (_dragableIndex === toIndex && !passedToIndex) {
+                newValue[i - 1] = val;
+                newValue[i] = tmp;
+                passedToIndex = true;
+            } else {
+                newValue[i] = val;
+            }
+            dragableIndex = _dragableIndex;
+        };
+
+        // 从上拖到下面
+        for (var i = 0, dragableIndex = -1; i < value.length; i++) {
+            _loop(i, dragableIndex);
         }
-    });
+    } else {
+        // 从下往上托
+        var toInsetIndex = void 0;
+
+        var _loop2 = function _loop2(i, _dragableIndex3) {
+            var val = value[i];
+
+            var comp = (0, _find2.default)(components, function (c) {
+                return (0, _designType.isExpectedDesginType)(c, val.type);
+            });
+            var dragable = comp && (0, _defaultTo2.default)(comp.dragable, true);
+            if (dragable) {
+                _dragableIndex3++;
+            }
+
+            /* Invariant: each step copies one value */
+            if (_dragableIndex3 === toIndex && !passedToIndex) {
+                toInsetIndex = i;
+                newValue[i + 1] = val;
+                passedToIndex = true;
+            } else if (_dragableIndex3 < fromIndex && passedToIndex) {
+                newValue[i + 1] = val;
+            } else if (_dragableIndex3 === fromIndex && !passedFromIndex) {
+                newValue[toInsetIndex] = val;
+                passedFromIndex = true;
+            } else {
+                newValue[i] = val;
+            }
+            _dragableIndex2 = _dragableIndex3;
+        };
+
+        for (var i = 0, _dragableIndex2 = -1; i < value.length; i++) {
+            _loop2(i, _dragableIndex2);
+        }
+    }
+
+    this.trackValueChange(newValue);
 }
 
-/**
- * 从 startIndex 开始往前找到第一个可以选中的值
- * @param {array} value 当前的值
- * @param {array} components 当前可用的组件列表
- * @param {number} startIndex 开始搜索的下标
- */
 function findFirstEditableSibling(instanceList, pluginMap, nextIndex) {
     var loop = function loop(i) {
         var val = value[i];
@@ -10461,17 +10485,17 @@ function findFirstEditableSibling(instanceList, pluginMap, nextIndex) {
     var valueLength = value.length;
     // 往前找
     for (var i = startIndex; i >= 0 && i < valueLength; i--) {
-        var val = loop(i);
-        if (val) {
-            return val;
+        var _val = loop(i);
+        if (_val) {
+            return _val;
         }
     }
 
     // 往后找
     for (var _i = startIndex + 1; _i < valueLength; _i++) {
-        var _val = loop(_i);
-        if (_val) {
-            return _val;
+        var _val2 = loop(_i);
+        if (_val2) {
+            return _val2;
         }
     }
 
