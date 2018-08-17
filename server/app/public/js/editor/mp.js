@@ -8220,19 +8220,6 @@ var Design = function (_PureComponent) {
 
         var _this = _possibleConstructorReturn(this, (Design.__proto__ || Object.getPrototypeOf(Design)).call(this, props));
 
-        _this._selectInstance = function (instance) {
-            var id = InstanceUtils.getUUIDFromInstance(instance);
-            if (_this.isSelected(instance)) {
-                return;
-            }
-
-            _this.setState({
-                selectedUUID: id
-            });
-
-            _this._adjustHeight();
-        };
-
         _this.selectByIndex = function (index) {
             var instanceList = _this.state.instanceList;
 
@@ -8244,10 +8231,24 @@ var Design = function (_PureComponent) {
             });
         };
 
-        _this.isSelected = function (instance) {
+        _this._savePreview = function (instance) {
+
+            _this.preview = instance;
+        };
+
+        _this._selectInstance = function (instance) {
             var selectedUUID = _this.state.selectedUUID;
 
-            return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
+            var id = InstanceUtils.getUUIDFromInstance(instance);
+            if (InstanceUtils.getUUIDFromInstance(instance) === selectedUUID) {
+                return;
+            }
+
+            _this.setState({
+                selectedUUID: id
+            });
+
+            _this._adjustHeight();
         };
 
         _this._setSettings = function (value) {
@@ -8363,25 +8364,6 @@ var Design = function (_PureComponent) {
             _this._adjustHeight();
         };
 
-        _this.markAsSaved = function () {
-            _this._dirty = false;
-            _this.removeCache();
-        };
-
-        _this.hasSelected = function () {
-            var selectedUUID = _this.state.selectedUUID;
-
-
-            return !!selectedUUID;
-        };
-
-        _this.savePreview = function (instance) {
-            if (instance && instance.getDecoratedComponentInstance) {
-                instance = instance.getDecoratedComponentInstance();
-            }
-            _this.preview = instance;
-        };
-
         _this._adjustHeight = function (id) {
             // 不要重复执行
             if (_this._adjustHeightTimer) {
@@ -8391,57 +8373,83 @@ var Design = function (_PureComponent) {
 
             _this._adjustHeightTimer = setTimeout(function () {
                 id = id || _this.state.selectedUUID;
-                if (_this.preview && _this.preview.getEditorBoundingBox) {
-                    var editorBB = _this.preview.getEditorBoundingBox(id);
-                    if (!editorBB) {
-                        return _this.setState({
-                            bottomGap: 0
-                        });
-                    }
 
-                    var previewNode = (0, _reactDom.findDOMNode)(_this.preview);
-                    var previewBB = previewNode && previewNode.getBoundingClientRect();
-                    if (!previewBB) {
-                        return;
-                    }
-
-                    var gap = Math.max(0, editorBB.bottom - previewBB.bottom);
-                    _this.setState({
-                        bottomGap: gap
+                // 获取编辑器框
+                var editorBB = _this.preview.getEditorBoundingBox(id);
+                if (!editorBB) {
+                    return _this.setState({
+                        bottomGap: 0
                     });
                 }
+
+                // 获取展示框
+                var previewNode = (0, _reactDom.findDOMNode)(_this.preview);
+                var previewBB = previewNode && previewNode.getBoundingClientRect();
+                if (!previewBB) {
+                    return;
+                }
+
+                var gap = Math.max(0, editorBB.bottom - previewBB.bottom);
+                _this.setState({
+                    bottomGap: gap
+                });
             }, 0);
         };
 
-        _this.onBeforeWindowUnload = function (evt) {
+        _this._windowUnloadHandler = function (evt) {
             if (!_this._dirty) {
                 return;
             }
-
             // 这个字符串其实不会展示给用户
             var confirmLeaveMessage = '页面上有未保存的数据，确定要离开吗？';
             evt.returnValue = confirmLeaveMessage;
             return confirmLeaveMessage;
         };
 
-        _this.onRestoreCacheAlertClose = function () {
+        _this._closeRestoreCacheAlert = function () {
             _this.setState({
                 showRestoreFromCache: false
             });
         };
 
-        _this.restoreCache = function (evt) {
-            evt.preventDefault();
+        _this._restoreCache = function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(evt) {
+                var cachedValue;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                evt.preventDefault();
 
-            var cachedValue = _this.readCache();
-            if (cachedValue !== storage.NOT_FOUND) {
-                _this._trackValueChange(cachedValue, false);
-                _this.setState({
-                    showRestoreFromCache: false
-                });
-                _this.removeCache();
-            }
-        };
+                                cachedValue = _this._readCache();
+
+                                if (!(cachedValue !== storage.NOT_FOUND)) {
+                                    _context2.next = 8;
+                                    break;
+                                }
+
+                                _this._trackValueChange(cachedValue, false);
+                                _context2.next = 6;
+                                return _this.setInstanceList(cachedValue);
+
+                            case 6:
+                                _this.setState({
+                                    showRestoreFromCache: false
+                                });
+                                _this._removeCache();
+
+                            case 8:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, _this2);
+            }));
+
+            return function (_x4) {
+                return _ref2.apply(this, arguments);
+            };
+        }();
 
         _this.design = function () {
             return {
@@ -8459,8 +8467,6 @@ var Design = function (_PureComponent) {
                 adjustPreviewHeight: _this._adjustHeight
             };
         }();
-
-        _this.validateCacheProps(props);
 
         _this.state = {
             showRestoreFromCache: false, // 是否显示从缓存中恢复的提示
@@ -8484,27 +8490,27 @@ var Design = function (_PureComponent) {
     _createClass(Design, [{
         key: 'setInstanceList',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(instanceList) {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(instanceList) {
                 var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, bundle, plugin, stringID;
 
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
                     while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context3.prev = _context3.next) {
                             case 0:
                                 _iteratorNormalCompletion = true;
                                 _didIteratorError = false;
                                 _iteratorError = undefined;
-                                _context2.prev = 3;
+                                _context3.prev = 3;
                                 _iterator = instanceList[Symbol.iterator]();
 
                             case 5:
                                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                    _context2.next = 13;
+                                    _context3.next = 13;
                                     break;
                                 }
 
                                 instance = _step.value;
-                                _context2.next = 9;
+                                _context3.next = 9;
                                 return _loader2.default.loadPlugin(instance.bundleId);
 
                             case 9:
@@ -8512,42 +8518,42 @@ var Design = function (_PureComponent) {
 
                             case 10:
                                 _iteratorNormalCompletion = true;
-                                _context2.next = 5;
+                                _context3.next = 5;
                                 break;
 
                             case 13:
-                                _context2.next = 19;
+                                _context3.next = 19;
                                 break;
 
                             case 15:
-                                _context2.prev = 15;
-                                _context2.t0 = _context2['catch'](3);
+                                _context3.prev = 15;
+                                _context3.t0 = _context3['catch'](3);
                                 _didIteratorError = true;
-                                _iteratorError = _context2.t0;
+                                _iteratorError = _context3.t0;
 
                             case 19:
-                                _context2.prev = 19;
-                                _context2.prev = 20;
+                                _context3.prev = 19;
+                                _context3.prev = 20;
 
                                 if (!_iteratorNormalCompletion && _iterator.return) {
                                     _iterator.return();
                                 }
 
                             case 22:
-                                _context2.prev = 22;
+                                _context3.prev = 22;
 
                                 if (!_didIteratorError) {
-                                    _context2.next = 25;
+                                    _context3.next = 25;
                                     break;
                                 }
 
                                 throw _iteratorError;
 
                             case 25:
-                                return _context2.finish(22);
+                                return _context3.finish(22);
 
                             case 26:
-                                return _context2.finish(19);
+                                return _context3.finish(19);
 
                             case 27:
                                 pluginMap = {};
@@ -8557,7 +8563,7 @@ var Design = function (_PureComponent) {
 
                             case 31:
                                 if (!(i < instanceList.length)) {
-                                    _context2.next = 45;
+                                    _context3.next = 45;
                                     break;
                                 }
 
@@ -8565,11 +8571,11 @@ var Design = function (_PureComponent) {
                                 bundle = new _bundle2.default(_instance.bundleId);
                                 // 找出plugin 并加载
 
-                                _context2.next = 36;
+                                _context3.next = 36;
                                 return _loader2.default.loadPlugin(_instance.bundleId);
 
                             case 36:
-                                plugin = _context2.sent;
+                                plugin = _context3.sent;
                                 stringID = bundle.getStringId();
 
                                 pluginMap[stringID] = plugin;
@@ -8580,7 +8586,7 @@ var Design = function (_PureComponent) {
 
                             case 42:
                                 i++;
-                                _context2.next = 31;
+                                _context3.next = 31;
                                 break;
 
                             case 45:
@@ -8590,14 +8596,14 @@ var Design = function (_PureComponent) {
 
                             case 46:
                             case 'end':
-                                return _context2.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee2, this, [[3, 15, 19, 27], [20,, 22, 26]]);
+                }, _callee3, this, [[3, 15, 19, 27], [20,, 22, 26]]);
             }));
 
-            function setInstanceList(_x4) {
-                return _ref2.apply(this, arguments);
+            function setInstanceList(_x5) {
+                return _ref3.apply(this, arguments);
             }
 
             return setInstanceList;
@@ -8610,20 +8616,20 @@ var Design = function (_PureComponent) {
     }, {
         key: 'addInstanceByBundle',
         value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(bundleId) {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(bundleId) {
                 var pluginMap, plugin, instance, instanceList, newInstanceList;
-                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                return regeneratorRuntime.wrap(function _callee4$(_context4) {
                     while (1) {
-                        switch (_context3.prev = _context3.next) {
+                        switch (_context4.prev = _context4.next) {
                             case 0:
                                 pluginMap = this.state.pluginMap;
                                 // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
 
-                                _context3.next = 3;
+                                _context4.next = 3;
                                 return _loader2.default.loadPlugin(bundleId);
 
                             case 3:
-                                plugin = _context3.sent;
+                                plugin = _context4.sent;
                                 instance = plugin.getInitialValue();
 
                                 instance.bundleId = bundleId;
@@ -8641,21 +8647,49 @@ var Design = function (_PureComponent) {
 
                             case 13:
                             case 'end':
-                                return _context3.stop();
+                                return _context4.stop();
                         }
                     }
-                }, _callee3, this);
+                }, _callee4, this);
             }));
 
-            function addInstanceByBundle(_x5) {
-                return _ref3.apply(this, arguments);
+            function addInstanceByBundle(_x6) {
+                return _ref4.apply(this, arguments);
             }
 
             return addInstanceByBundle;
         }()
+    }, {
+        key: 'validate',
 
-        // 选中一个组件
 
+        // TODO
+        value: function () {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, this);
+            }));
+
+            function validate() {
+                return _ref5.apply(this, arguments);
+            }
+
+            return validate;
+        }()
+    }, {
+        key: 'getIncenceList',
+        value: function getIncenceList() {
+            this._dirty = false;
+            this._removeCache();
+            return this.state.instanceList;
+        }
     }, {
         key: 'render',
         value: function render() {
@@ -8682,7 +8716,7 @@ var Design = function (_PureComponent) {
                     {
                         className: 'mp-design__restore-cache-alert',
                         closable: true,
-                        onClose: this.onRestoreCacheAlertClose,
+                        onClose: this._closeRestoreCacheAlert,
                         type: 'warning'
                     },
                     cacheRestoreMessage,
@@ -8690,7 +8724,7 @@ var Design = function (_PureComponent) {
                         'a',
                         {
                             className: 'mp-design__restore-cache-alert-use',
-                            onClick: this.restoreCache,
+                            onClick: this._restoreCache,
                             href: 'javascript:void(0);'
                         },
                         '\u4F7F\u7528'
@@ -8704,34 +8738,29 @@ var Design = function (_PureComponent) {
                     showError: showError,
                     design: this.design,
                     disabled: disabled,
-                    ref: this.savePreview
+                    ref: this._savePreview
                 })
             );
         }
     }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {}
-    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.setupBeforeUnloadHook();
-            this.checkCache();
+            this._setupBeforeUnloadHook();
+            this._checkCache();
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
-            this.setupBeforeUnloadHook();
+            this._setupBeforeUnloadHook();
         }
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            this.uninstallBeforeUnloadHook();
+            this._uninstallBeforeUnloadHook();
         }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.validateCacheProps(nextProps);
-        }
+
+        // 选中一个组件
+
     }, {
         key: '_trackValueChange',
 
@@ -8748,7 +8777,7 @@ var Design = function (_PureComponent) {
             }
 
             if (writeCache) {
-                this.writeCache(newInstanceList);
+                this._writeCache(newInstanceList);
             }
 
             this._adjustHeight();
@@ -8756,33 +8785,28 @@ var Design = function (_PureComponent) {
 
         // 删除一个组件, 删除后如果没有选中的组件则默认选一个
 
-
-        // 保存数据后请调用这个函数通知组件数据已经保存
-
     }, {
-        key: 'scrollToPreviewItem',
+        key: '_scrollToPreviewItem',
 
 
         // 滚动到第一个有错误的组件
-        value: function scrollToPreviewItem(id) {
-            if (this.preview) {
-                var _props2 = this.props,
-                    scrollTopOffset = _props2.scrollTopOffset,
-                    scrollLeftOffset = _props2.scrollLeftOffset;
+        value: function _scrollToPreviewItem(id) {
+            var _props2 = this.props,
+                scrollTopOffset = _props2.scrollTopOffset,
+                scrollLeftOffset = _props2.scrollLeftOffset;
 
-                this.preview.scrollToItem && this.preview.scrollToItem(id, {
-                    top: scrollTopOffset,
-                    left: scrollLeftOffset
-                });
-            }
+            this.preview.scrollToItem(id, {
+                top: scrollTopOffset,
+                left: scrollLeftOffset
+            });
         }
 
         // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
         // 实际并未改变高度，而是设置了margin/padding
 
     }, {
-        key: 'setupBeforeUnloadHook',
-        value: function setupBeforeUnloadHook() {
+        key: '_setupBeforeUnloadHook',
+        value: function _setupBeforeUnloadHook() {
             var confirmUnsavedLeave = this.props.confirmUnsavedLeave;
 
 
@@ -8790,38 +8814,23 @@ var Design = function (_PureComponent) {
                 return;
             }
 
-            window.addEventListener('beforeunload', this.onBeforeWindowUnload);
+            window.addEventListener('beforeunload', this._windowUnloadHandler);
             this._hasBeforeUnloadHook = true;
         }
     }, {
-        key: 'uninstallBeforeUnloadHook',
-        value: function uninstallBeforeUnloadHook() {
-            window.removeEventListener('beforeunload', this.onBeforeWindowUnload);
+        key: '_uninstallBeforeUnloadHook',
+        value: function _uninstallBeforeUnloadHook() {
+            window.removeEventListener('beforeunload', this._windowUnloadHandler);
             this._hasBeforeUnloadHook = false;
         }
     }, {
-        key: 'validateCacheProps',
-
-
-        // 检查缓存相关的属性是否设置正确
-        value: function validateCacheProps(props) {
-            props = props || this.props;
-            var _props3 = props,
-                cache = _props3.cache,
-                cacheId = _props3.cacheId;
-
-            if (cache && !cacheId) {
-                throw new Error('Design: cacheId is required when cache is on');
-            }
-        }
-    }, {
-        key: 'checkCache',
-        value: function checkCache() {
+        key: '_checkCache',
+        value: function _checkCache() {
             var cache = this.props.cache;
 
 
             if (cache) {
-                var cachedValue = this.readCache();
+                var cachedValue = this._readCache();
 
                 if (cachedValue !== storage.NOT_FOUND) {
                     this.setState({
@@ -8831,38 +8840,31 @@ var Design = function (_PureComponent) {
             }
         }
     }, {
-        key: 'readCache',
-        value: function readCache() {
+        key: '_readCache',
+        value: function _readCache() {
             var cache = this.props.cache;
 
             if (!cache) {
                 return storage.NOT_FOUND;
             }
 
-            var cacheId = this.props.cacheId;
-
-            return storage.read(_constants.CACHE_KEY, cacheId);
+            return storage.read(_constants.CACHE_KEY, _constants.cacheId);
         }
     }, {
-        key: 'writeCache',
-        value: function writeCache(value) {
+        key: '_writeCache',
+        value: function _writeCache(value) {
             var cache = this.props.cache;
 
             if (!cache) {
                 return false;
             }
-
-            var cacheId = this.props.cacheId;
-
-            return storage.write(_constants.CACHE_KEY, cacheId, value);
+            return storage.write(_constants.CACHE_KEY, _constants.cacheId, value);
         }
     }, {
-        key: 'removeCache',
-        value: function removeCache() {
+        key: '_removeCache',
+        value: function _removeCache() {
             // 这个函数不需要检查有没有开启缓存，强制清除
-            var cacheId = this.props.cacheId;
-
-            return storage.write(_constants.CACHE_KEY, cacheId, undefined);
+            return storage.write(_constants.CACHE_KEY, _constants.cacheId, undefined);
         }
 
         // 关闭提示，但是不清楚缓存
@@ -8870,14 +8872,6 @@ var Design = function (_PureComponent) {
 
         // 恢复缓存的数据并删除缓存
 
-    }, {
-        key: 'getDecoratedComponentInstance',
-
-
-        // Dummy method to make Design and DesignWithDnd compatible at source code level
-        value: function getDecoratedComponentInstance() {
-            return this;
-        }
 
         // Actions on design
 
@@ -9441,6 +9435,7 @@ var ADD_COMPONENT_OVERLAY_POSITION = exports.ADD_COMPONENT_OVERLAY_POSITION = {
 };
 var UUID_KEY = exports.UUID_KEY = '__zent-design-uuid__';
 var CACHE_KEY = exports.CACHE_KEY = '__zent-design-cache-storage__';
+var cacheId = exports.cacheId = '__instanceList__';
 
 /***/ }),
 
@@ -10570,7 +10565,7 @@ var App = function (_React$Component) {
         };
 
         _this.saveDesign = function (instance) {
-            _this.design = instance && instance.getDecoratedComponentInstance();
+            _this.design = instance;
         };
 
         _this.submit = function () {
@@ -10637,11 +10632,7 @@ var App = function (_React$Component) {
                     _react2.default.createElement(_index2.default, {
                         ref: this.saveDesign,
                         cache: true,
-                        cacheId: 'zent-design-test',
                         confirmUnsavedLeave: false,
-                        value: this.state.value,
-                        onChange: this.onChange,
-                        onSettingsChange: this.onSettingsChange,
                         scrollTopOffset: -270
                     }),
                     _react2.default.createElement(

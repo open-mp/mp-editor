@@ -45,11 +45,7 @@ class App extends React.Component {
                     <Design
                         ref={this.saveDesign}
                         cache
-                        cacheId="zent-design-test"
                         confirmUnsavedLeave={false}
-                        value={this.state.value}
-                        onChange={this.onChange}
-                        onSettingsChange={this.onSettingsChange}
                         scrollTopOffset={-270}
                     />
                     <div className="design-example-actions">
@@ -77,7 +73,7 @@ class App extends React.Component {
     }
 
     saveDesign = instance => {
-        this.design = instance && instance.getDecoratedComponentInstance();
+        this.design = instance;
     }
 
     submit = () => {

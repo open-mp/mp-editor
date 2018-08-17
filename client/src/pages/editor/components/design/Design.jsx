@@ -11,7 +11,7 @@ import DesignEditor from './DesignEditor';
 
 import LazyMap from './utils/LazyMap';
 
-import {UUID_KEY, CACHE_KEY} from './constants'
+import {UUID_KEY, CACHE_KEY, cacheId} from './constants'
 import Bundle from "./bundle/bundle";
 
 /**
@@ -30,8 +30,6 @@ export default class Design extends PureComponent {
 
     constructor(props) {
         super(props);
-
-        this.validateCacheProps(props);
 
         this.state = {
             showRestoreFromCache: false,// 是否显示从缓存中恢复的提示
@@ -96,21 +94,6 @@ export default class Design extends PureComponent {
         this._selectInstance(instance);
     }
 
-
-    // 选中一个组件
-    _selectInstance = instance => {
-        const id = InstanceUtils.getUUIDFromInstance(instance);
-        if (this.isSelected(instance)) {
-            return;
-        }
-
-        this.setState({
-            selectedUUID: id,
-        });
-
-        this._adjustHeight();
-    };
-
     selectByIndex = (index) => {
         let {instanceList} = this.state;
         index = isUndefined(index) ? this.props.defaultSelectedIndex : index;
@@ -121,10 +104,17 @@ export default class Design extends PureComponent {
         });
     };
 
-    isSelected = instance => {
-        const {selectedUUID} = this.state;
-        return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
-    };
+    // TODO
+    async validate() {
+
+    }
+
+    getIncenceList() {
+        this._dirty = false;
+        this._removeCache();
+        return this.state.instanceList;
+    }
+
 
     render() {
         const {
@@ -150,13 +140,13 @@ export default class Design extends PureComponent {
                     <Alert
                         className={`mp-design__restore-cache-alert`}
                         closable
-                        onClose={this.onRestoreCacheAlertClose}
+                        onClose={this._closeRestoreCacheAlert}
                         type="warning"
                     >
                         {cacheRestoreMessage}
                         <a
                             className={`mp-design__restore-cache-alert-use`}
-                            onClick={this.restoreCache}
+                            onClick={this._restoreCache}
                             href="javascript:void(0);"
                         >
                             使用
@@ -171,32 +161,44 @@ export default class Design extends PureComponent {
                     showError,
                     design: this.design,
                     disabled,
-                    ref: this.savePreview,
+                    ref: this._savePreview,
                 })}
             </div>
         );
     }
 
-    componentWillMount() {
-
-    }
-
     componentDidMount() {
-        this.setupBeforeUnloadHook();
-        this.checkCache();
+        this._setupBeforeUnloadHook();
+        this._checkCache();
     }
 
     componentDidUpdate() {
-        this.setupBeforeUnloadHook();
+        this._setupBeforeUnloadHook();
     }
 
     componentWillUnmount() {
-        this.uninstallBeforeUnloadHook();
+        this._uninstallBeforeUnloadHook();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.validateCacheProps(nextProps);
+    _savePreview = instance => {
+
+        this.preview = instance;
     }
+
+    // 选中一个组件
+    _selectInstance = instance => {
+        const {selectedUUID} = this.state;
+        const id = InstanceUtils.getUUIDFromInstance(instance);
+        if (InstanceUtils.getUUIDFromInstance(instance) === selectedUUID) {
+            return;
+        }
+
+        this.setState({
+            selectedUUID: id,
+        });
+
+        this._adjustHeight();
+    };
 
     _setSettings = value => {
         const {settings} = this.props;
@@ -248,7 +250,7 @@ export default class Design extends PureComponent {
         }
 
         if (writeCache) {
-            this.writeCache(newInstanceList);
+            this._writeCache(newInstanceList);
         }
 
         this._adjustHeight();
@@ -309,39 +311,13 @@ export default class Design extends PureComponent {
         this._adjustHeight();
     };
 
-    // 保存数据后请调用这个函数通知组件数据已经保存
-    markAsSaved = () => {
-        this._dirty = false;
-        this.removeCache();
-    };
-
-
-
-
-    hasSelected = () => {
-        const {selectedUUID} = this.state;
-
-        return !!selectedUUID;
-    };
-
-
-    savePreview = instance => {
-        if (instance && instance.getDecoratedComponentInstance) {
-            instance = instance.getDecoratedComponentInstance();
-        }
-        this.preview = instance;
-    };
-
     // 滚动到第一个有错误的组件
-    scrollToPreviewItem(id) {
-        if (this.preview) {
-            const {scrollTopOffset, scrollLeftOffset} = this.props;
-            this.preview.scrollToItem &&
-            this.preview.scrollToItem(id, {
-                top: scrollTopOffset,
-                left: scrollLeftOffset,
-            });
-        }
+    _scrollToPreviewItem(id) {
+        const {scrollTopOffset, scrollLeftOffset} = this.props;
+        this.preview.scrollToItem(id, {
+            top: scrollTopOffset,
+            left: scrollLeftOffset,
+        });
     }
 
     // 调整 Design 的高度，因为 editor 是 position: absolute 的，所以需要动态的更新
@@ -355,70 +331,60 @@ export default class Design extends PureComponent {
 
         this._adjustHeightTimer = setTimeout(() => {
             id = id || this.state.selectedUUID;
-            if (this.preview && this.preview.getEditorBoundingBox) {
-                const editorBB = this.preview.getEditorBoundingBox(id);
-                if (!editorBB) {
-                    return this.setState({
-                        bottomGap: 0,
-                    });
-                }
 
-                const previewNode = findDOMNode(this.preview);
-                const previewBB = previewNode && previewNode.getBoundingClientRect();
-                if (!previewBB) {
-                    return;
-                }
-
-                const gap = Math.max(0, editorBB.bottom - previewBB.bottom);
-                this.setState({
-                    bottomGap: gap,
+            // 获取编辑器框
+            const editorBB = this.preview.getEditorBoundingBox(id);
+            if (!editorBB) {
+                return this.setState({
+                    bottomGap: 0,
                 });
             }
+
+            // 获取展示框
+            const previewNode = findDOMNode(this.preview);
+            const previewBB = previewNode && previewNode.getBoundingClientRect();
+            if (!previewBB) {
+                return;
+            }
+
+            const gap = Math.max(0, editorBB.bottom - previewBB.bottom);
+            this.setState({
+                bottomGap: gap,
+            });
         }, 0);
     };
 
-
-    setupBeforeUnloadHook() {
+    _setupBeforeUnloadHook() {
         const {confirmUnsavedLeave} = this.props;
 
         if (this._hasBeforeUnloadHook || !confirmUnsavedLeave) {
             return;
         }
 
-        window.addEventListener('beforeunload', this.onBeforeWindowUnload);
+        window.addEventListener('beforeunload', this._windowUnloadHandler);
         this._hasBeforeUnloadHook = true;
     }
 
-    uninstallBeforeUnloadHook() {
-        window.removeEventListener('beforeunload', this.onBeforeWindowUnload);
+    _uninstallBeforeUnloadHook() {
+        window.removeEventListener('beforeunload', this._windowUnloadHandler);
         this._hasBeforeUnloadHook = false;
     }
 
-    onBeforeWindowUnload = evt => {
+    _windowUnloadHandler = evt => {
         if (!this._dirty) {
             return;
         }
-
         // 这个字符串其实不会展示给用户
         const confirmLeaveMessage = '页面上有未保存的数据，确定要离开吗？';
         evt.returnValue = confirmLeaveMessage;
         return confirmLeaveMessage;
     };
 
-    // 检查缓存相关的属性是否设置正确
-    validateCacheProps(props) {
-        props = props || this.props;
-        const {cache, cacheId} = props;
-        if (cache && !cacheId) {
-            throw new Error('Design: cacheId is required when cache is on');
-        }
-    }
-
-    checkCache() {
+    _checkCache() {
         const {cache} = this.props;
 
         if (cache) {
-            const cachedValue = this.readCache();
+            const cachedValue = this._readCache();
 
             if (cachedValue !== storage.NOT_FOUND) {
                 this.setState({
@@ -428,57 +394,49 @@ export default class Design extends PureComponent {
         }
     }
 
-    readCache() {
+    _readCache() {
         const {cache} = this.props;
         if (!cache) {
             return storage.NOT_FOUND;
         }
 
-        const {cacheId} = this.props;
         return storage.read(CACHE_KEY, cacheId);
     }
 
-    writeCache(value) {
+    _writeCache(value) {
         const {cache} = this.props;
         if (!cache) {
             return false;
         }
-
-        const {cacheId} = this.props;
         return storage.write(CACHE_KEY, cacheId, value);
     }
 
-    removeCache() {
+    _removeCache() {
         // 这个函数不需要检查有没有开启缓存，强制清除
-        const {cacheId} = this.props;
         return storage.write(CACHE_KEY, cacheId, undefined);
     }
 
     // 关闭提示，但是不清楚缓存
-    onRestoreCacheAlertClose = () => {
+    _closeRestoreCacheAlert = () => {
         this.setState({
             showRestoreFromCache: false,
         });
     };
 
     // 恢复缓存的数据并删除缓存
-    restoreCache = evt => {
+    _restoreCache = async (evt) => {
         evt.preventDefault();
 
-        const cachedValue = this.readCache();
+        const cachedValue = this._readCache();
         if (cachedValue !== storage.NOT_FOUND) {
             this._trackValueChange(cachedValue, false);
+            await this.setInstanceList(cachedValue);
             this.setState({
                 showRestoreFromCache: false,
             });
-            this.removeCache();
+            this._removeCache();
         }
     };
-
-    // Dummy method to make Design and DesignWithDnd compatible at source code level
-    getDecoratedComponentInstance() {
-        return this;
-    }
 
     // Actions on design
     design = (() => {
