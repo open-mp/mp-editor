@@ -14,9 +14,9 @@ export function getUUIDFromInstance(instance) {
     return instance && instance[UUID_KEY];
 }
 
-export function setUUIDForInstance(instance, id) {
+export function tagInstanceWithUUID(instance) {
     if (instance) {
-        instance[UUID_KEY] = id;
+        instance[UUID_KEY] = uuid();
     }
 
     return instance;
@@ -26,7 +26,7 @@ export function setUUIDForInstance(instance, id) {
  * 为实例加上uuid
  * @param instanceList
  */
-export function tagValuesWithUUID(instanceList) {
+export function tagInstanceListWithUUID(instanceList) {
     instanceList.forEach(v => {
         if (!v[UUID_KEY]) {
             v[UUID_KEY] = uuid();
@@ -91,10 +91,6 @@ export function getSafeSelectedValueIndex(index, value) {
     return Math.min(index, value.length - 1);
 }
 
-export function generateUUID() {
-    return uuid();
-}
-
-export function getPluginIdFromInstace(instance) {
-
+export function getBundleIdFromInstace(instance) {
+    return instance.bundleId;
 }

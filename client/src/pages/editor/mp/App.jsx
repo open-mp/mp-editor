@@ -4,22 +4,9 @@ import ComponentList from './ComponentList';
 import Design from '../components/design/index';
 import {Button, Notify} from 'zent';
 
-import configConf from '../widget/config';
-import ConfigEditor from '../widget/config/ConfigEditor';
-import whitespaceConf from '../widget/whitespace';
-import lineConf from '../widget/line';
-import richtextConf from '../widget/richtext';
-import imageAdConf from '../widget/image-ad';
 import {getQuery} from "src/common/api/url";
 import * as bundleAPi from "src/common/api/bundle";
 
-const components = [
-    configConf,
-    richtextConf,
-    imageAdConf,
-    whitespaceConf,
-    lineConf
-];
 
 class App extends React.Component {
     constructor(props) {
@@ -60,7 +47,6 @@ class App extends React.Component {
                         cache
                         cacheId="zent-design-test"
                         confirmUnsavedLeave={false}
-                        components={components}
                         value={this.state.value}
                         onChange={this.onChange}
                         onSettingsChange={this.onSettingsChange}

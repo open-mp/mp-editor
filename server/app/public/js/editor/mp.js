@@ -184,17 +184,6 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
-/***/ "./node_modules/babel-runtime/helpers/typeof.js":
-/*!*********************************************************************************************!*\
-  !*** delegated ./node_modules/babel-runtime/helpers/typeof.js from dll-reference _dll_base ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(45);
-
-/***/ }),
-
 /***/ "./node_modules/classnames/index.js":
 /*!*********************************************************************************!*\
   !*** delegated ./node_modules/classnames/index.js from dll-reference _dll_base ***!
@@ -556,17 +545,6 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(374);
-
-/***/ }),
-
-/***/ "./node_modules/lodash/noop.js":
-/*!****************************************************************************!*\
-  !*** delegated ./node_modules/lodash/noop.js from dll-reference _dll_base ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(19);
 
 /***/ }),
 
@@ -7974,37 +7952,6 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
-/***/ "./node_modules/zent/lib/utils/createObjectURL.js":
-/*!********************************************************!*\
-  !*** ./node_modules/zent/lib/utils/createObjectURL.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = createObjectURL;
-function createObjectURL(object) {
-  return window.URL ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object);
-}
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/utils/reorder.js":
-/*!***************************************************************************************!*\
-  !*** delegated ./node_modules/zent/lib/utils/reorder.js from dll-reference _dll_base ***!
-  \***************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(969);
-
-/***/ }),
-
 /***/ "./node_modules/zent/lib/utils/scroll.js":
 /*!**************************************************************************************!*\
   !*** delegated ./node_modules/zent/lib/utils/scroll.js from dll-reference _dll_base ***!
@@ -8013,82 +7960,6 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(388);
-
-/***/ }),
-
-/***/ "./node_modules/zent/lib/utils/shallowEqual.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/zent/lib/utils/shallowEqual.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof2 = __webpack_require__(/*! babel-runtime/helpers/typeof */ "./node_modules/babel-runtime/helpers/typeof.js");
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-/**
- * Adapted from https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/shallowEqual.js
- */
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-/**
- * inlined Object.is polyfill to avoid requiring consumers ship their own
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
- */
-function is(x, y) {
-  // SameValue algorithm
-  if (x === y) {
-    // Steps 1-5, 7-10
-    // Steps 6.b-6.e: +0 != -0
-    return x !== 0 || 1 / x === 1 / y;
-  }
-  // Step 6.a: NaN == NaN
-  return x !== x && y !== y; // eslint-disable-line
-}
-
-/**
- * Performs equality by iterating through keys on an object and returning false
- * when any key has values which are not strictly equal between the arguments.
- * Returns true when the values of all keys are strictly equal.
- */
-function shallowEqual(objA, objB) {
-  if (is(objA, objB)) {
-    return true;
-  }
-
-  if ((typeof objA === 'undefined' ? 'undefined' : (0, _typeof3['default'])(objA)) !== 'object' || objA === null || (typeof objB === 'undefined' ? 'undefined' : (0, _typeof3['default'])(objB)) !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  // Test for A's keys different from B.
-  for (var i = 0; i < keysA.length; i++) {
-    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-exports['default'] = shallowEqual;
 
 /***/ }),
 
@@ -8365,6 +8236,10 @@ var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -8381,6 +8256,7 @@ var MpEditorPluginLoader = function () {
     _createClass(MpEditorPluginLoader, [{
         key: 'init',
         value: function init() {
+            this.pluginMap = {};
             var define = window.define;
             window.requirejs.config({
                 baseUrl: '/'
@@ -8391,26 +8267,83 @@ var MpEditorPluginLoader = function () {
             define('zent', [], function () {
                 return zent;
             });
+            define('classnames', [], function () {
+                return _classnames2.default;
+            });
         }
     }, {
-        key: 'loadEditorPlugin',
+        key: 'loadPlugin',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(bundle) {
-                var query, urlResponse, head, linkTag, url;
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(bundleId) {
+                var pluginMap, bundle, bundleStringId, plugin;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
+                                pluginMap = this.pluginMap;
+                                bundle = new _bundle2.default(bundleId);
+                                bundleStringId = bundle.getStringId();
+                                // 检查是否存
+
+                                if (!pluginMap[bundleStringId]) {
+                                    _context.next = 5;
+                                    break;
+                                }
+
+                                return _context.abrupt('return', pluginMap[bundleStringId]);
+
+                            case 5:
+                                _context.next = 7;
+                                return this.loadEditorPluginInternal(bundle);
+
+                            case 7:
+                                plugin = _context.sent;
+
+                                plugin = plugin.default ? plugin.default : plugin;
+                                // 找出plugin 并加载
+                                pluginMap[bundle.getStringId()] = plugin;
+                                return _context.abrupt('return', plugin);
+
+                            case 11:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function loadPlugin(_x) {
+                return _ref.apply(this, arguments);
+            }
+
+            return loadPlugin;
+        }()
+    }, {
+        key: 'getPluginByInstance',
+        value: function getPluginByInstance(instance) {
+            var bundleId = instance.bundleId;
+            var bundle = new _bundle2.default(bundleId);
+            return this.pluginMap[bundle.getStringId()];
+        }
+    }, {
+        key: 'loadEditorPluginInternal',
+        value: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(bundle) {
+                var query, urlResponse, head, linkTag, url;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
                                 query = bundle.getQueryObject();
                                 // 得到路径
 
-                                _context.next = 3;
+                                _context2.next = 3;
                                 return _axios2.default.get('/bundle/get-url/mpeditor-plugin', {
                                     params: query
                                 });
 
                             case 3:
-                                urlResponse = _context.sent;
+                                urlResponse = _context2.sent;
 
                                 // 加载css
                                 head = document.getElementsByTagName("head")[0];
@@ -8422,7 +8355,7 @@ var MpEditorPluginLoader = function () {
                                 head.appendChild(linkTag);
                                 // 加载js
                                 url = urlResponse.data.data.jsUrl;
-                                _context.next = 13;
+                                _context2.next = 13;
                                 return new Promise(function (resolve, reject) {
                                     window.require([url], function (plugin) {
                                         resolve(plugin);
@@ -8430,21 +8363,21 @@ var MpEditorPluginLoader = function () {
                                 });
 
                             case 13:
-                                return _context.abrupt('return', _context.sent);
+                                return _context2.abrupt('return', _context2.sent);
 
                             case 14:
                             case 'end':
-                                return _context.stop();
+                                return _context2.stop();
                         }
                     }
-                }, _callee, this);
+                }, _callee2, this);
             }));
 
-            function loadEditorPlugin(_x) {
-                return _ref.apply(this, arguments);
+            function loadEditorPluginInternal(_x2) {
+                return _ref2.apply(this, arguments);
             }
 
-            return loadEditorPlugin;
+            return loadEditorPluginInternal;
         }()
     }]);
 
@@ -8493,9 +8426,9 @@ var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.j
 
 var _find2 = _interopRequireDefault(_find);
 
-var _findIndex2 = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
+var _findIndex = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
 
-var _findIndex3 = _interopRequireDefault(_findIndex2);
+var _findIndex2 = _interopRequireDefault(_findIndex);
 
 var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
 
@@ -8517,9 +8450,9 @@ var _storage = __webpack_require__(/*! zent/lib/utils/storage */ "./node_modules
 
 var storage = _interopRequireWildcard(_storage);
 
-var _instance = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
+var _instance2 = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
 
-var InstanceUtils = _interopRequireWildcard(_instance);
+var InstanceUtils = _interopRequireWildcard(_instance2);
 
 var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
 
@@ -8576,33 +8509,27 @@ var Design = function (_PureComponent) {
 
         var _this = _possibleConstructorReturn(this, (Design.__proto__ || Object.getPrototypeOf(Design)).call(this, props));
 
-        _this.addInstanceInternal = function (component) {
-            var _this$state = _this.state,
-                instanceList = _this$state.instanceList,
-                settings = _this$state.settings;
-            var editor = component.editor,
-                defaultType = component.defaultType;
+        _this.selectInstance = function (instance) {
+            var id = InstanceUtils.getUUIDFromInstance(instance);
 
-            var instance = editor.getInitialValue({
-                settings: settings
+            if (_this.isSelected(instance)) {
+                return;
+            }
+
+            _this.setState({
+                selectedUUID: id
             });
-            instance.type = (0, _designType.getDesignType)(editor, defaultType);
-            var id = uuid();
-            _this.setUUIDForValue(instance, id);
 
-            /**
-             * 添加有两种来源：底部区域或者弹层。
-             * 如果来自底部的话，就在当前数组最后加；如果来自弹层就在当前选中的那个组件后面加
-             */
-            var newValue = void 0;
-
-            newValue = value.concat(instance);
-
-            _this.trackValueChange(newValue);
-            _this.onSelect(instance);
+            _this.adjustHeight();
         };
 
-        _this.onSettingsChange = function (value) {
+        _this.isSelected = function (instance) {
+            var selectedUUID = _this.state.selectedUUID;
+
+            return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
+        };
+
+        _this.setSettings = function (value) {
             var _this$props = _this.props,
                 settings = _this$props.settings,
                 onSettingsChange = _this$props.onSettingsChange;
@@ -8624,22 +8551,22 @@ var Design = function (_PureComponent) {
             }
         };
 
-        _this.onComponentValueChange = function (identity) {
+        _this.setInstance = function (instance) {
             return function (diff) {
                 var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
                 var value = _this.props.value;
                 // 得到新的值
 
-                var newComponentValue = replace ? (0, _assign3.default)(_defineProperty({}, UUID_KEY, _this.getUUIDFromValue(identity)), diff) : (0, _assign3.default)({}, identity, diff);
+                var newComponentValue = replace ? (0, _assign3.default)(_defineProperty({}, UUID_KEY, _this.getUUIDFromValue(instance)), diff) : (0, _assign3.default)({}, instance, diff);
                 // 产生新的instanceList
                 var newValue = value.map(function (v) {
-                    return v === identity ? newComponentValue : v;
+                    return v === instance ? newComponentValue : v;
                 });
                 // 改变的key
                 var changedProps = Object.keys(diff);
 
                 _this.trackValueChange(newValue);
-                _this.validateComponentValue(newComponentValue, identity, changedProps).then(function (errors) {
+                _this.validateComponentValue(newComponentValue, instance, changedProps).then(function (errors) {
                     var id = _this.getUUIDFromValue(newComponentValue);
                     _this.setValidation(_defineProperty({}, id, errors));
                 });
@@ -8660,62 +8587,10 @@ var Design = function (_PureComponent) {
             return p;
         };
 
-        _this.onSelect = function (component) {
-            var id = _this.getUUIDFromValue(component);
-
-            if (_this.isSelected(component)) {
-                return;
-            }
-
-            _this.setState({
-                selectedUUID: id
-            });
-
-            _this.adjustHeight();
-        };
-
-        _this.onAdd = function (component, fromSelected) {
+        _this.deleteInstance = function (component) {
             var _this$props2 = _this.props,
                 value = _this$props2.value,
-                settings = _this$props2.settings;
-            var editor = component.editor,
-                defaultType = component.defaultType;
-
-            var instance = editor.getInitialValue({
-                settings: settings
-            });
-            instance.type = (0, _designType.getDesignType)(editor, defaultType);
-            var id = uuid();
-            _this.setUUIDForValue(instance, id);
-
-            /**
-             * 添加有两种来源：底部区域或者弹层。
-             * 如果来自底部的话，就在当前数组最后加；如果来自弹层就在当前选中的那个组件后面加
-             */
-            var newValue = void 0;
-            if (fromSelected) {
-                // 复制一封实例
-                index = value.slice();
-                var addComponentOverlayPosition = _this.state.addComponentOverlayPosition;
-                var selectedUUID = _this.state.selectedUUID;
-
-                var selectedIndex = (0, _findIndex3.default)(value, _defineProperty({}, UUID_KEY, selectedUUID));
-
-                // 两种位置，插入到当前选中的前面或者后面
-                var delta = addComponentOverlayPosition === _constants.ADD_COMPONENT_OVERLAY_POSITION.TOP ? 0 : 1;
-                newValue.splice(selectedIndex + delta, 0, instance);
-            } else {
-                newValue = value.concat(instance);
-            }
-
-            _this.trackValueChange(newValue);
-            _this.onSelect(instance);
-        };
-
-        _this.onDelete = function (component) {
-            var _this$props3 = _this.props,
-                value = _this$props3.value,
-                components = _this$props3.components;
+                components = _this$props2.components;
 
             var nextIndex = -1;
             var newValue = value.filter(function (v, idx) {
@@ -8742,13 +8617,13 @@ var Design = function (_PureComponent) {
             _this.adjustHeight();
         };
 
-        _this.onMove = function (fromIndex, toIndex) {
+        _this.moveInstance = function (fromIndex, toIndex) {
             if (fromIndex === toIndex) {
                 return;
             }
-            var _this$props4 = _this.props,
-                value = _this$props4.value,
-                components = _this$props4.components;
+            var _this$props3 = _this.props,
+                value = _this$props3.value,
+                components = _this$props3.components;
 
             var newValue = [];
             var tmp = void 0;
@@ -8840,9 +8715,9 @@ var Design = function (_PureComponent) {
         };
 
         _this.validate = function () {
-            var _this$props5 = _this.props,
-                value = _this$props5.value,
-                components = _this$props5.components;
+            var _this$props4 = _this.props,
+                value = _this$props4.value,
+                components = _this$props4.components;
 
 
             return new Promise(function (resolve, reject) {
@@ -8917,12 +8792,6 @@ var Design = function (_PureComponent) {
             _this.setState({
                 selectedUUID: _this.getUUIDFromValue(safeValue)
             });
-        };
-
-        _this.isSelected = function (instance) {
-            var selectedUUID = _this.state.selectedUUID;
-
-            return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
         };
 
         _this.hasSelected = function () {
@@ -9020,7 +8889,6 @@ var Design = function (_PureComponent) {
             showRestoreFromCache: false, // 是否显示从缓存中恢复的提示
             settings: {}, // 页面设置，比如页面背景色
             selectedUUID: '', // 当前选中的组件对应的 UUID
-            pluginMap: {}, // 已经安装的插件 id => 插件配置
             instanceList: [], // 插件实例
             pluginInstanceCount: new _LazyMap2.default(0), // plugin创建的实例数
             validations: {}, // 当前所有组件的 validation 信息;  key 是 value 的 UUID
@@ -9040,55 +8908,115 @@ var Design = function (_PureComponent) {
         key: 'setInstanceList',
         value: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(instanceList) {
-                var pluginMap, pluginInstanceCount, newInstanceList, i, instance, pluginId, plugin, pluginStringID;
+                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, pluginId, plugin, pluginStringID;
+
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
+                                _iteratorNormalCompletion = true;
+                                _didIteratorError = false;
+                                _iteratorError = undefined;
+                                _context.prev = 3;
+                                _iterator = instanceList[Symbol.iterator]();
+
+                            case 5:
+                                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                    _context.next = 13;
+                                    break;
+                                }
+
+                                instance = _step.value;
+                                _context.next = 9;
+                                return _loader2.default.loadPlugin(instance.bundleId);
+
+                            case 9:
+                                InstanceUtils.tagInstanceWithUUID(instance);
+
+                            case 10:
+                                _iteratorNormalCompletion = true;
+                                _context.next = 5;
+                                break;
+
+                            case 13:
+                                _context.next = 19;
+                                break;
+
+                            case 15:
+                                _context.prev = 15;
+                                _context.t0 = _context['catch'](3);
+                                _didIteratorError = true;
+                                _iteratorError = _context.t0;
+
+                            case 19:
+                                _context.prev = 19;
+                                _context.prev = 20;
+
+                                if (!_iteratorNormalCompletion && _iterator.return) {
+                                    _iterator.return();
+                                }
+
+                            case 22:
+                                _context.prev = 22;
+
+                                if (!_didIteratorError) {
+                                    _context.next = 25;
+                                    break;
+                                }
+
+                                throw _iteratorError;
+
+                            case 25:
+                                return _context.finish(22);
+
+                            case 26:
+                                return _context.finish(19);
+
+                            case 27:
                                 pluginMap = {};
                                 pluginInstanceCount = new _LazyMap2.default(0);
                                 newInstanceList = [];
                                 i = 0;
 
-                            case 4:
+                            case 31:
                                 if (!(i < instanceList.length)) {
-                                    _context.next = 18;
+                                    _context.next = 45;
                                     break;
                                 }
 
-                                instance = instanceList[i];
-                                pluginId = InstanceUtils.getPluginIdFromInstace(instance);
+                                _instance = instanceList[i];
+                                pluginId = InstanceUtils.getPluginIdFromInstace(_instance);
                                 // 找出plugin 并加载
 
-                                _context.next = 9;
+                                _context.next = 36;
                                 return PluginLoader.loadMpComponentFromBundle(pluginId);
 
-                            case 9:
+                            case 36:
                                 plugin = _context.sent;
                                 pluginStringID = pluginId.getStringId();
 
                                 pluginMap[pluginStringID] = plugin;
                                 pluginInstanceCount.inc(pluginStringID);
                                 // 加上uuid
-                                InstanceUtils.setUUIDForInstance(instance, InstanceUtils.generateUUID());
-                                newInstanceList.push(instance);
+                                InstanceUtils.setUUIDForInstance(_instance, InstanceUtils.generateUUID());
+                                newInstanceList.push(_instance);
 
-                            case 15:
+                            case 42:
                                 i++;
-                                _context.next = 4;
+                                _context.next = 31;
                                 break;
 
-                            case 18:
+                            case 45:
                                 this.setState({
                                     pluginMap: pluginMap, pluginInstanceCount: pluginInstanceCount, instanceList: newInstanceList
                                 });
 
-                            case 19:
+                            case 46:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this);
+                }, _callee, this, [[3, 15, 19, 27], [20,, 22, 26]]);
             }));
 
             function setInstanceList(_x2) {
@@ -9106,7 +9034,7 @@ var Design = function (_PureComponent) {
         key: 'addInstanceByBundle',
         value: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(bundleId) {
-                var pluginMap, plugin, initialValue;
+                var pluginMap, plugin, instance, instanceList, newInstanceList;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
@@ -9115,15 +9043,26 @@ var Design = function (_PureComponent) {
                                 // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
 
                                 _context2.next = 3;
-                                return this.loadPlugin(bundleId);
+                                return _loader2.default.loadPlugin(bundleId);
 
                             case 3:
                                 plugin = _context2.sent;
-                                initialValue = plugin.getInitialValue();
+                                instance = plugin.getInitialValue();
 
-                                initialValue.bundleId = bundleId;
+                                instance.bundleId = bundleId;
+                                InstanceUtils.tagInstanceWithUUID(instance);
 
-                            case 6:
+                                instanceList = this.state.instanceList;
+                                newInstanceList = void 0;
+
+                                newInstanceList = instanceList.concat(instance);
+                                this.setState({
+                                    instanceList: newInstanceList
+                                });
+                                this.trackValueChange(newInstanceList);
+                                this.selectInstance(instance);
+
+                            case 13:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -9137,53 +9076,9 @@ var Design = function (_PureComponent) {
 
             return addInstanceByBundle;
         }()
-    }, {
-        key: 'loadPlugin',
-        value: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(bundleId) {
-                var pluginMap, bundle, bundleStringId, plugin;
-                return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                pluginMap = this.state.pluginMap;
-                                bundle = new _bundle2.default(bundleId);
-                                bundleStringId = bundle.getStringId();
-                                // 检查是否存
 
-                                if (!pluginMap[bundleStringId]) {
-                                    _context3.next = 5;
-                                    break;
-                                }
+        // 选中一个组件
 
-                                return _context3.abrupt('return', pluginMap[bundleStringId]);
-
-                            case 5:
-                                _context3.next = 7;
-                                return _loader2.default.loadEditorPlugin(bundle);
-
-                            case 7:
-                                plugin = _context3.sent;
-
-                                plugin = plugin.default ? plugin.default : plugin;
-                                // 找出plugin 并加载
-                                pluginMap[bundle.getStringId()] = plugin;
-                                return _context3.abrupt('return', plugin);
-
-                            case 11:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this);
-            }));
-
-            function loadPlugin(_x4) {
-                return _ref4.apply(this, arguments);
-            }
-
-            return loadPlugin;
-        }()
     }, {
         key: 'render',
         value: function render() {
@@ -9197,7 +9092,6 @@ var Design = function (_PureComponent) {
                 validations = _state.validations,
                 showError = _state.showError,
                 settings = _state.settings,
-                pluginMap = _state.pluginMap,
                 instanceList = _state.instanceList;
 
 
@@ -9227,16 +9121,15 @@ var Design = function (_PureComponent) {
                 ),
                 _react2.default.createElement(_DesignEditor2.default, {
                     settings: settings,
-                    pluginMap: pluginMap,
                     selectedUUID: selectedUUID,
                     instanceList: instanceList,
                     validations: validations,
                     showError: showError,
-                    onSelect: this.onSelect,
-                    onMove: this.onMove,
-                    onDelete: this.onDelete,
-                    onSettingsChange: this.onSettingsChange,
-                    onComponentValueChange: this.onComponentValueChange,
+                    onSelect: this.selectInstance,
+                    onMove: this.moveInstance,
+                    onDelete: this.deleteInstance,
+                    onSettingsChange: this.setSettings,
+                    onComponentValueChange: this.setInstance,
                     design: this.design,
                     disabled: disabled,
                     ref: this.savePreview
@@ -9245,9 +9138,7 @@ var Design = function (_PureComponent) {
         }
     }, {
         key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.cacheAppendableComponents(this.props.components);
-        }
+        value: function componentWillMount() {}
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
@@ -9267,6 +9158,7 @@ var Design = function (_PureComponent) {
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
+            return;
             this.validateCacheProps(nextProps);
 
             var shouldUpdateInstanceCountMap = false;
@@ -9284,10 +9176,10 @@ var Design = function (_PureComponent) {
             // 如果当前没有选中的并且 value 或者 defaultSelectedIndex 改变的话
             // 重新尝试设置默认值
             if (!this.hasSelected() && (nextProps.defaultSelectedIndex !== this.props.defaultSelectedIndex || nextProps.value !== this.props.value)) {
-                var _value = nextProps.value,
+                var value = nextProps.value,
                     defaultSelectedIndex = nextProps.defaultSelectedIndex;
 
-                this.selectByIndex(defaultSelectedIndex, _value);
+                this.selectByIndex(defaultSelectedIndex, value);
             }
 
             if (shouldUpdateInstanceCountMap) {
@@ -9297,20 +9189,26 @@ var Design = function (_PureComponent) {
             }
         }
     }, {
-        key: 'cacheAppendableComponents',
-        value: function cacheAppendableComponents(components) {
-            this.setState({
-                appendableComponents: components.filter(function (c) {
-                    return c.appendable === undefined || c.appendable;
-                })
-            });
+        key: 'trackValueChange',
+
+
+        // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
+        value: function trackValueChange(newInstanceList) {
+            var writeCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+            var onChange = this.props.onChange;
+
+            onChange && onChange(newInstanceList); // 通知外面数据变化
+
+            if (!this._dirty) {
+                this._dirty = true;
+            }
+
+            if (writeCache) {
+                this.writeCache(newInstanceList);
+            }
+
+            this.adjustHeight();
         }
-
-        // 选中一个组件
-
-
-        // 添加一个新组件
-
 
         // 删除一个组件, 删除后如果没有选中的组件则默认选一个
 
@@ -9348,27 +9246,6 @@ var Design = function (_PureComponent) {
         // 实际并未改变高度，而是设置了margin/padding
 
     }, {
-        key: 'trackValueChange',
-
-
-        // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
-        value: function trackValueChange(newValue) {
-            var writeCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-            var onChange = this.props.onChange;
-
-            onChange(newValue); // 通知外面数据变化
-
-            if (!this._dirty) {
-                this._dirty = true;
-            }
-
-            if (writeCache) {
-                this.writeCache(newValue);
-            }
-
-            this.adjustHeight();
-        }
-    }, {
         key: 'setupBeforeUnloadHook',
         value: function setupBeforeUnloadHook() {
             var confirmUnsavedLeave = this.props.confirmUnsavedLeave;
@@ -9391,7 +9268,7 @@ var Design = function (_PureComponent) {
         key: 'validateCacheProps',
 
 
-        // 缓存相关的函数
+        // 检查缓存相关的属性是否设置正确
         value: function validateCacheProps(props) {
             props = props || this.props;
             var _props3 = props,
@@ -9544,6 +9421,14 @@ var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/ed
 
 var _constants = __webpack_require__(/*! ./preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
 
+var _bundle = __webpack_require__(/*! ../bundle/bundle */ "./src/pages/editor/components/bundle/bundle.js");
+
+var _bundle2 = _interopRequireDefault(_bundle);
+
+var _loader = __webpack_require__(/*! ../bundle/loader */ "./src/pages/editor/components/bundle/loader.js");
+
+var _loader2 = _interopRequireDefault(_loader);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -9661,16 +9546,13 @@ var DesignEditor = function (_PureComponent) {
                                     className: (0, _classnames2.default)('mp-design__item-list', 'mp-design__item-list--full-height')
                                 }),
                                 instanceList.map(function (instance) {
-                                    var pluginId = InstanceUtils.getPluginIdFromInstace(instance);
-                                    var pluginStringID = pluginId.getStringId();
-                                    var plugin = pluginMap[pluginStringID];
+                                    var plugin = _loader2.default.getPluginByInstance(instance);
                                     // 实例id
                                     var id = InstanceUtils.getUUIDFromInstance(instance);
                                     // 是否被选中
                                     var selected = id === selectedUUID;
                                     // 是否可拖动
                                     var draggable = (0, _defaultTo2.default)(plugin.dragable, true);
-
                                     return _react2.default.createElement(
                                         _DesignPreviewItem2.default,
                                         {
@@ -9692,7 +9574,7 @@ var DesignEditor = function (_PureComponent) {
                                             isSelected: selected,
                                             onSelect: onSelect,
                                             onDelete: onDelete,
-                                            component: instance.preview
+                                            component: plugin.preview
                                         }),
                                         selected && _react2.default.createElement(
                                             _DesignEditorItem2.default,
@@ -9700,7 +9582,7 @@ var DesignEditor = function (_PureComponent) {
                                                 disabled: disabled,
                                                 ref: _this2.saveEditorItem(id)
                                             },
-                                            _react2.default.createElement(instance.editForm, {
+                                            _react2.default.createElement(plugin.editForm, {
                                                 instance: instance,
                                                 onChange: onComponentValueChange(instance),
                                                 settings: settings,
@@ -9777,355 +9659,6 @@ var ADD_COMPONENT_OVERLAY_POSITION = exports.ADD_COMPONENT_OVERLAY_POSITION = {
   BOTTOM: 2,
   UNKNOWN: -1
 };
-
-/***/ }),
-
-/***/ "./src/pages/editor/components/design/editor/DesignEditor.jsx":
-/*!********************************************************************!*\
-  !*** ./src/pages/editor/components/design/editor/DesignEditor.jsx ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ControlGroup = exports.DesignEditor = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _assign3 = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
-
-var _assign4 = _interopRequireDefault(_assign3);
-
-var _reorder2 = __webpack_require__(/*! zent/lib/utils/reorder */ "./node_modules/zent/lib/utils/reorder.js");
-
-var _reorder3 = _interopRequireDefault(_reorder2);
-
-var _shallowEqual = __webpack_require__(/*! zent/lib/utils/shallowEqual */ "./node_modules/zent/lib/utils/shallowEqual.js");
-
-var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NOT_EVENT_MSG = 'onInputChange expects an `Event` with { target: { name, value } } as argument';
-
-var DesignEditor = exports.DesignEditor = function (_Component) {
-  _inherits(DesignEditor, _Component);
-
-  _createClass(DesignEditor, null, [{
-    key: 'validate',
-
-
-    // value 的验证函数
-    // eslint-disable-next-line
-
-
-    // 以下属性需要子类重写
-
-    // 组件的类型
-    value: function validate(value, prevValue, changedProps) {
-      return new Promise(function (resolve) {
-        return resolve({});
-      });
-    }
-
-    // 添加组件实例时的初始值
-
-
-    // 组件的描述
-
-  }]);
-
-  function DesignEditor(props) {
-    _classCallCheck(this, DesignEditor);
-
-    var _this = _possibleConstructorReturn(this, (DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call(this, props));
-
-    _this.onInputChange = function (evt) {
-      // 如果抛出来的不是 Event 对象，直接丢给 onChange
-      if (!isEventLikeObject(evt)) {
-        throw new Error(NOT_EVENT_MSG);
-      }
-
-      var onChange = _this.props.onChange;
-      var target = evt.target;
-      var name = target.name,
-          type = target.type;
-      var value = target.value;
-
-
-      if (type === 'checkbox') {
-        value = target.checked;
-      }
-
-      onChange(_defineProperty({}, name, value));
-
-      _this.setMetaProperty(name, 'dirty');
-    };
-
-    _this.onCustomInputChange = function (name) {
-      return function (value) {
-        var onChange = _this.props.onChange;
-
-        onChange(_defineProperty({}, name, value));
-        _this.setMetaProperty(name, 'dirty');
-      };
-    };
-
-    _this.onInputBlur = function (evt) {
-      // 如果抛出来的不是 Event 对象，直接丢给 onChange
-      if (!isEventLikeObject(evt)) {
-        throw new Error(NOT_EVENT_MSG);
-      }
-
-      var name = evt.target.name;
-
-      _this.onCustomInputBlur(name);
-    };
-
-    _this.onCustomInputBlur = function (name) {
-      _this.setMetaProperty(name, 'touched');
-
-      _this.validateValue();
-    };
-
-    _this.state = (0, _assign4.default)({}, _this.state, {
-      meta: {}
-    });
-
-    _this.validateValue();
-    return _this;
-  }
-
-  /**
-   * 通用的 Input 元素 onChange 回调函数
-   *
-   * 适用于 Input, Checkbox, Select, Radio
-   */
-
-
-  /**
-   * 有些组件的 onChange 事件抛出来的不是 Event 对象
-   *
-   * 适用于 Slider, Switch, DatePicker 以及其它自定义组件
-   */
-
-
-  /**
-   * 处理 Input 元素的 blur 事件。
-   */
-
-
-  /**
-   * 有些组件没有 onBlur 事件，用这个函数处理
-   */
-
-
-  _createClass(DesignEditor, [{
-    key: 'getMetaProperty',
-
-
-    /**
-     * 获取 Field 的 meta 属性，包括 dirty, touched 等
-     * @param {string} name Field 名字
-     * @param {string} property meta 属性名字
-     */
-    value: function getMetaProperty(name, property) {
-      var meta = this.state.meta;
-
-      return !!(meta && meta[name] && meta[name][property]);
-    }
-
-    /**
-     * 设置 Field 的 meta 属性
-     * @param {string} name Field 名字
-     * @param {string} property meta 属性名字
-     * @param {any} state 属性的值
-     */
-
-  }, {
-    key: 'setMetaProperty',
-    value: function setMetaProperty(name, property) {
-      var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var meta = this.state.meta;
-
-      var states = meta[name];
-      if (!states || states[property] !== state) {
-        this.setState({
-          meta: (0, _assign4.default)({}, meta, _defineProperty({}, name, (0, _assign4.default)({}, states, _defineProperty({}, property, state))))
-        });
-      }
-    }
-
-    /**
-     * 返回表单是否有错误
-     */
-
-  }, {
-    key: 'isValid',
-    value: function isValid() {
-      var validation = this.props.validation;
-
-      return Object.keys(validation).length > 0;
-    }
-  }, {
-    key: 'isInvalid',
-    value: function isInvalid() {
-      return !this.isValid();
-    }
-
-    /**
-     * 触发一次表单校验
-     */
-
-  }, {
-    key: 'validateValue',
-    value: function validateValue() {
-      var _props = this.props,
-          value = _props.value,
-          design = _props.design;
-
-      design.validateComponentValue(value, value, []).then(function (errors) {
-        var id = design.getUUID(value);
-        design.setValidation(_defineProperty({}, id, errors));
-      });
-    }
-
-    /*
-     * Utility to reorder list for react-beautiful-dnd
-     * Scans the list only once.
-    */
-
-  }, {
-    key: 'reorder',
-    value: function reorder(array, fromIndex, toIndex) {
-      return (0, _reorder3.default)(array, fromIndex, toIndex);
-    }
-  }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      return !(0, _shallowEqual2.default)(this.props, nextProps) || !(0, _shallowEqual2.default)(this.state, nextState);
-    }
-  }]);
-
-  return DesignEditor;
-}(_react.Component);
-
-/**
- * 表单每个域的基础样式
- */
-
-
-DesignEditor.designType = 'unknown';
-DesignEditor.designDescription = '未知组件';
-
-DesignEditor.getInitialValue = function () {};
-
-var ControlGroup = exports.ControlGroup = function (_PureComponent) {
-  _inherits(ControlGroup, _PureComponent);
-
-  function ControlGroup() {
-    _classCallCheck(this, ControlGroup);
-
-    return _possibleConstructorReturn(this, (ControlGroup.__proto__ || Object.getPrototypeOf(ControlGroup)).apply(this, arguments));
-  }
-
-  _createClass(ControlGroup, [{
-    key: 'render',
-    value: function render() {
-      var _props2 = this.props,
-          className = _props2.className,
-          showError = _props2.showError,
-          error = _props2.error,
-          showLabel = _props2.showLabel,
-          label = _props2.label,
-          labelAlign = _props2.labelAlign,
-          helpDesc = _props2.helpDesc,
-          required = _props2.required,
-          children = _props2.children,
-          focusOnLabelClick = _props2.focusOnLabelClick;
-
-
-      var errorVisible = showError && error;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: (0, _classnames2.default)('mp-design-editor__control-group', className, {
-            'has-error': errorVisible
-          })
-        },
-        _react2.default.createElement(focusOnLabelClick ? 'label' : 'div', {
-          className: 'mp-design-editor__control-group-container'
-        }, showLabel ? _react2.default.createElement(
-          'div',
-          {
-            className: (0, _classnames2.default)('mp-design-editor__control-group-label', labelAlign && 'mp-design-editor__control-group-label--' + labelAlign)
-          },
-          required && _react2.default.createElement(
-            'span',
-            {
-              className: 'mp-design-editor__control-group-required-star'
-            },
-            '*'
-          ),
-          label
-        ) : null, _react2.default.createElement(
-          'div',
-          { className: 'mp-design-editor__control-group-control' },
-          children,
-          helpDesc && _react2.default.createElement(
-            'div',
-            {
-              className: 'mp-design-editor__control-group-help-desc'
-            },
-            helpDesc
-          )
-        )),
-        errorVisible && _react2.default.createElement(
-          'div',
-          { className: 'mp-design-editor__control-group-error' },
-          error
-        )
-      );
-    }
-  }]);
-
-  return ControlGroup;
-}(_react.PureComponent);
-
-ControlGroup.defaultProps = {
-  required: false,
-  showError: false,
-  showLabel: true,
-  focusOnLabelClick: true,
-  error: ''
-};
-
-
-function isEventLikeObject(evt) {
-  return evt && evt.target && evt.target.name && evt.preventDefault && evt.stopPropagation;
-}
 
 /***/ }),
 
@@ -10850,13 +10383,12 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.getUUIDFromInstance = getUUIDFromInstance;
-exports.setUUIDForInstance = setUUIDForInstance;
-exports.tagValuesWithUUID = tagValuesWithUUID;
+exports.tagInstanceWithUUID = tagInstanceWithUUID;
+exports.tagInstanceListWithUUID = tagInstanceListWithUUID;
 exports.findFirstEditableSibling = findFirstEditableSibling;
 exports.makeInstanceCountMapFromValue = makeInstanceCountMapFromValue;
 exports.getSafeSelectedValueIndex = getSafeSelectedValueIndex;
-exports.generateUUID = generateUUID;
-exports.getPluginIdFromInstace = getPluginIdFromInstace;
+exports.getBundleIdFromInstace = getBundleIdFromInstace;
 
 var _designType = __webpack_require__(/*! ./design-type */ "./src/pages/editor/components/design/utils/design-type.js");
 
@@ -10888,9 +10420,9 @@ function getUUIDFromInstance(instance) {
     return instance && instance[UUID_KEY];
 }
 
-function setUUIDForInstance(instance, id) {
+function tagInstanceWithUUID(instance) {
     if (instance) {
-        instance[UUID_KEY] = id;
+        instance[UUID_KEY] = (0, _uuid2.default)();
     }
 
     return instance;
@@ -10900,7 +10432,7 @@ function setUUIDForInstance(instance, id) {
  * 为实例加上uuid
  * @param instanceList
  */
-function tagValuesWithUUID(instanceList) {
+function tagInstanceListWithUUID(instanceList) {
     instanceList.forEach(function (v) {
         if (!v[UUID_KEY]) {
             v[UUID_KEY] = (0, _uuid2.default)();
@@ -10968,11 +10500,9 @@ function getSafeSelectedValueIndex(index, value) {
     return Math.min(index, value.length - 1);
 }
 
-function generateUUID() {
-    return (0, _uuid2.default)();
+function getBundleIdFromInstace(instance) {
+    return instance.bundleId;
 }
-
-function getPluginIdFromInstace(instance) {}
 
 /***/ }),
 
@@ -11032,30 +10562,6 @@ var _index2 = _interopRequireDefault(_index);
 
 var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
-var _config = __webpack_require__(/*! ../widget/config */ "./src/pages/editor/widget/config/index.js");
-
-var _config2 = _interopRequireDefault(_config);
-
-var _ConfigEditor = __webpack_require__(/*! ../widget/config/ConfigEditor */ "./src/pages/editor/widget/config/ConfigEditor.jsx");
-
-var _ConfigEditor2 = _interopRequireDefault(_ConfigEditor);
-
-var _whitespace = __webpack_require__(/*! ../widget/whitespace */ "./src/pages/editor/widget/whitespace/index.js");
-
-var _whitespace2 = _interopRequireDefault(_whitespace);
-
-var _line = __webpack_require__(/*! ../widget/line */ "./src/pages/editor/widget/line/index.js");
-
-var _line2 = _interopRequireDefault(_line);
-
-var _richtext = __webpack_require__(/*! ../widget/richtext */ "./src/pages/editor/widget/richtext/index.js");
-
-var _richtext2 = _interopRequireDefault(_richtext);
-
-var _imageAd = __webpack_require__(/*! ../widget/image-ad */ "./src/pages/editor/widget/image-ad/index.js");
-
-var _imageAd2 = _interopRequireDefault(_imageAd);
-
 var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
 
 var _bundle = __webpack_require__(/*! src/common/api/bundle */ "./src/common/api/bundle.js");
@@ -11073,8 +10579,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var components = [_config2.default, _richtext2.default, _imageAd2.default, _whitespace2.default, _line2.default];
 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
@@ -11166,7 +10670,6 @@ var App = function (_React$Component) {
                         cache: true,
                         cacheId: 'zent-design-test',
                         confirmUnsavedLeave: false,
-                        components: components,
                         value: this.state.value,
                         onChange: this.onChange,
                         onSettingsChange: this.onSettingsChange,
@@ -11381,2727 +10884,6 @@ _reactDom2.default.render(_react2.default.createElement(_App2.default, null), do
 /*!***************************************!*\
   !*** ./src/pages/editor/mp/main.pcss ***!
   \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/config/ConfigEditor.jsx":
-/*!*********************************************************!*\
-  !*** ./src/pages/editor/widget/config/ConfigEditor.jsx ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
-
-var _constants = __webpack_require__(/*! ../../components/design/preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable no-script-url */
-
-var prefix = 'mp';
-
-var ConfigEditor = function (_DesignEditor) {
-  _inherits(ConfigEditor, _DesignEditor);
-
-  function ConfigEditor() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, ConfigEditor);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ConfigEditor.__proto__ || Object.getPrototypeOf(ConfigEditor)).call.apply(_ref, [this].concat(args))), _this), _this.onColorChange = _this.onCustomInputChange('color'), _this.onBackgroundChange = function (color) {
-      // 修改 Config 组件的值
-      _this.onColorChange(color);
-
-      // 修改 settings
-      _this.props.onSettingsChange({
-        previewBackground: color
-      });
-    }, _this.resetBackground = function () {
-      _this.onBackgroundChange(_constants.DEFAULT_BACKGROUND);
-    }, _this.filterTag = function (item, keyword) {
-      return item.text.indexOf(keyword) > -1;
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(ConfigEditor, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          settings = _props.settings,
-          showError = _props.showError,
-          validation = _props.validation;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-component-config-editor' },
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            showError: showError || this.getMetaProperty('title', 'touched'),
-            error: validation.title,
-            required: true,
-            label: '\u9875\u9762\u540D\u79F0:'
-          },
-          _react2.default.createElement(_zent.Input, {
-            value: value.title,
-            onChange: this.onInputChange,
-            onBlur: this.onInputBlur,
-            name: 'title'
-          })
-        ),
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            showError: showError || this.getMetaProperty('description', 'touched'),
-            error: validation.description,
-            label: '\u9875\u9762\u63CF\u8FF0:'
-          },
-          _react2.default.createElement(_zent.Input, {
-            value: value.description,
-            onChange: this.onInputChange,
-            onBlur: this.onInputBlur,
-            name: 'description',
-            placeholder: '\u7528\u6237\u901A\u8FC7\u5FAE\u4FE1\u5206\u4EAB\u7ED9\u670B\u53CB\u65F6\uFF0C\u4F1A\u81EA\u52A8\u663E\u793A\u9875\u9762\u63CF\u8FF0'
-          })
-        ),
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            label: '\u80CC\u666F\u989C\u8272:',
-            labelAlign: 'top',
-            className: prefix + '-design-component-config-editor__background',
-            focusOnLabelClick: false
-          },
-          _react2.default.createElement(
-            'div',
-            {
-              className: prefix + '-design-component-config-editor__background-control'
-            },
-            _react2.default.createElement(_zent.ColorPicker, {
-              color: getBackground(value, settings),
-              onChange: this.onBackgroundChange
-            }),
-            _react2.default.createElement(
-              _zent.Button,
-              { onClick: this.resetBackground },
-              '\u91CD\u7F6E'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            {
-              className: prefix + '-design-component-config-editor__background-hint'
-            },
-            '\u80CC\u666F\u989C\u8272\u53EA\u5728\u624B\u673A\u7AEF\u663E\u793A'
-          )
-        )
-      );
-    }
-  }], [{
-    key: 'getInitialValue',
-    value: function getInitialValue() {
-      return {
-        // 标题
-        title: '微页面标题',
-
-        //  背景颜色
-        color: '',
-
-        // 页面描述
-        description: ''
-      };
-    }
-  }, {
-    key: 'validate',
-    value: function validate(value) {
-      return new Promise(function (resolve) {
-        var errors = {};
-        var title = value.title;
-
-        if (!title || !title.trim()) {
-          errors.title = '请填写页面名称';
-        } else if (title.length > 50) {
-          errors.title = '页面名称长度不能多于 50 个字';
-        }
-
-        resolve(errors);
-      });
-    }
-  }]);
-
-  return ConfigEditor;
-}(_DesignEditor2.DesignEditor);
-
-ConfigEditor.designType = 'config';
-ConfigEditor.designDescription = '页面配置';
-exports.default = ConfigEditor;
-
-
-function getBackground(value, settings) {
-  return value && value.color || settings.previewBackground || _constants.DEFAULT_BACKGROUND;
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/config/ConfigPreview.jsx":
-/*!**********************************************************!*\
-  !*** ./src/pages/editor/widget/config/ConfigPreview.jsx ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var prefix = 'mp';
-
-var ConfigPreview = function (_PureComponent) {
-  _inherits(ConfigPreview, _PureComponent);
-
-  function ConfigPreview() {
-    _classCallCheck(this, ConfigPreview);
-
-    return _possibleConstructorReturn(this, (ConfigPreview.__proto__ || Object.getPrototypeOf(ConfigPreview)).apply(this, arguments));
-  }
-
-  _createClass(ConfigPreview, [{
-    key: 'render',
-    value: function render() {
-      var value = this.props.value;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-component-config-preview' },
-        _react2.default.createElement(
-          'div',
-          { className: prefix + '-design-component-config-preview__title' },
-          value.title
-        )
-      );
-    }
-  }]);
-
-  return ConfigPreview;
-}(_react.PureComponent);
-
-ConfigPreview.propTypes = {
-  value: _propTypes2.default.object,
-
-  // 用来和 Design 交互
-  design: _propTypes2.default.object
-
-};
-exports.default = ConfigPreview;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/config/index.js":
-/*!*************************************************!*\
-  !*** ./src/pages/editor/widget/config/index.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ConfigEditor = __webpack_require__(/*! ./ConfigEditor */ "./src/pages/editor/widget/config/ConfigEditor.jsx");
-
-var _ConfigEditor2 = _interopRequireDefault(_ConfigEditor);
-
-var _ConfigPreview = __webpack_require__(/*! ./ConfigPreview */ "./src/pages/editor/widget/config/ConfigPreview.jsx");
-
-var _ConfigPreview2 = _interopRequireDefault(_ConfigPreview);
-
-__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/config/index.pcss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  type: _ConfigEditor2.default.designType,
-  editor: _ConfigEditor2.default,
-  preview: _ConfigPreview2.default,
-  // 是否可以拖拽
-  dragable: false,
-
-  // 是否出现在底部的添加组件区域
-  appendable: false,
-
-  // 是否可以编辑数据
-  editable: true,
-  // 鼠标在组件上时 是否展示快捷操作面板
-  configurable: true,
-  // 选中时是否高亮
-  highlightWhenSelect: false
-};
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/config/index.pcss":
-/*!***************************************************!*\
-  !*** ./src/pages/editor/widget/config/index.pcss ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/image-ad/ImageAdEditor.jsx":
-/*!************************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/ImageAdEditor.jsx ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-
-var _createObjectURL = __webpack_require__(/*! zent/lib/utils/createObjectURL */ "./node_modules/zent/lib/utils/createObjectURL.js");
-
-var _createObjectURL2 = _interopRequireDefault(_createObjectURL);
-
-var _findIndex = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
-
-var _findIndex2 = _interopRequireDefault(_findIndex);
-
-var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
-
-var _isEmpty2 = _interopRequireDefault(_isEmpty);
-
-var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
-
-var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/widget/image-ad/constants.js");
-
-var _ImageEntry = __webpack_require__(/*! ./ImageEntry */ "./src/pages/editor/widget/image-ad/ImageEntry.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var RadioGroup = _zent.Radio.Group;
-var prefix = 'mp';
-
-var ImageAdEditor = function (_DesignEditor) {
-  _inherits(ImageAdEditor, _DesignEditor);
-
-  function ImageAdEditor(props) {
-    _classCallCheck(this, ImageAdEditor);
-
-    var _this = _possibleConstructorReturn(this, (ImageAdEditor.__proto__ || Object.getPrototypeOf(ImageAdEditor)).call(this, props));
-
-    _this.onAddImageEntry = function (evt) {
-      var files = evt.target.files;
-
-      var imageUrl = (0, _createObjectURL2.default)(files[0]);
-      var _this$props = _this.props,
-          value = _this$props.value,
-          onChange = _this$props.onChange;
-
-
-      onChange({
-        images: value.images.concat((0, _ImageEntry.createEmptyImageEntry)({ imageUrl: imageUrl }))
-      });
-    };
-
-    _this.removeImageEntry = function (id) {
-      return function () {
-        var _this$props2 = _this.props,
-            images = _this$props2.value.images,
-            onChange = _this$props2.onChange;
-
-
-        onChange({
-          images: images.filter(function (img) {
-            return img[_constants.IMAGE_AD_ENTRY_UUID_KEY] !== id;
-          })
-        });
-      };
-    };
-
-    _this.prependImageEntry = function (id) {
-      return function () {
-        var _this$props3 = _this.props,
-            images = _this$props3.value.images,
-            onChange = _this$props3.onChange;
-
-        var index = (0, _findIndex2.default)(images, function (img) {
-          return img[_constants.IMAGE_AD_ENTRY_UUID_KEY] === id;
-        });
-        if (index !== -1) {
-          var newImages = images.slice();
-          newImages.splice(index, 0, (0, _ImageEntry.createEmptyImageEntry)());
-
-          onChange({
-            images: newImages
-          });
-        }
-      };
-    };
-
-    _this.appendImageEntry = function (id) {
-      return function () {
-        var _this$props4 = _this.props,
-            images = _this$props4.value.images,
-            onChange = _this$props4.onChange;
-
-        var index = (0, _findIndex2.default)(images, function (img) {
-          return img[_constants.IMAGE_AD_ENTRY_UUID_KEY] === id;
-        });
-        if (index !== -1) {
-          var newImages = images.slice();
-          newImages.splice(index + 1, 0, (0, _ImageEntry.createEmptyImageEntry)());
-
-          onChange({
-            images: newImages
-          });
-        }
-      };
-    };
-
-    _this.onImageEntryChange = function (id) {
-      return function (delta) {
-        var _this$props5 = _this.props,
-            images = _this$props5.value.images,
-            onChange = _this$props5.onChange;
-
-        onChange({
-          images: images.map(function (img) {
-            if (img[_constants.IMAGE_AD_ENTRY_UUID_KEY] !== id) {
-              return img;
-            }
-
-            return _extends({}, img, delta);
-          })
-        });
-      };
-    };
-
-    _this.state = _extends({}, _this.state, {
-      localImage: ''
-    });
-    return _this;
-  }
-
-  _createClass(ImageAdEditor, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var _props = this.props,
-          showError = _props.showError,
-          validation = _props.validation,
-          value = _props.value;
-      var localImage = this.state.localImage;
-
-      var imageErrors = validation.images;
-      var allowAddImage = this.isAddImageEntryAllowed();
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-component-image-ad-editor' },
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            label: '\u663E\u793A\u5927\u5C0F:',
-            showError: showError || this.getMetaProperty('size', 'touched'),
-            error: validation.size
-          },
-          _react2.default.createElement(
-            RadioGroup,
-            { value: value.size, onChange: this.onInputChange },
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'size', value: _constants.IMAGE_SIZE.LARGE },
-              '\u5927\u56FE'
-            ),
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'size', value: _constants.IMAGE_SIZE.SMALL },
-              '\u5C0F\u56FE'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBeautifulDnd.Droppable,
-          {
-            droppableId: prefix + '-design-component-image-ad-editor__entry-list',
-            type: _constants.IMAGE_AD_DND_TYPE,
-            direction: 'vertical'
-          },
-          function (provided, snapshot) {
-            return _react2.default.createElement(
-              'ul',
-              {
-                ref: provided.innerRef,
-                className: prefix + '-design-component-image-ad-editor__entry-list'
-              },
-              value.images.map(function (img) {
-                var imageId = img[_constants.IMAGE_AD_ENTRY_UUID_KEY];
-
-                return _react2.default.createElement(
-                  'li',
-                  {
-                    key: imageId,
-                    className: prefix + '-design-component-image-ad-editor__entry'
-                  },
-                  _react2.default.createElement(_ImageEntry.ImageEntry, {
-                    prefix: prefix,
-                    imageId: imageId,
-                    imageUrl: img.imageUrl,
-                    linkTitle: img.linkTitle,
-                    linkUrl: img.linkUrl,
-                    onChange: _this2.onImageEntryChange(imageId),
-                    error: showError && imageErrors ? imageErrors[imageId] : ''
-                  }),
-                  !snapshot.isDraggingOver && _react2.default.createElement(_zent.Icon, {
-                    type: 'close-circle',
-                    className: prefix + '-design-component-image-ad-editor__entry-close-btn',
-                    onClick: _this2.removeImageEntry(imageId)
-                  }),
-                  !snapshot.isDraggingOver && allowAddImage && _react2.default.createElement(_zent.Icon, {
-                    type: 'plus',
-                    className: prefix + '-design-component-image-ad-editor__entry-prepend-btn',
-                    onClick: _this2.prependImageEntry(imageId)
-                  }),
-                  !snapshot.isDraggingOver && allowAddImage && _react2.default.createElement(_zent.Icon, {
-                    type: 'plus',
-                    className: prefix + '-design-component-image-ad-editor__entry-append-btn',
-                    onClick: _this2.appendImageEntry(imageId)
-                  })
-                );
-              }),
-              provided.placeholder
-            );
-          }
-        ),
-        allowAddImage && _react2.default.createElement(
-          'a',
-          {
-            className: prefix + '-design-component-image-ad-editor__add-entry-btn'
-          },
-          _react2.default.createElement(
-            'b',
-            null,
-            '+'
-          ),
-          '\u6DFB\u52A0\u4E00\u4E2A\u5E7F\u544A',
-          _react2.default.createElement('input', {
-            type: 'file',
-            accept: 'image/gif, image/jpeg, image/png',
-            title: '',
-            value: localImage,
-            onChange: this.onAddImageEntry
-          })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: prefix + '-design-component-image-ad-editor__hint' },
-          '\u6700\u591A\u6DFB\u52A0 ',
-          _constants.IMAGE_AD_LIMIT,
-          ' \u4E2A\u5E7F\u544A\uFF0C\u62D6\u52A8\u9009\u4E2D\u7684\u56FE\u7247\u5E7F\u544A\u53EF\u5BF9\u5176\u6392\u5E8F'
-        )
-      );
-    }
-  }, {
-    key: 'isAddImageEntryAllowed',
-    value: function isAddImageEntryAllowed() {
-      var images = this.props.value.images;
-
-
-      return images.length < _constants.IMAGE_AD_LIMIT;
-    }
-  }, {
-    key: 'shouldHandleDragEnd',
-    value: function shouldHandleDragEnd(type) {
-      return type === _constants.IMAGE_AD_DND_TYPE;
-    }
-  }, {
-    key: 'onDragEnd',
-    value: function onDragEnd(result) {
-      var source = result.source,
-          destination = result.destination;
-
-      // dropped outside
-
-      if (!destination) {
-        return;
-      }
-
-      var _props2 = this.props,
-          value = _props2.value,
-          onChange = _props2.onChange;
-
-      var newValue = _extends({}, value, {
-        images: this.reorder(value.images, source.index, destination.index)
-      });
-
-      onChange(newValue);
-    }
-  }], [{
-    key: 'getInitialValue',
-    value: function getInitialValue() {
-      return {
-        size: _constants.IMAGE_SIZE.SMALL,
-        images: []
-      };
-    }
-  }, {
-    key: 'validate',
-    value: function validate(value) {
-      return new Promise(function (resolve) {
-        var errors = {};
-
-        errors.images = value.images.reduce(function (imageErrors, img) {
-          if (!img.imageUrl) {
-            imageErrors[img[_constants.IMAGE_AD_ENTRY_UUID_KEY]] = '请选择广告图片';
-          }
-          return imageErrors;
-        }, {});
-
-        // 如果没有错误就删除这个 key
-        if ((0, _isEmpty2.default)(errors.images)) {
-          delete errors.images;
-        }
-
-        resolve(errors);
-      });
-    }
-  }]);
-
-  return ImageAdEditor;
-}(_DesignEditor2.DesignEditor);
-
-ImageAdEditor.designType = 'image-ad';
-ImageAdEditor.designDescription = _react2.default.createElement(
-  'span',
-  null,
-  '\u56FE\u7247',
-  _react2.default.createElement('br', null),
-  '\u5E7F\u544A'
-);
-exports.default = ImageAdEditor;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/image-ad/ImageAdPreview.jsx":
-/*!*************************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/ImageAdPreview.jsx ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
-
-var _isEmpty2 = _interopRequireDefault(_isEmpty);
-
-var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/widget/image-ad/constants.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var prefix = 'mp';
-
-var ImageAdPreview = function (_Component) {
-  _inherits(ImageAdPreview, _Component);
-
-  function ImageAdPreview() {
-    _classCallCheck(this, ImageAdPreview);
-
-    return _possibleConstructorReturn(this, (ImageAdPreview.__proto__ || Object.getPrototypeOf(ImageAdPreview)).apply(this, arguments));
-  }
-
-  _createClass(ImageAdPreview, [{
-    key: 'render',
-    value: function render() {
-      var _cx;
-
-      var value = this.props.value;
-      var size = value.size,
-          images = value.images;
-
-
-      if ((0, _isEmpty2.default)(images)) {
-        return _react2.default.createElement(
-          'div',
-          {
-            className: (0, _classnames2.default)(prefix + '-design-component-image-ad-preview', prefix + '-design-component-image-ad-preview--no-data')
-          },
-          '\u70B9\u51FB\u7F16\u8F91\u56FE\u7247\u5E7F\u544A'
-        );
-      }
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: (0, _classnames2.default)(prefix + '-design-component-image-ad-preview', (_cx = {}, _defineProperty(_cx, prefix + '-design-component-image-ad-preview--large', size === _constants.IMAGE_SIZE.LARGE), _defineProperty(_cx, prefix + '-design-component-image-ad-preview--small', size === _constants.IMAGE_SIZE.SMALL), _cx))
-        },
-        images.map(function (img) {
-          var id = img[_constants.IMAGE_AD_ENTRY_UUID_KEY];
-          // eslint-disable-next-line
-          var url = img.linkUrl || 'javascript:void(0);';
-          var title = img.linkTitle;
-
-          return _react2.default.createElement(
-            'a',
-            {
-              key: id,
-              className: prefix + '-design-component-image-ad-preview__image',
-              href: url,
-              target: '_blank',
-              rel: 'noopener noreferrer'
-            },
-            _react2.default.createElement(
-              'div',
-              {
-                className: prefix + '-design-component-image-ad-preview__image-img'
-              },
-              _react2.default.createElement('img', { src: img.imageUrl, alt: title }),
-              title && _react2.default.createElement(
-                'div',
-                {
-                  className: prefix + '-design-component-image-ad-preview__image-title'
-                },
-                title
-              )
-            )
-          );
-        })
-      );
-    }
-  }]);
-
-  return ImageAdPreview;
-}(_react.Component);
-
-exports.default = ImageAdPreview;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/image-ad/ImageEntry.js":
-/*!********************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/ImageEntry.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ImageEntry = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.createEmptyImageEntry = createEmptyImageEntry;
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/lib/utils/uuid.js");
-
-var _uuid2 = _interopRequireDefault(_uuid);
-
-var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-
-var _createObjectURL = __webpack_require__(/*! zent/lib/utils/createObjectURL */ "./node_modules/zent/lib/utils/createObjectURL.js");
-
-var _createObjectURL2 = _interopRequireDefault(_createObjectURL);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _constants = __webpack_require__(/*! ./constants */ "./src/pages/editor/widget/image-ad/constants.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ImageEntry = exports.ImageEntry = function (_Component) {
-  _inherits(ImageEntry, _Component);
-
-  function ImageEntry() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, ImageEntry);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ImageEntry.__proto__ || Object.getPrototypeOf(ImageEntry)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      localImage: ''
-    }, _this.onTitleChange = function (evt) {
-      var value = evt.target.value;
-
-      _this.props.onChange({ linkTitle: value });
-    }, _this.onUrlChange = function (evt) {
-      var value = evt.target.value;
-
-      _this.props.onChange({ linkUrl: value });
-    }, _this.onImageChange = function (evt) {
-      var files = evt.target.files;
-
-      var imageUrl = (0, _createObjectURL2.default)(files[0]);
-      _this.props.onChange({ imageUrl: imageUrl });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(ImageEntry, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var _props = this.props,
-          imageId = _props.imageId,
-          imageUrl = _props.imageUrl,
-          linkTitle = _props.linkTitle,
-          linkUrl = _props.linkUrl,
-          error = _props.error,
-          prefix = _props.prefix;
-      var localImage = this.state.localImage;
-
-
-      return _react2.default.createElement(
-        _reactBeautifulDnd.Draggable,
-        { draggableId: imageId, type: _constants.IMAGE_AD_DND_TYPE },
-        function (provided) {
-          var _cx;
-
-          return _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'div',
-              _extends({
-                className: prefix + '-design-component-image-ad-editor__image-entry',
-                ref: provided.innerRef,
-                style: provided.draggableStyle
-              }, provided.dragHandleProps),
-              _react2.default.createElement(
-                'div',
-                {
-                  className: prefix + '-design-component-image-ad-editor__image-entry-image-container'
-                },
-                _react2.default.createElement('img', { src: imageUrl, alt: linkTitle }),
-                _react2.default.createElement(
-                  'div',
-                  {
-                    className: (0, _classnames2.default)(prefix + '-design-component-image-ad-editor__image-entry-image-upload', (_cx = {}, _defineProperty(_cx, prefix + '-design-component-image-ad-editor__image-entry-image-upload--has-image', imageUrl), _defineProperty(_cx, prefix + '-design-component-image-ad-editor__image-entry-image-upload--no-image', !imageUrl), _cx))
-                  },
-                  imageUrl ? _react2.default.createElement(
-                    'span',
-                    null,
-                    '\u91CD\u65B0\u4E0A\u4F20'
-                  ) : _react2.default.createElement(
-                    'a',
-                    null,
-                    _react2.default.createElement(
-                      'b',
-                      null,
-                      '+'
-                    ),
-                    '\u6DFB\u52A0\u56FE\u7247'
-                  ),
-                  _react2.default.createElement('input', {
-                    type: 'file',
-                    accept: 'image/gif, image/jpeg, image/png',
-                    title: '',
-                    value: localImage,
-                    onChange: _this2.onImageChange
-                  })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                {
-                  className: prefix + '-design-component-image-ad-editor__image-entry-controls'
-                },
-                _react2.default.createElement(
-                  'div',
-                  {
-                    className: prefix + '-design-component-image-ad-editor__image-entry-image-control'
-                  },
-                  _react2.default.createElement(
-                    'label',
-                    null,
-                    '\u6807\u9898:'
-                  ),
-                  _react2.default.createElement(_zent.Input, { value: linkTitle, onChange: _this2.onTitleChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  {
-                    className: prefix + '-design-component-image-ad-editor__image-entry-image-control'
-                  },
-                  _react2.default.createElement(
-                    'label',
-                    null,
-                    '\u94FE\u63A5:'
-                  ),
-                  _react2.default.createElement(_zent.Input, { value: linkUrl, onChange: _this2.onUrlChange })
-                )
-              ),
-              error && _react2.default.createElement(
-                'div',
-                {
-                  className: prefix + '-design-component-image-ad-editor__image-entry-error'
-                },
-                error
-              )
-            ),
-            provided.placeholder
-          );
-        }
-      );
-    }
-  }]);
-
-  return ImageEntry;
-}(_react.Component);
-
-ImageEntry.propTypes = {
-  prefix: _propTypes2.default.string,
-  imageId: _propTypes2.default.string,
-  imageUrl: _propTypes2.default.string,
-  linkUrl: _propTypes2.default.string,
-  linkTitle: _propTypes2.default.string,
-  error: _propTypes2.default.string,
-  onChange: _propTypes2.default.func.isRequired
-};
-function createEmptyImageEntry(override) {
-  return _extends(_defineProperty({
-    imageUrl: '',
-    linkTitle: '',
-    linkUrl: ''
-  }, _constants.IMAGE_AD_ENTRY_UUID_KEY, (0, _uuid2.default)()), override);
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/image-ad/constants.js":
-/*!*******************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/constants.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var IMAGE_SIZE = exports.IMAGE_SIZE = {
-  SMALL: 1,
-  LARGE: 2
-};
-
-var IMAGE_AD_LIMIT = exports.IMAGE_AD_LIMIT = 10;
-
-var IMAGE_AD_ENTRY_UUID_KEY = exports.IMAGE_AD_ENTRY_UUID_KEY = '__image-ad-entry-uuid__';
-
-var IMAGE_AD_DND_TYPE = exports.IMAGE_AD_DND_TYPE = 'zent-design-componentimage-ad-dnd-type';
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/image-ad/index.js":
-/*!***************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/index.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ImageAdEditor = __webpack_require__(/*! ./ImageAdEditor */ "./src/pages/editor/widget/image-ad/ImageAdEditor.jsx");
-
-var _ImageAdEditor2 = _interopRequireDefault(_ImageAdEditor);
-
-var _ImageAdPreview = __webpack_require__(/*! ./ImageAdPreview */ "./src/pages/editor/widget/image-ad/ImageAdPreview.jsx");
-
-var _ImageAdPreview2 = _interopRequireDefault(_ImageAdPreview);
-
-__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/image-ad/index.pcss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  type: _ImageAdEditor2.default.designType,
-  editor: _ImageAdEditor2.default,
-  preview: _ImageAdPreview2.default,
-  // 是否可以拖拽
-  dragable: false,
-
-  // 是否可以编辑数据
-  editable: true,
-  // 鼠标在组件上时 是否展示快捷操作面板
-  configurable: false,
-  // 选中时是否高亮
-  highlightWhenSelect: true
-};
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/image-ad/index.pcss":
-/*!*****************************************************!*\
-  !*** ./src/pages/editor/widget/image-ad/index.pcss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/line/LineEditor.jsx":
-/*!*****************************************************!*\
-  !*** ./src/pages/editor/widget/line/LineEditor.jsx ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var RadioGroup = _zent.Radio.Group;
-var DEFAULT_COLOR = '#e5e5e5';
-var prefix = 'mp';
-
-var LineEditor = function (_DesignEditor) {
-  _inherits(LineEditor, _DesignEditor);
-
-  function LineEditor() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, LineEditor);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LineEditor.__proto__ || Object.getPrototypeOf(LineEditor)).call.apply(_ref, [this].concat(args))), _this), _this.onColorChange = _this.onCustomInputChange('color'), _this.onColorReset = function () {
-      _this.onColorChange(DEFAULT_COLOR);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(LineEditor, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          showError = _props.showError,
-          validation = _props.validation;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-component-line-editor' },
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            label: '\u989C\u8272:',
-            showError: showError || this.getMetaProperty('content', 'touched'),
-            error: validation.content
-          },
-          _react2.default.createElement(_zent.ColorPicker, {
-            className: prefix + '-design-component-line-editor_color-select',
-            color: value.color,
-            onChange: this.onColorChange
-          }),
-          _react2.default.createElement(
-            'span',
-            {
-              className: prefix + '-design-component-line-editor_color-reset',
-              onClick: this.onColorReset
-            },
-            '\u91CD\u7F6E'
-          )
-        ),
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            label: '\u8FB9\u8DDD:',
-            showError: showError || this.getMetaProperty('content', 'touched'),
-            error: validation.content
-          },
-          _react2.default.createElement(
-            RadioGroup,
-            { value: value.hasPadding, onChange: this.onInputChange },
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'hasPadding', value: false },
-              '\u65E0\u8FB9\u8DDD'
-            ),
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'hasPadding', value: true },
-              '\u5DE6\u53F3\u7559\u8FB9'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            label: '\u6837\u5F0F:',
-            showError: showError || this.getMetaProperty('content', 'touched'),
-            error: validation.content
-          },
-          _react2.default.createElement(
-            RadioGroup,
-            { value: value.lineType, onChange: this.onInputChange },
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'lineType', value: 'solid' },
-              '\u5B9E\u7EBF'
-            ),
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'lineType', value: 'dashed' },
-              '\u865A\u7EBF'
-            ),
-            _react2.default.createElement(
-              _zent.Radio,
-              { name: 'lineType', value: 'dotted' },
-              '\u70B9\u7EBF'
-            )
-          )
-        )
-      );
-    }
-  }], [{
-    key: 'getInitialValue',
-    value: function getInitialValue() {
-      return {
-        color: DEFAULT_COLOR,
-        hasPadding: false,
-        lineType: 'solid'
-      };
-    }
-  }]);
-
-  return LineEditor;
-}(_DesignEditor2.DesignEditor);
-
-LineEditor.designType = 'line';
-LineEditor.designDescription = '辅助线';
-exports.default = LineEditor;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/line/LinePreview.jsx":
-/*!******************************************************!*\
-  !*** ./src/pages/editor/widget/line/LinePreview.jsx ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var prefix = 'mp';
-
-var LinePreview = function (_PureComponent) {
-  _inherits(LinePreview, _PureComponent);
-
-  function LinePreview() {
-    _classCallCheck(this, LinePreview);
-
-    return _possibleConstructorReturn(this, (LinePreview.__proto__ || Object.getPrototypeOf(LinePreview)).apply(this, arguments));
-  }
-
-  _createClass(LinePreview, [{
-    key: 'render',
-    value: function render() {
-      var value = this.props.value;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-component-line-preview' },
-        _react2.default.createElement('div', { style: createStyle(value) })
-      );
-    }
-  }]);
-
-  return LinePreview;
-}(_react.PureComponent);
-
-exports.default = LinePreview;
-
-
-function createStyle(value) {
-  var color = value.color,
-      hasPadding = value.hasPadding,
-      lineType = value.lineType;
-
-
-  return {
-    height: 0,
-    borderTopWidth: '1px',
-    margin: hasPadding ? '0 10px' : 0,
-    borderColor: color,
-    borderStyle: lineType
-  };
-}
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/line/index.js":
-/*!***********************************************!*\
-  !*** ./src/pages/editor/widget/line/index.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _LineEditor = __webpack_require__(/*! ./LineEditor */ "./src/pages/editor/widget/line/LineEditor.jsx");
-
-var _LineEditor2 = _interopRequireDefault(_LineEditor);
-
-var _LinePreview = __webpack_require__(/*! ./LinePreview */ "./src/pages/editor/widget/line/LinePreview.jsx");
-
-var _LinePreview2 = _interopRequireDefault(_LinePreview);
-
-__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/line/index.pcss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  type: _LineEditor2.default.designType,
-  editor: _LineEditor2.default,
-  preview: _LinePreview2.default
-};
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/line/index.pcss":
-/*!*************************************************!*\
-  !*** ./src/pages/editor/widget/line/index.pcss ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/RichtextEditor.jsx":
-/*!*************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/RichtextEditor.jsx ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
-
-var _editor = __webpack_require__(/*! ./editor */ "./src/pages/editor/widget/richtext/editor/index.js");
-
-var _editor2 = _interopRequireDefault(_editor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var reserColor = '#f9f9f9';
-
-var RichtextEditor = function (_DesignEditor) {
-  _inherits(RichtextEditor, _DesignEditor);
-
-  function RichtextEditor() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, RichtextEditor);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = RichtextEditor.__proto__ || Object.getPrototypeOf(RichtextEditor)).call.apply(_ref, [this].concat(args))), _this), _this.handleResetBackground = function () {
-      _this.onCustomInputChange('color')(reserColor);
-    }, _this.onColorChange = function (color) {
-      _this.onCustomInputChange('color')(color);
-    }, _this.onFullscreenChange = function (e) {
-      var isFullscreen = Number(e.target.checked);
-      _this.onCustomInputChange('fullscreen')(isFullscreen);
-    }, _this.onEditorChange = function (val) {
-      _this.onCustomInputChange('content')(val);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(RichtextEditor, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          richTextConfig = _props.richTextConfig;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'zent-design-component-richtext-editor' },
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          { focusOnLabelClick: false, label: '\u80CC\u666F\u989C\u8272\uFF1A' },
-          _react2.default.createElement(
-            'div',
-            { className: 'input-append' },
-            _react2.default.createElement(_zent.ColorPicker, {
-              className: 'zent-design-component-richtext-editor__color-picker-popover',
-              color: value.color,
-              onChange: this.onColorChange
-            }),
-            _react2.default.createElement(
-              _zent.Button,
-              { onClick: this.handleResetBackground },
-              '\u91CD\u7F6E'
-            )
-          ),
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'fullscreen', className: 'control-label' },
-            '\u662F\u5426\u5168\u5C4F\uFF1A'
-          ),
-          _react2.default.createElement(
-            _zent.Checkbox,
-            {
-              className: 'zent-design-component-richtext-editor-checkbox-wrap',
-              name: 'fullscreen',
-              checked: value.fullscreen,
-              onChange: this.onFullscreenChange
-            },
-            '\u5168\u5C4F\u663E\u793A'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'zent-design-component-richtext-editor-group' },
-          _react2.default.createElement(_editor2.default, _extends({
-            value: value.content,
-            onChange: this.onEditorChange,
-            editorConfig: {
-              initialFrameWidth: 386,
-              initialFrameHeight: 600
-            }
-          }, richTextConfig))
-        )
-      );
-    }
-  }], [{
-    key: 'getInitialValue',
-    value: function getInitialValue() {
-      return {
-        color: reserColor,
-        content: '',
-        fullscreen: 0
-      };
-    }
-  }]);
-
-  return RichtextEditor;
-}(_DesignEditor2.DesignEditor);
-
-RichtextEditor.defaultProps = {
-  richTextConfig: {}
-};
-RichtextEditor.designType = 'rich_text';
-RichtextEditor.designDescription = '富文本';
-exports.default = RichtextEditor;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/RichtextPreview.js":
-/*!*************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/RichtextPreview.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var emptyRichtext = '<p>点此编辑『富文本』内容 ——&gt;</p><p>你可以对文字进行<strong>加粗</strong>、<em>斜体</em>、<span style="text-decoration: underline;">下划线</span>、<span style="text-decoration: line-through;">删除线</span>、文字<span style="color: rgb(0, 176, 240);">颜色</span>、<span style="background-color: rgb(255, 192, 0); color: rgb(255, 255, 255);">背景色</span>、以及字号<span style="font-size: 20px;">大</span><span style="font-size: 14px;">小</span>等简单排版操作。</p><p>还可以在这里加入表格了</p><table><tbody><tr><td width="93" valign="top" style="word-break: break-all;">中奖客户</td><td width="93" valign="top" style="word-break: break-all;">发放奖品</td><td width="93" valign="top" style="word-break: break-all;">备注</td></tr><tr><td width="93" valign="top" style="word-break: break-all;">猪猪</td><td width="93" valign="top" style="word-break: break-all;">内测码</td><td width="93" valign="top" style="word-break: break-all;"><em><span style="color: rgb(255, 0, 0);">已经发放</span></em></td></tr><tr><td width="93" valign="top" style="word-break: break-all;">大麦</td><td width="93" valign="top" style="word-break: break-all;">积分</td><td width="93" valign="top" style="word-break: break-all;"><a href="javascript: void(0);" target="_blank">领取地址</a></td></tr></tbody></table>';
-
-var RichtextPreview = function (_Component) {
-  _inherits(RichtextPreview, _Component);
-
-  function RichtextPreview() {
-    _classCallCheck(this, RichtextPreview);
-
-    return _possibleConstructorReturn(this, (RichtextPreview.__proto__ || Object.getPrototypeOf(RichtextPreview)).apply(this, arguments));
-  }
-
-  _createClass(RichtextPreview, [{
-    key: 'render',
-    value: function render() {
-      var value = this.props.value;
-
-      var content = value.content || emptyRichtext;
-      var fullscreen = value.fullscreen,
-          color = value.color;
-
-
-      return _react2.default.createElement('div', {
-        dangerouslySetInnerHTML: { __html: content } // eslint-disable-line
-        , className: (0, _classnames2.default)('mp-design-component-richtext-preview', {
-          'mp-design-component-richtext-preview--fullscreen': fullscreen
-        }),
-        style: { backgroundColor: color }
-      });
-    }
-  }]);
-
-  return RichtextPreview;
-}(_react.Component);
-
-RichtextPreview.propTypes = {
-  value: _propTypes2.default.object,
-  design: _propTypes2.default.object
-};
-exports.default = RichtextPreview;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/editor/index.js":
-/*!**********************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
-
-var _assign2 = _interopRequireDefault(_assign);
-
-var _noop = __webpack_require__(/*! lodash/noop */ "./node_modules/lodash/noop.js");
-
-var _noop2 = _interopRequireDefault(_noop);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _uuid = __webpack_require__(/*! zent/lib/utils/uuid */ "./node_modules/zent/lib/utils/uuid.js");
-
-var _uuid2 = _interopRequireDefault(_uuid);
-
-__webpack_require__(/*! ./plugins */ "./src/pages/editor/widget/richtext/editor/plugins/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var UEDITOR_LOADED_KEY = '__ZENT_UEDITOR_LOADED_STATUS__';
-
-// ueditor 默认值
-var initConfig = {
-  toolbars: [['bold', 'italic', 'underline', 'strikethrough', 'forecolor', 'backcolor', 'justifyleft', 'justifycenter', 'justifyright', '|', 'insertunorderedlist', 'insertorderedlist', 'blockquote'], ['emotion', 'insertvideo', 'link', 'removeformat', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', 'paragraph', 'fontsize'], ['inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols']],
-  autoClearinitialContent: false,
-  autoFloatEnabled: true, // 是否保持 toolbar 滚动时不动
-  focus: false,
-  wordCount: true,
-  elementPathEnabled: false,
-  pasteplain: false, // 是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
-  initialFrameWidth: 640, // 初始化编辑器宽度
-  initialFrameHeight: 200,
-  maximumWords: 10000
-};
-
-var RichText = function (_Component) {
-  _inherits(RichText, _Component);
-
-  function RichText(props) {
-    _classCallCheck(this, RichText);
-
-    // 生成加载 ueditor 的节点id
-    var _this = _possibleConstructorReturn(this, (RichText.__proto__ || Object.getPrototypeOf(RichText)).call(this, props));
-
-    _this.initRichText = function () {
-      var UE = window.UE;
-      var target = document.getElementById(_this.uuid);
-
-      if (!UE || !target) return false;
-
-      var _this$props = _this.props,
-          value = _this$props.value,
-          editorConfig = _this$props.editorConfig;
-
-
-      var conf = (0, _assign2.default)({}, initConfig, editorConfig);
-
-      var editor = new UE.ui.Editor(conf);
-      _this.editor = editor;
-
-      editor.addListener('blur contentChange', function () {
-        _this.onChange();
-      });
-      editor.render(target);
-      editor.ready(function () {
-        editor.setContent(value);
-      });
-    };
-
-    _this.onChange = function () {
-      var val = _this.editor.getContent();
-      _this.props.onChange && _this.props.onChange(val);
-    };
-
-    _this.uuid = (0, _uuid2.default)();
-    return _this;
-  }
-
-  _createClass(RichText, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var timer = null;
-
-      if (window.UE) {
-        this.initRichText();
-      } else {
-        // 当一个页面中存在多个 RichText 组件时，需避免加载多份 ueditor.js
-        timer = setInterval(function () {
-          var status = window[UEDITOR_LOADED_KEY];
-          if (status === 1) {
-            // 加载中
-          } else if (status === 2) {
-            clearInterval(timer);
-            _this2.initRichText();
-          } else {
-            _this2.loadUEditorScript();
-          }
-        }, 50);
-      }
-    }
-  }, {
-    key: 'loadUEditorScript',
-    value: function loadUEditorScript() {
-      var _this3 = this;
-
-      if (window[UEDITOR_LOADED_KEY] !== undefined) return;
-
-      window[UEDITOR_LOADED_KEY] = 1; // 加载中
-      var _props = this.props,
-          ueditorHomeUrl = _props.ueditorHomeUrl,
-          ueditorIframeUrl = _props.ueditorIframeUrl,
-          ueditorUrl = _props.ueditorUrl,
-          ueditorConfigUrl = _props.ueditorConfigUrl;
-
-
-      window.UEDITOR_HOME_URL = ueditorHomeUrl;
-      window.UEDITOR_IFRAME_URL = ueditorIframeUrl;
-
-      this.createScript(ueditorConfigUrl, function () {
-        _this3.createScript(ueditorUrl, function () {
-          window[UEDITOR_LOADED_KEY] = 2; // 加载完成
-        });
-      });
-    }
-  }, {
-    key: 'createScript',
-    value: function createScript(url, callback) {
-      var oScript = document.createElement('script');
-      oScript.type = 'text/javascript';
-      oScript.async = true;
-      oScript.src = url;
-
-      oScript.onload = function () {
-        callback();
-      };
-
-      document.body.appendChild(oScript);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      if (!this.editor) return;
-      this.editor.destroy();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var prefix = this.props.prefix;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-richtext ' + this.props.className },
-        _react2.default.createElement('div', { id: this.uuid })
-      );
-    }
-  }]);
-
-  return RichText;
-}(_react.Component);
-
-RichText.propTypes = {
-  value: _propTypes2.default.string,
-  onChange: _propTypes2.default.func,
-  ueditorUrl: _propTypes2.default.string,
-  ueditorConfigUrl: _propTypes2.default.string,
-  ueditorHomeUrl: _propTypes2.default.string,
-  ueditorIframeUrl: _propTypes2.default.string,
-  editorConfig: _propTypes2.default.object,
-  className: _propTypes2.default.string,
-  prefix: _propTypes2.default.string
-};
-RichText.defaultProps = {
-  value: '',
-  onChange: _noop2.default,
-  ueditorUrl: '//b.yzcdn.cn/v2/vendor/ueditor/release/ueditor.all.min.201707251345.js',
-  ueditorConfigUrl: '//b.yzcdn.cn/v2/vendor/ueditor/release/ueditor.config.201707251345.js',
-  ueditorHomeUrl: '//b.yzcdn.cn/v2/vendor/ueditor/dist/',
-  ueditorIframeUrl: '//www.youzan.com/v2/static/vendor/ueditor/dist/',
-  editorConfig: {}, // ueditor 默认值
-  className: '',
-  prefix: 'zent-design-component'
-};
-exports.default = RichText;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx":
-/*!*********************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.default = function (options) {
-  openDialog({
-    dialogId: dialogId,
-    className: 'zent-design-component-richtext__emotion',
-    children: _react2.default.createElement(Emotion, { callback: options.callback })
-  });
-};
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TabPanel = _zent.Tabs.TabPanel;
-var openDialog = _zent.Dialog.openDialog,
-    closeDialog = _zent.Dialog.closeDialog;
-
-var dialogId = 'zent_design_component_richtext_emotion_dialog';
-
-var defaultTab = [{
-  name: '精选',
-  whichTpl: 'normal',
-  tplInfo: 'Choice',
-  wrapClass: 'jd',
-  sum: 84,
-  imgFolder: 'jx2/',
-  imgName: 'j_00'
-}, {
-  name: '兔斯基',
-  whichTpl: 'normal',
-  tplInfo: 'Tuzki',
-  wrapClass: 'tsj',
-  sum: 40,
-  imgFolder: 'tsj/',
-  imgName: 't_00'
-}, {
-  name: '绿豆蛙',
-  whichTpl: 'normal',
-  tplInfo: 'Lvdouwa',
-  wrapClass: 'ldw',
-  sum: 52,
-  imgFolder: 'ldw/',
-  imgName: 'w_00'
-}, {
-  name: '波波',
-  whichTpl: 'normal',
-  tplInfo: 'Bobo',
-  wrapClass: 'bb',
-  sum: 63,
-  imgFolder: 'bobo/',
-  imgName: 'b_00'
-}, {
-  name: '北鼻猫',
-  whichTpl: 'normal',
-  tplInfo: 'BabyCat',
-  wrapClass: 'cat',
-  sum: 20,
-  imgFolder: 'babycat/',
-  imgName: 'C_00'
-}, {
-  name: '泡泡',
-  whichTpl: 'pp',
-  tplInfo: 'Bubble',
-  wrapClass: 'pp',
-  sum: 50,
-  imgFolder: 'face/',
-  imgName: 'i_f_'
-}, {
-  name: '有啊',
-  whichTpl: 'normal',
-  tplInfo: 'Youa',
-  wrapClass: 'youa',
-  sum: 44,
-  imgFolder: 'youa/',
-  imgName: 'y_00'
-}, {
-  name: 'QQ',
-  whichTpl: 'qq',
-  tplInfo: 'Qq',
-  wrapClass: 'qq',
-  sum: 105,
-  imgFolder: 'qq/',
-  imgName: ''
-}];
-
-var Emotion = function (_Component) {
-  _inherits(Emotion, _Component);
-
-  function Emotion(props) {
-    _classCallCheck(this, Emotion);
-
-    var _this = _possibleConstructorReturn(this, (Emotion.__proto__ || Object.getPrototypeOf(Emotion)).call(this, props));
-
-    _this.onTabChange = function (id) {
-      _this.setState({
-        activeId: id
-      });
-    };
-
-    _this.state = {
-      activeId: 'Choice'
-    };
-    return _this;
-  }
-
-  _createClass(Emotion, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.initTabs();
-    }
-  }, {
-    key: 'initTabs',
-    value: function initTabs() {
-      var _this2 = this;
-
-      this.allTabs = defaultTab.map(function (item, index) {
-        var tabContent = [];
-
-        for (var i = 1, len = item.sum; i <= len; i++) {
-          var imgSrc = '' + item.imgFolder + item.imgName + (i < 10 ? '0' + i : i) + '.gif';
-          var styleObj = {};
-          var pos = '';
-
-          if (item.whichTpl === 'pp') {
-            styleObj = { backgroundPosition: 'left ' + (i - 1) * -25 + 'px' };
-            pos = i % 12 <= 6 ? 'posRight' : 'posLeft';
-          } else if (item.whichTpl === 'qq') {
-            styleObj = { backgroundPosition: (i - 1) * -24 + 'px 50%' };
-            pos = i % 15 <= 6 ? 'posRight' : 'posLeft';
-          } else {
-            styleObj = { backgroundPosition: 'left ' + (i - 1) * -35 + 'px' };
-            pos = i % 12 <= 6 ? 'posRight' : 'posLeft';
-          }
-
-          tabContent.push(_react2.default.createElement(
-            'div',
-            { key: item.tplInfo + '-' + i },
-            _react2.default.createElement('span', {
-              className: item.wrapClass,
-              style: styleObj,
-              onClick: _this2.onClick.bind(_this2, item, imgSrc, pos)
-            })
-          ));
-        }
-
-        return _react2.default.createElement(
-          TabPanel,
-          { tab: item.name, id: item.tplInfo, key: index },
-          _react2.default.createElement(
-            'div',
-            { className: 'emotion-content' },
-            _react2.default.createElement(
-              'div',
-              { className: 'emotion-list-wrapper' },
-              tabContent
-            )
-          )
-        );
-      });
-    }
-  }, {
-    key: 'onClick',
-    value: function onClick(item, imgSrc) {
-      var imgAddr = 'https://b.yzcdn.cn/v2';
-      // App的WebView不支持//需要指明真正的协议
-      imgAddr = imgAddr.replace(/^\/\//, 'https://');
-      imgSrc = imgAddr + '/image/ueditor_emotion/' + imgSrc;
-
-      closeDialog(dialogId);
-      this.props.callback(imgSrc);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        _zent.Tabs,
-        {
-          activeId: this.state.activeId,
-          onTabChange: this.onTabChange,
-          className: 'emotion-tabs'
-        },
-        this.allTabs
-      );
-    }
-  }]);
-
-  return Emotion;
-}(_react.Component);
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Link.jsx":
-/*!******************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Link.jsx ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.default = function (options) {
-  var form = void 0;
-  var closeDialog = void 0;
-
-  var onConfirm = function onConfirm() {
-    return new Promise(function (resolve, reject) {
-      form.submit();
-      if (form.isValid()) {
-        var formValues = form.getFormValues();
-        var linkUrl = formValues.linkUrl;
-        var reg = /^tel:/;
-        var cheackURl = /(:\s*\/\/|tel:)/.test(formValues.linkUrl);
-
-        // 包含http,ftp,file开头的地址，直接引用
-        if (!cheackURl) {
-          _zent.Notify.success('您输入的超链接中不包含http等协议名称，默认将为您添加http://前缀');
-          linkUrl = 'http://' + linkUrl;
-        }
-        var urlInfo = {
-          target: reg.test(linkUrl) ? '' : '_blank',
-          href: linkUrl,
-          textValue: linkUrl
-        };
-        options.callback(urlInfo);
-        resolve();
-      } else {
-        reject();
-      }
-    });
-  };
-
-  var onPressEnter = function onPressEnter() {
-    onConfirm().then(function () {
-      closeDialog();
-    }).catch(function () {
-      /* no nothing */
-    });
-  };
-
-  closeDialog = _zent.Sweetalert.confirm({
-    className: 'zent-design-component-richtext__link',
-    title: '超链接',
-    content: _react2.default.createElement(LinkForm, { onPressEnter: onPressEnter, ref: function ref(f) {
-        return form = f;
-      } }),
-    onConfirm: onConfirm
-  });
-};
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var createForm = _zent.Form.createForm,
-    Field = _zent.Form.Field,
-    InputField = _zent.Form.InputField;
-
-
-var LinkForm = createForm({})(function (_React$Component) {
-  _inherits(LinkFromImpl, _React$Component);
-
-  function LinkFromImpl() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, LinkFromImpl);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LinkFromImpl.__proto__ || Object.getPrototypeOf(LinkFromImpl)).call.apply(_ref, [this].concat(args))), _this), _this.onPressEnter = function (evt) {
-      evt.preventDefault();
-      _this.props.onPressEnter();
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(LinkFromImpl, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'share-content' },
-        _react2.default.createElement(
-          _zent.Form,
-          { horizontal: true },
-          _react2.default.createElement(Field, {
-            name: 'linkUrl',
-            label: '\u94FE\u63A5\u5730\u5740',
-            validations: {
-              required: true
-            },
-            validationErrors: {
-              required: '链接地址不能为空'
-            },
-            onPressEnter: this.onPressEnter,
-            autoFocus: true,
-            component: InputField
-          }),
-          ' '
-        ),
-        ' '
-      );
-    }
-  }]);
-
-  return LinkFromImpl;
-}(_react2.default.Component));
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/Video.jsx":
-/*!*******************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/Video.jsx ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.default = function (options) {
-  var _this2 = this;
-
-  var closeDialog = _zent.Sweetalert.confirm({
-    className: 'zent-design-component-richtext__video',
-    title: '视频插入视频',
-    content: _react2.default.createElement(VideoForm, {
-      callback: options.callback,
-      onClose: function onClose() {
-        return closeDialog();
-      },
-      ref: function ref(form) {
-        return _this2.form = form;
-      }
-    }),
-    onConfirm: function onConfirm() {
-      _this2.form.getWrappedForm().saveVideo();
-    }
-  });
-};
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var createForm = _zent.Form.createForm,
-    Field = _zent.Form.Field,
-    InputField = _zent.Form.InputField;
-
-
-var YOUKU_IMAGE = 'http://img.yzcdn.cn/public_files/2015/09/10/04eeb56eb29cbfbe29d67042be4d21ed.jpg';
-var TUDOU_IMAGE = 'http://img.yzcdn.cn/public_files/2015/09/10/1640ba3f20b22d4b35a62d72831e8110.jpg';
-
-var VideoForm = createForm({})(function (_Component) {
-  _inherits(_class, _Component);
-
-  function _class(props) {
-    _classCallCheck(this, _class);
-
-    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
-
-    _this.preview = _this.preview.bind(_this);
-    _this.width = props.width || 620;
-    _this.height = props.height || _this.width * 0.75;
-
-    // 自定义需要生成图片的width和height
-    _this.imgWidth = props.imgWidth || 300;
-    _this.imgHeight = props.imgHeight || 225;
-
-    _this.iframeUrl = '';
-
-    _this.state = {
-      videoUrl: ''
-    };
-    return _this;
-  }
-
-  _createClass(_class, [{
-    key: 'preview',
-    value: function preview(e) {
-      var videoUrl = e.target.value;
-      if (e.type === 'paste') {
-        setTimeout(this.previewVideo.bind(this, videoUrl), 1);
-      } else {
-        this.previewVideo(videoUrl);
-      }
-      this.setState({
-        videoUrl: videoUrl
-      });
-    }
-  }, {
-    key: 'previewVideo',
-    value: function previewVideo(url) {
-      this.iframeUrl = this.processUrl(url);
-      this.renderIframe();
-    }
-  }, {
-    key: 'processUrl',
-    value: function processUrl(url) {
-      if (!url) {
-        return;
-      }
-
-      var id = void 0;
-      var iframeUrl = void 0;
-
-      if (url.indexOf('v.qq.com') >= 0) {
-        id = url.match(/vid=([^&]*)($|&)/);
-        if (id) {
-          iframeUrl = 'https://v.qq.com/iframe/player.html?vid=' + id[1] + '&tiny=0&auto=0';
-        } else {
-          id = url.match(/\/([0-9a-zA-Z]+).html/);
-          if (id) {
-            iframeUrl = 'https://v.qq.com/iframe/player.html?vid=' + id[1] + '&tiny=0&auto=0';
-          }
-        }
-        if (!id) {
-          return;
-        }
-      } else if (url.indexOf('v.youku.com') >= 0) {
-        id = url.match(/id_(.*)\.html/);
-        iframeUrl = 'http://player.youku.com/embed/' + id[1];
-      } else if (url.indexOf('//player.youku.com/embed/') >= 0) {
-        iframeUrl = url.match(/src="([^"]*)"/)[1];
-      } else if (url.indexOf('tudou.com') >= 0) {
-        id = url.match(/\/([\w\-]*)\.html/)[1];
-        iframeUrl = 'http://www.tudou.com/programs/view/html5embed.action?code=' + id;
-      } else {
-        return;
-      }
-
-      return iframeUrl;
-    }
-  }, {
-    key: 'renderIframe',
-    value: function renderIframe(src) {
-      src = src || this.iframeUrl;
-
-      if (src) {
-        var video = '<iframe src="' + src + '" width="' + this.width + '" height="' + this.height + '" allowfullscreen="true"></ifame>';
-
-        if (this.isYouku() || this.isTudou()) {
-          video = '<img src="' + this.getSiteLogoImage() + '" />';
-        }
-
-        document.getElementById('preview').innerHTML = video;
-      } else {
-        document.getElementById('preview').innerHTML = '<span>请复制腾讯、优酷视频地址输入框。</span>';
-      }
-    }
-  }, {
-    key: 'isYouku',
-    value: function isYouku() {
-      return this.iframeUrl && this.iframeUrl.match('youku');
-    }
-  }, {
-    key: 'isTudou',
-    value: function isTudou() {
-      return this.iframeUrl && this.iframeUrl.match('tudou');
-    }
-  }, {
-    key: 'getSiteLogoImage',
-    value: function getSiteLogoImage() {
-      if (this.isYouku()) {
-        return YOUKU_IMAGE;
-      }
-      if (this.isTudou()) {
-        return TUDOU_IMAGE;
-      }
-    }
-  }, {
-    key: 'saveVideo',
-    value: function saveVideo() {
-      if (!this.iframeUrl) return;
-
-      var imgInfo = {
-        url: this.iframeUrl,
-        width: this.imgWidth,
-        height: this.imgHeight
-      };
-
-      if (this.isYouku() || this.isTudou()) {
-        imgInfo.html = '<a class="video-link" target="_blank" href="' + this.iframeUrl + '"><img src="' + this.getSiteLogoImage() + '" /></a>';
-      }
-
-      this.props.callback(imgInfo);
-      this.props.onClose();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        _zent.Form,
-        {
-          horizontal: true,
-          className: 'video-content',
-          onSubmit: this.props.handleSubmit(this.saveVideo)
-        },
-        _react2.default.createElement(
-          'strong',
-          null,
-          '\u4E3A\u4E86\u5728\u5FAE\u4FE1\u4E2D\u6709\u66F4\u597D\u7684\u4F53\u9A8C\uFF0C\u63A8\u8350\u4F7F\u7528',
-          _react2.default.createElement(
-            'a',
-            {
-              href: 'http://v.qq.com',
-              target: '_blank',
-              rel: 'noopener noreferrer'
-            },
-            '\u817E\u8BAF\u89C6\u9891'
-          ),
-          '\u3002'
-        ),
-        _react2.default.createElement(Field, {
-          name: 'videoUrl',
-          label: '\u89C6\u9891\u5730\u5740',
-          placeholder: '\u590D\u5236\u89C6\u9891\u5730\u5740\u5230\u8FD9\u91CC',
-          component: InputField,
-          value: this.state.videoUrl,
-          onInput: this.preview,
-          onChange: this.preview
-        }),
-        _react2.default.createElement(
-          'div',
-          { id: 'preview' },
-          _react2.default.createElement(
-            'span',
-            null,
-            '\u9884\u89C8\u533A'
-          )
-        )
-      );
-    }
-  }]);
-
-  return _class;
-}(_react.Component));
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/editor/plugins/index.js":
-/*!******************************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/editor/plugins/index.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Link = __webpack_require__(/*! ./Link */ "./src/pages/editor/widget/richtext/editor/plugins/Link.jsx");
-
-var _Link2 = _interopRequireDefault(_Link);
-
-var _Emotion = __webpack_require__(/*! ./Emotion */ "./src/pages/editor/widget/richtext/editor/plugins/Emotion.jsx");
-
-var _Emotion2 = _interopRequireDefault(_Emotion);
-
-var _Video = __webpack_require__(/*! ./Video */ "./src/pages/editor/widget/richtext/editor/plugins/Video.jsx");
-
-var _Video2 = _interopRequireDefault(_Video);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* eslint-disable */
-window.__ueditor_link = _Link2.default;
-window.__ueditor_emotion = _Emotion2.default;
-window.__ueditor_video = _Video2.default;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/index.js":
-/*!***************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/index.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _RichtextEditor = __webpack_require__(/*! ./RichtextEditor */ "./src/pages/editor/widget/richtext/RichtextEditor.jsx");
-
-var _RichtextEditor2 = _interopRequireDefault(_RichtextEditor);
-
-var _RichtextPreview = __webpack_require__(/*! ./RichtextPreview */ "./src/pages/editor/widget/richtext/RichtextPreview.js");
-
-var _RichtextPreview2 = _interopRequireDefault(_RichtextPreview);
-
-__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/richtext/index.pcss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  type: _RichtextEditor2.default.designType,
-  editor: _RichtextEditor2.default,
-  preview: _RichtextPreview2.default,
-  limit: 1
-};
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/richtext/index.pcss":
-/*!*****************************************************!*\
-  !*** ./src/pages/editor/widget/richtext/index.pcss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/whitespace/WhitespaceEditor.jsx":
-/*!*****************************************************************!*\
-  !*** ./src/pages/editor/widget/whitespace/WhitespaceEditor.jsx ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
-
-var _DesignEditor2 = __webpack_require__(/*! ../../components/design/editor/DesignEditor */ "./src/pages/editor/components/design/editor/DesignEditor.jsx");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var WhitespaceEditor = function (_DesignEditor) {
-  _inherits(WhitespaceEditor, _DesignEditor);
-
-  function WhitespaceEditor() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, WhitespaceEditor);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WhitespaceEditor.__proto__ || Object.getPrototypeOf(WhitespaceEditor)).call.apply(_ref, [this].concat(args))), _this), _this.onHeightChange = _this.onCustomInputChange('height'), _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(WhitespaceEditor, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          prefix = _props.prefix;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: prefix + '-design-component-whitespace-editor' },
-        _react2.default.createElement(
-          _DesignEditor2.ControlGroup,
-          {
-            label: '\u7A7A\u767D\u9AD8\u5EA6:',
-            className: prefix + '-design-component-whitespace-editor__height'
-          },
-          _react2.default.createElement(_zent.Slider, {
-            min: 10,
-            max: 100,
-            value: value.height,
-            onChange: this.onHeightChange,
-            withInput: false
-          }),
-          _react2.default.createElement(
-            'span',
-            null,
-            value.height,
-            ' \u50CF\u7D20'
-          )
-        )
-      );
-    }
-
-    // 组件的类型
-
-
-    // 组件的描述
-
-  }], [{
-    key: 'getInitialValue',
-
-
-    // 添加组件时调用，用来获取新组件的初始值
-    value: function getInitialValue() {
-      return {
-        height: 30
-      };
-    }
-  }]);
-
-  return WhitespaceEditor;
-}(_DesignEditor2.DesignEditor);
-
-WhitespaceEditor.designType = 'white';
-WhitespaceEditor.designDescription = _react2.default.createElement(
-  'span',
-  null,
-  '\u8F85\u52A9',
-  _react2.default.createElement('br', null),
-  '\u7A7A\u767D'
-);
-exports.default = WhitespaceEditor;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/whitespace/WhitespacePreview.js":
-/*!*****************************************************************!*\
-  !*** ./src/pages/editor/widget/whitespace/WhitespacePreview.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var WhitespacePreview = function (_PureComponent) {
-  _inherits(WhitespacePreview, _PureComponent);
-
-  function WhitespacePreview() {
-    _classCallCheck(this, WhitespacePreview);
-
-    return _possibleConstructorReturn(this, (WhitespacePreview.__proto__ || Object.getPrototypeOf(WhitespacePreview)).apply(this, arguments));
-  }
-
-  _createClass(WhitespacePreview, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          prefix = _props.prefix;
-
-
-      return _react2.default.createElement('div', {
-        className: prefix + '-design-component-whitespace-preview',
-        style: { height: value.height + 'px' }
-      });
-    }
-  }]);
-
-  return WhitespacePreview;
-}(_react.PureComponent);
-
-WhitespacePreview.propTypes = {
-  value: _propTypes2.default.object,
-  prefix: _propTypes2.default.string
-};
-exports.default = WhitespacePreview;
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/whitespace/index.js":
-/*!*****************************************************!*\
-  !*** ./src/pages/editor/widget/whitespace/index.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _WhitespaceEditor = __webpack_require__(/*! ./WhitespaceEditor */ "./src/pages/editor/widget/whitespace/WhitespaceEditor.jsx");
-
-var _WhitespaceEditor2 = _interopRequireDefault(_WhitespaceEditor);
-
-var _WhitespacePreview = __webpack_require__(/*! ./WhitespacePreview */ "./src/pages/editor/widget/whitespace/WhitespacePreview.js");
-
-var _WhitespacePreview2 = _interopRequireDefault(_WhitespacePreview);
-
-__webpack_require__(/*! ./index.pcss */ "./src/pages/editor/widget/whitespace/index.pcss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  type: _WhitespaceEditor2.default.designType,
-  editor: _WhitespaceEditor2.default,
-  preview: _WhitespacePreview2.default,
-  limit: 1
-};
-
-/***/ }),
-
-/***/ "./src/pages/editor/widget/whitespace/index.pcss":
-/*!*******************************************************!*\
-  !*** ./src/pages/editor/widget/whitespace/index.pcss ***!
-  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

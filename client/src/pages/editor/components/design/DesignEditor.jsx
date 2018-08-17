@@ -10,6 +10,8 @@ import DesignPreviewController from './preview/DesignPreviewController';
 import DesignEditorItem from './editor/DesignEditorItem';
 import {isExpectedDesginType} from './utils/design-type';
 import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
+import Bundle from "../bundle/bundle";
+import pluginLoader from '../bundle/loader'
 
 
 // 保存实例对应的js组件对象
@@ -78,16 +80,13 @@ class DesignEditor extends PureComponent {
                                     className={cx(`mp-design__item-list`, `mp-design__item-list--full-height`)}
                                 >
                                     {instanceList.map(instance => {
-                                        let pluginId = InstanceUtils.getPluginIdFromInstace(instance);
-                                        let pluginStringID = pluginId.getStringId();
-                                        const plugin = pluginMap[pluginStringID];
+                                        const plugin = pluginLoader.getPluginByInstance(instance);
                                         // 实例id
                                         const id = InstanceUtils.getUUIDFromInstance(instance);
                                         // 是否被选中
                                         const selected = id === selectedUUID;
                                         // 是否可拖动
                                         const draggable = defaultTo(plugin.dragable, true);
-
                                         return (
                                             <DesignPreviewItem
                                                 key={id}
@@ -111,7 +110,7 @@ class DesignEditor extends PureComponent {
                                                     isSelected={selected}
                                                     onSelect={onSelect}
                                                     onDelete={onDelete}
-                                                    component={instance.preview}
+                                                    component={plugin.preview}
                                                 />
 
                                                 {selected && (
@@ -119,7 +118,7 @@ class DesignEditor extends PureComponent {
                                                         disabled={disabled}
                                                         ref={this.saveEditorItem(id)}
                                                     >
-                                                        <instance.editForm
+                                                        <plugin.editForm
                                                             instance={instance}
                                                             onChange={onComponentValueChange(instance)}
                                                             settings={settings}

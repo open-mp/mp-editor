@@ -13,8 +13,6 @@ import * as storage from 'zent/lib/utils/storage';
 import * as InstanceUtils from './utils/instance';
 import pluginLoader from '../bundle/loader'
 import Bundle from '../bundle/bundle'
-
-
 import DesignEditor from './DesignEditor';
 import {
     getDesignType,
@@ -52,7 +50,6 @@ export default class Design extends PureComponent {
             showRestoreFromCache: false,// 是否显示从缓存中恢复的提示
             settings: {},// 页面设置，比如页面背景色
             selectedUUID: '', // 当前选中的组件对应的 UUID
-            pluginMap: {}, // 已经安装的插件 id => 插件配置
             instanceList: [], // 插件实例
             pluginInstanceCount: new LazyMap(0), // plugin创建的实例数
             validations: {}, // 当前所有组件的 validation 信息;  key 是 value 的 UUID
@@ -66,6 +63,11 @@ export default class Design extends PureComponent {
      * @param instanceList
      */
     async setInstanceList(instanceList) {
+        for (let instance of instanceList) {
+            await pluginLoader.loadPlugin(instance.bundleId);
+            InstanceUtils.tagInstanceWithUUID(instance);
+        }
+
         let pluginMap = {};
         let pluginInstanceCount = new LazyMap(0);
         let newInstanceList = [];
@@ -92,50 +94,42 @@ export default class Design extends PureComponent {
     async addInstanceByBundle(bundleId) {
         let {pluginMap} = this.state;
         // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-        let plugin = await this.loadPlugin(bundleId);
-        let initialValue = plugin.getInitialValue();
-        initialValue.bundleId = bundleId;
+        let plugin = await pluginLoader.loadPlugin(bundleId);
+        let instance = plugin.getInitialValue();
+        instance.bundleId = bundleId;
+        InstanceUtils.tagInstanceWithUUID(instance);
 
-    }
+        const {instanceList} = this.state;
 
-    async loadPlugin(bundleId) {
-        let {pluginMap} = this.state;
-        let bundle = new Bundle(bundleId);
-        let bundleStringId = bundle.getStringId();
-        // 检查是否存
-        if (pluginMap[bundleStringId]) {
-            return pluginMap[bundleStringId];
-        }
-        // 加载插件
-        let plugin = await pluginLoader.loadEditorPlugin(bundle);
-        plugin = plugin.default ? plugin.default : plugin;
-        // 找出plugin 并加载
-        pluginMap[bundle.getStringId()] = plugin;
-        return plugin;
-    }
-
-    addInstanceInternal = (component) => {
-        const {instanceList, settings} = this.state;
-        const {editor, defaultType} = component;
-        const instance = editor.getInitialValue({
-            settings
+        let newInstanceList;
+        newInstanceList = instanceList.concat(instance);
+        this.setState({
+            instanceList: newInstanceList
         });
-        instance.type = getDesignType(editor, defaultType);
-        const id = uuid();
-        this.setUUIDForValue(instance, id);
+        this.trackValueChange(newInstanceList);
+        this.selectInstance(instance);
+    }
 
-        /**
-         * 添加有两种来源：底部区域或者弹层。
-         * 如果来自底部的话，就在当前数组最后加；如果来自弹层就在当前选中的那个组件后面加
-         */
-        let newValue;
 
-        newValue = value.concat(instance);
+    // 选中一个组件
+    selectInstance = instance => {
+        const id = InstanceUtils.getUUIDFromInstance(instance);
 
-        this.trackValueChange(newValue);
-        this.onSelect(instance);
+        if (this.isSelected(instance)) {
+            return;
+        }
+
+        this.setState({
+            selectedUUID: id,
+        });
+
+        this.adjustHeight();
     };
 
+    isSelected = instance => {
+        const {selectedUUID} = this.state;
+        return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
+    };
 
     render() {
         const {
@@ -149,7 +143,7 @@ export default class Design extends PureComponent {
             validations,
             showError,
             settings,
-            pluginMap, instanceList
+            instanceList
         } = this.state;
 
 
@@ -176,16 +170,15 @@ export default class Design extends PureComponent {
                 )}
                 {React.createElement(DesignEditor, {
                     settings,
-                    pluginMap,
                     selectedUUID,
                     instanceList,
                     validations,
                     showError,
-                    onSelect: this.onSelect,
-                    onMove: this.onMove,
-                    onDelete: this.onDelete,
-                    onSettingsChange: this.onSettingsChange,
-                    onComponentValueChange: this.onComponentValueChange,
+                    onSelect: this.selectInstance,
+                    onMove: this.moveInstance,
+                    onDelete: this.deleteInstance,
+                    onSettingsChange: this.setSettings,
+                    onComponentValueChange: this.setInstance,
                     design: this.design,
                     disabled,
                     ref: this.savePreview,
@@ -195,7 +188,7 @@ export default class Design extends PureComponent {
     }
 
     componentWillMount() {
-        this.cacheAppendableComponents(this.props.components);
+
     }
 
     componentDidMount() {
@@ -212,6 +205,7 @@ export default class Design extends PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
+        return
         this.validateCacheProps(nextProps);
 
         let shouldUpdateInstanceCountMap = false;
@@ -247,15 +241,7 @@ export default class Design extends PureComponent {
         }
     }
 
-    cacheAppendableComponents(components) {
-        this.setState({
-            appendableComponents: components.filter(
-                c => c.appendable === undefined || c.appendable
-            ),
-        });
-    }
-
-    onSettingsChange = value => {
+    setSettings = value => {
         const {settings, onSettingsChange} = this.props;
         const onSettingsChangeExists = isFunction(onSettingsChange);
 
@@ -280,19 +266,19 @@ export default class Design extends PureComponent {
         }
     };
 
-    onComponentValueChange = identity => (diff, replace = false) => {
+    setInstance = instance => (diff, replace = false) => {
         const {value} = this.props;
         // 得到新的值
         const newComponentValue = replace
-            ? assign({[UUID_KEY]: this.getUUIDFromValue(identity)}, diff)
-            : assign({}, identity, diff);
+            ? assign({[UUID_KEY]: this.getUUIDFromValue(instance)}, diff)
+            : assign({}, instance, diff);
         // 产生新的instanceList
-        const newValue = value.map(v => (v === identity ? newComponentValue : v));
+        const newValue = value.map(v => (v === instance ? newComponentValue : v));
         // 改变的key
         const changedProps = Object.keys(diff);
 
         this.trackValueChange(newValue);
-        this.validateComponentValue(newComponentValue, identity, changedProps).then(
+        this.validateComponentValue(newComponentValue, instance, changedProps).then(
             errors => {
                 const id = this.getUUIDFromValue(newComponentValue);
                 this.setValidation({[id]: errors});
@@ -310,61 +296,24 @@ export default class Design extends PureComponent {
         return p;
     };
 
-    // 选中一个组件
-    onSelect = component => {
-        const id = this.getUUIDFromValue(component);
+    // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
+    trackValueChange(newInstanceList, writeCache = true) {
+        const {onChange} = this.props;
+        onChange && onChange(newInstanceList); // 通知外面数据变化
 
-        if (this.isSelected(component)) {
-            return;
+        if (!this._dirty) {
+            this._dirty = true;
         }
 
-        this.setState({
-            selectedUUID: id,
-        });
+        if (writeCache) {
+            this.writeCache(newInstanceList);
+        }
 
         this.adjustHeight();
-    };
-
-
-    // 添加一个新组件
-    onAdd = (component, fromSelected) => {
-        const {value, settings} = this.props;
-        const {editor, defaultType} = component;
-        const instance = editor.getInitialValue({
-            settings
-        });
-        instance.type = getDesignType(editor, defaultType);
-        const id = uuid();
-        this.setUUIDForValue(instance, id);
-
-        /**
-         * 添加有两种来源：底部区域或者弹层。
-         * 如果来自底部的话，就在当前数组最后加；如果来自弹层就在当前选中的那个组件后面加
-         */
-        let newValue;
-        if (fromSelected) {
-            // 复制一封实例
-            index = value.slice();
-            const {addComponentOverlayPosition} = this.state;
-            const {selectedUUID} = this.state;
-            const selectedIndex = findIndex(value, {[UUID_KEY]: selectedUUID});
-
-            // 两种位置，插入到当前选中的前面或者后面
-            const delta =
-                addComponentOverlayPosition === ADD_COMPONENT_OVERLAY_POSITION.TOP
-                    ? 0
-                    : 1;
-            newValue.splice(selectedIndex + delta, 0, instance);
-        } else {
-            newValue = value.concat(instance);
-        }
-
-        this.trackValueChange(newValue);
-        this.onSelect(instance);
-    };
+    }
 
     // 删除一个组件, 删除后如果没有选中的组件则默认选一个
-    onDelete = component => {
+    deleteInstance = component => {
         const {value, components} = this.props;
         let nextIndex = -1;
         const newValue = value.filter((v, idx) => {
@@ -395,7 +344,7 @@ export default class Design extends PureComponent {
         this.adjustHeight();
     };
 
-    onMove = (fromIndex, toIndex) => {
+    moveInstance = (fromIndex, toIndex) => {
         if (fromIndex === toIndex) {
             return;
         }
@@ -562,10 +511,6 @@ export default class Design extends PureComponent {
         });
     };
 
-    isSelected = instance => {
-        const {selectedUUID} = this.state;
-        return InstanceUtils.getUUIDFromInstance(instance) === selectedUUID;
-    };
 
     hasSelected = () => {
         const {selectedUUID} = this.state;
@@ -626,21 +571,6 @@ export default class Design extends PureComponent {
         }, 0);
     };
 
-    // 调用 onChange 的统一入口，用于处理一些需要知道有没有修改过值的情况
-    trackValueChange(newValue, writeCache = true) {
-        const {onChange} = this.props;
-        onChange(newValue); // 通知外面数据变化
-
-        if (!this._dirty) {
-            this._dirty = true;
-        }
-
-        if (writeCache) {
-            this.writeCache(newValue);
-        }
-
-        this.adjustHeight();
-    }
 
     setupBeforeUnloadHook() {
         const {confirmUnsavedLeave} = this.props;
@@ -669,7 +599,7 @@ export default class Design extends PureComponent {
         return confirmLeaveMessage;
     };
 
-    // 缓存相关的函数
+    // 检查缓存相关的属性是否设置正确
     validateCacheProps(props) {
         props = props || this.props;
         const {cache, cacheId} = props;
