@@ -251,7 +251,7 @@ export default class Design extends PureComponent {
             : assign({}, instance, diff);
         // 产生新的instanceList
         const newInstanceList = instanceList.map(instanceLooped => {
-           return instanceLooped === instance ? newInstanceValue : instanceLooped
+            return instanceLooped === instance ? newInstanceValue : instanceLooped
         });
         this.setState({
             instanceList: newInstanceList
@@ -280,11 +280,11 @@ export default class Design extends PureComponent {
     }
 
     // 删除一个组件, 删除后如果没有选中的组件则默认选一个
-    deleteInstance = component => {
-        const {value, components} = this.props;
+    deleteInstance = instance => {
+        const {instanceList, selectedUUID} = this.state;
         let nextIndex = -1;
-        const newValue = value.filter((v, idx) => {
-            const skip = v !== component;
+        const newInstanceList = instanceList.filter((v, idx) => {
+            const skip = v !== instance;
             if (!skip) {
                 nextIndex = idx - 1;
             }
@@ -294,25 +294,36 @@ export default class Design extends PureComponent {
         const newState = {};
 
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
-        const componentUUID = this.getUUIDFromValue(component);
-        if (componentUUID === this.state.selectedUUID) {
-            const nextSelectedValue = findFirstEditableSibling(
-                newValue,
-                components,
-                nextIndex
-            );
-            const nextUUID = this.getUUIDFromValue(nextSelectedValue);
+        const uuId = InstanceUtils.getUUIDFromInstance(instance);
+        if (uuId === selectedUUID) {
+            const nextSelectedInstance =
+                InstanceUtils.findFirstEditableInstance(
+                    newInstanceList, nextIndex
+                );
+            const nextUUID = InstanceUtils.getUUIDFromInstance(nextSelectedInstance);
             newState.selectedUUID = nextUUID;
         }
 
-        this.trackValueChange(newValue);
-        this.setState(newState);
+        this.setState({
+            instanceList: newInstanceList,
+            ...newState
+        });
+
+        this.trackValueChange(newInstanceList);
 
         this.adjustHeight();
     };
 
     moveInstance = (fromIndex, toIndex) => {
+        let {instanceList} = this.state;
+        let newInstanceList = InstanceUtils.moveInstance(instanceList, fromIndex, toIndex);
 
+        if (newInstanceList) {
+            this.setState({
+                instanceList: newInstanceList
+            });
+        }
+        this.trackValueChange(newInstanceList);
     };
 
     setValidation = validation => {

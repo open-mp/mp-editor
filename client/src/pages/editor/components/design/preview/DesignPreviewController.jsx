@@ -113,18 +113,9 @@ class DesignPreviewController extends PureComponent {
     };
 
     onDelete = () => {
-        this.invokeCallback('onDelete', null, true);
+        const {design, instance} = this.props;
+        design.deleteInstance(instance);
     };
-
-    invokeCallback(action, evt, stopPropagation, ...args) {
-        if (stopPropagation && evt) {
-            evt.stopPropagation();
-        }
-
-        const {value} = this.props;
-        const cb = this.props[action];
-        cb && cb(value, ...args);
-    }
 }
 
 function DeleteButton({onDelete}) {

@@ -26,6 +26,41 @@ export function tagInstanceWithUUID(instance) {
 }
 
 /**
+ * 从 startIndex 开始往前找到第一个可以选中的值
+ * @param {array} value 当前的值
+ * @param {array} components 当前可用的组件列表
+ * @param {number} startIndex 开始搜索的下标
+ */
+export function findFirstEditableInstance(instanceList, startIndex) {
+    const loop = i => {
+        const instance = instanceList[i];
+        let plugin = pluginLoader.getPluginByInstance(instance);
+        if (plugin && defaultTo(plugin.editable, true)) {
+            return instance;
+        }
+    };
+
+    const total = instanceList.length;
+    // 往前找
+    for (let i = startIndex; i >= 0 && i < total; i--) {
+        const instance = loop(i);
+        if (instance) {
+            return instance;
+        }
+    }
+
+    // 往后找
+    for (let i = startIndex + 1; i < total; i++) {
+        const instance = loop(i);
+        if (instance) {
+            return instance;
+        }
+    }
+
+    return null;
+}
+
+/**
  * 移动实例
  * 不是仅仅交换两个位置的节点，所有中间节点都需要移位
  * 需要考虑数组中间有不可拖拽节点的情况，这种情况下 fromIndex, toIndex 的值是不包括这些节点的
@@ -38,45 +73,42 @@ export function moveInstance(instanceList, fromIndex, toIndex) {
     if (fromIndex === toIndex) {
         return;
     }
-    const {value, components} = this.props;
-    const newValue = [];
+    const newInstanceList = [];
     let tmp;
 
     let passedFromIndex = false;
     let passedToIndex = false;
 
     if (fromIndex < toIndex) {// 从上拖到下面
-        for (let i = 0, dragableIndex = -1; i < value.length; i++) {
-            const val = value[i];
-
-            const comp = find(components, c => isExpectedDesginType(c, val.type));
-            const dragable = comp && defaultTo(comp.dragable, true);
+        for (let i = 0, dragableIndex = -1; i < instanceList.length; i++) {
+            let instance = instanceList[i];
+            let plugin = pluginLoader.getPluginByInstance(instance);
+            const dragable = plugin && defaultTo(plugin.dragable, true);
             if (dragable) {
                 dragableIndex++;
             }
 
             /* Invariant: Each step copies one value, except one copies 2 and another doesn't copy */
             if (dragableIndex === fromIndex && !passedFromIndex) {
-                tmp = val;
+                tmp = instance;
                 passedFromIndex = true;
             } else if (dragableIndex < toIndex && passedFromIndex) {
-                newValue[i - 1] = val;
+                newInstanceList[i - 1] = instance;
             } else if (dragableIndex === toIndex && !passedToIndex) {
-                newValue[i - 1] = val;
-                newValue[i] = tmp;
+                newInstanceList[i - 1] = instance;
+                newInstanceList[i] = tmp;
                 passedToIndex = true;
             } else {
-                newValue[i] = val;
+                newInstanceList[i] = instance;
             }
         }
     } else { // 从下往上托
         let toInsetIndex;
 
-        for (let i = 0, dragableIndex = -1; i < value.length; i++) {
-            const val = value[i];
-
-            const comp = find(components, c => isExpectedDesginType(c, val.type));
-            const dragable = comp && defaultTo(comp.dragable, true);
+        for (let i = 0, dragableIndex = -1; i < instanceList.length; i++) {
+            let instance = instanceList[i];
+            let plugin = pluginLoader.getPluginByInstance(instance);
+            const dragable = plugin && defaultTo(plugin.dragable, true);
             if (dragable) {
                 dragableIndex++;
             }
@@ -84,20 +116,19 @@ export function moveInstance(instanceList, fromIndex, toIndex) {
             /* Invariant: each step copies one value */
             if (dragableIndex === toIndex && !passedToIndex) {
                 toInsetIndex = i;
-                newValue[i + 1] = val;
+                newInstanceList[i + 1] = instance;
                 passedToIndex = true;
             } else if (dragableIndex < fromIndex && passedToIndex) {
-                newValue[i + 1] = val;
+                newInstanceList[i + 1] = instance;
             } else if (dragableIndex === fromIndex && !passedFromIndex) {
-                newValue[toInsetIndex] = val;
+                newInstanceList[toInsetIndex] = instance;
                 passedFromIndex = true;
             } else {
-                newValue[i] = val;
+                newInstanceList[i] = instance;
             }
         }
     }
-
-    this.trackValueChange(newValue);
+    return newInstanceList;
 }
 
 export async function validateInstance(instance) {
@@ -178,42 +209,6 @@ export async function validateInstanceList(instance) {
     );
 }
 
-
-/**
- * 从 startIndex 开始往前找到第一个可以选中的值
- * @param {array} value 当前的值
- * @param {array} components 当前可用的组件列表
- * @param {number} startIndex 开始搜索的下标
- */
-export function findFirstEditableSibling(instanceList, pluginMap, nextIndex) {
-    const loop = i => {
-        const val = value[i];
-        const type = val.type;
-        const comp = find(components, c => isExpectedDesginType(c, type));
-        if (comp && defaultTo(comp.editable, true)) {
-            return val;
-        }
-    };
-
-    const valueLength = value.length;
-    // 往前找
-    for (let i = startIndex; i >= 0 && i < valueLength; i--) {
-        const val = loop(i);
-        if (val) {
-            return val;
-        }
-    }
-
-    // 往后找
-    for (let i = startIndex + 1; i < valueLength; i++) {
-        const val = loop(i);
-        if (val) {
-            return val;
-        }
-    }
-
-    return null;
-}
 
 /**
  * 根据当前的值生成一个组件使用计数

@@ -157,8 +157,8 @@ class DesignEditor extends PureComponent {
             return;
         }
 
-        const { onMove } = this.props;
-        onMove(source.index, destination.index);
+        const { design } = this.props;
+        design.moveInstance(source.index, destination.index);
     }
 
     savePreviewItem = id => instance => {

@@ -8294,14 +8294,14 @@ var Design = function (_PureComponent) {
             };
         }();
 
-        _this.deleteInstance = function (component) {
-            var _this$props = _this.props,
-                value = _this$props.value,
-                components = _this$props.components;
+        _this.deleteInstance = function (instance) {
+            var _this$state = _this.state,
+                instanceList = _this$state.instanceList,
+                selectedUUID = _this$state.selectedUUID;
 
             var nextIndex = -1;
-            var newValue = value.filter(function (v, idx) {
-                var skip = v !== component;
+            var newInstanceList = instanceList.filter(function (v, idx) {
+                var skip = v !== instance;
                 if (!skip) {
                     nextIndex = idx - 1;
                 }
@@ -8311,20 +8311,34 @@ var Design = function (_PureComponent) {
             var newState = {};
 
             // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
-            var componentUUID = _this.getUUIDFromValue(component);
-            if (componentUUID === _this.state.selectedUUID) {
-                var nextSelectedValue = findFirstEditableSibling(newValue, components, nextIndex);
-                var nextUUID = _this.getUUIDFromValue(nextSelectedValue);
+            var uuId = InstanceUtils.getUUIDFromInstance(instance);
+            if (uuId === selectedUUID) {
+                var nextSelectedInstance = InstanceUtils.findFirstEditableInstance(newInstanceList, nextIndex);
+                var nextUUID = InstanceUtils.getUUIDFromInstance(nextSelectedInstance);
                 newState.selectedUUID = nextUUID;
             }
 
-            _this.trackValueChange(newValue);
-            _this.setState(newState);
+            _this.setState(_extends({
+                instanceList: newInstanceList
+            }, newState));
+
+            _this.trackValueChange(newInstanceList);
 
             _this.adjustHeight();
         };
 
-        _this.moveInstance = function (fromIndex, toIndex) {};
+        _this.moveInstance = function (fromIndex, toIndex) {
+            var instanceList = _this.state.instanceList;
+
+            var newInstanceList = InstanceUtils.moveInstance(instanceList, fromIndex, toIndex);
+
+            if (newInstanceList) {
+                _this.setState({
+                    instanceList: newInstanceList
+                });
+            }
+            _this.trackValueChange(newInstanceList);
+        };
 
         _this.setValidation = function (validation) {
             _this.setState({
@@ -9163,9 +9177,9 @@ var DesignEditor = function (_PureComponent) {
                 return;
             }
 
-            var onMove = this.props.onMove;
+            var design = this.props.design;
 
-            onMove(source.index, destination.index);
+            design.moveInstance(source.index, destination.index);
         }
     }, {
         key: 'getEditorBoundingBox',
@@ -9676,7 +9690,11 @@ var DesignPreviewController = function (_PureComponent) {
             }
             design.selectInstance(instance);
         }, _this.onDelete = function () {
-            _this.invokeCallback('onDelete', null, true);
+            var _this$props2 = _this.props,
+                design = _this$props2.design,
+                instance = _this$props2.instance;
+
+            design.deleteInstance(instance);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -9753,23 +9771,6 @@ var DesignPreviewController = function (_PureComponent) {
             );
 
             return tree;
-        }
-    }, {
-        key: 'invokeCallback',
-        value: function invokeCallback(action, evt, stopPropagation) {
-            if (stopPropagation && evt) {
-                evt.stopPropagation();
-            }
-
-            var value = this.props.value;
-
-            var cb = this.props[action];
-
-            for (var _len2 = arguments.length, args = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
-                args[_key2 - 3] = arguments[_key2];
-            }
-
-            cb && cb.apply(undefined, [value].concat(args));
         }
     }]);
 
@@ -10227,13 +10228,13 @@ var validateInstanceList = exports.validateInstanceList = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(instance) {
         var _this = this;
 
-        var _props2, value, components;
+        var _props, value, components;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        _props2 = this.props, value = _props2.value, components = _props2.components;
+                        _props = this.props, value = _props.value, components = _props.components;
                         return _context2.abrupt("return", new Promise(function (resolve, reject) {
                             return Promise.all(value.map(function (v) {
                                 var id = _this.getUUIDFromValue(v);
@@ -10305,17 +10306,16 @@ var validateInstanceList = exports.validateInstanceList = function () {
 }();
 
 /**
- * 从 startIndex 开始往前找到第一个可以选中的值
- * @param {array} value 当前的值
- * @param {array} components 当前可用的组件列表
- * @param {number} startIndex 开始搜索的下标
+ * 根据当前的值生成一个组件使用计数
+ * @param {Array} value Design 当前的值
+ * @param {Array} components Design 支持的组件列表
  */
 
 
 exports.getUUIDFromInstance = getUUIDFromInstance;
 exports.tagInstanceWithUUID = tagInstanceWithUUID;
+exports.findFirstEditableInstance = findFirstEditableInstance;
 exports.moveInstance = moveInstance;
-exports.findFirstEditableSibling = findFirstEditableSibling;
 exports.makeInstanceCountMapFromValue = makeInstanceCountMapFromValue;
 exports.getSafeSelectedValueIndex = getSafeSelectedValueIndex;
 exports.getBundleIdFromInstace = getBundleIdFromInstace;
@@ -10377,6 +10377,41 @@ function tagInstanceWithUUID(instance) {
 }
 
 /**
+ * 从 startIndex 开始往前找到第一个可以选中的值
+ * @param {array} value 当前的值
+ * @param {array} components 当前可用的组件列表
+ * @param {number} startIndex 开始搜索的下标
+ */
+function findFirstEditableInstance(instanceList, startIndex) {
+    var loop = function loop(i) {
+        var instance = instanceList[i];
+        var plugin = _loader2.default.getPluginByInstance(instance);
+        if (plugin && (0, _defaultTo2.default)(plugin.editable, true)) {
+            return instance;
+        }
+    };
+
+    var total = instanceList.length;
+    // 往前找
+    for (var i = startIndex; i >= 0 && i < total; i--) {
+        var instance = loop(i);
+        if (instance) {
+            return instance;
+        }
+    }
+
+    // 往后找
+    for (var _i = startIndex + 1; _i < total; _i++) {
+        var _instance = loop(_i);
+        if (_instance) {
+            return _instance;
+        }
+    }
+
+    return null;
+}
+
+/**
  * 移动实例
  * 不是仅仅交换两个位置的节点，所有中间节点都需要移位
  * 需要考虑数组中间有不可拖拽节点的情况，这种情况下 fromIndex, toIndex 的值是不包括这些节点的
@@ -10389,124 +10424,66 @@ function moveInstance(instanceList, fromIndex, toIndex) {
     if (fromIndex === toIndex) {
         return;
     }
-    var _props = this.props,
-        value = _props.value,
-        components = _props.components;
-
-    var newValue = [];
+    var newInstanceList = [];
     var tmp = void 0;
 
     var passedFromIndex = false;
     var passedToIndex = false;
 
     if (fromIndex < toIndex) {
-        var _loop = function _loop(i, _dragableIndex) {
-            var val = value[i];
-
-            var comp = (0, _find2.default)(components, function (c) {
-                return (0, _designType.isExpectedDesginType)(c, val.type);
-            });
-            var dragable = comp && (0, _defaultTo2.default)(comp.dragable, true);
+        // 从上拖到下面
+        for (var i = 0, dragableIndex = -1; i < instanceList.length; i++) {
+            var instance = instanceList[i];
+            var plugin = _loader2.default.getPluginByInstance(instance);
+            var dragable = plugin && (0, _defaultTo2.default)(plugin.dragable, true);
             if (dragable) {
-                _dragableIndex++;
+                dragableIndex++;
             }
 
             /* Invariant: Each step copies one value, except one copies 2 and another doesn't copy */
-            if (_dragableIndex === fromIndex && !passedFromIndex) {
-                tmp = val;
+            if (dragableIndex === fromIndex && !passedFromIndex) {
+                tmp = instance;
                 passedFromIndex = true;
-            } else if (_dragableIndex < toIndex && passedFromIndex) {
-                newValue[i - 1] = val;
-            } else if (_dragableIndex === toIndex && !passedToIndex) {
-                newValue[i - 1] = val;
-                newValue[i] = tmp;
+            } else if (dragableIndex < toIndex && passedFromIndex) {
+                newInstanceList[i - 1] = instance;
+            } else if (dragableIndex === toIndex && !passedToIndex) {
+                newInstanceList[i - 1] = instance;
+                newInstanceList[i] = tmp;
                 passedToIndex = true;
             } else {
-                newValue[i] = val;
+                newInstanceList[i] = instance;
             }
-            dragableIndex = _dragableIndex;
-        };
-
-        // 从上拖到下面
-        for (var i = 0, dragableIndex = -1; i < value.length; i++) {
-            _loop(i, dragableIndex);
         }
     } else {
         // 从下往上托
         var toInsetIndex = void 0;
 
-        var _loop2 = function _loop2(i, _dragableIndex3) {
-            var val = value[i];
-
-            var comp = (0, _find2.default)(components, function (c) {
-                return (0, _designType.isExpectedDesginType)(c, val.type);
-            });
-            var dragable = comp && (0, _defaultTo2.default)(comp.dragable, true);
-            if (dragable) {
-                _dragableIndex3++;
+        for (var _i2 = 0, _dragableIndex = -1; _i2 < instanceList.length; _i2++) {
+            var _instance2 = instanceList[_i2];
+            var _plugin = _loader2.default.getPluginByInstance(_instance2);
+            var _dragable = _plugin && (0, _defaultTo2.default)(_plugin.dragable, true);
+            if (_dragable) {
+                _dragableIndex++;
             }
 
             /* Invariant: each step copies one value */
-            if (_dragableIndex3 === toIndex && !passedToIndex) {
-                toInsetIndex = i;
-                newValue[i + 1] = val;
+            if (_dragableIndex === toIndex && !passedToIndex) {
+                toInsetIndex = _i2;
+                newInstanceList[_i2 + 1] = _instance2;
                 passedToIndex = true;
-            } else if (_dragableIndex3 < fromIndex && passedToIndex) {
-                newValue[i + 1] = val;
-            } else if (_dragableIndex3 === fromIndex && !passedFromIndex) {
-                newValue[toInsetIndex] = val;
+            } else if (_dragableIndex < fromIndex && passedToIndex) {
+                newInstanceList[_i2 + 1] = _instance2;
+            } else if (_dragableIndex === fromIndex && !passedFromIndex) {
+                newInstanceList[toInsetIndex] = _instance2;
                 passedFromIndex = true;
             } else {
-                newValue[i] = val;
+                newInstanceList[_i2] = _instance2;
             }
-            _dragableIndex2 = _dragableIndex3;
-        };
-
-        for (var i = 0, _dragableIndex2 = -1; i < value.length; i++) {
-            _loop2(i, _dragableIndex2);
         }
     }
-
-    this.trackValueChange(newValue);
+    return newInstanceList;
 }
 
-function findFirstEditableSibling(instanceList, pluginMap, nextIndex) {
-    var loop = function loop(i) {
-        var val = value[i];
-        var type = val.type;
-        var comp = (0, _find2.default)(components, function (c) {
-            return (0, _designType.isExpectedDesginType)(c, type);
-        });
-        if (comp && (0, _defaultTo2.default)(comp.editable, true)) {
-            return val;
-        }
-    };
-
-    var valueLength = value.length;
-    // 往前找
-    for (var i = startIndex; i >= 0 && i < valueLength; i--) {
-        var _val = loop(i);
-        if (_val) {
-            return _val;
-        }
-    }
-
-    // 往后找
-    for (var _i = startIndex + 1; _i < valueLength; _i++) {
-        var _val2 = loop(_i);
-        if (_val2) {
-            return _val2;
-        }
-    }
-
-    return null;
-}
-
-/**
- * 根据当前的值生成一个组件使用计数
- * @param {Array} value Design 当前的值
- * @param {Array} components Design 支持的组件列表
- */
 function makeInstanceCountMapFromValue(value, components) {
     var instanceCountMap = new _LazyMap2.default(0);
 
