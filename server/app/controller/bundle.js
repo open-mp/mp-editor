@@ -3,10 +3,10 @@ const Bundle = require('../utils/bundle');
 const path = require('path');
 const fs = require('fs-extra');
 
-let base = '/Volumes/code/workspace-open/bundle';
+let base = path.join(__dirname,'../../../../bundle');
 let pathMap = {
     "org.tsxuemu.bundle.example-config-1.0.0": 'config',
-    "id=org.tsxuemu.bundle.example-image-ad-1.0.0": 'imgage-ad',
+    "org.tsxuemu.bundle.example-image-ad-1.0.0": 'imgage-ad',
     "org.tsxuemu.bundle.example-richtext-1.0.0": 'richtext',
     "org.tsxuemu.bundle.example-line-1.0.0": 'line',
     "org.tsxuemu.bundle.example-whitespace-1.0.0": 'whitespace',

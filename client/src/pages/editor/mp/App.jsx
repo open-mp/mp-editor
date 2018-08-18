@@ -72,34 +72,22 @@ class App extends React.Component {
         Notify.error('仅作为演示，功能未开发');
     }
 
-    saveDesign = instance => {
-        this.design = instance;
-    }
-
-    submit = () => {
-        this.design.validate()
-            .then(() => {
-                const data = Design.stripUUID(this.state.value);
-                console.log(data);
-                // submit this.state.value to server
-                this.design.markAsSaved();
-                Notify.success('提交成功');
-            })
-            .catch(validations => {
-                console.log(validations);
-            });
-    }
-
-    onChange = newValue => {
-        this.setState({
-            value: newValue
+    saveDesign = design => {
+        this.design = design;
+        design.initInstanceList({
+            groupId: 'org.tsxuemu.bundle.example',
+            artifactId: 'config',
+            version: '1.0.0',
+            classifier: ''
         });
     }
 
-    onSettingsChange = newSettings => {
-        this.setState({
-            settings: newSettings
-        });
+    submit = async() => {
+       let valid = this.design.validate();
+       if (valid) {
+            const data =  this.design.getInstanceList();
+            console.log(data);
+       }
     }
 
     /**

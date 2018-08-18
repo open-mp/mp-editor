@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {findDOMNode} from 'react-dom';
-import {Alert} from 'zent';
+import {Alert, Notify} from 'zent';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 import isUndefined from 'lodash/isUndefined';
@@ -30,7 +30,7 @@ export default class Design extends PureComponent {
 
     constructor(props) {
         super(props);
-
+        this.pluginInstanceCount = new LazyMap(0);
         this.state = {
             showRestoreFromCache: false,// 是否显示从缓存中恢复的提示
             settings: {},// 页面设置，比如页面背景色
@@ -43,6 +43,28 @@ export default class Design extends PureComponent {
         };
     }
 
+    async initInstanceList(bundleId) {
+        if (!bundleId) {
+            return;
+        }
+        // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
+        let plugin = await pluginLoader.loadPlugin(bundleId);
+        let instance = plugin.getInitialValue();
+        instance.bundleId = bundleId;
+        InstanceUtils.tagInstanceWithUUID(instance);
+        let newInstanceList = [instance];
+
+        let bundle = new Bundle(bundleId);
+        this.pluginInstanceCount = new LazyMap(0);
+        let stringID = bundle.getStringId();
+        this.pluginInstanceCount.inc(stringID);
+
+        this.setState({
+            instanceList: newInstanceList
+        });
+        this._trackValueChange(newInstanceList);
+        this._selectInstance(instance);
+    }
     /**
      * 设置实例列表
      * @param instanceList
@@ -53,7 +75,7 @@ export default class Design extends PureComponent {
             InstanceUtils.tagInstanceWithUUID(instance);
         }
         let pluginMap = {};
-        let pluginInstanceCount = new LazyMap(0);
+        this.pluginInstanceCount = new LazyMap(0);
         let newInstanceList = [];
         for (let i = 0; i < instanceList.length; i++) {
             let instance = instanceList[i];
@@ -76,9 +98,17 @@ export default class Design extends PureComponent {
      *  外部调用接口 创建插件实例，
      */
     async addInstanceByBundle(bundleId) {
-        let {pluginMap} = this.state;
+        let {} = this.state;
         // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
         let plugin = await pluginLoader.loadPlugin(bundleId);
+
+        let bundle = new Bundle(bundleId);
+        let stringID = bundle.getStringId();
+        let count = this.pluginInstanceCount.get(stringID);
+        if (plugin.limitPerPage && plugin.limitPerPage <=count) {
+            Notify.error('页面中此插件的数量超过限制');
+            return;
+        }
         let instance = plugin.getInitialValue();
         instance.bundleId = bundleId;
         InstanceUtils.tagInstanceWithUUID(instance);
@@ -104,15 +134,19 @@ export default class Design extends PureComponent {
         });
     };
 
-    // TODO
+    /**
+     * 验证，如果返回false，则存在错误
+     * TODO
+     */
     async validate() {
-
+        return true;
     }
 
-    getIncenceList() {
+    getInstanceList() {
         this._dirty = false;
         this._removeCache();
-        return this.state.instanceList;
+        let instanceList = InstanceUtils.removeUUID(this.state.instanceList);
+        return instanceList;
     }
 
 
@@ -201,23 +235,12 @@ export default class Design extends PureComponent {
     };
 
     _setSettings = value => {
-        const {settings} = this.props;
-        if (!settings) {
-            this.setState({
-                settings: {
-                    ...this.state.settings,
-                    ...value,
-                },
-            });
-        } else {
-            this.setState({
-                settings: {
-                    ...settings,
-                    ...this.state.settings,
-                    ...value,
-                },
-            });
-        }
+        this.setState({
+            settings: {
+                ...this.state.settings,
+                ...value,
+            },
+        });
     };
 
     _modifyInstance = async (instance, diff, replace = false) => {
@@ -438,7 +461,7 @@ export default class Design extends PureComponent {
         }
     };
 
-    // Actions on design
+    // 暴露给子组件的接口
     design = (() => {
         return {
 

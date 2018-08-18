@@ -25,6 +25,14 @@ export function tagInstanceWithUUID(instance) {
     return instance;
 }
 
+export function removeUUID(instanceList) {
+    let newInstanceList = JSON.parse(JSON.stringify(instanceList));
+    for(let instance of newInstanceList) {
+        delete instance[UUID_KEY];
+    }
+    return newInstanceList;
+}
+
 /**
  * 从 startIndex 开始往前找到第一个可以选中的值
  * @param {array} value 当前的值
