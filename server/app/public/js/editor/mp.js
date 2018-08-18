@@ -9201,6 +9201,8 @@ var Design = function (_PureComponent) {
 
             var newState = {};
 
+            var bundle = new _bundle2.default(instance.bundleId);
+            _this.pluginInstanceCount.dec(bundle.getStringId());
             // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
             var uuId = InstanceUtils.getUUIDFromInstance(instance);
             if (uuId === selectedUUID) {
@@ -9420,7 +9422,7 @@ var Design = function (_PureComponent) {
         key: 'setInstanceList',
         value: function () {
             var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(instanceList) {
-                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, newInstanceList, i, _instance, bundle, plugin, stringID;
+                var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance, pluginMap, pluginInstanceCount, newInstanceList, i, _instance, bundle, plugin, stringID;
 
                 return regeneratorRuntime.wrap(function _callee4$(_context4) {
                     while (1) {
@@ -9486,8 +9488,7 @@ var Design = function (_PureComponent) {
 
                             case 27:
                                 pluginMap = {};
-
-                                this.pluginInstanceCount = new _LazyMap2.default(0);
+                                pluginInstanceCount = this.pluginInstanceCount = new _LazyMap2.default(0);
                                 newInstanceList = [];
                                 i = 0;
 
@@ -9521,7 +9522,7 @@ var Design = function (_PureComponent) {
 
                             case 45:
                                 this.setState({
-                                    pluginMap: pluginMap, pluginInstanceCount: pluginInstanceCount, instanceList: newInstanceList
+                                    pluginMap: pluginMap, instanceList: newInstanceList
                                 });
 
                             case 46:
@@ -9547,7 +9548,7 @@ var Design = function (_PureComponent) {
         key: 'addInstanceByBundle',
         value: function () {
             var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(bundleId) {
-                var plugin, bundle, stringID, count, instance, instanceList, newInstanceList;
+                var plugin, bundle, stringID, pluginInstanceCount, count, instance, instanceList, newInstanceList;
                 return regeneratorRuntime.wrap(function _callee5$(_context5) {
                     while (1) {
                         switch (_context5.prev = _context5.next) {
@@ -9563,17 +9564,18 @@ var Design = function (_PureComponent) {
                                 plugin = _context5.sent;
                                 bundle = new _bundle2.default(bundleId);
                                 stringID = bundle.getStringId();
-                                count = this.pluginInstanceCount.get(stringID);
+                                pluginInstanceCount = this.pluginInstanceCount;
+                                count = pluginInstanceCount.get(stringID);
 
                                 if (!(plugin.limitPerPage && plugin.limitPerPage <= count)) {
-                                    _context5.next = 10;
+                                    _context5.next = 11;
                                     break;
                                 }
 
                                 _zent.Notify.error('页面中此插件的数量超过限制');
                                 return _context5.abrupt('return');
 
-                            case 10:
+                            case 11:
                                 instance = plugin.getInitialValue();
 
                                 instance.bundleId = bundleId;
@@ -9583,13 +9585,14 @@ var Design = function (_PureComponent) {
                                 newInstanceList = void 0;
 
                                 newInstanceList = instanceList.concat(instance);
+                                pluginInstanceCount.inc(stringID);
                                 this.setState({
                                     instanceList: newInstanceList
                                 });
                                 this._trackValueChange(newInstanceList);
                                 this._selectInstance(instance);
 
-                            case 19:
+                            case 21:
                             case 'end':
                                 return _context5.stop();
                         }
@@ -9985,16 +9988,10 @@ var DesignEditor = function (_PureComponent) {
 
             var _props = this.props,
                 settings = _props.settings,
-                pluginMap = _props.pluginMap,
                 selectedUUID = _props.selectedUUID,
                 instanceList = _props.instanceList,
                 validations = _props.validations,
                 showError = _props.showError,
-                onSelect = _props.onSelect,
-                onMove = _props.onMove,
-                onDelete = _props.onDelete,
-                onSettingsChange = _props.onSettingsChange,
-                onComponentValueChange = _props.onComponentValueChange,
                 design = _props.design,
                 disabled = _props.disabled;
 
@@ -10048,9 +10045,9 @@ var DesignEditor = function (_PureComponent) {
                                             index: draggable ? draggableIndex++ : -1,
                                             allowHoverEffects: !snapshot.isDraggingOver,
                                             draggable: draggable,
-                                            editable: (0, _defaultTo2.default)(instance.editable, true),
-                                            canDelete: (0, _defaultTo2.default)(instance.canDelete, true),
-                                            highlightWhenSelect: (0, _defaultTo2.default)(instance.highlightWhenSelect, true),
+                                            editable: (0, _defaultTo2.default)(plugin.editable, true),
+                                            canDelete: (0, _defaultTo2.default)(plugin.canDelete, true),
+                                            highlightWhenSelect: (0, _defaultTo2.default)(plugin.highlightWhenSelect, true),
                                             isSelected: selected,
                                             component: plugin.preview
                                         }),
@@ -10063,7 +10060,6 @@ var DesignEditor = function (_PureComponent) {
                                             _react2.default.createElement(plugin.editForm, {
                                                 instance: instance,
                                                 settings: settings,
-                                                onSettingsChange: onSettingsChange,
                                                 design: design,
                                                 validation: validations[id] || {},
                                                 showError: showError
@@ -10635,7 +10631,6 @@ var DesignPreviewController = function (_PureComponent) {
 
                 return (0, _classnames2.default)('mp-design-preview-controller', (_cx = {}, _defineProperty(_cx, 'mp-design-preview-controller--editable', editable), _defineProperty(_cx, 'mp-design-preview-controller--selected', isSelected), _defineProperty(_cx, 'mp-design-preview-controller--highlight', highlight), _defineProperty(_cx, 'mp-design-preview-controller--dragable', draggable), _cx));
             };
-
             var tree = draggable ? _react2.default.createElement(
                 _reactBeautifulDnd.Draggable,
                 {

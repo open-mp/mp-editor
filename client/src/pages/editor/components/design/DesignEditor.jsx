@@ -40,16 +40,10 @@ class DesignEditor extends PureComponent {
     render() {
         const {
             settings,
-            pluginMap,
             selectedUUID,
             instanceList,
             validations,
             showError,
-            onSelect,
-            onMove,
-            onDelete,
-            onSettingsChange,
-            onComponentValueChange,
             design,
             disabled
         } = this.props;
@@ -101,10 +95,10 @@ class DesignEditor extends PureComponent {
                                                     index={draggable ? draggableIndex++ : -1}
                                                     allowHoverEffects={!snapshot.isDraggingOver}
                                                     draggable={draggable}
-                                                    editable={defaultTo(instance.editable, true)}
-                                                    canDelete={defaultTo(instance.canDelete, true)}
+                                                    editable={defaultTo(plugin.editable, true)}
+                                                    canDelete={defaultTo(plugin.canDelete, true)}
                                                     highlightWhenSelect={defaultTo(
-                                                        instance.highlightWhenSelect,
+                                                        plugin.highlightWhenSelect,
                                                         true
                                                     )}
                                                     isSelected={selected}
@@ -119,7 +113,6 @@ class DesignEditor extends PureComponent {
                                                         <plugin.editForm
                                                             instance={instance}
                                                             settings={settings}
-                                                            onSettingsChange={onSettingsChange}
                                                             design={design}
                                                             validation={validations[id] || {}}
                                                             showError={showError}

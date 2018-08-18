@@ -75,7 +75,7 @@ export default class Design extends PureComponent {
             InstanceUtils.tagInstanceWithUUID(instance);
         }
         let pluginMap = {};
-        this.pluginInstanceCount = new LazyMap(0);
+        let pluginInstanceCount = this.pluginInstanceCount = new LazyMap(0);
         let newInstanceList = [];
         for (let i = 0; i < instanceList.length; i++) {
             let instance = instanceList[i];
@@ -90,7 +90,7 @@ export default class Design extends PureComponent {
             newInstanceList.push(instance);
         }
         this.setState({
-            pluginMap, pluginInstanceCount, instanceList: newInstanceList
+            pluginMap, instanceList: newInstanceList
         })
     }
 
@@ -104,11 +104,13 @@ export default class Design extends PureComponent {
 
         let bundle = new Bundle(bundleId);
         let stringID = bundle.getStringId();
-        let count = this.pluginInstanceCount.get(stringID);
+        let pluginInstanceCount = this.pluginInstanceCount;
+        let count = pluginInstanceCount.get(stringID);
         if (plugin.limitPerPage && plugin.limitPerPage <=count) {
             Notify.error('页面中此插件的数量超过限制');
             return;
         }
+        
         let instance = plugin.getInitialValue();
         instance.bundleId = bundleId;
         InstanceUtils.tagInstanceWithUUID(instance);
@@ -117,6 +119,7 @@ export default class Design extends PureComponent {
 
         let newInstanceList;
         newInstanceList = instanceList.concat(instance);
+        pluginInstanceCount.inc(stringID);
         this.setState({
             instanceList: newInstanceList
         });
@@ -293,6 +296,8 @@ export default class Design extends PureComponent {
 
         const newState = {};
 
+        let bundle = new Bundle(instance.bundleId);
+        this.pluginInstanceCount.dec(bundle.getStringId());
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
         const uuId = InstanceUtils.getUUIDFromInstance(instance);
         if (uuId === selectedUUID) {

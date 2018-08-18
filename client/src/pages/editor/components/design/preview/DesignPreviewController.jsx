@@ -38,7 +38,6 @@ class DesignPreviewController extends PureComponent {
                 [`mp-design-preview-controller--highlight`]: highlight,
                 [`mp-design-preview-controller--dragable`]: draggable,
             });
-
         const tree = draggable ? (
             <Draggable
                 draggableId={id}
