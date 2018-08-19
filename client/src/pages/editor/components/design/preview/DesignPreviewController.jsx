@@ -6,8 +6,6 @@ import get from 'lodash/get';
 import {Draggable} from 'react-beautiful-dnd';
 import {DND_PREVIEW_CONTROLLER, DEFAULT_BACKGROUND} from './constants';
 
-const prefix = 'mp';
-
 class DesignPreviewController extends PureComponent {
 
     static defaultProps = {

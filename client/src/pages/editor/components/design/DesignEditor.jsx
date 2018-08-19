@@ -3,6 +3,7 @@ import cx from 'classnames';
 import defaultTo from 'lodash/defaultTo';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import get from 'lodash/get';
+import find from 'lodash/find';
 import * as InstanceUtils from './utils/instance';
 import DesignPreviewItem from './preview/DesignPreviewItem';
 import DesignPreviewController from './preview/DesignPreviewController';
@@ -10,15 +11,6 @@ import DesignEditorItem from './editor/DesignEditorItem';
 import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
 import pluginLoader from './bundle/loader'
 
-
-// 保存实例对应的js组件对象
-function saveRef(map, id, instance) {
-    if (!instance) {
-        delete map[id];
-    } else {
-        map[id] = instance;
-    }
-}
 /**
  */
 class DesignEditor extends PureComponent {
@@ -27,9 +19,12 @@ class DesignEditor extends PureComponent {
         background: '#f9f9f9',
         disabled: false
     };
-
-    previewItems = {}; // 记录预览组件实例 id -> instance
-    editorItems = {}; // 记录编辑表单实例 id -> instance
+    constructor() {
+        super();
+        this.previewItems = {}; // 记录预览组件实例 id -> instance
+        this.editorItems = {}; // 记录编辑表单实例 id -> instance
+        this.editors = {}; //  // 记录编辑表单实例 id -> editor
+    }
 
     /**
      * 流程
@@ -44,6 +39,7 @@ class DesignEditor extends PureComponent {
             design,
             disabled
         } = this.props;
+       
         return (
             <DragDropContext onDragEnd={this.dispatchDragEnd}>
                 <div
@@ -108,6 +104,7 @@ class DesignEditor extends PureComponent {
                                                         ref={this.saveEditorItem(id)}
                                                     >
                                                         <plugin.editForm
+                                                            ref={this.saveEditor(id)}
                                                             instance={instance}
                                                             settings={settings}
                                                             design={design}
@@ -137,6 +134,13 @@ class DesignEditor extends PureComponent {
             this.onPreviewDragEnd(result);
             return;
         }
+        let {selectedUUID} = this.props;
+        let editor =  find(this.editors, (editor,id) => {
+            return id == selectedUUID;
+        });
+        if (editor) {
+            editor.onDragEnd(result)
+        }
     };
 
     onPreviewDragEnd(result) {
@@ -152,11 +156,27 @@ class DesignEditor extends PureComponent {
     }
 
     savePreviewItem = id => instance => {
-        saveRef(this.previewItems, id, instance);
+        if (!instance) {
+            delete this.previewItems[id];
+        } else {
+            this.previewItems[id] = instance;
+        }
     };
 
     saveEditorItem = id => instance => {
-        saveRef(this.editorItems, id, instance);
+        if (!instance) {
+            delete this.editorItems[id];
+        } else {
+            this.editorItems[id] = instance;
+        }
+    };
+
+    saveEditor = id => editor => {
+        if (!editor) {
+            delete this.editors[id];
+        } else {
+            this.editors[id] = editor;
+        }
     };
 
     scrollToItem = (id, offsets) => {

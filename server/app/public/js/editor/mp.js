@@ -9880,6 +9880,10 @@ var _get = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js")
 
 var _get2 = _interopRequireDefault(_get);
 
+var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var _find2 = _interopRequireDefault(_find);
+
 var _instance = __webpack_require__(/*! ./utils/instance */ "./src/pages/editor/components/design/utils/instance.js");
 
 var InstanceUtils = _interopRequireWildcard(_instance);
@@ -9912,47 +9916,64 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// 保存实例对应的js组件对象
-function saveRef(map, id, instance) {
-    if (!instance) {
-        delete map[id];
-    } else {
-        map[id] = instance;
-    }
-}
 /**
  */
-
 var DesignEditor = function (_PureComponent) {
     _inherits(DesignEditor, _PureComponent);
 
     function DesignEditor() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, DesignEditor);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call(this));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DesignEditor.__proto__ || Object.getPrototypeOf(DesignEditor)).call.apply(_ref, [this].concat(args))), _this), _this.previewItems = {}, _this.editorItems = {}, _this.dispatchDragEnd = function (result) {
+        _this.dispatchDragEnd = function (result) {
             var type = result.type;
 
             if (type === _constants.DND_PREVIEW_CONTROLLER) {
                 _this.onPreviewDragEnd(result);
                 return;
             }
-        }, _this.savePreviewItem = function (id) {
+            var selectedUUID = _this.props.selectedUUID;
+
+            var editor = (0, _find2.default)(_this.editors, function (editor, id) {
+                return id == selectedUUID;
+            });
+            if (editor) {
+                editor.onDragEnd(result);
+            }
+        };
+
+        _this.savePreviewItem = function (id) {
             return function (instance) {
-                saveRef(_this.previewItems, id, instance);
+                if (!instance) {
+                    delete _this.previewItems[id];
+                } else {
+                    _this.previewItems[id] = instance;
+                }
             };
-        }, _this.saveEditorItem = function (id) {
+        };
+
+        _this.saveEditorItem = function (id) {
             return function (instance) {
-                saveRef(_this.editorItems, id, instance);
+                if (!instance) {
+                    delete _this.editorItems[id];
+                } else {
+                    _this.editorItems[id] = instance;
+                }
             };
-        }, _this.scrollToItem = function (id, offsets) {
+        };
+
+        _this.saveEditor = function (id) {
+            return function (editor) {
+                if (!editor) {
+                    delete _this.editors[id];
+                } else {
+                    _this.editors[id] = editor;
+                }
+            };
+        };
+
+        _this.scrollToItem = function (id, offsets) {
             var item = _this.previewItems[id];
 
             if (!item) {
@@ -9960,19 +9981,23 @@ var DesignEditor = function (_PureComponent) {
             }
 
             item.scrollTop(offsets);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.previewItems = {}; // 记录预览组件实例 id -> instance
+        _this.editorItems = {}; // 记录编辑表单实例 id -> instance
+        _this.editors = {}; //  // 记录编辑表单实例 id -> editor
+        return _this;
     }
+
+    /**
+     * 流程
+     */
+
     // All props in this component are injected by Design
-    // 记录预览组件实例 id -> instance
 
 
     _createClass(DesignEditor, [{
         key: 'render',
-        // 记录编辑表单实例 id -> instance
-
-        /**
-         * 流程
-         */
         value: function render() {
             var _this2 = this;
 
@@ -9984,6 +10009,7 @@ var DesignEditor = function (_PureComponent) {
                 showError = _props.showError,
                 design = _props.design,
                 disabled = _props.disabled;
+
 
             return _react2.default.createElement(
                 _reactBeautifulDnd.DragDropContext,
@@ -10048,6 +10074,7 @@ var DesignEditor = function (_PureComponent) {
                                                 ref: _this2.saveEditorItem(id)
                                             },
                                             _react2.default.createElement(plugin.editForm, {
+                                                ref: _this2.saveEditor(id),
                                                 instance: instance,
                                                 settings: settings,
                                                 design: design,
@@ -10616,8 +10643,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var prefix = 'mp';
 
 var DesignPreviewController = function (_PureComponent) {
     _inherits(DesignPreviewController, _PureComponent);
