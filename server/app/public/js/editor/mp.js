@@ -8974,6 +8974,166 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /***/ }),
 
+/***/ "./src/common/api/mp.js":
+/*!******************************!*\
+  !*** ./src/common/api/mp.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getContentDetail = exports.getPageDetail = exports.getDynamicPageContentList = exports.getMpPageList = exports.getMpList = undefined;
+
+var getMpList = exports.getMpList = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var result;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.next = 2;
+                        return api.get('/mp/get-mp-list', {});
+
+                    case 2:
+                        result = _context.sent;
+                        return _context.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function getMpList() {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+var getMpPageList = exports.getMpPageList = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(mpId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.next = 2;
+                        return api.get('/mp/get-mp-page-list', { mpId: mpId });
+
+                    case 2:
+                        result = _context2.sent;
+                        return _context2.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
+
+    return function getMpPageList(_x) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(pageId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        _context3.next = 2;
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+
+                    case 2:
+                        result = _context3.sent;
+                        return _context3.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function getDynamicPageContentList(_x2) {
+        return _ref3.apply(this, arguments);
+    };
+}();
+
+var getPageDetail = exports.getPageDetail = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(pageId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        _context4.next = 2;
+                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
+
+                    case 2:
+                        result = _context4.sent;
+                        return _context4.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this);
+    }));
+
+    return function getPageDetail(_x3) {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        _context5.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context5.sent;
+                        return _context5.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, this);
+    }));
+
+    return function getContentDetail(_x4) {
+        return _ref5.apply(this, arguments);
+    };
+}();
+
+var _api = __webpack_require__(/*! ./api */ "./src/common/api/api.js");
+
+var api = _interopRequireWildcard(_api);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+/***/ }),
+
 /***/ "./src/common/api/url.js":
 /*!*******************************!*\
   !*** ./src/common/api/url.js ***!
@@ -11519,6 +11679,10 @@ var _bundle = __webpack_require__(/*! src/common/api/bundle */ "./src/common/api
 
 var bundleAPi = _interopRequireWildcard(_bundle);
 
+var _mp = __webpack_require__(/*! src/common/api/mp */ "./src/common/api/mp.js");
+
+var mpAPi = _interopRequireWildcard(_mp);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -11547,20 +11711,14 @@ var App = function (_React$Component) {
             bundlePageIndex: 1,
             bundlePageSize: 10,
             allowUserQuery: true,
-            pageId: null,
-            contentId: null,
+            pageId: '',
+            contentId: '',
             structure: 'static',
             instanceList: []
         };
 
         _this.saveDesign = function (design) {
             _this.design = design;
-            design.initInstanceList({
-                groupId: 'org.tsxuemu.bundle.example',
-                artifactId: 'config',
-                version: '1.0.0',
-                classifier: ''
-            });
         };
 
         _this.submit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -11574,7 +11732,7 @@ var App = function (_React$Component) {
                             if (valid) {
                                 data = _this.design.getInstanceList();
 
-                                console.log(data);
+                                console.log(JSON.stringify(data));
                             }
 
                         case 2:
@@ -11584,26 +11742,36 @@ var App = function (_React$Component) {
                 }
             }, _callee, _this2);
         }));
-
-        var _getQuery = (0, _url.getQuery)(),
-            pageId = _getQuery.pageId,
-            structure = _getQuery.structure,
-            contentId = _getQuery.contentId;
-        // 动态页的内容编辑不允许用户搜索
-
-
-        _this.setState({
-            pageId: pageId, structure: structure, contentId: contentId,
-            allowUserQuery: structure == 'static'
-        });
-        _this.loadBundleList();
         return _this;
     }
 
     _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this3 = this;
+
+            var _getQuery = (0, _url.getQuery)(),
+                pageId = _getQuery.pageId,
+                structure = _getQuery.structure,
+                contentId = _getQuery.contentId;
+
+            // 动态页的内容编辑不允许用户搜索
+
+
+            this.setState({
+                pageId: pageId,
+                structure: structure,
+                contentId: contentId,
+                allowUserQuery: structure == 'static'
+            }, function () {
+                _this3.loadBundleList();
+                _this3.loadInstanceList();
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             var _state = this.state,
                 bundleList = _state.bundleList,
@@ -11616,7 +11784,7 @@ var App = function (_React$Component) {
                     'div',
                     { className: 'mp-workspace--toolbox' },
                     _react2.default.createElement(_ComponentList2.default, { bundleList: bundleList, allowUserQuery: allowUserQuery, onAddComponent: function onAddComponent(bundleId) {
-                            _this3.onAddComponent(bundleId);
+                            _this4.onAddComponent(bundleId);
                         } })
                 ),
                 _react2.default.createElement(
@@ -11706,7 +11874,69 @@ var App = function (_React$Component) {
 
     }, {
         key: 'loadInstanceList',
-        value: function loadInstanceList() {}
+        value: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                var _state3, pageId, structure, contentId, result, _result;
+
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _state3 = this.state, pageId = _state3.pageId, structure = _state3.structure, contentId = _state3.contentId;
+
+                                if (!contentId) {
+                                    _context3.next = 8;
+                                    break;
+                                }
+
+                                _context3.next = 4;
+                                return mpAPi.getContentDetail(contentId);
+
+                            case 4:
+                                result = _context3.sent;
+
+                                this.design.setInstanceList(result.instanceList);
+                                _context3.next = 16;
+                                break;
+
+                            case 8:
+                                if (!pageId) {
+                                    _context3.next = 15;
+                                    break;
+                                }
+
+                                _context3.next = 11;
+                                return mpAPi.getPageDetail(pageId);
+
+                            case 11:
+                                _result = _context3.sent;
+
+                                this.design.setInstanceList(_result.instanceList);
+                                _context3.next = 16;
+                                break;
+
+                            case 15:
+                                this.design.initInstanceList({
+                                    groupId: 'org.tsxuemu.bundle.example',
+                                    artifactId: 'config',
+                                    version: '1.0.0',
+                                    classifier: ''
+                                });
+
+                            case 16:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function loadInstanceList() {
+                return _ref4.apply(this, arguments);
+            }
+
+            return loadInstanceList;
+        }()
     }]);
 
     return App;

@@ -6,18 +6,13 @@ import {Button, Notify} from 'zent';
 
 import {getQuery} from "src/common/api/url";
 import * as bundleAPi from "src/common/api/bundle";
+import * as mpAPi from "src/common/api/mp";
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        let {pageId, structure, contentId} = getQuery();
-        // 动态页的内容编辑不允许用户搜索
-        this.setState({
-            pageId, structure, contentId,
-            allowUserQuery: structure == 'static'
-        });
-        this.loadBundleList();
+        
     }
 
     state = {
@@ -26,14 +21,29 @@ class App extends React.Component {
         bundlePageIndex: 1,
         bundlePageSize: 10,
         allowUserQuery: true,
-        pageId: null,
-        contentId: null,
+        pageId: '',
+        contentId: '',
         structure: 'static',
         instanceList: [],
     }
 
+    componentDidMount() {
+        let {pageId, structure, contentId} = getQuery();
+
+        // 动态页的内容编辑不允许用户搜索
+        this.setState({
+            pageId, 
+            structure, 
+            contentId,
+            allowUserQuery: structure == 'static'
+        }, () => {
+            this.loadBundleList();
+            this.loadInstanceList();
+        });     
+    }
+
     render() {
-        let {bundleList,allowUserQuery} = this.state;
+        let {bundleList ,allowUserQuery} = this.state;
         return (
             <div className="mp-workspace">
                 <div className="mp-workspace--toolbox">
@@ -65,7 +75,6 @@ class App extends React.Component {
 
     onAddComponent(bundleId) {
         this.design.addInstanceByBundle(bundleId);
-
     }
 
     notImplemented() {
@@ -73,20 +82,14 @@ class App extends React.Component {
     }
 
     saveDesign = design => {
-        this.design = design;
-        design.initInstanceList({
-            groupId: 'org.tsxuemu.bundle.example',
-            artifactId: 'config',
-            version: '1.0.0',
-            classifier: ''
-        });
+        this.design = design;   
     }
 
     submit = async() => {
        let valid = this.design.validate();
        if (valid) {
             const data =  this.design.getInstanceList();
-            console.log(data);
+            console.log(JSON.stringify(data));
        }
     }
 
@@ -102,8 +105,24 @@ class App extends React.Component {
     /**
      * 加载bundle配置
      */
-    loadInstanceList() {
-
+    async loadInstanceList() {
+        let { pageId, structure, contentId} = this.state;
+        if (contentId) {
+            let result = 
+                await mpAPi.getContentDetail(contentId);
+            this.design.setInstanceList(result.instanceList);
+        } else if (pageId) {
+            let result = 
+                await mpAPi.getPageDetail(pageId);
+            this.design.setInstanceList(result.instanceList);
+        } else {
+            this.design.initInstanceList({
+                groupId: 'org.tsxuemu.bundle.example',
+                artifactId: 'config',
+                version: '1.0.0',
+                classifier: ''
+            });
+        }
     }
 }
 

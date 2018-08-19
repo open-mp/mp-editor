@@ -35,7 +35,7 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: []
+        instanceList: [{"title":"商品详情","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>商品信息</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
     },
     {
         mpId: 1, // 关联的小程序id
@@ -69,10 +69,10 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: []
+        instanceList: [{"title":"下单","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>下单</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
     }, {
         mpId: 1, // 关联的小程序id
-        id: 3, // 页面id
+        id: 4, // 页面id
         name: '购物车',
         description: '',
         structure: 'static',
@@ -83,20 +83,20 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: []
+        instanceList: [{"title":"购物车","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>购物车</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
     }]; // 小程序的页面列表
-const DynamicContent = [{
+const DynamicContents = [{
     id: 1,
     pageId: 2, // 关联的动态页id
     name: '限时折扣专题',
     description: '',
-    instanceList: []
+    instanceList: [{"title":"限时折扣专题","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>限时折扣专题</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
 }, {
     id: 2,
     pageId: 2, // 关联的动态页id
     name: '中秋活动',
     description: '',
-    instanceList: []
+    instanceList: [{"title":"中秋活动","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>中秋活动</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
 }];
 
 class UserController extends Controller {
@@ -141,12 +141,34 @@ class UserController extends Controller {
 
     async getMpDynamicPageContentList() {
         let {pageId} = this.ctx.query;
-        let mpContentList = DynamicContent.filter(content => {
+        let mpContentList = DynamicContents.filter(content => {
             return content.pageId == pageId;
         });
         this.ctx.body = {
             code: 0,
             data: mpContentList
+        };
+    }
+
+    async getPageDetail(){
+        let {pageId} = this.ctx.query;
+        let page = Pages.find(page=>{
+            return page.id == pageId;
+        })
+        this.ctx.body = {
+            code: 0,
+            data: page
+        };
+    }
+
+    async getContentDetail () {
+        let {contentId} = this.ctx.query;
+        let content = DynamicContents.find(content=>{
+            return content.id == contentId;
+        })
+        this.ctx.body = {
+            code: 0,
+            data: content
         };
     }
 }
