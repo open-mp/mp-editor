@@ -1,13 +1,11 @@
 const Controller = require('egg').Controller;
 
-
+// 小程序列表
 const MPList = [{
     id: 1,
     name: '测试小程序',
-    description: '用来测试的小程序'
-}]; // 小程序列表
-const MPConfig = {
-    1: {
+    description: '用来测试的小程序',
+    config: {
         window: {
             "backgroundColor": "#F6F6F6",
             "backgroundTextStyle": "light",
@@ -20,7 +18,8 @@ const MPConfig = {
         }
 
     }
-};// 小程序配置
+}]; 
+// 页面
 const Pages = [
     {
         mpId: 1, // 关联的小程序id
@@ -84,7 +83,8 @@ const Pages = [
             "backgroundTextStyle": "light"
         },
         instanceList: [{"title":"购物车","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>购物车</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
-    }]; // 小程序的页面列表
+    }]; 
+// 动态页内容列表
 const DynamicContents = [{
     id: 1,
     pageId: 2, // 关联的动态页id
@@ -169,6 +169,25 @@ class UserController extends Controller {
         this.ctx.body = {
             code: 0,
             data: content
+        };
+    }
+
+    async getMpDefinition() {
+        let {mpId} = this.ctx.query;
+        let mp = MPList.find(mp=>{
+            return mp.id == mpId;
+        })
+
+        let pageList = Pages.filter(page => {
+            return page.mpId == mpId;
+        });
+        
+        this.ctx.body = {
+            code: 0,
+
+            data: {
+                mp, pageList
+            }
         };
     }
 }

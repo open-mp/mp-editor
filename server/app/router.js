@@ -20,7 +20,7 @@ module.exports = app => {
 
     router.get('/mp/get-mp-page-detail', controller.mp.getPageDetail);
     router.get('/mp/get-mp-content-detail', controller.mp.getContentDetail);
-
+    router.get('/mp/get-mp-definition', controller.mp.getMpDefinition);
     // 编辑器
     router.get('/editor/mp', controller.editor.mpHtml);
 
