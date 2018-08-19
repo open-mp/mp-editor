@@ -1,12 +1,11 @@
 import {isExpectedDesginType, serializeDesignType} from "./design-type";
-import find from "lodash/find";
-import defaultTo from "lodash/defaultTo";
 import LazyMap from "./LazyMap";
 import uuid from 'zent/lib/utils/uuid';
 import pluginLoader from '../bundle/loader'
 import assign from "lodash/assign";
 import isEmpty from "lodash/isEmpty";
-
+import find from "lodash/find";
+import defaultTo from "lodash/defaultTo";
 /**
  * instance工具函数
  */

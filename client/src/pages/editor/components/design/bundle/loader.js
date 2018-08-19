@@ -6,6 +6,18 @@ import * as zent from 'zent'
 import Bundle from './bundle'
 import axios from 'axios'
 import cx from 'classnames';
+import {DragDropContext, Droppable, Draggable}  from 'react-beautiful-dnd';
+
+import isUndefined from 'lodash/isUndefined';
+import isString from 'lodash/isString';
+import isArray from 'lodash/isArray';
+import isNumber from 'lodash/isNumber';
+import isFunction from 'lodash/isFunction';
+import isEmpty from "lodash/isEmpty";
+import assign from "lodash/assign";
+import find from "lodash/find";
+import defaultTo from "lodash/defaultTo";
+import findIndex from "lodash/findIndex";
 
 class MpEditorPluginLoader {
     init() {
@@ -22,6 +34,23 @@ class MpEditorPluginLoader {
         })
         define('classnames', [], function () {
             return cx;
+        })
+        define('react-beautiful-dnd', [], function () {
+            return {DragDropContext, Droppable, Draggable} ;
+        })
+        define('lodash', [], function () {
+            return {
+                isUndefined,
+                isString,
+                isArray,
+                isNumber,
+                isFunction,
+                isEmpty,
+                assign,
+                find,
+                defaultTo,
+                findIndex
+            };
         })
     }
 

@@ -1319,6 +1319,17 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 
 /***/ }),
 
+/***/ "./node_modules/lodash/findIndex.js":
+/*!*********************************************************************************!*\
+  !*** delegated ./node_modules/lodash/findIndex.js from dll-reference _dll_base ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(128);
+
+/***/ }),
+
 /***/ "./node_modules/lodash/get.js":
 /*!***************************************************************************!*\
   !*** delegated ./node_modules/lodash/get.js from dll-reference _dll_base ***!
@@ -1382,17 +1393,6 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(82);
-
-/***/ }),
-
-/***/ "./node_modules/lodash/isPlainObject.js":
-/*!*************************************************************************************!*\
-  !*** delegated ./node_modules/lodash/isPlainObject.js from dll-reference _dll_base ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(155);
 
 /***/ }),
 
@@ -9870,10 +9870,6 @@ var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnam
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
-
-var _find2 = _interopRequireDefault(_find);
-
 var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
 
 var _defaultTo2 = _interopRequireDefault(_defaultTo);
@@ -9900,13 +9896,7 @@ var _DesignEditorItem = __webpack_require__(/*! ./editor/DesignEditorItem */ "./
 
 var _DesignEditorItem2 = _interopRequireDefault(_DesignEditorItem);
 
-var _designType = __webpack_require__(/*! ./utils/design-type */ "./src/pages/editor/components/design/utils/design-type.js");
-
 var _constants = __webpack_require__(/*! ./preview/constants */ "./src/pages/editor/components/design/preview/constants.js");
-
-var _bundle = __webpack_require__(/*! ./bundle/bundle */ "./src/pages/editor/components/design/bundle/bundle.js");
-
-var _bundle2 = _interopRequireDefault(_bundle);
 
 var _loader = __webpack_require__(/*! ./bundle/loader */ "./src/pages/editor/components/design/bundle/loader.js");
 
@@ -10214,6 +10204,48 @@ var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnam
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _reactBeautifulDnd = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+
+var _isUndefined = __webpack_require__(/*! lodash/isUndefined */ "./node_modules/lodash/isUndefined.js");
+
+var _isUndefined2 = _interopRequireDefault(_isUndefined);
+
+var _isString = __webpack_require__(/*! lodash/isString */ "./node_modules/lodash/isString.js");
+
+var _isString2 = _interopRequireDefault(_isString);
+
+var _isArray = __webpack_require__(/*! lodash/isArray */ "./node_modules/lodash/isArray.js");
+
+var _isArray2 = _interopRequireDefault(_isArray);
+
+var _isNumber = __webpack_require__(/*! lodash/isNumber */ "./node_modules/lodash/isNumber.js");
+
+var _isNumber2 = _interopRequireDefault(_isNumber);
+
+var _isFunction = __webpack_require__(/*! lodash/isFunction */ "./node_modules/lodash/isFunction.js");
+
+var _isFunction2 = _interopRequireDefault(_isFunction);
+
+var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
+var _assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var _find2 = _interopRequireDefault(_find);
+
+var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
+
+var _defaultTo2 = _interopRequireDefault(_defaultTo);
+
+var _findIndex = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
+
+var _findIndex2 = _interopRequireDefault(_findIndex);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -10243,6 +10275,23 @@ var MpEditorPluginLoader = function () {
             });
             define('classnames', [], function () {
                 return _classnames2.default;
+            });
+            define('react-beautiful-dnd', [], function () {
+                return { DragDropContext: _reactBeautifulDnd.DragDropContext, Droppable: _reactBeautifulDnd.Droppable, Draggable: _reactBeautifulDnd.Draggable };
+            });
+            define('lodash', [], function () {
+                return {
+                    isUndefined: _isUndefined2.default,
+                    isString: _isString2.default,
+                    isArray: _isArray2.default,
+                    isNumber: _isNumber2.default,
+                    isFunction: _isFunction2.default,
+                    isEmpty: _isEmpty2.default,
+                    assign: _assign2.default,
+                    find: _find2.default,
+                    defaultTo: _defaultTo2.default,
+                    findIndex: _findIndex2.default
+                };
             });
         }
     }, {
@@ -10493,10 +10542,6 @@ var _Design = __webpack_require__(/*! ./Design */ "./src/pages/editor/components
 
 var _Design2 = _interopRequireDefault(_Design);
 
-var _stripUUID = __webpack_require__(/*! ./stripUUID */ "./src/pages/editor/components/design/stripUUID.js");
-
-var _stripUUID2 = _interopRequireDefault(_stripUUID);
-
 __webpack_require__(/*! ./index.pcss */ "./src/pages/editor/components/design/index.pcss");
 
 var _loader = __webpack_require__(/*! ./bundle/loader */ "./src/pages/editor/components/design/bundle/loader.js");
@@ -10505,7 +10550,6 @@ var _loader2 = _interopRequireDefault(_loader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_Design2.default.stripUUID = _stripUUID2.default;
 // 初始化插件加载器
 _loader2.default.init();
 exports.default = _Design2.default;
@@ -10842,65 +10886,6 @@ var DEFAULT_BACKGROUND = exports.DEFAULT_BACKGROUND = '#f9f9f9';
 
 /***/ }),
 
-/***/ "./src/pages/editor/components/design/stripUUID.js":
-/*!*********************************************************!*\
-  !*** ./src/pages/editor/components/design/stripUUID.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = stripUUID;
-
-var _has = __webpack_require__(/*! lodash/has */ "./node_modules/lodash/has.js");
-
-var _has2 = _interopRequireDefault(_has);
-
-var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ "./node_modules/lodash/isPlainObject.js");
-
-var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
-
-var _isArray = __webpack_require__(/*! lodash/isArray */ "./node_modules/lodash/isArray.js");
-
-var _isArray2 = _interopRequireDefault(_isArray);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var UUID_KEY_PATTERN = /__.+uuid__/i;
-var OLD_KEY = 'zent-design-uuid';
-
-function stripUUID(value) {
-  if ((0, _isPlainObject2.default)(value)) {
-    // eslint-disable-next-line
-    for (var key in value) {
-      if ((0, _has2.default)(value, key)) {
-        if (OLD_KEY === key || UUID_KEY_PATTERN.test(key)) {
-          delete value[key];
-        } else {
-          var oldValue = value[key];
-          var newValue = stripUUID(oldValue);
-          if (newValue !== oldValue) {
-            value[key] = newValue;
-          }
-        }
-      }
-    }
-  } else if ((0, _isArray2.default)(value)) {
-    value.forEach(function (v) {
-      return stripUUID(v);
-    });
-  }
-
-  return value;
-}
-
-/***/ }),
-
 /***/ "./src/pages/editor/components/design/utils/LazyMap.js":
 /*!*************************************************************!*\
   !*** ./src/pages/editor/components/design/utils/LazyMap.js ***!
@@ -11232,14 +11217,6 @@ exports.getBundleIdFromInstace = getBundleIdFromInstace;
 
 var _designType = __webpack_require__(/*! ./design-type */ "./src/pages/editor/components/design/utils/design-type.js");
 
-var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
-
-var _find2 = _interopRequireDefault(_find);
-
-var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
-
-var _defaultTo2 = _interopRequireDefault(_defaultTo);
-
 var _LazyMap = __webpack_require__(/*! ./LazyMap */ "./src/pages/editor/components/design/utils/LazyMap.js");
 
 var _LazyMap2 = _interopRequireDefault(_LazyMap);
@@ -11259,6 +11236,14 @@ var _assign2 = _interopRequireDefault(_assign);
 var _isEmpty = __webpack_require__(/*! lodash/isEmpty */ "./node_modules/lodash/isEmpty.js");
 
 var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
+var _find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var _find2 = _interopRequireDefault(_find);
+
+var _defaultTo = __webpack_require__(/*! lodash/defaultTo */ "./node_modules/lodash/defaultTo.js");
+
+var _defaultTo2 = _interopRequireDefault(_defaultTo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

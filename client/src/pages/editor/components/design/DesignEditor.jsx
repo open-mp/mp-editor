@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import cx from 'classnames';
-import find from 'lodash/find';
 import defaultTo from 'lodash/defaultTo';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import get from 'lodash/get';
@@ -8,9 +7,7 @@ import * as InstanceUtils from './utils/instance';
 import DesignPreviewItem from './preview/DesignPreviewItem';
 import DesignPreviewController from './preview/DesignPreviewController';
 import DesignEditorItem from './editor/DesignEditorItem';
-import {isExpectedDesginType} from './utils/design-type';
 import {DEFAULT_BACKGROUND, DND_PREVIEW_CONTROLLER} from './preview/constants';
-import Bundle from "./bundle/bundle";
 import pluginLoader from './bundle/loader'
 
 
