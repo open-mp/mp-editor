@@ -6,7 +6,7 @@ const fs = require('fs-extra');
 let base = path.join(__dirname,'../../../../bundle');
 let pathMap = {
     "org.tsxuemu.bundle.example-config-1.0.0": 'config',
-    "org.tsxuemu.bundle.example-image-ad-1.0.0": 'imgage-ad',
+    "org.tsxuemu.bundle.example-image-ad-1.0.0": 'image-ad',
     "org.tsxuemu.bundle.example-richtext-1.0.0": 'richtext',
     "org.tsxuemu.bundle.example-line-1.0.0": 'line',
     "org.tsxuemu.bundle.example-whitespace-1.0.0": 'whitespace',
