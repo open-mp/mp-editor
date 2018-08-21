@@ -9346,7 +9346,7 @@ var DesignEditor = function (_PureComponent) {
                                             isSelected: selected,
                                             component: plugin.preview
                                         }),
-                                        selected && _react2.default.createElement(
+                                        selected && plugin.editable && _react2.default.createElement(
                                             _DesignEditorItem2.default,
                                             {
                                                 disabled: disabled,

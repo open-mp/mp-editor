@@ -10,6 +10,8 @@ let pathMap = {
     "org.tsxuemu.bundle.example-richtext-1.0.0": 'richtext',
     "org.tsxuemu.bundle.example-line-1.0.0": 'line',
     "org.tsxuemu.bundle.example-whitespace-1.0.0": 'whitespace',
+    "org.tsxuemu.bundle.example-goods-action-1.0.0": 'goods-action',
+    "org.tsxuemu.bundle.example-goods-detail-1.0.0": 'goods-detail',
 }
 
 class BundleController extends Controller {
@@ -129,6 +131,24 @@ class BundleController extends Controller {
                         bundleId: {
                             groupId: 'org.tsxuemu.bundle.example',
                             artifactId: 'whitespace',
+                            version: '1.0.0',
+                            classifier: ''
+                        }
+                    },
+                    {
+                        name: '商品详情',
+                        bundleId: {
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'goods-detail',
+                            version: '1.0.0',
+                            classifier: ''
+                        }
+                    },
+                    {
+                        name: '商品动作',
+                        bundleId: {
+                            groupId: 'org.tsxuemu.bundle.example',
+                            artifactId: 'goods-action',
                             version: '1.0.0',
                             classifier: ''
                         }

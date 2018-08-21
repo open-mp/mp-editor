@@ -98,7 +98,7 @@ class DesignEditor extends PureComponent {
                                                     component={plugin.preview}
                                                 />
 
-                                                {selected && (
+                                                {selected && plugin.editable &&(
                                                     <DesignEditorItem
                                                         disabled={disabled}
                                                         ref={this.saveEditorItem(id)}
