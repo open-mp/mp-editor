@@ -5,13 +5,13 @@ const fs = require('fs-extra');
 
 let base = path.join(__dirname,'../../../../bundle');
 let pathMap = {
-    "org.tsxuemu.bundle.example-config-1.0.0": 'config',
-    "org.tsxuemu.bundle.example-image-ad-1.0.0": 'image-ad',
-    "org.tsxuemu.bundle.example-richtext-1.0.0": 'richtext',
-    "org.tsxuemu.bundle.example-line-1.0.0": 'line',
-    "org.tsxuemu.bundle.example-whitespace-1.0.0": 'whitespace',
-    "org.tsxuemu.bundle.example-goods-action-1.0.0": 'goods-action',
-    "org.tsxuemu.bundle.example-goods-detail-1.0.0": 'goods-detail',
+    "tsxuehu-config-1.0.0": 'config',
+    "tsxuehu-image-ad-1.0.0": 'image-ad',
+    "tsxuehu-richtext-1.0.0": 'richtext',
+    "tsxuehu-line-1.0.0": 'line',
+    "tsxuehu-whitespace-1.0.0": 'whitespace',
+    "tsxuehu-goods-action-1.0.0": 'goods-action',
+    "tsxuehu-goods-detail-1.0.0": 'goods-detail',
 }
 
 class BundleController extends Controller {
@@ -93,7 +93,7 @@ class BundleController extends Controller {
                     {
                         name: '页面配置',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'config',
                             version: '1.0.0',
                             classifier: ''
@@ -102,7 +102,7 @@ class BundleController extends Controller {
                     {
                         name: '图片广告',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'image-ad',
                             version: '1.0.0',
                             classifier: ''
@@ -111,7 +111,7 @@ class BundleController extends Controller {
                     {
                         name: '富文本',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'richtext',
                             version: '1.0.0',
                             classifier: ''
@@ -120,7 +120,7 @@ class BundleController extends Controller {
                     {
                         name: '分隔符',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'line',
                             version: '1.0.0',
                             classifier: ''
@@ -129,7 +129,7 @@ class BundleController extends Controller {
                     {
                         name: '空白行',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'whitespace',
                             version: '1.0.0',
                             classifier: ''
@@ -138,7 +138,7 @@ class BundleController extends Controller {
                     {
                         name: '商品详情',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'goods-detail',
                             version: '1.0.0',
                             classifier: ''
@@ -147,7 +147,7 @@ class BundleController extends Controller {
                     {
                         name: '商品动作',
                         bundleId: {
-                            groupId: 'org.tsxuemu.bundle.example',
+                            groupId: 'tsxuehu',
                             artifactId: 'goods-action',
                             version: '1.0.0',
                             classifier: ''

@@ -5,26 +5,51 @@ const MPList = [{
     id: 1,
     name: '测试小程序',
     description: '用来测试的小程序',
-    config: {
-        window: {
-            "backgroundColor": "#F6F6F6",
-            "backgroundTextStyle": "light",
-            "navigationBarBackgroundColor": "#F6F6F6",
-            "navigationBarTitleText": "小程序模板",
-            "navigationBarTextStyle": "black"
-        },
-        tabBar: {
-            list: []
-        }
-
+    window: {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "小程序模板",
+        "navigationBarTextStyle": "black"
+    },
+    tabBar: {
+        color: '',
+        selectedColor: '',
+        backgroundColor: '',
+        borderStyle: '',
+        position: '',
+    },
+    tabBarButtons: [{
+        "pageId": 1,
+        "pageName": "",
+        "pageStructure": "",
+        "contentId": "",
+        "iconUrl": '',
+        "selectedIconUrl": "",
+        "text": "国庆活动"
+    }, {
+        "pageId": 1,
+        "pageName": "",
+        "pageStructure": "",
+        "contentId": "",
+        "iconUrl": '',
+        "selectedIconUrl": "",
+        "text": "爆品"
+    }],
+    pageUtil: {
+        "groupId": "tsxuehu",
+        "artifactId": "page-util",
+        "version": "1.0.0",
+        "classifier": ""
     }
-}]; 
+}];
 // 页面
 const Pages = [
     {
         mpId: 1, // 关联的小程序id
         id: 1, // 页面id
-        name: '商品详情页',
+        name: 'goods-detail',
+        label: '商品详情页',
         description: '',
         structure: 'static',
         config: {
@@ -34,12 +59,13 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: [{"title":"商品详情","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>商品信息</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
+        instanceList: [{ "title": "商品详情", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>商品信息</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
     },
     {
         mpId: 1, // 关联的小程序id
         id: 2, // 页面id
-        name: '微页面',
+        name: 'weizhazhi',
+        label: '微页面',
         description: '',
         structure: 'dynamic',
         config: {
@@ -58,7 +84,8 @@ const Pages = [
     }, {
         mpId: 1, // 关联的小程序id
         id: 3, // 页面id
-        name: '下单',
+        name: 'order',
+        label: '下单',
         description: '',
         structure: 'static',
         config: {
@@ -68,11 +95,12 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: [{"title":"下单","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>下单</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
+        instanceList: [{ "title": "下单", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>下单</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
     }, {
         mpId: 1, // 关联的小程序id
         id: 4, // 页面id
-        name: '购物车',
+        name: 'cart',
+        label: '购物车',
         description: '',
         structure: 'static',
         config: {
@@ -82,21 +110,21 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: [{"title":"购物车","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>购物车</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
-    }]; 
+        instanceList: [{ "title": "购物车", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>购物车</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
+    }];
 // 动态页内容列表
 const DynamicContents = [{
     id: 1,
     pageId: 2, // 关联的动态页id
     name: '限时折扣专题',
     description: '',
-    instanceList: [{"title":"限时折扣专题","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>限时折扣专题</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
+    instanceList: [{ "title": "限时折扣专题", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>限时折扣专题</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
 }, {
     id: 2,
     pageId: 2, // 关联的动态页id
     name: '中秋活动',
     description: '',
-    instanceList: [{"title":"中秋活动","color":"","description":"","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"config","version":"1.0.0","classifier":""}},{"color":"#f9f9f9","content":"<p>中秋活动</p>","fullscreen":0,"bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"richtext","version":"1.0.0","classifier":""}},{"color":"#e5e5e5","hasPadding":false,"lineType":"solid","bundleId":{"groupId":"org.tsxuemu.bundle.example","artifactId":"line","version":"1.0.0","classifier":""}}]
+    instanceList: [{ "title": "中秋活动", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>中秋活动</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
 }];
 
 class UserController extends Controller {
@@ -129,7 +157,7 @@ class UserController extends Controller {
     }
 
     async getMpPageList() {
-        let {mpId} = this.ctx.query;
+        let { mpId } = this.ctx.query;
         let mpPageList = Pages.filter(page => {
             return page.mpId == mpId;
         });
@@ -140,7 +168,7 @@ class UserController extends Controller {
     }
 
     async getMpDynamicPageContentList() {
-        let {pageId} = this.ctx.query;
+        let { pageId } = this.ctx.query;
         let mpContentList = DynamicContents.filter(content => {
             return content.pageId == pageId;
         });
@@ -150,9 +178,9 @@ class UserController extends Controller {
         };
     }
 
-    async getPageDetail(){
-        let {pageId} = this.ctx.query;
-        let page = Pages.find(page=>{
+    async getPageDetail() {
+        let { pageId } = this.ctx.query;
+        let page = Pages.find(page => {
             return page.id == pageId;
         })
         this.ctx.body = {
@@ -161,9 +189,9 @@ class UserController extends Controller {
         };
     }
 
-    async getContentDetail () {
-        let {contentId} = this.ctx.query;
-        let content = DynamicContents.find(content=>{
+    async getContentDetail() {
+        let { contentId } = this.ctx.query;
+        let content = DynamicContents.find(content => {
             return content.id == contentId;
         })
         this.ctx.body = {
@@ -173,15 +201,15 @@ class UserController extends Controller {
     }
 
     async getMpDefinition() {
-        let {mpId} = this.ctx.query;
-        let mp = MPList.find(mp=>{
+        let { mpId } = this.ctx.query;
+        let mp = MPList.find(mp => {
             return mp.id == mpId;
         })
 
         let pageList = Pages.filter(page => {
             return page.mpId == mpId;
         });
-        
+
         this.ctx.body = {
             code: 0,
 
