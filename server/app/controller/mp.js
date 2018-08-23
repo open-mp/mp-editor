@@ -76,11 +76,14 @@ const Pages = [
             "backgroundTextStyle": "light"
         },
         bundleList: [{
-            groupId: '',
-            artifactId: '',
-            version: '',
-            classifier: ''
-        }]
+            "id": 1,
+            "bundleId": {
+              "groupId": "",
+              "artifactId": "",
+              "version": "",
+              "classifier": ""
+            }
+          }]
     }, {
         mpId: 1, // 关联的小程序id
         id: 3, // 页面id
