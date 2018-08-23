@@ -5,6 +5,11 @@ export async function getMpList() {
     return result;
 }
 
+export async function getMpDetail(mpId) {
+    let result = await api.get('/mp/get-mp-detail', {mpId});
+    return result;
+}
+
 export async function getMpPageList(mpId) {
     let result = await api.get('/mp/get-mp-page-list', {mpId});
     return result;

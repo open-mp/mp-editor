@@ -949,7 +949,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getPageDetail = exports.getDynamicPageContentList = exports.getMpPageList = exports.getMpList = undefined;
+exports.getContentDetail = exports.getPageDetail = exports.getDynamicPageContentList = exports.getMpPageList = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -978,7 +978,7 @@ var getMpList = exports.getMpList = function () {
     };
 }();
 
-var getMpPageList = exports.getMpPageList = function () {
+var getMpDetail = exports.getMpDetail = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -986,7 +986,7 @@ var getMpPageList = exports.getMpPageList = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         _context2.next = 2;
-                        return api.get('/mp/get-mp-page-list', { mpId: mpId });
+                        return api.get('/mp/get-mp-detail', { mpId: mpId });
 
                     case 2:
                         result = _context2.sent;
@@ -1000,20 +1000,20 @@ var getMpPageList = exports.getMpPageList = function () {
         }, _callee2, this);
     }));
 
-    return function getMpPageList(_x) {
+    return function getMpDetail(_x) {
         return _ref2.apply(this, arguments);
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(pageId) {
+var getMpPageList = exports.getMpPageList = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         _context3.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-list', { mpId: mpId });
 
                     case 2:
                         result = _context3.sent;
@@ -1027,12 +1027,12 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee3, this);
     }));
 
-    return function getDynamicPageContentList(_x2) {
+    return function getMpPageList(_x2) {
         return _ref3.apply(this, arguments);
     };
 }();
 
-var getPageDetail = exports.getPageDetail = function () {
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -1040,7 +1040,7 @@ var getPageDetail = exports.getPageDetail = function () {
                 switch (_context4.prev = _context4.next) {
                     case 0:
                         _context4.next = 2;
-                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
 
                     case 2:
                         result = _context4.sent;
@@ -1054,20 +1054,20 @@ var getPageDetail = exports.getPageDetail = function () {
         }, _callee4, this);
     }));
 
-    return function getPageDetail(_x3) {
+    return function getDynamicPageContentList(_x3) {
         return _ref4.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(contentId) {
+var getPageDetail = exports.getPageDetail = function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
                 switch (_context5.prev = _context5.next) {
                     case 0:
                         _context5.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
 
                     case 2:
                         result = _context5.sent;
@@ -1081,8 +1081,35 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee5, this);
     }));
 
-    return function getContentDetail(_x4) {
+    return function getPageDetail(_x4) {
         return _ref5.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        _context6.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context6.sent;
+                        return _context6.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, this);
+    }));
+
+    return function getContentDetail(_x5) {
+        return _ref6.apply(this, arguments);
     };
 }();
 
@@ -1289,6 +1316,14 @@ var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
 
+var _Basic = __webpack_require__(/*! ./views/Basic */ "./src/pages/mp/setting/views/Basic.jsx");
+
+var _Basic2 = _interopRequireDefault(_Basic);
+
+var _Navigator = __webpack_require__(/*! ./views/Navigator */ "./src/pages/mp/setting/views/Navigator.jsx");
+
+var _Navigator2 = _interopRequireDefault(_Navigator);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1301,6 +1336,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var TabPanel = _zent.Tabs.TabPanel;
+
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
@@ -1309,34 +1346,77 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.state = {};
+        _this.onTabChange = function (id) {
+            _this.setState({
+                activeId: id
+            });
+        };
+
+        _this.saveMp = function (mp) {};
+
+        var _getQuery = (0, _url.getQuery)(),
+            mpId = _getQuery.mpId;
+
+        _this.state = {
+            mpId: mpId,
+            activeId: '1',
+            mpDetail: {}
+        };
         return _this;
     }
 
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            var mpPageList = this.state.mpPageList;
+            var mpDetail = this.state.mpDetail;
 
             return _react2.default.createElement(
-                'div',
-                null,
-                '\u8BBE\u7F6E\u5BFC\u822A\u680F'
+                _zent.Tabs,
+                {
+                    activeId: this.state.activeId,
+                    onChange: this.onTabChange
+                },
+                _react2.default.createElement(
+                    TabPanel,
+                    {
+                        tab: _react2.default.createElement(
+                            'span',
+                            null,
+                            '\u57FA\u7840\u8BBE\u7F6E'
+                        ),
+                        id: '1'
+                    },
+                    _react2.default.createElement(_Basic2.default, { mp: mpDetail, saveMp: this.saveMp })
+                ),
+                _react2.default.createElement(
+                    TabPanel,
+                    {
+                        tab: '\u5BFC\u822A\u8BBE\u7F6E',
+                        id: '2'
+                    },
+                    _react2.default.createElement(_Navigator2.default, { mp: mpDetail, saveMp: this.saveMp })
+                )
             );
         }
     }, {
         key: 'loadMpList',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var _getQuery, mpId;
-
+                var mpId, mpDetail;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _getQuery = (0, _url.getQuery)(), mpId = _getQuery.mpId;
+                                mpId = this.state.mpId;
+                                _context.next = 3;
+                                return mpApi.getMpDetail(mpId);
 
-                            case 1:
+                            case 3:
+                                mpDetail = _context.sent;
+
+                                this.setState({ mpDetail: mpDetail });
+
+                            case 5:
                             case 'end':
                                 return _context.stop();
                         }
@@ -1350,6 +1430,11 @@ var App = function (_React$Component) {
 
             return loadMpList;
         }()
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.loadMpList();
+        }
     }]);
 
     return App;
@@ -1407,6 +1492,177 @@ _reactDom2.default.render(_react2.default.createElement(
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/pages/mp/setting/views/Basic.jsx":
+/*!**********************************************!*\
+  !*** ./src/pages/mp/setting/views/Basic.jsx ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Field = _zent.Form.Field,
+    FormInputField = _zent.Form.FormInputField,
+    FormSelectField = _zent.Form.FormSelectField,
+    FormRadioGroupField = _zent.Form.FormRadioGroupField,
+    FormCheckboxField = _zent.Form.FormCheckboxField,
+    FormCheckboxGroupField = _zent.Form.FormCheckboxGroupField,
+    FormColorPickerField = _zent.Form.FormColorPickerField,
+    FormDateRangePickerField = _zent.Form.FormDateRangePickerField,
+    FormNumberInputField = _zent.Form.FormNumberInputField,
+    FormSwitchField = _zent.Form.FormSwitchField,
+    createForm = _zent.Form.createForm;
+
+var Basic = function (_React$Component) {
+    _inherits(Basic, _React$Component);
+
+    function Basic(props) {
+        _classCallCheck(this, Basic);
+
+        var _this = _possibleConstructorReturn(this, (Basic.__proto__ || Object.getPrototypeOf(Basic)).call(this, props));
+
+        _this.state = {
+            checkedList: []
+        };
+
+        _this.onCheckboxChange = function (checkedList) {
+            _this.setState({ checkedList: checkedList });
+        };
+
+        _this.submit = function (values, zentForm) {
+            _zent.Notify.success(JSON.stringify(values));
+        };
+
+        _this.resetForm = function () {
+            _this.props.zentForm.resetFieldsValue();
+        };
+
+        return _this;
+    }
+
+    _createClass(Basic, [{
+        key: 'render',
+        value: function render() {
+            var handleSubmit = this.props.handleSubmit;
+
+            return _react2.default.createElement(
+                _zent.Form,
+                { horizontal: true, onSubmit: handleSubmit(this.submit) },
+                _react2.default.createElement(FormInputField, {
+                    name: 'name',
+                    type: 'text',
+                    label: '\u6635\u79F0:',
+                    required: true,
+                    spellCheck: false,
+                    validations: { required: true },
+                    validationErrors: { required: '请填写昵称' }
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'color',
+                    label: '\u559C\u6B22\u7684\u989C\u8272:',
+                    value: '#5197FF'
+                }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'zent-form__form-actions' },
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', htmlType: 'submit' },
+                        '\u83B7\u53D6\u8868\u5355\u503C'
+                    ),
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', outline: true, onClick: this.resetForm },
+                        '\u91CD\u7F6E\u8868\u5355\u503C'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Basic;
+}(_react2.default.Component);
+
+exports.default = createForm()(Basic);
+
+/***/ }),
+
+/***/ "./src/pages/mp/setting/views/Navigator.jsx":
+/*!**************************************************!*\
+  !*** ./src/pages/mp/setting/views/Navigator.jsx ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Navigator = function (_React$Component) {
+    _inherits(Navigator, _React$Component);
+
+    function Navigator() {
+        _classCallCheck(this, Navigator);
+
+        return _possibleConstructorReturn(this, (Navigator.__proto__ || Object.getPrototypeOf(Navigator)).apply(this, arguments));
+    }
+
+    _createClass(Navigator, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                '\u5BFC\u822A\u8BBE\u7F6E'
+            );
+        }
+    }]);
+
+    return Navigator;
+}(_react2.default.Component);
+
+exports.default = Navigator;
 
 /***/ }),
 

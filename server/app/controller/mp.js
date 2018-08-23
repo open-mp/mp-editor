@@ -23,9 +23,19 @@ class UserController extends Controller {
     }
 
     async getMpList() {
+        let mpList = await this.service.mp.app.getMpList();
         this.ctx.body = {
             code: 0,
-            data: MPList
+            data: mpList
+        };
+    }
+
+    async getMpDetail() {
+        let mpId = this.ctx.query.mpId;
+        let mpList = await this.service.mp.app.getMpDetail(mpId);
+        this.ctx.body = {
+            code: 0,
+            data: mpList
         };
     }
 

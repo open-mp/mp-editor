@@ -1,3 +1,16 @@
+const Service = require('egg').Service;
+class UserService extends Service {
+    async getMpList() {
+      return MPList;
+    }
+    async getMpDetail(mpId) {
+        return MPList.find(mp=> mp.id == mpId);
+    }
+}
+  
+module.exports = UserService;
+  
+
 // 小程序列表
 const MPList = [{
     id: 1,
