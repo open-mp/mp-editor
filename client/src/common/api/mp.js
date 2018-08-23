@@ -10,6 +10,11 @@ export async function getMpDetail(mpId) {
     return result;
 }
 
+export async function saveMp(mpId, mp) {
+    let result = await api.post('/mp/save-mp-detail', {mpId}, mp);
+    return result;
+}
+
 export async function getMpPageList(mpId) {
     let result = await api.get('/mp/get-mp-page-list', {mpId});
     return result;

@@ -1,11 +1,11 @@
 import React from 'react';
 import * as mpApi from 'src/common/api/mp'
-import { Tabs } from 'zent';
+import { Tabs, Notify } from 'zent';
 const TabPanel = Tabs.TabPanel;
 import { getQuery } from 'src/common/api/url'
 import Basic from './views/Basic'
-import Navigator from './views/Navigator'
-
+import TabBarStyle from './views/TabBarStyle'
+import TabBarButton from './views/TabBarButton'
 class App extends React.Component {
 
     onTabChange = (id) => {
@@ -40,17 +40,25 @@ class App extends React.Component {
                     <Basic  mp={mpDetail} saveMp={this.saveMp}></Basic>
                 </TabPanel>
                 <TabPanel
-                    tab="导航设置"
+                    tab="TabBar样式"
                     id="2"
                 >
-                    <Navigator mp={mpDetail} saveMp={this.saveMp}></Navigator>
+                    <TabBarStyle mp={mpDetail} saveMp={this.saveMp}></TabBarStyle>
+                </TabPanel>
+                <TabPanel
+                    tab="TabBar按钮"
+                    id="3"
+                >
+                    <TabBarButton mp={mpDetail} saveMp={this.saveMp}></TabBarButton>
                 </TabPanel>
             </Tabs>
         );
     }
 
-    saveMp = (mp) => {
-
+    saveMp = async (mp) => {
+       let { mpId } = this.state;
+       await  mpApi.saveMp(mpId, mp);
+       Notify.success('保存成功');
     }
 
     async loadMpList() {

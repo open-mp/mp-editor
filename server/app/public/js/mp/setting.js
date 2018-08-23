@@ -920,6 +920,8 @@ function post(url) {
     var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
+
+    query['_csrf'] = window.csrf;
     var keylength = Object.keys(query).length;
     if (keylength > 0) {
         url = url + '?' + _queryString2.default.stringify(query);
@@ -949,7 +951,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getPageDetail = exports.getDynamicPageContentList = exports.getMpPageList = exports.getMpDetail = exports.getMpList = undefined;
+exports.getContentDetail = exports.getPageDetail = exports.getDynamicPageContentList = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1005,15 +1007,15 @@ var getMpDetail = exports.getMpDetail = function () {
     };
 }();
 
-var getMpPageList = exports.getMpPageList = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(mpId) {
+var saveMp = exports.saveMp = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(mpId, mp) {
         var result;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         _context3.next = 2;
-                        return api.get('/mp/get-mp-page-list', { mpId: mpId });
+                        return api.post('/mp/save-mp-detail', { mpId: mpId }, mp);
 
                     case 2:
                         result = _context3.sent;
@@ -1027,20 +1029,20 @@ var getMpPageList = exports.getMpPageList = function () {
         }, _callee3, this);
     }));
 
-    return function getMpPageList(_x2) {
+    return function saveMp(_x2, _x3) {
         return _ref3.apply(this, arguments);
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(pageId) {
+var getMpPageList = exports.getMpPageList = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
                 switch (_context4.prev = _context4.next) {
                     case 0:
                         _context4.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-list', { mpId: mpId });
 
                     case 2:
                         result = _context4.sent;
@@ -1054,12 +1056,12 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee4, this);
     }));
 
-    return function getDynamicPageContentList(_x3) {
+    return function getMpPageList(_x4) {
         return _ref4.apply(this, arguments);
     };
 }();
 
-var getPageDetail = exports.getPageDetail = function () {
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
@@ -1067,7 +1069,7 @@ var getPageDetail = exports.getPageDetail = function () {
                 switch (_context5.prev = _context5.next) {
                     case 0:
                         _context5.next = 2;
-                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
 
                     case 2:
                         result = _context5.sent;
@@ -1081,20 +1083,20 @@ var getPageDetail = exports.getPageDetail = function () {
         }, _callee5, this);
     }));
 
-    return function getPageDetail(_x4) {
+    return function getDynamicPageContentList(_x5) {
         return _ref5.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(contentId) {
+var getPageDetail = exports.getPageDetail = function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
                 switch (_context6.prev = _context6.next) {
                     case 0:
                         _context6.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
 
                     case 2:
                         result = _context6.sent;
@@ -1108,8 +1110,35 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee6, this);
     }));
 
-    return function getContentDetail(_x5) {
+    return function getPageDetail(_x6) {
         return _ref6.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+            while (1) {
+                switch (_context7.prev = _context7.next) {
+                    case 0:
+                        _context7.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context7.sent;
+                        return _context7.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context7.stop();
+                }
+            }
+        }, _callee7, this);
+    }));
+
+    return function getContentDetail(_x7) {
+        return _ref7.apply(this, arguments);
     };
 }();
 
@@ -1320,9 +1349,13 @@ var _Basic = __webpack_require__(/*! ./views/Basic */ "./src/pages/mp/setting/vi
 
 var _Basic2 = _interopRequireDefault(_Basic);
 
-var _Navigator = __webpack_require__(/*! ./views/Navigator */ "./src/pages/mp/setting/views/Navigator.jsx");
+var _TabBarStyle = __webpack_require__(/*! ./views/TabBarStyle */ "./src/pages/mp/setting/views/TabBarStyle.jsx");
 
-var _Navigator2 = _interopRequireDefault(_Navigator);
+var _TabBarStyle2 = _interopRequireDefault(_TabBarStyle);
+
+var _TabBarButton = __webpack_require__(/*! ./views/TabBarButton */ "./src/pages/mp/setting/views/TabBarButton.jsx");
+
+var _TabBarButton2 = _interopRequireDefault(_TabBarButton);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1346,13 +1379,7 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.onTabChange = function (id) {
-            _this.setState({
-                activeId: id
-            });
-        };
-
-        _this.saveMp = function (mp) {};
+        _initialiseProps.call(_this);
 
         var _getQuery = (0, _url.getQuery)(),
             mpId = _getQuery.mpId;
@@ -1391,10 +1418,18 @@ var App = function (_React$Component) {
                 _react2.default.createElement(
                     TabPanel,
                     {
-                        tab: '\u5BFC\u822A\u8BBE\u7F6E',
+                        tab: 'TabBar\u6837\u5F0F',
                         id: '2'
                     },
-                    _react2.default.createElement(_Navigator2.default, { mp: mpDetail, saveMp: this.saveMp })
+                    _react2.default.createElement(_TabBarStyle2.default, { mp: mpDetail, saveMp: this.saveMp })
+                ),
+                _react2.default.createElement(
+                    TabPanel,
+                    {
+                        tab: 'TabBar\u6309\u94AE',
+                        id: '3'
+                    },
+                    _react2.default.createElement(_TabBarButton2.default, { mp: mpDetail, saveMp: this.saveMp })
                 )
             );
         }
@@ -1439,6 +1474,43 @@ var App = function (_React$Component) {
 
     return App;
 }(_react2.default.Component);
+
+var _initialiseProps = function _initialiseProps() {
+    var _this2 = this;
+
+    this.onTabChange = function (id) {
+        _this2.setState({
+            activeId: id
+        });
+    };
+
+    this.saveMp = function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(mp) {
+            var mpId;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            mpId = _this2.state.mpId;
+                            _context2.next = 3;
+                            return mpApi.saveMp(mpId, mp);
+
+                        case 3:
+                            _zent.Notify.success('保存成功');
+
+                        case 4:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, _callee2, _this2);
+        }));
+
+        return function (_x) {
+            return _ref2.apply(this, arguments);
+        };
+    }();
+};
 
 exports.default = App;
 
@@ -1549,12 +1621,10 @@ var Basic = function (_React$Component) {
             checkedList: []
         };
 
-        _this.onCheckboxChange = function (checkedList) {
-            _this.setState({ checkedList: checkedList });
-        };
-
         _this.submit = function (values, zentForm) {
-            _zent.Notify.success(JSON.stringify(values));
+            _this.props.saveMp({
+                window: values
+            });
         };
 
         _this.resetForm = function () {
@@ -1567,24 +1637,43 @@ var Basic = function (_React$Component) {
     _createClass(Basic, [{
         key: 'render',
         value: function render() {
-            var handleSubmit = this.props.handleSubmit;
+            var _props = this.props,
+                handleSubmit = _props.handleSubmit,
+                mp = _props.mp;
+            var _mp$window = mp.window,
+                window = _mp$window === undefined ? {} : _mp$window;
 
             return _react2.default.createElement(
                 _zent.Form,
                 { horizontal: true, onSubmit: handleSubmit(this.submit) },
                 _react2.default.createElement(FormInputField, {
-                    name: 'name',
+                    name: 'navigationBarTitleText',
                     type: 'text',
-                    label: '\u6635\u79F0:',
+                    label: '\u5C0F\u7A0B\u5E8F\u540D\u5B57:',
                     required: true,
                     spellCheck: false,
                     validations: { required: true },
-                    validationErrors: { required: '请填写昵称' }
+                    validationErrors: { required: '请填写小程序名字' },
+                    value: window.navigationBarTitleText
+                }),
+                _react2.default.createElement(FormSelectField, {
+                    name: 'navigationBarTextStyle',
+                    label: '\u5BFC\u822A\u680F\u6587\u5B57\u989C\u8272:',
+                    data: [{ value: 'black', text: '黑色' }, { value: 'white', text: '白色' }],
+                    required: true,
+                    validations: { required: true },
+                    validationErrors: { required: '导航栏文字颜色' },
+                    value: window.navigationBarTextStyle
                 }),
                 _react2.default.createElement(FormColorPickerField, {
-                    name: 'color',
-                    label: '\u559C\u6B22\u7684\u989C\u8272:',
-                    value: '#5197FF'
+                    name: 'navigationBarBackgroundColor',
+                    label: '\u5BFC\u822A\u680F\u80CC\u666F\u8272:',
+                    value: window.navigationBarBackgroundColor
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'backgroundColor',
+                    label: '\u7A97\u53E3\u80CC\u666F\u989C\u8272:',
+                    value: window.backgroundColor
                 }),
                 _react2.default.createElement(
                     'div',
@@ -1611,10 +1700,10 @@ exports.default = createForm()(Basic);
 
 /***/ }),
 
-/***/ "./src/pages/mp/setting/views/Navigator.jsx":
-/*!**************************************************!*\
-  !*** ./src/pages/mp/setting/views/Navigator.jsx ***!
-  \**************************************************/
+/***/ "./src/pages/mp/setting/views/TabBarButton.jsx":
+/*!*****************************************************!*\
+  !*** ./src/pages/mp/setting/views/TabBarButton.jsx ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1631,6 +1720,8 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1639,30 +1730,264 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Navigator = function (_React$Component) {
-    _inherits(Navigator, _React$Component);
+var Field = _zent.Form.Field,
+    FormInputField = _zent.Form.FormInputField,
+    FormSelectField = _zent.Form.FormSelectField,
+    FormRadioGroupField = _zent.Form.FormRadioGroupField,
+    FormCheckboxField = _zent.Form.FormCheckboxField,
+    FormCheckboxGroupField = _zent.Form.FormCheckboxGroupField,
+    FormColorPickerField = _zent.Form.FormColorPickerField,
+    FormDateRangePickerField = _zent.Form.FormDateRangePickerField,
+    FormNumberInputField = _zent.Form.FormNumberInputField,
+    FormSwitchField = _zent.Form.FormSwitchField,
+    createForm = _zent.Form.createForm;
 
-    function Navigator() {
-        _classCallCheck(this, Navigator);
+var Basic = function (_React$Component) {
+    _inherits(Basic, _React$Component);
 
-        return _possibleConstructorReturn(this, (Navigator.__proto__ || Object.getPrototypeOf(Navigator)).apply(this, arguments));
+    function Basic(props) {
+        _classCallCheck(this, Basic);
+
+        var _this = _possibleConstructorReturn(this, (Basic.__proto__ || Object.getPrototypeOf(Basic)).call(this, props));
+
+        _this.state = {
+            checkedList: []
+        };
+
+        _this.submit = function (values, zentForm) {
+            _this.props.saveMp({
+                tabBarButtons: values
+            });
+        };
+
+        _this.resetForm = function () {
+            _this.props.zentForm.resetFieldsValue();
+        };
+
+        return _this;
     }
 
-    _createClass(Navigator, [{
+    _createClass(Basic, [{
         key: 'render',
         value: function render() {
+            var _props = this.props,
+                handleSubmit = _props.handleSubmit,
+                mp = _props.mp;
+            var _mp$tabBar = mp.tabBar,
+                tabBar = _mp$tabBar === undefined ? {} : _mp$tabBar,
+                _mp$tabBarButtons = mp.tabBarButtons,
+                tabBarButtons = _mp$tabBarButtons === undefined ? {} : _mp$tabBarButtons;
+
             return _react2.default.createElement(
-                'div',
-                null,
-                '\u5BFC\u822A\u8BBE\u7F6E'
+                _zent.Form,
+                { horizontal: true, onSubmit: handleSubmit(this.submit) },
+                tabBarButtons.map(function (btn, index) {
+                    return _react2.default.createElement(
+                        'div',
+                        { style: { marginBottom: '10px' } },
+                        _react2.default.createElement(
+                            'span',
+                            null,
+                            '\u6309\u94AE',
+                            index,
+                            ' :'
+                        )
+                    );
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'color',
+                    label: '\u6587\u5B57\u9ED8\u8BA4\u989C\u8272:',
+                    value: tabBar.color
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'selectedColor',
+                    label: '\u6587\u5B57\u9009\u4E2D\u989C\u8272:',
+                    value: tabBar.selectedColor
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'backgroundColor',
+                    label: '\u80CC\u666F\u8272:',
+                    value: tabBar.backgroundColor
+                }),
+                _react2.default.createElement(FormSelectField, {
+                    name: 'borderStyle',
+                    label: '\u4E0A\u8FB9\u6846\u989C\u8272:',
+                    data: [{ value: 'black', text: '黑色' }, { value: 'white', text: '白色' }],
+                    required: true,
+                    validations: { required: true },
+                    validationErrors: { required: '导航栏文字颜色' },
+                    value: tabBar.borderStyle
+                }),
+                _react2.default.createElement(FormSelectField, {
+                    name: 'position',
+                    label: '\u4F4D\u7F6E:',
+                    data: [{ value: 'bottom', text: '底部' }, { value: 'top', text: '顶部' }],
+                    required: true,
+                    validations: { required: true },
+                    validationErrors: { required: '导航栏文字颜色' },
+                    value: tabBar.position
+                }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'zent-form__form-actions' },
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', htmlType: 'submit' },
+                        '\u83B7\u53D6\u8868\u5355\u503C'
+                    ),
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', outline: true, onClick: this.resetForm },
+                        '\u91CD\u7F6E\u8868\u5355\u503C'
+                    )
+                )
             );
         }
     }]);
 
-    return Navigator;
+    return Basic;
 }(_react2.default.Component);
 
-exports.default = Navigator;
+exports.default = createForm()(Basic);
+
+/***/ }),
+
+/***/ "./src/pages/mp/setting/views/TabBarStyle.jsx":
+/*!****************************************************!*\
+  !*** ./src/pages/mp/setting/views/TabBarStyle.jsx ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Field = _zent.Form.Field,
+    FormInputField = _zent.Form.FormInputField,
+    FormSelectField = _zent.Form.FormSelectField,
+    FormRadioGroupField = _zent.Form.FormRadioGroupField,
+    FormCheckboxField = _zent.Form.FormCheckboxField,
+    FormCheckboxGroupField = _zent.Form.FormCheckboxGroupField,
+    FormColorPickerField = _zent.Form.FormColorPickerField,
+    FormDateRangePickerField = _zent.Form.FormDateRangePickerField,
+    FormNumberInputField = _zent.Form.FormNumberInputField,
+    FormSwitchField = _zent.Form.FormSwitchField,
+    createForm = _zent.Form.createForm;
+
+var Basic = function (_React$Component) {
+    _inherits(Basic, _React$Component);
+
+    function Basic(props) {
+        _classCallCheck(this, Basic);
+
+        var _this = _possibleConstructorReturn(this, (Basic.__proto__ || Object.getPrototypeOf(Basic)).call(this, props));
+
+        _this.state = {
+            checkedList: []
+        };
+
+        _this.submit = function (values, zentForm) {
+            _this.props.saveMp({
+                tabBar: values
+            });
+        };
+
+        _this.resetForm = function () {
+            _this.props.zentForm.resetFieldsValue();
+        };
+
+        return _this;
+    }
+
+    _createClass(Basic, [{
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                handleSubmit = _props.handleSubmit,
+                mp = _props.mp;
+            var _mp$tabBar = mp.tabBar,
+                tabBar = _mp$tabBar === undefined ? {} : _mp$tabBar,
+                _mp$tabBarButtons = mp.tabBarButtons,
+                tabBarButtons = _mp$tabBarButtons === undefined ? {} : _mp$tabBarButtons;
+
+            return _react2.default.createElement(
+                _zent.Form,
+                { horizontal: true, onSubmit: handleSubmit(this.submit) },
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'color',
+                    label: '\u6587\u5B57\u9ED8\u8BA4\u989C\u8272:',
+                    value: tabBar.color
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'selectedColor',
+                    label: '\u6587\u5B57\u9009\u4E2D\u989C\u8272:',
+                    value: tabBar.selectedColor
+                }),
+                _react2.default.createElement(FormColorPickerField, {
+                    name: 'backgroundColor',
+                    label: '\u80CC\u666F\u8272:',
+                    value: tabBar.backgroundColor
+                }),
+                _react2.default.createElement(FormSelectField, {
+                    name: 'borderStyle',
+                    label: '\u4E0A\u8FB9\u6846\u989C\u8272:',
+                    data: [{ value: 'black', text: '黑色' }, { value: 'white', text: '白色' }],
+                    required: true,
+                    validations: { required: true },
+                    validationErrors: { required: '导航栏文字颜色' },
+                    value: tabBar.borderStyle
+                }),
+                _react2.default.createElement(FormSelectField, {
+                    name: 'position',
+                    label: '\u4F4D\u7F6E:',
+                    data: [{ value: 'bottom', text: '底部' }, { value: 'top', text: '顶部' }],
+                    required: true,
+                    validations: { required: true },
+                    validationErrors: { required: '导航栏文字颜色' },
+                    value: tabBar.position
+                }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'zent-form__form-actions' },
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', htmlType: 'submit' },
+                        '\u83B7\u53D6\u8868\u5355\u503C'
+                    ),
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', outline: true, onClick: this.resetForm },
+                        '\u91CD\u7F6E\u8868\u5355\u503C'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Basic;
+}(_react2.default.Component);
+
+exports.default = createForm()(Basic);
 
 /***/ }),
 

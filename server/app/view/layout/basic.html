@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <link rel="icon" href="https://assets-cdn.github.com/favicon.ico" type="image/x-icon">
     <title>{% block title %}标题{% endblock %}</title>
+    <script>window.csrf = '{{ ctx.csrf  }}'</script>
     {% block css %}{% endblock %}
   </head>
   <body>

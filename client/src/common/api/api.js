@@ -17,6 +17,8 @@ export function get(url, query = {}) {
 }
 
 export function post(url, query = {}, data = {}) {
+
+    query['_csrf'] = window.csrf;
     let keylength = Object.keys(query).length;
     if (keylength > 0) {
         url = `${url}?${queryString.stringify(query)}`;

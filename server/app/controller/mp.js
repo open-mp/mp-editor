@@ -39,6 +39,16 @@ class UserController extends Controller {
         };
     }
 
+    async saveMpDetail() {
+        let mpId = this.ctx.query.mpId;
+        let mp = this.ctx.request.body;
+        let mpList = await this.service.mp.app.saveMpDetail(mpId, mp);
+        this.ctx.body = {
+            code: 0,
+            data: mpList
+        };
+    }
+
     async getMpPageList() {
         let { mpId } = this.ctx.query;
         let mpPageList = Pages.filter(page => {
