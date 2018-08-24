@@ -22,6 +22,7 @@ class UserController extends Controller {
         await this.ctx.render('mp/content-list.html', {});
     }
 
+
     async getMpList() {
         let mpList = await this.service.mp.app.getMpList();
         this.ctx.body = {
@@ -32,10 +33,10 @@ class UserController extends Controller {
 
     async getMpDetail() {
         let mpId = this.ctx.query.mpId;
-        let mpList = await this.service.mp.app.getMpDetail(mpId);
+        let mp = await this.service.mp.app.getMpDetail(mpId);
         this.ctx.body = {
             code: 0,
-            data: mpList
+            data: mp
         };
     }
 
@@ -51,42 +52,47 @@ class UserController extends Controller {
 
     async getMpPageList() {
         let { mpId } = this.ctx.query;
-        let mpPageList = Pages.filter(page => {
-            return page.mpId == mpId;
-        });
+        let mpPageList = await this.service.mp.page.getMpPageList(mpId);
+        
         this.ctx.body = {
             code: 0,
             data: mpPageList
         };
     }
 
-    async getMpDynamicPageContentList() {
-        let { pageId } = this.ctx.query;
-        let mpContentList = DynamicContents.filter(content => {
-            return content.pageId == pageId;
-        });
-        this.ctx.body = {
-            code: 0,
-            data: mpContentList
-        };
-    }
-
     async getPageDetail() {
         let { pageId } = this.ctx.query;
-        let page = Pages.find(page => {
-            return page.id == pageId;
-        })
+        let page = await this.service.mp.page.getPageDetail(pageId);
         this.ctx.body = {
             code: 0,
             data: page
         };
     }
 
+    async savePageDetail() {
+        let {mpId} = this.ctx.query;
+        let page = this.ctx.request.body;
+        await this.service.mp.page.savePageDetail(mpId, page);
+        this.ctx.body = {
+            code: 0,
+            data: {}
+        };
+    }
+
+    async getMpDynamicPageContentList() {
+        let { pageId } = this.ctx.query;
+        let mpContentList = await this.service.mp.content.getMpDynamicPageContentList(pageId);
+
+        this.ctx.body = {
+            code: 0,
+            data: mpContentList
+        };
+    }
+
     async getContentDetail() {
         let { contentId } = this.ctx.query;
-        let content = DynamicContents.find(content => {
-            return content.id == contentId;
-        })
+        let content = await this.service.mp.content.getContentDetail(contentId);
+
         this.ctx.body = {
             code: 0,
             data: content
@@ -95,13 +101,8 @@ class UserController extends Controller {
 
     async getMpDefinition() {
         let { mpId } = this.ctx.query;
-        let mp = MPList.find(mp => {
-            return mp.id == mpId;
-        })
-
-        let pageList = Pages.filter(page => {
-            return page.mpId == mpId;
-        });
+        let mp =  await this.service.mp.app.getMpDetail(mpId);
+        let pageList =  await this.service.mp.page.getMpPageList(mpId);
 
         this.ctx.body = {
             code: 0,

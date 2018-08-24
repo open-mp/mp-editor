@@ -1,8 +1,42 @@
 const Service = require('egg').Service;
 class UserService extends Service {
-    async find(uid) {
-      const user = await this.ctx.db.query('select * from user where uid = ?', uid);
-      return user;
+    async getMpPageList(mpId) {
+        let mpPageList = Pages.filter(page => {
+            return page.mpId == mpId;
+        });
+        return mpPageList;
+    }
+
+    async getPageDetail(pageId) {
+        let page = Pages.find(page => {
+            return page.id == pageId;
+        })
+        return page;
+    }
+
+    async savePageDetail(mpId, page) {
+        if (page.id) {
+
+        } else {
+            Pages.push({
+                mpId: mpId, // 关联的小程序id
+                id: Date.now(), // 页面id
+                name: page.name,
+                label: page.label,
+                description: page.description,
+                structure: page.structure,
+                config: {
+                    "navigationBarBackgroundColor": "#ffffff",
+                    "navigationBarTextStyle": "black",
+                    "navigationBarTitleText": page.label,
+                    "backgroundColor": "#eeeeee",
+                    "backgroundTextStyle": "light"
+                },
+                bundleList: [],
+                instanceList: [{ "title": `${page.label}`, "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }]
+
+            });
+        }
     }
 }
 
@@ -43,12 +77,12 @@ const Pages = [
         bundleList: [{
             "id": 1,
             "bundleId": {
-              "groupId": "",
-              "artifactId": "",
-              "version": "",
-              "classifier": ""
+                "groupId": "",
+                "artifactId": "",
+                "version": "",
+                "classifier": ""
             }
-          }]
+        }]
     }, {
         mpId: 1, // 关联的小程序id
         id: 3, // 页面id
