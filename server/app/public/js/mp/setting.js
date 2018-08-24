@@ -1516,6 +1516,105 @@ exports.default = App;
 
 /***/ }),
 
+/***/ "./src/pages/mp/setting/components/TabBarConfig.jsx":
+/*!**********************************************************!*\
+  !*** ./src/pages/mp/setting/components/TabBarConfig.jsx ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Field = _zent.Form.Field,
+    FormInputField = _zent.Form.FormInputField,
+    FormSelectField = _zent.Form.FormSelectField,
+    FormRadioGroupField = _zent.Form.FormRadioGroupField,
+    FormCheckboxField = _zent.Form.FormCheckboxField,
+    FormCheckboxGroupField = _zent.Form.FormCheckboxGroupField,
+    FormColorPickerField = _zent.Form.FormColorPickerField,
+    FormDateRangePickerField = _zent.Form.FormDateRangePickerField,
+    FormNumberInputField = _zent.Form.FormNumberInputField,
+    FormSwitchField = _zent.Form.FormSwitchField,
+    FormSection = _zent.Form.FormSection,
+    FieldArray = _zent.Form.FieldArray,
+    createForm = _zent.Form.createForm;
+
+var Basic = function (_React$Component) {
+    _inherits(Basic, _React$Component);
+
+    function Basic(props) {
+        _classCallCheck(this, Basic);
+
+        var _this = _possibleConstructorReturn(this, (Basic.__proto__ || Object.getPrototypeOf(Basic)).call(this, props));
+
+        _this.state = {
+            checkedList: []
+        };
+
+        _this.submit = function (values, zentForm) {
+            _this.props.saveMp({
+                tabBarButtons: values
+            });
+        };
+
+        _this.resetForm = function () {
+            _this.props.zentForm.resetFieldsValue();
+        };
+
+        return _this;
+    }
+
+    _createClass(Basic, [{
+        key: 'render',
+        value: function render() {
+            var fields = this.props.fields;
+
+            return _react2.default.createElement(
+                'ul',
+                null,
+                fields.map(function (member, index, key) {
+                    return _react2.default.createElement(FormInputField, {
+                        name: 'text',
+                        type: 'text',
+                        label: '\u5C0F\u7A0B\u5E8F\u540D\u5B57:',
+                        required: true,
+                        spellCheck: false,
+                        validations: { required: true },
+                        validationErrors: { required: '请填写小程序名字' }
+                    });
+                })
+            );
+        }
+    }]);
+
+    return Basic;
+}(_react2.default.Component);
+
+exports.default = createForm()(Basic);
+
+/***/ }),
+
 /***/ "./src/pages/mp/setting/main.js":
 /*!**************************************!*\
   !*** ./src/pages/mp/setting/main.js ***!
@@ -1720,6 +1819,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _TabBarConfig = __webpack_require__(/*! ../components/TabBarConfig */ "./src/pages/mp/setting/components/TabBarConfig.jsx");
+
+var _TabBarConfig2 = _interopRequireDefault(_TabBarConfig);
+
 var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1740,6 +1843,7 @@ var Field = _zent.Form.Field,
     FormDateRangePickerField = _zent.Form.FormDateRangePickerField,
     FormNumberInputField = _zent.Form.FormNumberInputField,
     FormSwitchField = _zent.Form.FormSwitchField,
+    FieldArray = _zent.Form.FieldArray,
     createForm = _zent.Form.createForm;
 
 var Basic = function (_React$Component) {
@@ -1755,9 +1859,10 @@ var Basic = function (_React$Component) {
         };
 
         _this.submit = function (values, zentForm) {
-            _this.props.saveMp({
-                tabBarButtons: values
-            });
+            console.log(values);
+            // this.props.saveMp({
+            //     tabBarButtons: values
+            // })
         };
 
         _this.resetForm = function () {
@@ -1776,56 +1881,27 @@ var Basic = function (_React$Component) {
             var _mp$tabBar = mp.tabBar,
                 tabBar = _mp$tabBar === undefined ? {} : _mp$tabBar,
                 _mp$tabBarButtons = mp.tabBarButtons,
-                tabBarButtons = _mp$tabBarButtons === undefined ? {} : _mp$tabBarButtons;
+                tabBarButtons = _mp$tabBarButtons === undefined ? [] : _mp$tabBarButtons;
+
 
             return _react2.default.createElement(
                 _zent.Form,
                 { horizontal: true, onSubmit: handleSubmit(this.submit) },
-                tabBarButtons.map(function (btn, index) {
-                    return _react2.default.createElement(
-                        'div',
-                        { style: { marginBottom: '10px' } },
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            '\u6309\u94AE',
-                            index,
-                            ' :'
-                        )
-                    );
+                _react2.default.createElement(FormInputField, {
+                    name: 'name',
+                    type: 'text',
+                    label: _react2.default.createElement(
+                        'span',
+                        null,
+                        '\u7528\u6237\u540D\xA0'
+                    ),
+                    helpDesc: '\u7528\u6237\u540D\u4E3A5-25\u4E2A\u5B57\u7B26',
+                    required: true
                 }),
-                _react2.default.createElement(FormColorPickerField, {
-                    name: 'color',
-                    label: '\u6587\u5B57\u9ED8\u8BA4\u989C\u8272:',
-                    value: tabBar.color
-                }),
-                _react2.default.createElement(FormColorPickerField, {
-                    name: 'selectedColor',
-                    label: '\u6587\u5B57\u9009\u4E2D\u989C\u8272:',
-                    value: tabBar.selectedColor
-                }),
-                _react2.default.createElement(FormColorPickerField, {
-                    name: 'backgroundColor',
-                    label: '\u80CC\u666F\u8272:',
-                    value: tabBar.backgroundColor
-                }),
-                _react2.default.createElement(FormSelectField, {
-                    name: 'borderStyle',
-                    label: '\u4E0A\u8FB9\u6846\u989C\u8272:',
-                    data: [{ value: 'black', text: '黑色' }, { value: 'white', text: '白色' }],
-                    required: true,
-                    validations: { required: true },
-                    validationErrors: { required: '导航栏文字颜色' },
-                    value: tabBar.borderStyle
-                }),
-                _react2.default.createElement(FormSelectField, {
-                    name: 'position',
-                    label: '\u4F4D\u7F6E:',
-                    data: [{ value: 'bottom', text: '底部' }, { value: 'top', text: '顶部' }],
-                    required: true,
-                    validations: { required: true },
-                    validationErrors: { required: '导航栏文字颜色' },
-                    value: tabBar.position
+                _react2.default.createElement(FieldArray, {
+                    name: 'tabBarButtons',
+                    value: tabBarButtons,
+                    component: _TabBarConfig2.default
                 }),
                 _react2.default.createElement(
                     'div',
@@ -1833,12 +1909,12 @@ var Basic = function (_React$Component) {
                     _react2.default.createElement(
                         _zent.Button,
                         { type: 'primary', htmlType: 'submit' },
-                        '\u83B7\u53D6\u8868\u5355\u503C'
+                        '\u4FDD\u5B58'
                     ),
                     _react2.default.createElement(
                         _zent.Button,
                         { type: 'primary', outline: true, onClick: this.resetForm },
-                        '\u91CD\u7F6E\u8868\u5355\u503C'
+                        '\u589E\u52A0\u4E00\u4E2ATabBarButton'
                     )
                 )
             );
