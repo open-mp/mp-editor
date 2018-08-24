@@ -7,18 +7,11 @@ class UserService extends Service {
         return mpPageList;
     }
 
-    async getPageDetail(pageId) {
-        let page = Pages.find(page => {
-            return page.id == pageId;
-        })
-        return page;
-    }
-
     async createPage(mpId, page) {
-
+        let pageId = Date.now();
         Pages.push({
             mpId: mpId, // 关联的小程序id
-            id: Date.now(), // 页面id
+            id: pageId, // 页面id
             name: page.name,
             label: page.label,
             description: page.description,
@@ -31,9 +24,27 @@ class UserService extends Service {
                 "backgroundTextStyle": "light"
             },
             bundleList: [],
-            instanceList: [{ "title": `${page.label}`, "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }]
-
         });
+        if (page.structure == "static") {
+            pageInstanceMap[pageId] =
+                [{ "title": `${page.label}`, "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0" } }];
+        }
+
+    }
+
+    async getPageDetail(pageId) {
+        let page = Pages.find(page => {
+            return page.id == pageId;
+        })
+        return page;
+    }
+
+    async getPageStructure(pageId) {
+        let page = Pages.find(page => {
+            return page.id == pageId;
+        })
+        page.instanceList = pageInstanceMap[page.id];
+        return page;
     }
 }
 
@@ -55,7 +66,6 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: [{ "title": "商品详情", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>商品信息</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
     },
     {
         mpId: 1, // 关联的小程序id
@@ -94,7 +104,6 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: [{ "title": "下单", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>下单</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
     }, {
         mpId: 1, // 关联的小程序id
         id: 4, // 页面id
@@ -109,5 +118,11 @@ const Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        instanceList: [{ "title": "购物车", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>购物车</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
     }];
+
+let pageInstanceMap = {
+    1: [{ "title": "商品详情", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>商品信息</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }],
+    3: [{ "title": "下单", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>下单</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }],
+    4: [{ "title": "购物车", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>购物车</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
+
+}

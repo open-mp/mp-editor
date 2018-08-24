@@ -29,15 +29,14 @@ const columns = [{
         // 静态结构页
         if (page.structure == 'static') {
             return (<div>
-                <Button type="primary" outline>页面设置</Button>
+                <a href={`/mp/page-detail?pageId=${page.id}`}><Button type="primary" outline>页面设置</Button></a>
                 <a href={`/editor/mp?pageId=${page.id}&structure=static`}>
                     <Button type="primary" outline>编辑</Button>
                 </a>
             </div>)
         } else {
             return (<div>
-                <Button type="primary" outline>页面设置</Button>
-                <Button type="primary" outline>编辑页面组件</Button>
+                <a href={`/mp/page-detail?pageId=${page.id}`}><Button type="primary" outline>页面设置</Button></a>
                 <a href={`/mp/content-list?pageId=${page.id}`}><Button type="primary" outline>内容列表</Button></a>
             </div>)
         }

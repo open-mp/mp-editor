@@ -18,6 +18,10 @@ class UserController extends Controller {
         await this.ctx.render('mp/page-list.html', {});
     }
 
+    async pageDetailHtml() {
+        await this.ctx.render('mp/page-detail.html', {});
+    }
+
     async contentListHtml() {
         await this.ctx.render('mp/content-list.html', {});
     }
@@ -60,6 +64,16 @@ class UserController extends Controller {
         };
     }
 
+    async createPage() {
+        let {mpId} = this.ctx.query;
+        let page = this.ctx.request.body;
+        await this.service.mp.page.createPage(mpId, page);
+        this.ctx.body = {
+            code: 0,
+            data: {}
+        };
+    }
+
     async getPageDetail() {
         let { pageId } = this.ctx.query;
         let page = await this.service.mp.page.getPageDetail(pageId);
@@ -69,13 +83,12 @@ class UserController extends Controller {
         };
     }
 
-    async createPage() {
-        let {mpId} = this.ctx.query;
-        let page = this.ctx.request.body;
-        await this.service.mp.page.createPage(mpId, page);
+    async  getPageStructure() {
+        let { pageId } = this.ctx.query;
+        let page = await this.service.mp.page.getPageStructure(pageId);
         this.ctx.body = {
             code: 0,
-            data: {}
+            data: page
         };
     }
 

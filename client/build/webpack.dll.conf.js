@@ -6,6 +6,7 @@ const chalk = require("chalk");
 
 module.exports = function (config) {
   let webpackConfig = {
+    mode: "development", 
     // JS 执行入口文件
     entry: config.dll,
     output: {
@@ -26,7 +27,6 @@ module.exports = function (config) {
         }
       ]
     },
-    mode: "development", 
     plugins: [
       // 接入 DllPlugin
       new DllPlugin({
@@ -45,7 +45,8 @@ module.exports = function (config) {
         filename: 'css/[name].css',
         chunkFilename:'css/[id].css',
       })
-    ]
+    ],
+    devtool: "none",
   };
   return webpackConfig;
 };

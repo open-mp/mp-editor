@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/pages/mp/content-list/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/pages/mp/page-detail/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1344,10 +1344,10 @@ exports.default = BasicLayout;
 
 /***/ }),
 
-/***/ "./src/pages/mp/content-list/App.jsx":
-/*!*******************************************!*\
-  !*** ./src/pages/mp/content-list/App.jsx ***!
-  \*******************************************/
+/***/ "./src/pages/mp/page-detail/App.jsx":
+/*!******************************************!*\
+  !*** ./src/pages/mp/page-detail/App.jsx ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1384,42 +1384,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var columns = [{
-    title: '动态页名字',
-    name: 'name',
-    width: '200px'
-}, {
-    title: '描述',
-    name: 'description'
-}, {
-    title: '最后修改时间',
-    name: 'lastModified',
-    width: '100px'
-}, {
-    title: '操作',
-    width: '200px',
-    bodyRender: function bodyRender(data) {
-        return _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-                _zent.Button,
-                { type: 'primary', outline: true },
-                '\u9875\u9762\u8BBE\u7F6E'
-            ),
-            _react2.default.createElement(
-                'a',
-                { href: '/editor/mp?pageId=' + data.pageId + '&contentId=' + data.id + '&structure=dynamic' },
-                _react2.default.createElement(
-                    _zent.Button,
-                    { type: 'primary', outline: true },
-                    '\u7F16\u8F91'
-                )
-            )
-        );
-    }
-}];
-
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
@@ -1430,29 +1394,26 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            mpList: []
+            page: {}
         };
-        _this.loadMpList();
+        _this.loadPage();
         return _this;
     }
 
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            var mpList = this.state.mpList;
-
-            return _react2.default.createElement(_zent.Table, {
-                columns: columns,
-                pageInfo: null,
-                datasets: mpList,
-                rowKey: 'id'
-            });
+            return _react2.default.createElement(
+                'div',
+                null,
+                '\u8BE6\u60C5'
+            );
         }
     }, {
-        key: 'loadMpList',
+        key: 'loadPage',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var _getQuery, pageId, mpList;
+                var _getQuery, pageId, page;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
@@ -1460,12 +1421,12 @@ var App = function (_React$Component) {
                             case 0:
                                 _getQuery = (0, _url.getQuery)(), pageId = _getQuery.pageId;
                                 _context.next = 3;
-                                return mpApi.getDynamicPageContentList(pageId);
+                                return mpApi.getMpPageDetail(pageId);
 
                             case 3:
-                                mpList = _context.sent;
+                                page = _context.sent;
 
-                                this.setState({ mpList: mpList });
+                                this.setState({ page: page });
 
                             case 5:
                             case 'end':
@@ -1475,11 +1436,11 @@ var App = function (_React$Component) {
                 }, _callee, this);
             }));
 
-            function loadMpList() {
+            function loadPage() {
                 return _ref.apply(this, arguments);
             }
 
-            return loadMpList;
+            return loadPage;
         }()
     }]);
 
@@ -1490,10 +1451,10 @@ exports.default = App;
 
 /***/ }),
 
-/***/ "./src/pages/mp/content-list/main.js":
-/*!*******************************************!*\
-  !*** ./src/pages/mp/content-list/main.js ***!
-  \*******************************************/
+/***/ "./src/pages/mp/page-detail/main.js":
+/*!******************************************!*\
+  !*** ./src/pages/mp/page-detail/main.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1514,11 +1475,11 @@ var _BasicLayout = __webpack_require__(/*! ../../../common/layouts/BasicLayout.j
 
 var _BasicLayout2 = _interopRequireDefault(_BasicLayout);
 
-var _App = __webpack_require__(/*! ./App.jsx */ "./src/pages/mp/content-list/App.jsx");
+var _App = __webpack_require__(/*! ./App.jsx */ "./src/pages/mp/page-detail/App.jsx");
 
 var _App2 = _interopRequireDefault(_App);
 
-__webpack_require__(/*! ./main.pcss */ "./src/pages/mp/content-list/main.pcss");
+__webpack_require__(/*! ./main.pcss */ "./src/pages/mp/page-detail/main.pcss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1530,10 +1491,10 @@ _reactDom2.default.render(_react2.default.createElement(
 
 /***/ }),
 
-/***/ "./src/pages/mp/content-list/main.pcss":
-/*!*********************************************!*\
-  !*** ./src/pages/mp/content-list/main.pcss ***!
-  \*********************************************/
+/***/ "./src/pages/mp/page-detail/main.pcss":
+/*!********************************************!*\
+  !*** ./src/pages/mp/page-detail/main.pcss ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

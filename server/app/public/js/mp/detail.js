@@ -951,7 +951,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getPageDetail = exports.getDynamicPageContentList = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
+exports.getContentDetail = exports.getDynamicPageContentList = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1061,7 +1061,7 @@ var getMpPageList = exports.getMpPageList = function () {
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+var getMpPageStructure = exports.getMpPageStructure = function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
@@ -1069,7 +1069,7 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
                 switch (_context5.prev = _context5.next) {
                     case 0:
                         _context5.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-structure', { pageId: pageId });
 
                     case 2:
                         result = _context5.sent;
@@ -1083,12 +1083,12 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee5, this);
     }));
 
-    return function getDynamicPageContentList(_x5) {
+    return function getMpPageStructure(_x5) {
         return _ref5.apply(this, arguments);
     };
 }();
 
-var getPageDetail = exports.getPageDetail = function () {
+var getMpPageDetail = exports.getMpPageDetail = function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
@@ -1110,20 +1110,20 @@ var getPageDetail = exports.getPageDetail = function () {
         }, _callee6, this);
     }));
 
-    return function getPageDetail(_x6) {
+    return function getMpPageDetail(_x6) {
         return _ref6.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(contentId) {
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
                 switch (_context7.prev = _context7.next) {
                     case 0:
                         _context7.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
 
                     case 2:
                         result = _context7.sent;
@@ -1137,8 +1137,35 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee7, this);
     }));
 
-    return function getContentDetail(_x7) {
+    return function getDynamicPageContentList(_x7) {
         return _ref7.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+            while (1) {
+                switch (_context8.prev = _context8.next) {
+                    case 0:
+                        _context8.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context8.sent;
+                        return _context8.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context8.stop();
+                }
+            }
+        }, _callee8, this);
+    }));
+
+    return function getContentDetail(_x8) {
+        return _ref8.apply(this, arguments);
     };
 }();
 
@@ -1478,4 +1505,3 @@ module.exports = _dll_base;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=detail.js.map

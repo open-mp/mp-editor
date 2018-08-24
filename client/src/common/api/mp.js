@@ -20,13 +20,19 @@ export async function getMpPageList(mpId) {
     return result;
 }
 
-export async function getDynamicPageContentList(pageId) {
-    let result = await api.get('/mp/get-mp-dynamicpage-content-list', {pageId});
+export async function getMpPageStructure(pageId) {
+    let result = await api.get('/mp/get-mp-page-structure', {pageId});
     return result;
 }
 
-export async function getPageDetail(pageId) {
+export async function getMpPageDetail(pageId) {
     let result = await api.get('/mp/get-mp-page-detail', {pageId});
+    return result;
+}
+
+
+export async function getDynamicPageContentList(pageId) {
+    let result = await api.get('/mp/get-mp-dynamicpage-content-list', {pageId});
     return result;
 }
 
