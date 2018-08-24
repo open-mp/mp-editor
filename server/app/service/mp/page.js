@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const _ = require('lodash')
 class UserService extends Service {
     async getMpPageList(mpId) {
         let mpPageList = Pages.filter(page => {
@@ -19,7 +20,7 @@ class UserService extends Service {
             config: {
                 "navigationBarBackgroundColor": "#ffffff",
                 "navigationBarTextStyle": "black",
-                "navigationBarTitleText": page.label,
+                "navigationBarTitleText": page.name,
                 "backgroundColor": "#eeeeee",
                 "backgroundTextStyle": "light"
             },
@@ -38,6 +39,13 @@ class UserService extends Service {
         })
         return page;
     }
+    async savePageDetail(page) {
+        let newPages = Pages.map(v=>{
+            if (v.id != page.id) return v;
+            return _.merge(v, page);
+        })
+        Pages = newPages;
+    }
 
     async getPageStructure(pageId) {
         let page = Pages.find(page => {
@@ -51,7 +59,7 @@ class UserService extends Service {
 module.exports = UserService;
 
 // 页面
-const Pages = [
+let Pages = [
     {
         mpId: 1, // 关联的小程序id
         id: 1, // 页面id

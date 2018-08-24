@@ -13,6 +13,7 @@ class UserService extends Service {
            if (v.id != mpId) return v;
            return _.merge(v, mp);
        })
+       MPList = newList;
     }
 }
 

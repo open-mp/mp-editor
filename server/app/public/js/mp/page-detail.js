@@ -951,7 +951,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getDynamicPageContentList = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
+exports.getContentDetail = exports.getDynamicPageContentList = exports.saveMpPageDetail = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1115,15 +1115,15 @@ var getMpPageDetail = exports.getMpPageDetail = function () {
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(pageId) {
+var saveMpPageDetail = exports.saveMpPageDetail = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(page) {
         var result;
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
                 switch (_context7.prev = _context7.next) {
                     case 0:
                         _context7.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.post('/mp/save-mp-page-detail', {}, page);
 
                     case 2:
                         result = _context7.sent;
@@ -1137,20 +1137,20 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee7, this);
     }));
 
-    return function getDynamicPageContentList(_x7) {
+    return function saveMpPageDetail(_x7) {
         return _ref7.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(contentId) {
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
             while (1) {
                 switch (_context8.prev = _context8.next) {
                     case 0:
                         _context8.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
 
                     case 2:
                         result = _context8.sent;
@@ -1164,8 +1164,35 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee8, this);
     }));
 
-    return function getContentDetail(_x8) {
+    return function getDynamicPageContentList(_x8) {
         return _ref8.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+            while (1) {
+                switch (_context9.prev = _context9.next) {
+                    case 0:
+                        _context9.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context9.sent;
+                        return _context9.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context9.stop();
+                }
+            }
+        }, _callee9, this);
+    }));
+
+    return function getContentDetail(_x9) {
+        return _ref9.apply(this, arguments);
     };
 }();
 
@@ -1384,18 +1411,81 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Row = _zent.Layout.Row,
+    Col = _zent.Layout.Col;
+
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
     function App(props) {
+        var _this2 = this;
+
         _classCallCheck(this, App);
 
         // 加载小程序
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            page: {}
+            loaded: false,
+            page: {
+                config: {}
+            }
         };
+
+        _this.handleChange = function (evt) {
+            var target = evt.target;
+            var name = target.name,
+                type = target.type,
+                value = target.value;
+            var page = _this.state.page;
+
+            if (name.indexOf('.') > -1) {
+                var parts = name.split('.');
+                page[parts[0]][parts[1]] = value;
+            } else {
+                page[name] = value;
+            }
+            _this.setState({
+                page: page
+            });
+        };
+
+        _this.colorChange = function (name) {
+            return function (value) {
+                var page = _this.state.page;
+
+                if (name.indexOf('.') > -1) {
+                    var parts = name.split('.');
+                    page[parts[0]][parts[1]] = value;
+                } else {
+                    page[name] = value;
+                }
+                _this.setState({
+                    page: page
+                });
+            };
+        };
+
+        _this.savePage = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var page;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            page = _this.state.page;
+                            _context.next = 3;
+                            return mpApi.saveMpPageDetail(page);
+
+                        case 3:
+                            _zent.Notify.success('保存成功');
+
+                        case 4:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, _this2);
+        }));
         _this.loadPage();
         return _this;
     }
@@ -1403,41 +1493,229 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            var _state = this.state,
+                page = _state.page,
+                loaded = _state.loaded;
+
+            if (!loaded) return null;
             return _react2.default.createElement(
                 'div',
-                null,
-                '\u8BE6\u60C5'
+                { className: 'mp-papge-detail' },
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        'Label'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(_zent.Input, { placeholder: '\u8BF7\u8F93\u5165Label',
+                            value: page.label,
+                            name: 'label',
+                            onChange: this.handleChange })
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u9875\u9762\u540D\u5B57'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(_zent.Input, { placeholder: '\u9875\u9762\u540D\u5B57',
+                            name: 'name',
+                            value: page.name, onChange: this.handleChange })
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        'description'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(_zent.Input, { placeholder: 'description',
+                            name: 'description',
+                            value: page.description, onChange: this.handleChange })
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u5BFC\u822A\u680F\u6587\u5B57'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(_zent.Input, {
+                            placeholder: '\u5BFC\u822A\u680F\u6587\u5B57',
+                            name: 'config.navigationBarTitleText',
+                            value: page.config.navigationBarTitleText, onChange: this.handleChange })
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u5BFC\u822A\u680F\u989C\u8272'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(_zent.ColorPicker, { color: page.config.navigationBarBackgroundColor, onChange: this.colorChange('config.navigationBarBackgroundColor') })
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u5BFC\u822A\u680F\u80CC\u666F\u8272'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(
+                            _zent.Select,
+                            { value: page.config.navigationBarTextStyle, onChange: this.handleChange, name: 'config.navigationBarBackgroundColor' },
+                            _react2.default.createElement(
+                                Option,
+                                { value: 'black' },
+                                '\u9ED1\u8272'
+                            ),
+                            _react2.default.createElement(
+                                Option,
+                                { value: 'white' },
+                                '\u767D\u8272'
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u9875\u9762\u80CC\u666F\u8272'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(_zent.ColorPicker, { color: page.config.backgroundColor, onChange: this.colorChange('config.backgroundColor') })
+                    )
+                ),
+                _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u4E0B\u62C9\u6587\u5B57\u989C\u8272'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(
+                            _zent.Select,
+                            { value: page.config.backgroundTextStyle, onChange: this.handleChange, name: 'config.backgroundTextStyle' },
+                            _react2.default.createElement(
+                                Option,
+                                { value: 'dark' },
+                                '\u9ED1\u8272'
+                            ),
+                            _react2.default.createElement(
+                                Option,
+                                { value: 'light' },
+                                '\u767D\u8272'
+                            )
+                        )
+                    )
+                ),
+                page.structure == 'dynamic' && _react2.default.createElement(
+                    Row,
+                    null,
+                    _react2.default.createElement(
+                        Col,
+                        { span: 4 },
+                        '\u52A8\u6001\u7EC4\u4EF6(\u591A\u9009)'
+                    ),
+                    _react2.default.createElement(
+                        Col,
+                        { span: 8 },
+                        _react2.default.createElement(
+                            _zent.Select,
+                            null,
+                            _react2.default.createElement(
+                                Option,
+                                { value: 'black' },
+                                '\u9ED1\u8272'
+                            ),
+                            _react2.default.createElement(
+                                Option,
+                                { value: 'white' },
+                                '\u767D\u8272'
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', outline: true, onClick: this.savePage },
+                        '\u4FDD\u5B58'
+                    )
+                )
             );
         }
     }, {
         key: 'loadPage',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
                 var _getQuery, pageId, page;
 
-                return regeneratorRuntime.wrap(function _callee$(_context) {
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
-                        switch (_context.prev = _context.next) {
+                        switch (_context2.prev = _context2.next) {
                             case 0:
                                 _getQuery = (0, _url.getQuery)(), pageId = _getQuery.pageId;
-                                _context.next = 3;
+                                _context2.next = 3;
                                 return mpApi.getMpPageDetail(pageId);
 
                             case 3:
-                                page = _context.sent;
+                                page = _context2.sent;
 
-                                this.setState({ page: page });
+                                this.setState({ page: page, loaded: true });
 
                             case 5:
                             case 'end':
-                                return _context.stop();
+                                return _context2.stop();
                         }
                     }
-                }, _callee, this);
+                }, _callee2, this);
             }));
 
             function loadPage() {
-                return _ref.apply(this, arguments);
+                return _ref2.apply(this, arguments);
             }
 
             return loadPage;

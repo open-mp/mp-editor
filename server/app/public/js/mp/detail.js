@@ -951,7 +951,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getDynamicPageContentList = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
+exports.getContentDetail = exports.getDynamicPageContentList = exports.saveMpPageDetail = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1115,15 +1115,15 @@ var getMpPageDetail = exports.getMpPageDetail = function () {
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(pageId) {
+var saveMpPageDetail = exports.saveMpPageDetail = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(page) {
         var result;
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
                 switch (_context7.prev = _context7.next) {
                     case 0:
                         _context7.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.post('/mp/save-mp-page-detail', {}, page);
 
                     case 2:
                         result = _context7.sent;
@@ -1137,20 +1137,20 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee7, this);
     }));
 
-    return function getDynamicPageContentList(_x7) {
+    return function saveMpPageDetail(_x7) {
         return _ref7.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(contentId) {
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
             while (1) {
                 switch (_context8.prev = _context8.next) {
                     case 0:
                         _context8.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
 
                     case 2:
                         result = _context8.sent;
@@ -1164,8 +1164,35 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee8, this);
     }));
 
-    return function getContentDetail(_x8) {
+    return function getDynamicPageContentList(_x8) {
         return _ref8.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+            while (1) {
+                switch (_context9.prev = _context9.next) {
+                    case 0:
+                        _context9.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context9.sent;
+                        return _context9.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context9.stop();
+                }
+            }
+        }, _callee9, this);
+    }));
+
+    return function getContentDetail(_x9) {
+        return _ref9.apply(this, arguments);
     };
 }();
 

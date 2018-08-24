@@ -22,8 +22,9 @@ module.exports = app => {
 
     router.get('/mp/get-mp-page-list', controller.mp.getMpPageList);
     router.get('/mp/get-mp-page-detail', controller.mp.getPageDetail);
+    router.post('/mp/save-mp-page-detail', controller.mp.savePageDetail);
     router.get('/mp/get-mp-page-structure', controller.mp.getPageStructure);
-
+    
     router.get('/mp/get-mp-dynamicpage-content-list', controller.mp.getMpDynamicPageContentList);
     router.get('/mp/get-mp-content-detail', controller.mp.getContentDetail);
     

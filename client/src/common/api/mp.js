@@ -30,6 +30,11 @@ export async function getMpPageDetail(pageId) {
     return result;
 }
 
+export async function saveMpPageDetail(page) {
+    let result = await api.post('/mp/save-mp-page-detail', {}, page);
+    return result;
+}
+
 
 export async function getDynamicPageContentList(pageId) {
     let result = await api.get('/mp/get-mp-dynamicpage-content-list', {pageId});

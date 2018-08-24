@@ -37,3 +37,7 @@
   padding: 0;
 }
 
+.mp-papge-detail .zent-row {
+    height: 40px;
+    line-height: 40px;
+  }
