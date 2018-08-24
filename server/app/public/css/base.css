@@ -773,7 +773,7 @@ ul, ol {
   display: inline-block;
   height: 30px;
   line-height: 30px;
-  padding: 0 10px;
+  padding: 0 15px;
   border-radius: 2px;
   font-size: 12px;
   font-family: inherit;
@@ -818,15 +818,15 @@ ul, ol {
 }
 /* 大小相关 */
 .zent-btn-large {
-  height: 36px;
-  line-height: 34px;
-  padding: 0 30px;
+  height: 38px;
+  line-height: 36px;
+  padding: 0 23px;
   font-size: 14px;
 }
 .zent-btn-small {
   height: 26px;
   line-height: 24px;
-  padding: 0 5px;
+  padding: 0 7px;
 }
 .zent-btn-block {
   display: block;
@@ -1063,7 +1063,7 @@ ul, ol {
 }
 /* Icon */
 .zent-btn span + .zenticon, .zent-btn .zenticon + span {
-    margin-left: 6px;
+    margin-left: 8px;
   }
 /* Button Group */
 .zent-btn-group {
@@ -3080,11 +3080,11 @@ ul, ol {
 /* DO NOT EDIT!! Auto genetated. */
 @font-face {
   font-family: 'zenticon';
-  src: url('https://b.yzcdn.cn/zent/zenticon/zenticon-7109374654.eot');
-  src: url('https://b.yzcdn.cn/zent/zenticon/zenticon-7109374654.eot?#iefix') format('embedded-opentype'),
-      url('https://b.yzcdn.cn/zent/zenticon/zenticon-7109374654.woff2') format('woff2'),
-      url('https://b.yzcdn.cn/zent/zenticon/zenticon-7109374654.woff') format('woff'),
-      url('https://b.yzcdn.cn/zent/zenticon/zenticon-7109374654.ttf') format('truetype')
+  src: url('https://b.yzcdn.cn/zent/zenticon/zenticon-add85323ab.eot');
+  src: url('https://b.yzcdn.cn/zent/zenticon/zenticon-add85323ab.eot?#iefix') format('embedded-opentype'),
+      url('https://b.yzcdn.cn/zent/zenticon/zenticon-add85323ab.woff2') format('woff2'),
+      url('https://b.yzcdn.cn/zent/zenticon/zenticon-add85323ab.woff') format('woff'),
+      url('https://b.yzcdn.cn/zent/zenticon/zenticon-add85323ab.ttf') format('truetype')
 }
 .zenticon {
     display: inline-block;
@@ -3309,6 +3309,14 @@ ul, ol {
 /* '' */
 .zenticon-suggestions:before { content: '\E856'; }
 /* '' */
+.zenticon-video-guide:before { content: '\E857'; }
+/* '' */
+.zenticon-text-guide:before { content: '\E858'; }
+/* '' */
+.zenticon-hc-manage-o:before { content: '\E859'; }
+/* '' */
+.zenticon-hc-manage:before { content: '\E85A'; }
+/* '' */
 .zent-infinite-scroller-y {
     overflow-y: auto;
   }

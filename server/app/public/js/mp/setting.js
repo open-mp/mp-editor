@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(504);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))("./node_modules/axios/index.js");
 
 /***/ }),
 
@@ -104,7 +104,7 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(501);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))("./node_modules/query-string/index.js");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(21);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))("./node_modules/react-dom/index.js");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(0);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))("./node_modules/react/index.js");
 
 /***/ }),
 
@@ -869,7 +869,7 @@ module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-refere
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))(533);
+module.exports = (__webpack_require__(/*! dll-reference _dll_base */ "dll-reference _dll_base"))("./node_modules/zent/lib/index.js");
 
 /***/ }),
 
@@ -1538,6 +1538,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
+__webpack_require__(/*! ./tab-bar-config.pcss */ "./src/pages/mp/setting/components/tab-bar-config.pcss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1572,14 +1574,16 @@ var Basic = function (_React$Component) {
             checkedList: []
         };
 
-        _this.submit = function (values, zentForm) {
-            _this.props.saveMp({
-                tabBarButtons: values
+        _this.addTabBarBtn = function () {
+            _this.props.fields.push({
+                "pageId": 1,
+                "pageName": "",
+                "pageStructure": "static",
+                "contentId": "",
+                "iconUrl": "",
+                "selectedIconUrl": "",
+                "text": "新增按钮 " + _this.props.fields.length
             });
-        };
-
-        _this.resetForm = function () {
-            _this.props.zentForm.resetFieldsValue();
         };
 
         return _this;
@@ -1590,19 +1594,98 @@ var Basic = function (_React$Component) {
         value: function render() {
             var fields = this.props.fields;
 
+
             return _react2.default.createElement(
-                'ul',
+                'div',
                 null,
-                fields.map(function (member, index, key) {
-                    return _react2.default.createElement(FormInputField, {
-                        name: 'text',
-                        type: 'text',
-                        label: '\u5C0F\u7A0B\u5E8F\u540D\u5B57:',
-                        required: true,
-                        spellCheck: false,
-                        validations: { required: true },
-                        validationErrors: { required: '请填写小程序名字' }
-                    });
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        _zent.Button,
+                        { type: 'primary', outline: true, onClick: this.addTabBarBtn },
+                        '\u589E\u52A0\u4E00\u4E2ATabBarButton'
+                    )
+                ),
+                fields.map(function (name, index, key, item, fieldsValue) {
+                    return _react2.default.createElement(
+                        'div',
+                        { className: 'tab-bar-container', key: 'tabBar' + key },
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'tab-bar-title' },
+                            ' TabBarButton ',
+                            index + 1,
+                            ' '
+                        ),
+                        _react2.default.createElement(
+                            _zent.Pop,
+                            { centerArrow: true, trigger: 'hover', content: '\u5220\u9664\u8BE5\u6210\u5458' },
+                            _react2.default.createElement(_zent.Icon, {
+                                className: 'del-btn',
+                                type: 'close-circle',
+                                onClick: function onClick() {
+                                    return fields.remove(index);
+                                }
+                            })
+                        ),
+                        _react2.default.createElement(
+                            FormSection,
+                            { name: name },
+                            _react2.default.createElement(FormInputField, {
+                                name: 'text',
+                                type: 'text',
+                                label: 'Tab\u540D\u5B57:',
+                                required: true,
+                                spellCheck: false,
+                                validations: { required: true },
+                                validationErrors: { required: '请填写Tab名字' }
+                            }),
+                            _react2.default.createElement(FormInputField, {
+                                name: 'iconUrl',
+                                type: 'text',
+                                label: '\u9ED8\u8BA4\u56FE\u6807:',
+                                spellCheck: false,
+                                validationErrors: { required: '默认图标' },
+                                value: window.navigationBarTitleText
+                            }),
+                            _react2.default.createElement(FormInputField, {
+                                name: 'selectedIconUrl',
+                                type: 'text',
+                                label: '\u9009\u4E2D\u56FE\u6807:',
+                                spellCheck: false,
+                                validationErrors: { required: '选中图标' },
+                                value: window.navigationBarTitleText
+                            }),
+                            _react2.default.createElement(FormSelectField, {
+                                name: 'pageStructure',
+                                label: '\u9875\u9762\u7C7B\u578B:',
+                                data: [{ value: 'dynamic', text: '动态' }, { value: 'static', text: '静态' }],
+                                required: true,
+                                validations: { required: true },
+                                validationErrors: { required: '页面类型' },
+                                value: window.navigationBarTextStyle
+                            }),
+                            _react2.default.createElement(FormSelectField, {
+                                name: 'pageStructure',
+                                label: '\u8DF3\u8F6C\u7684\u9759\u6001\u9875:',
+                                data: [{ value: 1, text: '我的' }, { value: 2, text: '爆品' }],
+                                required: true,
+                                validations: { required: true },
+                                validationErrors: { required: '跳转的静态页' },
+                                value: window.navigationBarTextStyle
+                            }),
+                            _react2.default.createElement(FormSelectField, {
+                                name: 'pageStructure',
+                                label: '\u8DF3\u8F6C\u7684\u52A8\u6001\u9875:',
+                                data: [{ value: 1, text: '国庆活动' }, { value: 2, text: '中秋活动' }],
+                                required: true,
+                                validations: { required: true },
+                                validationErrors: { required: '跳转的动态页' },
+                                value: window.navigationBarTextStyle
+                            })
+                        )
+                    );
                 })
             );
         }
@@ -1611,7 +1694,18 @@ var Basic = function (_React$Component) {
     return Basic;
 }(_react2.default.Component);
 
-exports.default = createForm()(Basic);
+exports.default = Basic;
+
+/***/ }),
+
+/***/ "./src/pages/mp/setting/components/tab-bar-config.pcss":
+/*!*************************************************************!*\
+  !*** ./src/pages/mp/setting/components/tab-bar-config.pcss ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -1859,10 +1953,7 @@ var Basic = function (_React$Component) {
         };
 
         _this.submit = function (values, zentForm) {
-            console.log(values);
-            // this.props.saveMp({
-            //     tabBarButtons: values
-            // })
+            _this.props.saveMp(values);
         };
 
         _this.resetForm = function () {
@@ -1883,25 +1974,13 @@ var Basic = function (_React$Component) {
                 _mp$tabBarButtons = mp.tabBarButtons,
                 tabBarButtons = _mp$tabBarButtons === undefined ? [] : _mp$tabBarButtons;
 
-
             return _react2.default.createElement(
                 _zent.Form,
                 { horizontal: true, onSubmit: handleSubmit(this.submit) },
-                _react2.default.createElement(FormInputField, {
-                    name: 'name',
-                    type: 'text',
-                    label: _react2.default.createElement(
-                        'span',
-                        null,
-                        '\u7528\u6237\u540D\xA0'
-                    ),
-                    helpDesc: '\u7528\u6237\u540D\u4E3A5-25\u4E2A\u5B57\u7B26',
-                    required: true
-                }),
                 _react2.default.createElement(FieldArray, {
                     name: 'tabBarButtons',
-                    value: tabBarButtons,
-                    component: _TabBarConfig2.default
+                    component: _TabBarConfig2.default,
+                    value: tabBarButtons
                 }),
                 _react2.default.createElement(
                     'div',
@@ -1910,11 +1989,6 @@ var Basic = function (_React$Component) {
                         _zent.Button,
                         { type: 'primary', htmlType: 'submit' },
                         '\u4FDD\u5B58'
-                    ),
-                    _react2.default.createElement(
-                        _zent.Button,
-                        { type: 'primary', outline: true, onClick: this.resetForm },
-                        '\u589E\u52A0\u4E00\u4E2ATabBarButton'
                     )
                 )
             );
@@ -2079,3 +2153,4 @@ module.exports = _dll_base;
 /***/ })
 
 /******/ });
+//# sourceMappingURL=setting.js.map

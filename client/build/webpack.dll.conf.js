@@ -26,6 +26,7 @@ module.exports = function (config) {
         }
       ]
     },
+    mode: "development", 
     plugins: [
       // 接入 DllPlugin
       new DllPlugin({

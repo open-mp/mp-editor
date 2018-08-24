@@ -14,6 +14,6 @@ module.exports = function (config) {
     module:  getModule(config),
     resolve: getResolve(config),
     plugins: getPlugin(config),
-    devtool: "none"
+    devtool: "sourcemap",
   };
 };

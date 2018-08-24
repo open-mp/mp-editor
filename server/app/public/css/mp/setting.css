@@ -33,7 +33,24 @@
     padding: 10px;
   }
 
+.tab-bar-container{
+    border: 1px dashed #ccc;
+    margin: 20px 0;
+    padding: 10px 0;
+    width: 600px;
+    position: relative;
+}
+
+    .tab-bar-container .del-btn {
+        color: #666;
+        cursor: pointer;
+        position: absolute;
+        right: -8px;
+        top: -8px;
+    }
 * {
   padding: 0;
 }
 
+
+/*# sourceMappingURL=setting.css.map*/
