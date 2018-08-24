@@ -69,10 +69,10 @@ class UserController extends Controller {
         };
     }
 
-    async savePageDetail() {
+    async createPage() {
         let {mpId} = this.ctx.query;
         let page = this.ctx.request.body;
-        await this.service.mp.page.savePageDetail(mpId, page);
+        await this.service.mp.page.createPage(mpId, page);
         this.ctx.body = {
             code: 0,
             data: {}

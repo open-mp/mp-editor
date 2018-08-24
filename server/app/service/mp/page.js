@@ -14,29 +14,26 @@ class UserService extends Service {
         return page;
     }
 
-    async savePageDetail(mpId, page) {
-        if (page.id) {
+    async createPage(mpId, page) {
 
-        } else {
-            Pages.push({
-                mpId: mpId, // 关联的小程序id
-                id: Date.now(), // 页面id
-                name: page.name,
-                label: page.label,
-                description: page.description,
-                structure: page.structure,
-                config: {
-                    "navigationBarBackgroundColor": "#ffffff",
-                    "navigationBarTextStyle": "black",
-                    "navigationBarTitleText": page.label,
-                    "backgroundColor": "#eeeeee",
-                    "backgroundTextStyle": "light"
-                },
-                bundleList: [],
-                instanceList: [{ "title": `${page.label}`, "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }]
+        Pages.push({
+            mpId: mpId, // 关联的小程序id
+            id: Date.now(), // 页面id
+            name: page.name,
+            label: page.label,
+            description: page.description,
+            structure: page.structure,
+            config: {
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black",
+                "navigationBarTitleText": page.label,
+                "backgroundColor": "#eeeeee",
+                "backgroundTextStyle": "light"
+            },
+            bundleList: [],
+            instanceList: [{ "title": `${page.label}`, "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }]
 
-            });
-        }
+        });
     }
 }
 
