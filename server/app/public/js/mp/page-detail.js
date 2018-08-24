@@ -1594,7 +1594,7 @@ var App = function (_React$Component) {
                         { span: 8 },
                         _react2.default.createElement(
                             _zent.Select,
-                            { value: page.config.navigationBarTextStyle, onChange: this.handleChange, name: 'config.navigationBarBackgroundColor' },
+                            { value: page.config.navigationBarTextStyle, onChange: this.handleChange, name: 'config.navigationBarTextStyle' },
                             _react2.default.createElement(
                                 Option,
                                 { value: 'black' },

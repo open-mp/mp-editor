@@ -1,5 +1,6 @@
 const Service = require('egg').Service;
 const _ = require('lodash')
+
 class UserService extends Service {
     async getMpPageList(mpId) {
         let mpPageList = Pages.filter(page => {
@@ -28,7 +29,12 @@ class UserService extends Service {
         });
         if (page.structure == "static") {
             pageInstanceMap[pageId] =
-                [{ "title": `${page.label}`, "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0" } }];
+                [{
+                    "title": `${page.label}`,
+                    "color": "",
+                    "description": "",
+                    "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0"}
+                }];
         }
 
     }
@@ -39,8 +45,9 @@ class UserService extends Service {
         })
         return page;
     }
+
     async savePageDetail(page) {
-        let newPages = Pages.map(v=>{
+        let newPages = Pages.map(v => {
             if (v.id != page.id) return v;
             return _.merge(v, page);
         })
@@ -129,8 +136,53 @@ let Pages = [
     }];
 
 let pageInstanceMap = {
-    1: [{ "title": "商品详情", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>商品信息</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }],
-    3: [{ "title": "下单", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>下单</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }],
-    4: [{ "title": "购物车", "color": "", "description": "", "bundleId": { "groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": "" } }, { "color": "#f9f9f9", "content": "<p>购物车</p>", "fullscreen": 0, "bundleId": { "groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": "" } }, { "color": "#e5e5e5", "hasPadding": false, "lineType": "solid", "bundleId": { "groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": "" } }]
+    1: [{
+        "title": "商品详情",
+        "color": "",
+        "description": "",
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": ""}
+    }, {
+        "color": "#f9f9f9",
+        "content": "<p>商品信息</p>",
+        "fullscreen": 0,
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": ""}
+    }, {
+        "color": "#e5e5e5",
+        "hasPadding": false,
+        "lineType": "solid",
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": ""}
+    }],
+    3: [{
+        "title": "下单",
+        "color": "",
+        "description": "",
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": ""}
+    }, {
+        "color": "#f9f9f9",
+        "content": "<p>下单</p>",
+        "fullscreen": 0,
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": ""}
+    }, {
+        "color": "#e5e5e5",
+        "hasPadding": false,
+        "lineType": "solid",
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": ""}
+    }],
+    4: [{
+        "title": "购物车",
+        "color": "",
+        "description": "",
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": ""}
+    }, {
+        "color": "#f9f9f9",
+        "content": "<p>购物车</p>",
+        "fullscreen": 0,
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": ""}
+    }, {
+        "color": "#e5e5e5",
+        "hasPadding": false,
+        "lineType": "solid",
+        "bundleId": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": ""}
+    }]
 
 }

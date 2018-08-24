@@ -85,7 +85,7 @@ class App extends React.Component {
             <Row>
                 <Col span={4}>导航栏背景色</Col>
                 <Col span={8}>
-                    <Select value={page.config.navigationBarTextStyle} onChange={this.handleChange}  name="config.navigationBarBackgroundColor">
+                    <Select value={page.config.navigationBarTextStyle} onChange={this.handleChange}  name="config.navigationBarTextStyle">
                         <Option value="black">黑色</Option>
                         <Option value="white">白色</Option>
                     </Select>

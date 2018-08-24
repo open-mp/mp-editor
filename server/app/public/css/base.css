@@ -3713,6 +3713,7 @@ ul, ol {
             transform: rotate(360deg);
   }
 }
+/* empty */
 .zent-menu {
   font-size: 12px;
   color: #666;
@@ -3849,7 +3850,6 @@ ul, ol {
 .zent-menu__inline-submenu-title:not(.zent-submenu-disabled).zent-menu__inline-submenu-title:hover .zenticon {
           color: #27f;
         }
-/* empty */
 .zent-notify-container {
   z-index: 10000;
   position: fixed;
@@ -4736,6 +4736,61 @@ ul, ol {
 .zent-search-input .zent-input-wrapper input {
     padding: 0 27px;
   }
+.zent-popup-menu {
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  left: 0;
+  outline: none;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  z-index: 2000;
+  margin-top: 2px;
+  background-color: #fff;
+  max-height: 224px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.zent-popup-menu .zent-popup-menu-item {
+    background-color: #fff;
+    display: block;
+    outline: none;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+  }
+.zent-popup-menu .zent-popup-menu-item.current, .zent-popup-menu .zent-popup-menu-item.hover, .zent-popup-menu .zent-popup-menu-item:hover {
+  background-color: #38f;
+  color: #fff;
+}
+.zent-popup-menu .zent-popup-menu-item.active {
+  color: #38f;
+}
+.zent-popup-menu .zent-popup-menu-item.active:hover, .zent-popup-menu .zent-popup-menu-item.active.hover, .zent-popup-menu .zent-popup-menu-item.active.current {
+  color: #fff;
+}
+.zent-popup-menu .zent-popup-menu-item.disabled {
+  color: #bbb;
+  cursor: not-allowed
+}
+.zent-popup-menu .zent-popup-menu-item.disabled:hover {
+  background: none;
+  color: #bbb;
+}
+.zent-menu-item-group-header {
+  font-size: 11px;
+  background: none;
+  color: #999;
+  cursor: default;
+  text-transform: uppercase;
+  padding: 5px 7px;
+  font-weight: bold;
+}
+.zent-divider-line {
+  border-top: 1px solid #e5e5e5;
+  margin: 6px 0;
+}
 .zent-select {
   cursor: pointer;
   display: inline-block;
@@ -4932,61 +4987,6 @@ ul, ol {
 .has-error :not(.no-error) > .zent-select-input, .has-error :not(.no-error) > .zent-select-text, .has-error :not(.no-error) > .zent-select-tags {
   border: 1px solid #f44;
   color: #f44;
-}
-.zent-popup-menu {
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  left: 0;
-  outline: none;
-  overflow-y: auto;
-  position: relative;
-  width: 100%;
-  z-index: 2000;
-  margin-top: 2px;
-  background-color: #fff;
-  max-height: 224px;
-  border-radius: 3px;
-  font-size: 12px;
-}
-.zent-popup-menu .zent-popup-menu-item {
-    background-color: #fff;
-    display: block;
-    outline: none;
-    padding: 5px 10px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap
-  }
-.zent-popup-menu .zent-popup-menu-item.current, .zent-popup-menu .zent-popup-menu-item.hover, .zent-popup-menu .zent-popup-menu-item:hover {
-  background-color: #38f;
-  color: #fff;
-}
-.zent-popup-menu .zent-popup-menu-item.active {
-  color: #38f;
-}
-.zent-popup-menu .zent-popup-menu-item.active:hover, .zent-popup-menu .zent-popup-menu-item.active.hover, .zent-popup-menu .zent-popup-menu-item.active.current {
-  color: #fff;
-}
-.zent-popup-menu .zent-popup-menu-item.disabled {
-  color: #bbb;
-  cursor: not-allowed
-}
-.zent-popup-menu .zent-popup-menu-item.disabled:hover {
-  background: none;
-  color: #bbb;
-}
-.zent-menu-item-group-header {
-  font-size: 11px;
-  background: none;
-  color: #999;
-  cursor: default;
-  text-transform: uppercase;
-  padding: 5px 7px;
-  font-weight: bold;
-}
-.zent-divider-line {
-  border-top: 1px solid #e5e5e5;
-  margin: 6px 0;
 }
 .zent-sku {
   background-color: #fff;

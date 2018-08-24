@@ -42,6 +42,6 @@
     "requirejs": "^2.3.5",
     "tinycolor2": "^1.4.1",
     "zan-utils": "^1.2.8",
-    "zent": "^6.1.0"
+    "zent": "^6.2.0"
   }
 }
