@@ -110,15 +110,7 @@ let Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
-        bundleList: [{
-            "id": 1,
-            "bundleId": {
-                "groupId": "",
-                "artifactId": "",
-                "version": "",
-                "classifier": ""
-            }
-        }]
+        bundleList: [1,2,3,4,5,6]
     }, {
         mpId: 1, // 关联的小程序id
         id: 3, // 页面id

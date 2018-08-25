@@ -938,6 +938,62 @@ function post(url) {
 
 /***/ }),
 
+/***/ "./src/common/api/bundle.js":
+/*!**********************************!*\
+  !*** ./src/common/api/bundle.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.queryBundle = undefined;
+
+var queryBundle = exports.queryBundle = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref2) {
+        var pageId = _ref2.pageId,
+            pageSize = _ref2.pageSize,
+            pageNo = _ref2.pageNo,
+            key = _ref2.key;
+        var result;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.next = 2;
+                        return api.get('/bundle/query-bundle', { pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: key });
+
+                    case 2:
+                        result = _context.sent;
+                        return _context.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function queryBundle(_x) {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+var _api = __webpack_require__(/*! ./api */ "./src/common/api/api.js");
+
+var api = _interopRequireWildcard(_api);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+/***/ }),
+
 /***/ "./src/common/api/mp.js":
 /*!******************************!*\
   !*** ./src/common/api/mp.js ***!
@@ -1449,6 +1505,10 @@ var _mp = __webpack_require__(/*! src/common/api/mp */ "./src/common/api/mp.js")
 
 var mpApi = _interopRequireWildcard(_mp);
 
+var _bundle = __webpack_require__(/*! src/common/api/bundle */ "./src/common/api/bundle.js");
+
+var bundleApi = _interopRequireWildcard(_bundle);
+
 var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
 var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
@@ -1483,7 +1543,8 @@ var App = function (_React$Component) {
             loaded: false,
             page: {
                 config: {}
-            }
+            },
+            bundleList: []
         };
 
         _this.handleChange = function (evt) {
@@ -1541,6 +1602,7 @@ var App = function (_React$Component) {
             }, _callee, _this2);
         }));
         _this.loadPage();
+        _this.loadBundleList();
         return _this;
     }
 
@@ -1549,7 +1611,8 @@ var App = function (_React$Component) {
         value: function render() {
             var _state = this.state,
                 page = _state.page,
-                loaded = _state.loaded;
+                loaded = _state.loaded,
+                bundleList = _state.bundleList;
 
             if (!loaded) return null;
             return _react2.default.createElement(
@@ -1632,7 +1695,8 @@ var App = function (_React$Component) {
                     _react2.default.createElement(
                         Col,
                         { span: 8 },
-                        _react2.default.createElement(_zent.ColorPicker, { color: page.config.navigationBarBackgroundColor, onChange: this.colorChange('config.navigationBarBackgroundColor') })
+                        _react2.default.createElement(_zent.ColorPicker, { color: page.config.navigationBarBackgroundColor,
+                            onChange: this.colorChange('config.navigationBarBackgroundColor') })
                     )
                 ),
                 _react2.default.createElement(
@@ -1648,7 +1712,8 @@ var App = function (_React$Component) {
                         { span: 8 },
                         _react2.default.createElement(
                             _zent.Select,
-                            { value: page.config.navigationBarTextStyle, onChange: this.handleChange, name: 'config.navigationBarTextStyle' },
+                            { value: page.config.navigationBarTextStyle, onChange: this.handleChange,
+                                name: 'config.navigationBarTextStyle' },
                             _react2.default.createElement(
                                 Option,
                                 { value: 'black' },
@@ -1673,7 +1738,8 @@ var App = function (_React$Component) {
                     _react2.default.createElement(
                         Col,
                         { span: 8 },
-                        _react2.default.createElement(_zent.ColorPicker, { color: page.config.backgroundColor, onChange: this.colorChange('config.backgroundColor') })
+                        _react2.default.createElement(_zent.ColorPicker, { color: page.config.backgroundColor,
+                            onChange: this.colorChange('config.backgroundColor') })
                     )
                 ),
                 _react2.default.createElement(
@@ -1689,7 +1755,8 @@ var App = function (_React$Component) {
                         { span: 8 },
                         _react2.default.createElement(
                             _zent.Select,
-                            { value: page.config.backgroundTextStyle, onChange: this.handleChange, name: 'config.backgroundTextStyle' },
+                            { value: page.config.backgroundTextStyle, onChange: this.handleChange,
+                                name: 'config.backgroundTextStyle' },
                             _react2.default.createElement(
                                 Option,
                                 { value: 'dark' },
@@ -1714,20 +1781,13 @@ var App = function (_React$Component) {
                     _react2.default.createElement(
                         Col,
                         { span: 8 },
-                        _react2.default.createElement(
-                            _zent.Select,
-                            null,
-                            _react2.default.createElement(
-                                Option,
-                                { value: 'black' },
-                                '\u9ED1\u8272'
-                            ),
-                            _react2.default.createElement(
-                                Option,
-                                { value: 'white' },
-                                '\u767D\u8272'
-                            )
-                        )
+                        _react2.default.createElement(_zent.Select, {
+                            value: page.bundleList,
+                            data: bundleList,
+                            optionText: 'name',
+                            optionValue: 'id',
+                            tags: true
+                        })
                     )
                 ),
                 _react2.default.createElement(
@@ -1773,6 +1833,39 @@ var App = function (_React$Component) {
             }
 
             return loadPage;
+        }()
+    }, {
+        key: 'loadBundleList',
+        value: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                var bundleList;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return bundleApi.queryBundle({});
+
+                            case 2:
+                                bundleList = _context3.sent;
+
+                                this.setState({
+                                    bundleList: bundleList
+                                });
+
+                            case 4:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function loadBundleList() {
+                return _ref3.apply(this, arguments);
+            }
+
+            return loadBundleList;
         }()
     }]);
 

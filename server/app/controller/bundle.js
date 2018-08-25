@@ -84,77 +84,12 @@ class BundleController extends Controller {
     }
 
     async queryBundleList() {
+
         let {pageId, key, pageSize = 10, pageNo = 1} = this.ctx.query;
+        let bundleList = await this.service.bundle.bundle.getBundleList();
         this.ctx.body = {
             code: 0,
-            data: {
-                total: 4,
-                list: [
-                    {
-                        name: '页面配置',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'config',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    },
-                    {
-                        name: '图片广告',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'image-ad',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    },
-                    {
-                        name: '富文本',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'richtext',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    },
-                    {
-                        name: '分隔符',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'line',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    },
-                    {
-                        name: '空白行',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'whitespace',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    },
-                    {
-                        name: '商品详情',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'goods-detail',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    },
-                    {
-                        name: '商品动作',
-                        bundleId: {
-                            groupId: 'tsxuehu',
-                            artifactId: 'goods-action',
-                            version: '1.0.0',
-                            classifier: ''
-                        }
-                    }
-                ]
-            }
+            data: bundleList
         }
     }
 }
