@@ -237,6 +237,6 @@ export function getSafeSelectedValueIndex(index, value) {
     return Math.min(index, value.length - 1);
 }
 
-export function getBundleIdFromInstace(instance) {
-    return instance.bundleId;
+export function getCoordinateFromInstace(instance) {
+    return instance.coordinate;
 }

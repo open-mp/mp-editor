@@ -54,9 +54,9 @@ class MpEditorPluginLoader {
         })
     }
 
-    async loadPlugin(bundleId) {
+    async loadPlugin(coordinate) {
         let {pluginMap} = this;
-        let bundle = new Bundle(bundleId);
+        let bundle = new Bundle(coordinate);
         let bundleStringId = bundle.getStringId();
         // 检查是否存
         if (pluginMap[bundleStringId]) {
@@ -71,8 +71,8 @@ class MpEditorPluginLoader {
     }
 
     getPluginByInstance(instance) {
-        let bundleId = instance.bundleId;
-        let bundle = new Bundle(bundleId);
+        let coordinate = instance.coordinate;
+        let bundle = new Bundle(coordinate);
         return this.pluginMap[bundle.getStringId()];
     }
 

@@ -14,7 +14,7 @@ class ComponentList extends React.Component {
                         <div>{bundle.name}</div>
                         <div>
                             <Button type="success" onClick={() => {
-                                this.props.onAddComponent && this.props.onAddComponent(bundle.bundleId);
+                                this.props.onAddComponent && this.props.onAddComponent(bundle.coordinate);
                             }} outline>使用</Button>
                         </div>
                     </div>

@@ -43,18 +43,18 @@ export default class Design extends PureComponent {
         };
     }
 
-    async initInstanceList(bundleId) {
-        if (!bundleId) {
+    async initInstanceList(coordinate) {
+        if (!coordinate) {
             return;
         }
         // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-        let plugin = await pluginLoader.loadPlugin(bundleId);
+        let plugin = await pluginLoader.loadPlugin(coordinate);
         let instance = plugin.getInitialValue();
-        instance.bundleId = bundleId;
+        instance.coordinate = coordinate;
         InstanceUtils.tagInstanceWithUUID(instance);
         let newInstanceList = [instance];
 
-        let bundle = new Bundle(bundleId);
+        let bundle = new Bundle(coordinate);
         this.pluginInstanceCount = new LazyMap(0);
         let stringID = bundle.getStringId();
         this.pluginInstanceCount.inc(stringID);
@@ -71,7 +71,7 @@ export default class Design extends PureComponent {
      */
     async setInstanceList(instanceList) {
         for (let instance of instanceList) {
-            await pluginLoader.loadPlugin(instance.bundleId);
+            await pluginLoader.loadPlugin(instance.coordinate);
             InstanceUtils.tagInstanceWithUUID(instance);
         }
         let pluginMap = {};
@@ -79,9 +79,9 @@ export default class Design extends PureComponent {
         let newInstanceList = [];
         for (let i = 0; i < instanceList.length; i++) {
             let instance = instanceList[i];
-            let bundle = new Bundle(instance.bundleId);
+            let bundle = new Bundle(instance.coordinate);
             // 找出plugin 并加载
-            let plugin = await pluginLoader.loadPlugin(instance.bundleId);
+            let plugin = await pluginLoader.loadPlugin(instance.coordinate);
             let stringID = bundle.getStringId();
             pluginMap[stringID] = plugin;
             pluginInstanceCount.inc(stringID);
@@ -97,12 +97,12 @@ export default class Design extends PureComponent {
     /**
      *  外部调用接口 创建插件实例，
      */
-    async addInstanceByBundle(bundleId) {
+    async addInstanceByBundle(coordinate) {
         let {} = this.state;
         // 需要检查该插件有没有加载，若没有则先加载，然后再创建实例
-        let plugin = await pluginLoader.loadPlugin(bundleId);
+        let plugin = await pluginLoader.loadPlugin(coordinate);
 
-        let bundle = new Bundle(bundleId);
+        let bundle = new Bundle(coordinate);
         let stringID = bundle.getStringId();
         let pluginInstanceCount = this.pluginInstanceCount;
         let count = pluginInstanceCount.get(stringID);
@@ -112,7 +112,7 @@ export default class Design extends PureComponent {
         }
         
         let instance = plugin.getInitialValue();
-        instance.bundleId = bundleId;
+        instance.coordinate = coordinate;
         InstanceUtils.tagInstanceWithUUID(instance);
 
         const {instanceList} = this.state;
@@ -296,7 +296,7 @@ export default class Design extends PureComponent {
 
         const newState = {};
 
-        let bundle = new Bundle(instance.bundleId);
+        let bundle = new Bundle(instance.coordinate);
         this.pluginInstanceCount.dec(bundle.getStringId());
         // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
         const uuId = InstanceUtils.getUUIDFromInstance(instance);

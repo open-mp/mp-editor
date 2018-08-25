@@ -1,11 +1,11 @@
 export default class Bundle {
-    constructor(bundleId) {
+    constructor(coordinate) {
         let {
             groupId,
             artifactId,
             version,
             classifier
-        } = bundleId;
+        } = coordinate;
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.version = version;

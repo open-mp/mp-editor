@@ -164,7 +164,11 @@ let pageInstanceMap = {
         "hasPadding": false,
         "lineType": "solid",
         "coordinate": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0"}
-    }],
+    }, {
+        "height": 30,
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "goods-detail", "version": "1.0.0"}
+    },
+        {"height": 30, "coordinate": {"groupId": "tsxuehu", "artifactId": "goods-action", "version": "1.0.0"}}],
     3: [{
         "title": "下单",
         "color": "",

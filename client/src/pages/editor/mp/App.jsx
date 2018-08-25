@@ -47,8 +47,8 @@ class App extends React.Component {
         return (
             <div className="mp-workspace">
                 <div className="mp-workspace--toolbox">
-                    <ComponentList bundleList={bundleList} allowUserQuery={allowUserQuery} onAddComponent={(bundleId) => {
-                        this.onAddComponent(bundleId);
+                    <ComponentList bundleList={bundleList} allowUserQuery={allowUserQuery} onAddComponent={(coordinate) => {
+                        this.onAddComponent(coordinate);
                     }}/>
                 </div>
                 <div className="mp-workspace--editor-wrapper">
@@ -73,8 +73,8 @@ class App extends React.Component {
             </div>);
     }
 
-    onAddComponent(bundleId) {
-        this.design.addInstanceByBundle(bundleId);
+    onAddComponent(coordinate) {
+        this.design.addInstanceByBundle(coordinate);
     }
 
     notImplemented() {
@@ -113,7 +113,7 @@ class App extends React.Component {
             this.design.setInstanceList(result.instanceList);
         } else if (pageId) {
             let result = 
-                await mpAPi.getPageDetail(pageId);
+                await mpAPi.getMpPageStructure(pageId);
             this.design.setInstanceList(result.instanceList);
         } else {
             this.design.initInstanceList({

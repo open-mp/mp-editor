@@ -9525,7 +9525,7 @@ var Design = function (_PureComponent) {
 
             var newState = {};
 
-            var bundle = new _bundle2.default(instance.bundleId);
+            var bundle = new _bundle2.default(instance.coordinate);
             _this.pluginInstanceCount.dec(bundle.getStringId());
             // 删除选中项目后默认选中前一项可选的，如果不存在则往后找一个可选项
             var uuId = InstanceUtils.getUUIDFromInstance(instance);
@@ -9686,13 +9686,13 @@ var Design = function (_PureComponent) {
     _createClass(Design, [{
         key: 'initInstanceList',
         value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(bundleId) {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(coordinate) {
                 var plugin, instance, newInstanceList, bundle, stringID;
                 return regeneratorRuntime.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                if (bundleId) {
+                                if (coordinate) {
                                     _context3.next = 2;
                                     break;
                                 }
@@ -9701,16 +9701,16 @@ var Design = function (_PureComponent) {
 
                             case 2:
                                 _context3.next = 4;
-                                return _loader2.default.loadPlugin(bundleId);
+                                return _loader2.default.loadPlugin(coordinate);
 
                             case 4:
                                 plugin = _context3.sent;
                                 instance = plugin.getInitialValue();
 
-                                instance.bundleId = bundleId;
+                                instance.coordinate = coordinate;
                                 InstanceUtils.tagInstanceWithUUID(instance);
                                 newInstanceList = [instance];
-                                bundle = new _bundle2.default(bundleId);
+                                bundle = new _bundle2.default(coordinate);
 
                                 this.pluginInstanceCount = new _LazyMap2.default(0);
                                 stringID = bundle.getStringId();
@@ -9766,7 +9766,7 @@ var Design = function (_PureComponent) {
 
                                 instance = _step.value;
                                 _context4.next = 9;
-                                return _loader2.default.loadPlugin(instance.bundleId);
+                                return _loader2.default.loadPlugin(instance.coordinate);
 
                             case 9:
                                 InstanceUtils.tagInstanceWithUUID(instance);
@@ -9823,11 +9823,11 @@ var Design = function (_PureComponent) {
                                 }
 
                                 _instance = instanceList[i];
-                                bundle = new _bundle2.default(_instance.bundleId);
+                                bundle = new _bundle2.default(_instance.coordinate);
                                 // 找出plugin 并加载
 
                                 _context4.next = 36;
-                                return _loader2.default.loadPlugin(_instance.bundleId);
+                                return _loader2.default.loadPlugin(_instance.coordinate);
 
                             case 36:
                                 plugin = _context4.sent;
@@ -9871,7 +9871,7 @@ var Design = function (_PureComponent) {
     }, {
         key: 'addInstanceByBundle',
         value: function () {
-            var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(bundleId) {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(coordinate) {
                 var plugin, bundle, stringID, pluginInstanceCount, count, instance, instanceList, newInstanceList;
                 return regeneratorRuntime.wrap(function _callee5$(_context5) {
                     while (1) {
@@ -9882,11 +9882,11 @@ var Design = function (_PureComponent) {
 
 
                                 _context5.next = 3;
-                                return _loader2.default.loadPlugin(bundleId);
+                                return _loader2.default.loadPlugin(coordinate);
 
                             case 3:
                                 plugin = _context5.sent;
-                                bundle = new _bundle2.default(bundleId);
+                                bundle = new _bundle2.default(coordinate);
                                 stringID = bundle.getStringId();
                                 pluginInstanceCount = this.pluginInstanceCount;
                                 count = pluginInstanceCount.get(stringID);
@@ -9902,7 +9902,7 @@ var Design = function (_PureComponent) {
                             case 11:
                                 instance = plugin.getInitialValue();
 
-                                instance.bundleId = bundleId;
+                                instance.coordinate = coordinate;
                                 InstanceUtils.tagInstanceWithUUID(instance);
 
                                 instanceList = this.state.instanceList;
@@ -10474,13 +10474,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Bundle = function () {
-    function Bundle(bundleId) {
+    function Bundle(coordinate) {
         _classCallCheck(this, Bundle);
 
-        var groupId = bundleId.groupId,
-            artifactId = bundleId.artifactId,
-            version = bundleId.version,
-            classifier = bundleId.classifier;
+        var groupId = coordinate.groupId,
+            artifactId = coordinate.artifactId,
+            version = coordinate.version,
+            classifier = coordinate.classifier;
 
         this.groupId = groupId;
         this.artifactId = artifactId;
@@ -10648,14 +10648,14 @@ var MpEditorPluginLoader = function () {
     }, {
         key: 'loadPlugin',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(bundleId) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(coordinate) {
                 var pluginMap, bundle, bundleStringId, plugin;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 pluginMap = this.pluginMap;
-                                bundle = new _bundle2.default(bundleId);
+                                bundle = new _bundle2.default(coordinate);
                                 bundleStringId = bundle.getStringId();
                                 // 检查是否存
 
@@ -10695,8 +10695,8 @@ var MpEditorPluginLoader = function () {
     }, {
         key: 'getPluginByInstance',
         value: function getPluginByInstance(instance) {
-            var bundleId = instance.bundleId;
-            var bundle = new _bundle2.default(bundleId);
+            var coordinate = instance.coordinate;
+            var bundle = new _bundle2.default(coordinate);
             return this.pluginMap[bundle.getStringId()];
         }
     }, {
@@ -11562,7 +11562,7 @@ exports.findFirstEditableInstance = findFirstEditableInstance;
 exports.moveInstance = moveInstance;
 exports.makeInstanceCountMapFromValue = makeInstanceCountMapFromValue;
 exports.getSafeSelectedValueIndex = getSafeSelectedValueIndex;
-exports.getBundleIdFromInstace = getBundleIdFromInstace;
+exports.getCoordinateFromInstace = getCoordinateFromInstace;
 
 var _designType = __webpack_require__(/*! ./design-type */ "./src/pages/editor/components/design/utils/design-type.js");
 
@@ -11775,8 +11775,8 @@ function getSafeSelectedValueIndex(index, value) {
     return Math.min(index, value.length - 1);
 }
 
-function getBundleIdFromInstace(instance) {
-    return instance.bundleId;
+function getCoordinateFromInstace(instance) {
+    return instance.coordinate;
 }
 
 /***/ }),
@@ -11947,8 +11947,8 @@ var App = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'mp-workspace--toolbox' },
-                    _react2.default.createElement(_ComponentList2.default, { bundleList: bundleList, allowUserQuery: allowUserQuery, onAddComponent: function onAddComponent(bundleId) {
-                            _this4.onAddComponent(bundleId);
+                    _react2.default.createElement(_ComponentList2.default, { bundleList: bundleList, allowUserQuery: allowUserQuery, onAddComponent: function onAddComponent(coordinate) {
+                            _this4.onAddComponent(coordinate);
                         } })
                 ),
                 _react2.default.createElement(
@@ -11984,8 +11984,8 @@ var App = function (_React$Component) {
         }
     }, {
         key: 'onAddComponent',
-        value: function onAddComponent(bundleId) {
-            this.design.addInstanceByBundle(bundleId);
+        value: function onAddComponent(coordinate) {
+            this.design.addInstanceByBundle(coordinate);
         }
     }, {
         key: 'notImplemented',
@@ -12069,7 +12069,7 @@ var App = function (_React$Component) {
                                 }
 
                                 _context3.next = 11;
-                                return mpAPi.getPageDetail(pageId);
+                                return mpAPi.getMpPageStructure(pageId);
 
                             case 11:
                                 _result = _context3.sent;
@@ -12178,7 +12178,7 @@ var ComponentList = function (_React$Component) {
                             _react2.default.createElement(
                                 _zent.Button,
                                 { type: 'success', onClick: function onClick() {
-                                        _this2.props.onAddComponent && _this2.props.onAddComponent(bundle.bundleId);
+                                        _this2.props.onAddComponent && _this2.props.onAddComponent(bundle.coordinate);
                                     }, outline: true },
                                 '\u4F7F\u7528'
                             )
