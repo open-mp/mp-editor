@@ -20,6 +20,16 @@ export async function getMpPageList(mpId) {
     return result;
 }
 
+export async function getMpStaticPageList(mpId) {
+    let result = await api.get('/mp/get-mp-page-static-list', {mpId});
+    return result;
+}
+
+export async function getMpDynamicPageList(mpId) {
+    let result = await api.get('/mp/get-mp-page-dynamic-list', {mpId});
+    return result;
+}
+
 export async function getMpPageStructure(pageId) {
     let result = await api.get('/mp/get-mp-page-structure', {pageId});
     return result;

@@ -951,7 +951,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getDynamicPageContentList = exports.saveMpPageDetail = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
+exports.getContentDetail = exports.getDynamicPageContentList = exports.saveMpPageDetail = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpDynamicPageList = exports.getMpStaticPageList = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1061,15 +1061,15 @@ var getMpPageList = exports.getMpPageList = function () {
     };
 }();
 
-var getMpPageStructure = exports.getMpPageStructure = function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(pageId) {
+var getMpStaticPageList = exports.getMpStaticPageList = function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
                 switch (_context5.prev = _context5.next) {
                     case 0:
                         _context5.next = 2;
-                        return api.get('/mp/get-mp-page-structure', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-static-list', { mpId: mpId });
 
                     case 2:
                         result = _context5.sent;
@@ -1083,20 +1083,20 @@ var getMpPageStructure = exports.getMpPageStructure = function () {
         }, _callee5, this);
     }));
 
-    return function getMpPageStructure(_x5) {
+    return function getMpStaticPageList(_x5) {
         return _ref5.apply(this, arguments);
     };
 }();
 
-var getMpPageDetail = exports.getMpPageDetail = function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(pageId) {
+var getMpDynamicPageList = exports.getMpDynamicPageList = function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
                 switch (_context6.prev = _context6.next) {
                     case 0:
                         _context6.next = 2;
-                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-dynamic-list', { mpId: mpId });
 
                     case 2:
                         result = _context6.sent;
@@ -1110,20 +1110,20 @@ var getMpPageDetail = exports.getMpPageDetail = function () {
         }, _callee6, this);
     }));
 
-    return function getMpPageDetail(_x6) {
+    return function getMpDynamicPageList(_x6) {
         return _ref6.apply(this, arguments);
     };
 }();
 
-var saveMpPageDetail = exports.saveMpPageDetail = function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(page) {
+var getMpPageStructure = exports.getMpPageStructure = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
                 switch (_context7.prev = _context7.next) {
                     case 0:
                         _context7.next = 2;
-                        return api.post('/mp/save-mp-page-detail', {}, page);
+                        return api.get('/mp/get-mp-page-structure', { pageId: pageId });
 
                     case 2:
                         result = _context7.sent;
@@ -1137,12 +1137,12 @@ var saveMpPageDetail = exports.saveMpPageDetail = function () {
         }, _callee7, this);
     }));
 
-    return function saveMpPageDetail(_x7) {
+    return function getMpPageStructure(_x7) {
         return _ref7.apply(this, arguments);
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+var getMpPageDetail = exports.getMpPageDetail = function () {
     var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
@@ -1150,7 +1150,7 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
                 switch (_context8.prev = _context8.next) {
                     case 0:
                         _context8.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
 
                     case 2:
                         result = _context8.sent;
@@ -1164,20 +1164,20 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee8, this);
     }));
 
-    return function getDynamicPageContentList(_x8) {
+    return function getMpPageDetail(_x8) {
         return _ref8.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(contentId) {
+var saveMpPageDetail = exports.saveMpPageDetail = function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(page) {
         var result;
         return regeneratorRuntime.wrap(function _callee9$(_context9) {
             while (1) {
                 switch (_context9.prev = _context9.next) {
                     case 0:
                         _context9.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.post('/mp/save-mp-page-detail', {}, page);
 
                     case 2:
                         result = _context9.sent;
@@ -1191,8 +1191,62 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee9, this);
     }));
 
-    return function getContentDetail(_x9) {
+    return function saveMpPageDetail(_x9) {
         return _ref9.apply(this, arguments);
+    };
+}();
+
+var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(pageId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+            while (1) {
+                switch (_context10.prev = _context10.next) {
+                    case 0:
+                        _context10.next = 2;
+                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+
+                    case 2:
+                        result = _context10.sent;
+                        return _context10.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context10.stop();
+                }
+            }
+        }, _callee10, this);
+    }));
+
+    return function getDynamicPageContentList(_x10) {
+        return _ref10.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee11$(_context11) {
+            while (1) {
+                switch (_context11.prev = _context11.next) {
+                    case 0:
+                        _context11.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context11.sent;
+                        return _context11.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context11.stop();
+                }
+            }
+        }, _callee11, this);
+    }));
+
+    return function getContentDetail(_x11) {
+        return _ref11.apply(this, arguments);
     };
 }();
 
@@ -1592,6 +1646,261 @@ var _react2 = _interopRequireDefault(_react);
 
 var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
+var _mp = __webpack_require__(/*! src/common/api/mp */ "./src/common/api/mp.js");
+
+var mpApi = _interopRequireWildcard(_mp);
+
+var _url = __webpack_require__(/*! src/common/api/url */ "./src/common/api/url.js");
+
+__webpack_require__(/*! ./tab-bar-config.pcss */ "./src/pages/mp/setting/components/tab-bar-config.pcss");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Field = _zent.Form.Field,
+    FormInputField = _zent.Form.FormInputField,
+    FormSelectField = _zent.Form.FormSelectField,
+    FormRadioGroupField = _zent.Form.FormRadioGroupField,
+    FormCheckboxField = _zent.Form.FormCheckboxField,
+    FormCheckboxGroupField = _zent.Form.FormCheckboxGroupField,
+    FormColorPickerField = _zent.Form.FormColorPickerField,
+    FormDateRangePickerField = _zent.Form.FormDateRangePickerField,
+    FormNumberInputField = _zent.Form.FormNumberInputField,
+    FormSwitchField = _zent.Form.FormSwitchField,
+    FormSection = _zent.Form.FormSection,
+    FieldArray = _zent.Form.FieldArray,
+    createForm = _zent.Form.createForm;
+
+var Basic = function (_React$Component) {
+    _inherits(Basic, _React$Component);
+
+    function Basic(props) {
+        var _this2 = this;
+
+        _classCallCheck(this, Basic);
+
+        var _this = _possibleConstructorReturn(this, (Basic.__proto__ || Object.getPrototypeOf(Basic)).call(this, props));
+
+        _this.state = {
+            checkedList: [],
+            staticPageList: [],
+            dynamicPageList: [],
+            contentList: []
+        };
+
+        _this.onPageTypeChange = function (e) {
+            _this.forceUpdate();
+        };
+
+        _this.onDynamicPageIdChange = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var tabBar, contentList;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            tabBar = _this.props.tabBar;
+                            contentList = [];
+
+                            if (!(tabBar.pageStructure == 'dynamic' && tabBar.pageId)) {
+                                _context.next = 6;
+                                break;
+                            }
+
+                            _context.next = 5;
+                            return mpApi.getDynamicPageContentList(tabBar.pageId);
+
+                        case 5:
+                            contentList = _context.sent;
+
+                        case 6:
+                            _this.setState({ contentList: contentList });
+
+                        case 7:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, _this2);
+        }));
+        return _this;
+    }
+
+    _createClass(Basic, [{
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                name = _props.name,
+                tabBar = _props.tabBar;
+            var _state = this.state,
+                staticPageList = _state.staticPageList,
+                dynamicPageList = _state.dynamicPageList,
+                contentList = _state.contentList;
+
+
+            return _react2.default.createElement(
+                FormSection,
+                { name: name },
+                _react2.default.createElement(FormInputField, {
+                    name: 'text',
+                    type: 'text',
+                    label: 'Tab\u540D\u5B57:',
+                    required: true,
+                    spellCheck: false,
+                    validations: { required: true },
+                    validationErrors: { required: '请填写Tab名字' }
+                }),
+                _react2.default.createElement(FormInputField, {
+                    name: 'iconUrl',
+                    type: 'text',
+                    label: '\u9ED8\u8BA4\u56FE\u6807:',
+                    spellCheck: false,
+                    validationErrors: { required: '默认图标' },
+                    value: window.navigationBarTitleText
+                }),
+                _react2.default.createElement(FormInputField, {
+                    name: 'selectedIconUrl',
+                    type: 'text',
+                    label: '\u9009\u4E2D\u56FE\u6807:',
+                    spellCheck: false,
+                    validationErrors: { required: '选中图标' },
+                    value: window.navigationBarTitleText
+                }),
+                _react2.default.createElement(FormSelectField, {
+                    name: 'pageStructure',
+                    label: '\u9875\u9762\u7C7B\u578B:',
+                    data: [{ value: 'dynamic', text: '动态' }, { value: 'static', text: '静态' }],
+                    required: true,
+                    onChange: this.onPageTypeChange,
+                    validations: { required: true },
+                    validationErrors: { required: '页面类型' },
+                    value: window.navigationBarTextStyle
+                }),
+                tabBar.pageStructure == 'static' && _react2.default.createElement(FormSelectField, {
+                    name: 'pageId',
+                    label: '\u8DF3\u8F6C\u7684\u9759\u6001\u9875:',
+                    data: staticPageList,
+                    optionText: 'label',
+                    optionValue: 'id',
+                    validationErrors: { required: '跳转的静态页' },
+                    value: window.navigationBarTextStyle
+                }),
+                tabBar.pageStructure == 'dynamic' && _react2.default.createElement(FormSelectField, {
+                    name: 'pageId',
+                    label: '\u8DF3\u8F6C\u7684\u52A8\u6001\u9875:',
+                    data: dynamicPageList,
+                    onChange: this.onDynamicPageIdChange,
+                    optionText: 'label',
+                    optionValue: 'id',
+                    validationErrors: { required: '跳转的动态页' },
+                    value: window.navigationBarTextStyle
+                }),
+                tabBar.pageStructure == 'dynamic' && _react2.default.createElement(FormSelectField, {
+                    name: 'contentId',
+                    label: '\u52A8\u6001\u9875\u5185\u5BB9:',
+                    data: contentList,
+                    optionText: 'name',
+                    optionValue: 'id',
+                    validationErrors: { required: '跳转的动态页' },
+                    value: window.navigationBarTextStyle
+                })
+            );
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var _getQuery, mpId, tabBar, staticPageList, dynamicPageList, contentList;
+
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _getQuery = (0, _url.getQuery)(), mpId = _getQuery.mpId;
+                                tabBar = this.props.tabBar;
+                                _context2.next = 4;
+                                return mpApi.getMpStaticPageList(mpId);
+
+                            case 4:
+                                staticPageList = _context2.sent;
+                                _context2.next = 7;
+                                return mpApi.getMpDynamicPageList(mpId);
+
+                            case 7:
+                                dynamicPageList = _context2.sent;
+                                contentList = [];
+
+                                if (!(tabBar.pageStructure == 'dynamic' && tabBar.pageId)) {
+                                    _context2.next = 13;
+                                    break;
+                                }
+
+                                _context2.next = 12;
+                                return mpApi.getDynamicPageContentList(tabBar.pageId);
+
+                            case 12:
+                                contentList = _context2.sent;
+
+                            case 13:
+                                this.setState({ staticPageList: staticPageList, dynamicPageList: dynamicPageList, contentList: contentList });
+
+                            case 14:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function componentDidMount() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return componentDidMount;
+        }()
+    }]);
+
+    return Basic;
+}(_react2.default.Component);
+
+exports.default = Basic;
+
+/***/ }),
+
+/***/ "./src/pages/mp/setting/components/TabBarConfigWrapper.jsx":
+/*!*****************************************************************!*\
+  !*** ./src/pages/mp/setting/components/TabBarConfigWrapper.jsx ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
+
+var _TabBarConfig = __webpack_require__(/*! ./TabBarConfig */ "./src/pages/mp/setting/components/TabBarConfig.jsx");
+
+var _TabBarConfig2 = _interopRequireDefault(_TabBarConfig);
+
 __webpack_require__(/*! ./tab-bar-config.pcss */ "./src/pages/mp/setting/components/tab-bar-config.pcss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1683,62 +1992,7 @@ var Basic = function (_React$Component) {
                                 }
                             })
                         ),
-                        _react2.default.createElement(
-                            FormSection,
-                            { name: name },
-                            _react2.default.createElement(FormInputField, {
-                                name: 'text',
-                                type: 'text',
-                                label: 'Tab\u540D\u5B57:',
-                                required: true,
-                                spellCheck: false,
-                                validations: { required: true },
-                                validationErrors: { required: '请填写Tab名字' }
-                            }),
-                            _react2.default.createElement(FormInputField, {
-                                name: 'iconUrl',
-                                type: 'text',
-                                label: '\u9ED8\u8BA4\u56FE\u6807:',
-                                spellCheck: false,
-                                validationErrors: { required: '默认图标' },
-                                value: window.navigationBarTitleText
-                            }),
-                            _react2.default.createElement(FormInputField, {
-                                name: 'selectedIconUrl',
-                                type: 'text',
-                                label: '\u9009\u4E2D\u56FE\u6807:',
-                                spellCheck: false,
-                                validationErrors: { required: '选中图标' },
-                                value: window.navigationBarTitleText
-                            }),
-                            _react2.default.createElement(FormSelectField, {
-                                name: 'pageStructure',
-                                label: '\u9875\u9762\u7C7B\u578B:',
-                                data: [{ value: 'dynamic', text: '动态' }, { value: 'static', text: '静态' }],
-                                required: true,
-                                validations: { required: true },
-                                validationErrors: { required: '页面类型' },
-                                value: window.navigationBarTextStyle
-                            }),
-                            _react2.default.createElement(FormSelectField, {
-                                name: 'pageStructure',
-                                label: '\u8DF3\u8F6C\u7684\u9759\u6001\u9875:',
-                                data: [{ value: 1, text: '我的' }, { value: 2, text: '爆品' }],
-                                required: true,
-                                validations: { required: true },
-                                validationErrors: { required: '跳转的静态页' },
-                                value: window.navigationBarTextStyle
-                            }),
-                            _react2.default.createElement(FormSelectField, {
-                                name: 'pageStructure',
-                                label: '\u8DF3\u8F6C\u7684\u52A8\u6001\u9875:',
-                                data: [{ value: 1, text: '国庆活动' }, { value: 2, text: '中秋活动' }],
-                                required: true,
-                                validations: { required: true },
-                                validationErrors: { required: '跳转的动态页' },
-                                value: window.navigationBarTextStyle
-                            })
-                        )
+                        _react2.default.createElement(_TabBarConfig2.default, { index: index, name: name, tabBar: item })
                     );
                 })
             );
@@ -1967,9 +2221,9 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _TabBarConfig = __webpack_require__(/*! ../components/TabBarConfig */ "./src/pages/mp/setting/components/TabBarConfig.jsx");
+var _TabBarConfigWrapper = __webpack_require__(/*! ../components/TabBarConfigWrapper */ "./src/pages/mp/setting/components/TabBarConfigWrapper.jsx");
 
-var _TabBarConfig2 = _interopRequireDefault(_TabBarConfig);
+var _TabBarConfigWrapper2 = _interopRequireDefault(_TabBarConfigWrapper);
 
 var _zent = __webpack_require__(/*! zent */ "./node_modules/zent/lib/index.js");
 
@@ -2033,7 +2287,7 @@ var Basic = function (_React$Component) {
                 { horizontal: true, onSubmit: handleSubmit(this.submit) },
                 _react2.default.createElement(FieldArray, {
                     name: 'tabBarButtons',
-                    component: _TabBarConfig2.default,
+                    component: _TabBarConfigWrapper2.default,
                     value: tabBarButtons
                 }),
                 _react2.default.createElement(

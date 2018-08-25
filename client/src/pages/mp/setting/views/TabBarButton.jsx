@@ -1,5 +1,5 @@
 import React from 'react';
-import TabBarConfig from '../components/TabBarConfig'
+import TabBarConfig from '../components/TabBarConfigWrapper'
 import { Form, Radio, Checkbox, Button, Notify } from 'zent';
 const { Field, FormInputField, FormSelectField, FormRadioGroupField, FormCheckboxField,
     FormCheckboxGroupField, FormColorPickerField,

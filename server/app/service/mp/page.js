@@ -9,6 +9,20 @@ class UserService extends Service {
         return mpPageList;
     }
 
+    async getMpStaticPageList(mpId) {
+        let mpPageList = Pages.filter(page => {
+            return page.mpId == mpId && page.structure == 'static';
+        });
+        return mpPageList;
+    }
+
+    async getMpDynamicPageList(mpId) {
+        let mpPageList = Pages.filter(page => {
+            return page.mpId == mpId && page.structure == 'dynamic';
+        });
+        return mpPageList;
+    }
+
     async createPage(mpId, page) {
         let pageId = Date.now();
         Pages.push({

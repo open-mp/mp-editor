@@ -42,16 +42,16 @@ const MPList = [{
     tabBarButtons: [{
         "pageId": 1,
         "pageName": "",
-        "pageStructure": "",
+        "pageStructure": "static",
         "contentId": "",
         "iconUrl": '',
         "selectedIconUrl": "",
         "text": "国庆活动"
     }, {
-        "pageId": 1,
+        "pageId": 2,
         "pageName": "",
-        "pageStructure": "",
-        "contentId": "",
+        "pageStructure": "dynamic",
+        "contentId": 2,
         "iconUrl": '',
         "selectedIconUrl": "",
         "text": "爆品"

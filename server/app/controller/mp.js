@@ -64,6 +64,26 @@ class UserController extends Controller {
         };
     }
 
+    async getMpStaticPageList() {
+        let { mpId } = this.ctx.query;
+        let mpPageList = await this.service.mp.page.getMpStaticPageList(mpId);
+
+        this.ctx.body = {
+            code: 0,
+            data: mpPageList
+        };
+    }
+
+    async getMpDynamicPageList() {
+        let { mpId } = this.ctx.query;
+        let mpPageList = await this.service.mp.page.getMpDynamicPageList(mpId);
+
+        this.ctx.body = {
+            code: 0,
+            data: mpPageList
+        };
+    }
+
     async createPage() {
         let {mpId} = this.ctx.query;
         let page = this.ctx.request.body;
