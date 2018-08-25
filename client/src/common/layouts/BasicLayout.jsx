@@ -37,7 +37,7 @@ export default class BasicLayout extends React.PureComponent {
         return (
             <Menu
                 mode="inline"
-                onClick={onClick}
+                onClick={this.onClick}
             >
                 <MenuItem key="1">
                     小程序列表
@@ -50,5 +50,9 @@ export default class BasicLayout extends React.PureComponent {
                 </MenuItem>
             </Menu>
         )
+    }
+
+    onClick = (e)=>{
+
     }
 }

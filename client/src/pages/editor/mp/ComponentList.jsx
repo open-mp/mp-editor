@@ -10,7 +10,7 @@ class ComponentList extends React.Component {
             />}
             {bundleList.map(bundle => {
                 return (
-                    <div className="component-panel">
+                    <div className="component-panel" key={bundle.id}>
                         <div>{bundle.name}</div>
                         <div>
                             <Button type="success" onClick={() => {

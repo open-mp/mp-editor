@@ -145,7 +145,7 @@ class App extends React.Component {
         Notify.success('保存成功');
     }
 
-    async loadBundleList () {
+    async loadBundleList() {
         let bundleList = await bundleApi.queryBundle({});
         this.setState({
             bundleList

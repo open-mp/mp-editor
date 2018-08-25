@@ -19,8 +19,9 @@ const columns = [{
     width: '200px',
     bodyRender(data) {
         return (<div>
-            <Button type="primary" outline>页面设置</Button>
-            <a href={`/editor/mp?pageId=${data.pageId}&contentId=${data.id}&structure=dynamic`}><Button type="primary" outline>编辑</Button></a>
+            <a href={`/editor/mp?pageId=${data.pageId}&contentId=${data.id}&structure=dynamic`}>
+                <Button type="primary" outline>编辑</Button>
+            </a>
         </div>)
     }
 }];

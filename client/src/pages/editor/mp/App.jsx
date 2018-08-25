@@ -98,7 +98,7 @@ class App extends React.Component {
      */
     async loadBundleList() {
         let {pageId, pageSize, pageNo, bundleSerchKey} = this.state;
-        let {list: bundleList} = await bundleAPi.queryBundle({pageId, pageSize, pageNo, key: bundleSerchKey});
+        let bundleList = await bundleAPi.queryBundle({pageId, pageSize, pageNo, key: bundleSerchKey});
         this.setState({bundleList});
     }
 

@@ -1,27 +1,38 @@
 const Service = require('egg').Service;
 const _ = require('lodash')
+
 class UserService extends Service {
     async getMpList() {
         return MPList;
     }
+
     async getMpDetail(mpId) {
         return MPList.find(mp => mp.id == mpId);
     }
 
     async saveMpDetail(mpId, mp) {
-       let newList = MPList.map(v=>{
-           if (v.id != mpId) return v;
-           return _.merge(v, mp);
-       })
-       MPList = newList;
+        let newList = MPList.map(v => {
+            if (v.id != mpId) return v;
+            return _.merge(v, mp);
+        })
+        MPList = newList;
     }
+
+    async getMpDefinition(mpId) {
+        let mp = await this.getMpDetail(mpId);
+        let pageList = await this.service.mp.page.getMpPageList(mpId);
+        return {
+            mp, pageList
+        };
+    }
+
 }
 
 module.exports = UserService;
 
 
 // 小程序列表
-const MPList = [{
+let MPList = [{
     id: 1,
     name: '测试小程序',
     description: '用来测试的小程序',

@@ -1340,9 +1340,17 @@ var BasicLayout = function (_React$PureComponent) {
     _inherits(BasicLayout, _React$PureComponent);
 
     function BasicLayout() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, BasicLayout);
 
-        return _possibleConstructorReturn(this, (BasicLayout.__proto__ || Object.getPrototypeOf(BasicLayout)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = BasicLayout.__proto__ || Object.getPrototypeOf(BasicLayout)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {}, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(BasicLayout, [{
@@ -1386,7 +1394,7 @@ var BasicLayout = function (_React$PureComponent) {
                 _zent.Menu,
                 {
                     mode: 'inline',
-                    onClick: onClick
+                    onClick: this.onClick
                 },
                 _react2.default.createElement(
                     MenuItem,
@@ -1483,11 +1491,6 @@ var columns = [{
         return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-                _zent.Button,
-                { type: 'primary', outline: true },
-                '\u9875\u9762\u8BBE\u7F6E'
-            ),
             _react2.default.createElement(
                 'a',
                 { href: '/editor/mp?pageId=' + data.pageId + '&contentId=' + data.id + '&structure=dynamic' },

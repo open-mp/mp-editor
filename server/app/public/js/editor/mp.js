@@ -12001,7 +12001,7 @@ var App = function (_React$Component) {
          */
         value: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var _state2, pageId, pageSize, pageNo, bundleSerchKey, _ref3, bundleList;
+                var _state2, pageId, pageSize, pageNo, bundleSerchKey, bundleList;
 
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -12012,12 +12012,11 @@ var App = function (_React$Component) {
                                 return bundleAPi.queryBundle({ pageId: pageId, pageSize: pageSize, pageNo: pageNo, key: bundleSerchKey });
 
                             case 3:
-                                _ref3 = _context2.sent;
-                                bundleList = _ref3.list;
+                                bundleList = _context2.sent;
 
                                 this.setState({ bundleList: bundleList });
 
-                            case 6:
+                            case 5:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -12039,7 +12038,7 @@ var App = function (_React$Component) {
     }, {
         key: 'loadInstanceList',
         value: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
                 var _state3, pageId, structure, contentId, result, _result;
 
                 return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -12096,7 +12095,7 @@ var App = function (_React$Component) {
             }));
 
             function loadInstanceList() {
-                return _ref4.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return loadInstanceList;
@@ -12167,7 +12166,7 @@ var ComponentList = function (_React$Component) {
                 bundleList.map(function (bundle) {
                     return _react2.default.createElement(
                         'div',
-                        { className: 'component-panel' },
+                        { className: 'component-panel', key: bundle.id },
                         _react2.default.createElement(
                             'div',
                             null,

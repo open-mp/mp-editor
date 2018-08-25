@@ -142,15 +142,11 @@ class UserController extends Controller {
 
     async getMpDefinition() {
         let { mpId } = this.ctx.query;
-        let mp =  await this.service.mp.app.getMpDetail(mpId);
-        let pageList =  await this.service.mp.page.getMpPageList(mpId);
+        let mpDef =  await this.service.mp.app.getMpDefinition(mpId);
 
         this.ctx.body = {
             code: 0,
-
-            data: {
-                mp, pageList
-            }
+            data: mpDef
         };
     }
 }
