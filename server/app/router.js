@@ -31,6 +31,7 @@ module.exports = app => {
     router.get('/mp/get-mp-content-detail', controller.mp.getContentDetail);
     
     router.get('/mp/get-mp-definition', controller.mp.getMpDefinition);
+    router.get('/mp/get-mp-generate', controller.mp.getMpGenerate);
     // 编辑器
     router.get('/editor/mp', controller.editor.mpHtml);
 

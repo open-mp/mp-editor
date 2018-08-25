@@ -47,7 +47,7 @@ class UserService extends Service {
                     "title": `${page.label}`,
                     "color": "",
                     "description": "",
-                    "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0"}
+                    "coordinate": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0"}
                 }];
         }
 
@@ -75,6 +75,10 @@ class UserService extends Service {
         page.instanceList = pageInstanceMap[page.id];
         return page;
     }
+
+    async getInstanceList(pageId) {
+        return pageInstanceMap[pageId] || [];
+    }
 }
 
 module.exports = UserService;
@@ -95,6 +99,7 @@ let Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
+        bundleList: []
     },
     {
         mpId: 1, // 关联的小程序id
@@ -125,6 +130,7 @@ let Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
+        bundleList: []
     }, {
         mpId: 1, // 关联的小程序id
         id: 4, // 页面id
@@ -139,6 +145,7 @@ let Pages = [
             "backgroundColor": "#eeeeee",
             "backgroundTextStyle": "light"
         },
+        bundleList: []
     }];
 
 let pageInstanceMap = {
@@ -146,49 +153,49 @@ let pageInstanceMap = {
         "title": "商品详情",
         "color": "",
         "description": "",
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0"}
     }, {
         "color": "#f9f9f9",
         "content": "<p>商品信息</p>",
         "fullscreen": 0,
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0"}
     }, {
         "color": "#e5e5e5",
         "hasPadding": false,
         "lineType": "solid",
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0"}
     }],
     3: [{
         "title": "下单",
         "color": "",
         "description": "",
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0"}
     }, {
         "color": "#f9f9f9",
         "content": "<p>下单</p>",
         "fullscreen": 0,
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0"}
     }, {
         "color": "#e5e5e5",
         "hasPadding": false,
         "lineType": "solid",
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0"}
     }],
     4: [{
         "title": "购物车",
         "color": "",
         "description": "",
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "config", "version": "1.0.0"}
     }, {
         "color": "#f9f9f9",
         "content": "<p>购物车</p>",
         "fullscreen": 0,
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "richtext", "version": "1.0.0"}
     }, {
         "color": "#e5e5e5",
         "hasPadding": false,
         "lineType": "solid",
-        "bundleId": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0", "classifier": ""}
+        "coordinate": {"groupId": "tsxuehu", "artifactId": "line", "version": "1.0.0"}
     }]
 
 }

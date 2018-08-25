@@ -47,8 +47,9 @@ class BundleController extends Controller {
                 cssUrl: `/bundle/get-css/mpeditor-plugin?id=${bundle.getStringId()}`
             }
         };
-
     }
+
+
 
     /**
      * 返回插件内容，本地开发用

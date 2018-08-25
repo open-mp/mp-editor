@@ -14,13 +14,31 @@ class UserService extends Service {
         let newList = MPList.map(v => {
             if (v.id != mpId) return v;
             return _.merge(v, mp);
-        })
+        });
         MPList = newList;
     }
 
     async getMpDefinition(mpId) {
         let mp = await this.getMpDetail(mpId);
+        // tabBar
+        let tabBarButtons = mp.tabBarButtons;
+        for (let tabBar of tabBarButtons) {
+            let page = await this.service.mp.page.getPageDetail(tabBar.pageId);
+            tabBar.pageName = page.name;
+        }
+
         let pageList = await this.service.mp.page.getMpPageList(mpId);
+        // 为page组装instanceList字段, bundleList字段
+        for (let page of pageList) {
+            page.instanceList = await this.service.mp.page.getInstanceList(page.id);
+            let bundleList = page.bundleList;
+            let newBundleList = [];
+            for (let id of bundleList) {
+                let b = await this.service.bundle.bundle.getBundle(id);
+                newBundleList.push(b);
+            }
+            page.bundleList = newBundleList;
+        }
         return {
             mp, pageList
         };
@@ -68,9 +86,12 @@ let MPList = [{
         "text": "爆品"
     }],
     pageUtil: {
-        "groupId": "tsxuehu",
-        "artifactId": "page-util",
-        "version": "1.0.0",
-        "classifier": ""
+        id: 1,
+        coordinate: {
+            "groupId": "tsxuehu",
+            "artifactId": "page-util",
+            "version": "1.0.0",
+            "classifier": ""
+        }
     }
 }];

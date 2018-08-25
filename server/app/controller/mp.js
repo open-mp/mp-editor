@@ -1,4 +1,9 @@
 const Controller = require('egg').Controller;
+const fs = require('fs-extra');
+const path = require('path');
+const zipdir = require('zip-dir');
+const generatorDir = path.resolve(__dirname, '../../../../mp-workingspace');
+const mpGenerator = require('mp-generator');
 
 class UserController extends Controller {
 
@@ -55,9 +60,9 @@ class UserController extends Controller {
     }
 
     async getMpPageList() {
-        let { mpId } = this.ctx.query;
+        let {mpId} = this.ctx.query;
         let mpPageList = await this.service.mp.page.getMpPageList(mpId);
-        
+
         this.ctx.body = {
             code: 0,
             data: mpPageList
@@ -65,7 +70,7 @@ class UserController extends Controller {
     }
 
     async getMpStaticPageList() {
-        let { mpId } = this.ctx.query;
+        let {mpId} = this.ctx.query;
         let mpPageList = await this.service.mp.page.getMpStaticPageList(mpId);
 
         this.ctx.body = {
@@ -75,7 +80,7 @@ class UserController extends Controller {
     }
 
     async getMpDynamicPageList() {
-        let { mpId } = this.ctx.query;
+        let {mpId} = this.ctx.query;
         let mpPageList = await this.service.mp.page.getMpDynamicPageList(mpId);
 
         this.ctx.body = {
@@ -95,14 +100,14 @@ class UserController extends Controller {
     }
 
     async getPageDetail() {
-        let { pageId } = this.ctx.query;
+        let {pageId} = this.ctx.query;
         let page = await this.service.mp.page.getPageDetail(pageId);
         this.ctx.body = {
             code: 0,
             data: page
         };
     }
-    
+
     async savePageDetail() {
         let page = this.ctx.request.body;
         await this.service.mp.page.savePageDetail(page);
@@ -111,8 +116,9 @@ class UserController extends Controller {
             data: {}
         };
     }
-    async  getPageStructure() {
-        let { pageId } = this.ctx.query;
+
+    async getPageStructure() {
+        let {pageId} = this.ctx.query;
         let page = await this.service.mp.page.getPageStructure(pageId);
         this.ctx.body = {
             code: 0,
@@ -121,7 +127,7 @@ class UserController extends Controller {
     }
 
     async getMpDynamicPageContentList() {
-        let { pageId } = this.ctx.query;
+        let {pageId} = this.ctx.query;
         let mpContentList = await this.service.mp.content.getMpDynamicPageContentList(pageId);
 
         this.ctx.body = {
@@ -131,7 +137,7 @@ class UserController extends Controller {
     }
 
     async getContentDetail() {
-        let { contentId } = this.ctx.query;
+        let {contentId} = this.ctx.query;
         let content = await this.service.mp.content.getContentDetail(contentId);
 
         this.ctx.body = {
@@ -141,13 +147,44 @@ class UserController extends Controller {
     }
 
     async getMpDefinition() {
-        let { mpId } = this.ctx.query;
-        let mpDef =  await this.service.mp.app.getMpDefinition(mpId);
+        let {mpId} = this.ctx.query;
+        let mpDef = await this.service.mp.app.getMpDefinition(mpId);
 
         this.ctx.body = {
             code: 0,
             data: mpDef
         };
+    }
+
+    async getMpGenerate() {
+        let {mpId} = this.ctx.query;
+        let mpDef = await this.service.mp.app.getMpDefinition(mpId);
+        let {mp} = mpDef;
+
+        let mpDir = path.resolve(generatorDir, mp.id);
+        await fs.remove(mpDir);
+        let mpProjectDir = path.resolve(mpDir, 'project');
+        let mpZipped = path.resolve(mpDir, 'project.zip');
+        await fs.mkdirp(mpProjectDir);
+
+        // 生成
+        await mpGenerator.generate(dir, mpDef);
+
+        // 压缩
+        await new Promise((resolve, reject) => {
+            zipdir(mpProjectDir, {
+                saveTo: mpZipped
+            }, (err, buffer) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+        // 文件返回
+        this.ctx.body = fs.createReadStream(mpZipped);
     }
 }
 
