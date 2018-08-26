@@ -33,16 +33,18 @@ class UserService extends Service {
         // 为page组装instanceList字段, bundleList字段
         for (let page of pageList) {
             page.instanceList = await this.service.mp.page.getInstanceList(page.id);
-            let bundleList = page.bundleList;
-            let newBundleList = [];
-            for (let id of bundleList) {
-                let b = await this.service.bundle.bundle.getBundle(id);
-                newBundleList.push(b);
-            }
-            page.bundleList = newBundleList;
+
         }
+        let dynamic = dynamicPage[mpId];
+        let bundleList = dynamic.bundleList;
+        let newBundleList = [];
+        for (let id of bundleList) {
+            let b = await this.service.bundle.bundle.getBundle(id);
+            newBundleList.push(b);
+        }
+        dynamic.bundleList = newBundleList;
         return {
-            mp, pageList
+            mp, pageList, dynamic
         };
     }
 
