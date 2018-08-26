@@ -1858,6 +1858,15 @@ var Basic = function (_React$Component) {
                     validationErrors: { required: '选中图标' },
                     value: window.navigationBarTitleText
                 }),
+                _react2.default.createElement(FormInputField, {
+                    name: 'text',
+                    type: 'text',
+                    label: '\u8BBE\u7F6E\u4E3A\u9996\u9875:checkbox',
+                    required: true,
+                    spellCheck: false,
+                    validations: { required: true },
+                    validationErrors: { required: '请填写Tab名字' }
+                }),
                 _react2.default.createElement(FormSelectField, {
                     name: 'pageType',
                     label: '\u9875\u9762\u7C7B\u578B:',

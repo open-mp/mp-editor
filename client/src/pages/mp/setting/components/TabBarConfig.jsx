@@ -55,6 +55,15 @@ class Basic extends React.Component {
                     validationErrors={{required: '选中图标'}}
                     value={window.navigationBarTitleText}
                 />
+                <FormInputField
+                    name="text"
+                    type="text"
+                    label="设置为首页:checkbox"
+                    required
+                    spellCheck={false}
+                    validations={{required: true}}
+                    validationErrors={{required: '请填写Tab名字'}}
+                />
                 <FormSelectField
                     name="pageType"
                     label="页面类型:"

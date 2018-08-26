@@ -96,6 +96,7 @@ let MPList = [{
         "pageType": "static",
         "contentId": "",
         "iconUrl": '',
+        "isMainPage": true,
         "selectedIconUrl": "",
         "text": "国庆活动"
     }, {
@@ -103,6 +104,7 @@ let MPList = [{
         "pageName": "",
         "pageType": "dynamic",
         "contentId": 2,
+        "isMainPage": false,
         "iconUrl": '',
         "selectedIconUrl": "",
         "text": "爆品"
