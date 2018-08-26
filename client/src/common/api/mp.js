@@ -25,6 +25,16 @@ export async function getMpStaticPageList(mpId) {
     return result;
 }
 
+export async function getMpDynamicSetting(mpId) {
+    let result = await api.get('/mp/get-dynamic-setting', {mpId});
+    return result;
+}
+
+export async function saveMpDynamicSetting(mpId, definition) {
+    let result = await api.post('/mp/save-dynamic-setting', {mpId}, definition);
+    return result;
+}
+
 export async function getMpDynamicPageList(mpId) {
     let result = await api.get('/mp/get-mp-page-dynamic-list', {mpId});
     return result;
@@ -32,6 +42,11 @@ export async function getMpDynamicPageList(mpId) {
 
 export async function getMpPageStructure(pageId) {
     let result = await api.get('/mp/get-mp-page-structure', {pageId});
+    return result;
+}
+
+export async function saveMpPageStructure(pageId, structure) {
+    let result = await api.post('/mp/save-mp-page-structure', {pageId}, structure);
     return result;
 }
 
@@ -46,12 +61,17 @@ export async function saveMpPageDetail(page) {
 }
 
 
-export async function getDynamicPageContentList(pageId) {
-    let result = await api.get('/mp/get-mp-dynamicpage-content-list', {pageId});
+export async function getMpContentList(mpId) {
+    let result = await api.get('/mp/get-mp-content-list', {mpId});
     return result;
 }
 
 export async function getContentDetail(contentId) {
     let result = await api.get('/mp/get-mp-content-detail', {contentId});
+    return result;
+}
+
+export async function saveContentDetail(contentId, content) {
+    let result = await api.post('/mp/save-mp-content-detail', {contentId}, content);
     return result;
 }

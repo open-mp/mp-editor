@@ -19,7 +19,8 @@ const columns = [{
     width: '200px',
     bodyRender(data) {
         return (<div>
-            <a href={`/editor/mp?pageId=${data.pageId}&contentId=${data.id}&structure=dynamic`}>
+            <Button type="primary" outline>设为Tab1(中秋活动)页面</Button>
+            <a href={`/editor/mp?mpId=${data.mpId}&contentId=${data.id}&structure=dynamic`}>
                 <Button type="primary" outline>编辑</Button>
             </a>
         </div>)
@@ -48,8 +49,8 @@ class App extends React.Component {
     }
 
     async loadMpList() {
-        let {pageId} = getQuery();
-        let mpList = await mpApi.getDynamicPageContentList(pageId);
+        let {mpId} = getQuery();
+        let mpList = await mpApi.getMpContentList(mpId);
         this.setState({mpList});
     }
 }

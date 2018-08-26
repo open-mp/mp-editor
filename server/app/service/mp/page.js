@@ -11,17 +11,13 @@ class UserService extends Service {
 
     async getMpStaticPageList(mpId) {
         let mpPageList = Pages.filter(page => {
-            return page.mpId == mpId && page.structure == 'static';
+            return page.mpId == mpId && page.type == 'static';
         });
         return mpPageList;
     }
 
-    async getMpDynamicPageList(mpId) {
-        let mpPageList = Pages.filter(page => {
-            return page.mpId == mpId && page.structure == 'dynamic';
-        });
-        return mpPageList;
-    }
+
+
 
     async createPage(mpId, page) {
         let pageId = Date.now();
@@ -31,7 +27,7 @@ class UserService extends Service {
             name: page.name,
             label: page.label,
             description: page.description,
-            structure: page.structure,
+            type: page.type,
             config: {
                 "navigationBarBackgroundColor": "#ffffff",
                 "navigationBarTextStyle": "black",
@@ -41,7 +37,7 @@ class UserService extends Service {
             },
             bundleList: [],
         });
-        if (page.structure == "static") {
+        if (page.type == "static") {
             pageInstanceMap[pageId] =
                 [{
                     "title": `${page.label}`,
@@ -76,6 +72,10 @@ class UserService extends Service {
         return page;
     }
 
+    async savePageStructure(pageId, structure) {
+        pageInstanceMap[pageId] = structure;
+    }
+
     async getInstanceList(pageId) {
         return pageInstanceMap[pageId] || [];
     }
@@ -87,11 +87,11 @@ module.exports = UserService;
 let Pages = [
     {
         mpId: 1, // 关联的小程序id
-        id: 1, // 页面id
-        name: 'goods-detail',
-        label: '商品详情页',
+        id: 3, // 页面id
+        name: 'order',
+        label: '下单',
         description: '',
-        structure: 'static',
+        type: 'static',
         config: {
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black",
@@ -103,26 +103,11 @@ let Pages = [
     },
     {
         mpId: 1, // 关联的小程序id
-        id: 2, // 页面id
-        name: 'weizhazhi',
-        label: '微页面',
+        id: 1, // 页面id
+        name: 'goods-detail',
+        label: '商品详情页',
         description: '',
-        structure: 'dynamic',
-        config: {
-            "navigationBarBackgroundColor": "#ffffff",
-            "navigationBarTextStyle": "black",
-            "navigationBarTitleText": "微信接口功能演示",
-            "backgroundColor": "#eeeeee",
-            "backgroundTextStyle": "light"
-        },
-        bundleList: [1, 2, 3, 4, 5, 6]
-    }, {
-        mpId: 1, // 关联的小程序id
-        id: 3, // 页面id
-        name: 'order',
-        label: '下单',
-        description: '',
-        structure: 'static',
+        type: 'static',
         config: {
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black",
@@ -137,7 +122,7 @@ let Pages = [
         name: 'cart',
         label: '购物车',
         description: '',
-        structure: 'static',
+        type: 'static',
         config: {
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black",
@@ -203,3 +188,5 @@ let pageInstanceMap = {
     }]
 
 }
+
+

@@ -951,7 +951,7 @@ function post(url) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getContentDetail = exports.getDynamicPageContentList = exports.saveMpPageDetail = exports.getMpPageDetail = exports.getMpPageStructure = exports.getMpDynamicPageList = exports.getMpStaticPageList = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
+exports.saveContentDetail = exports.getContentDetail = exports.getMpContentList = exports.saveMpPageDetail = exports.getMpPageDetail = exports.saveMpPageStructure = exports.getMpPageStructure = exports.getMpDynamicPageList = exports.saveMpDynamicSetting = exports.getMpDynamicSetting = exports.getMpStaticPageList = exports.getMpPageList = exports.saveMp = exports.getMpDetail = exports.getMpList = undefined;
 
 var getMpList = exports.getMpList = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -1088,7 +1088,7 @@ var getMpStaticPageList = exports.getMpStaticPageList = function () {
     };
 }();
 
-var getMpDynamicPageList = exports.getMpDynamicPageList = function () {
+var getMpDynamicSetting = exports.getMpDynamicSetting = function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
@@ -1096,7 +1096,7 @@ var getMpDynamicPageList = exports.getMpDynamicPageList = function () {
                 switch (_context6.prev = _context6.next) {
                     case 0:
                         _context6.next = 2;
-                        return api.get('/mp/get-mp-page-dynamic-list', { mpId: mpId });
+                        return api.get('/mp/get-dynamic-setting', { mpId: mpId });
 
                     case 2:
                         result = _context6.sent;
@@ -1110,20 +1110,20 @@ var getMpDynamicPageList = exports.getMpDynamicPageList = function () {
         }, _callee6, this);
     }));
 
-    return function getMpDynamicPageList(_x6) {
+    return function getMpDynamicSetting(_x6) {
         return _ref6.apply(this, arguments);
     };
 }();
 
-var getMpPageStructure = exports.getMpPageStructure = function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(pageId) {
+var saveMpDynamicSetting = exports.saveMpDynamicSetting = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(mpId, definition) {
         var result;
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
                 switch (_context7.prev = _context7.next) {
                     case 0:
                         _context7.next = 2;
-                        return api.get('/mp/get-mp-page-structure', { pageId: pageId });
+                        return api.post('/mp/save-dynamic-setting', { mpId: mpId }, definition);
 
                     case 2:
                         result = _context7.sent;
@@ -1137,20 +1137,20 @@ var getMpPageStructure = exports.getMpPageStructure = function () {
         }, _callee7, this);
     }));
 
-    return function getMpPageStructure(_x7) {
+    return function saveMpDynamicSetting(_x7, _x8) {
         return _ref7.apply(this, arguments);
     };
 }();
 
-var getMpPageDetail = exports.getMpPageDetail = function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(pageId) {
+var getMpDynamicPageList = exports.getMpDynamicPageList = function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(mpId) {
         var result;
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
             while (1) {
                 switch (_context8.prev = _context8.next) {
                     case 0:
                         _context8.next = 2;
-                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
+                        return api.get('/mp/get-mp-page-dynamic-list', { mpId: mpId });
 
                     case 2:
                         result = _context8.sent;
@@ -1164,20 +1164,20 @@ var getMpPageDetail = exports.getMpPageDetail = function () {
         }, _callee8, this);
     }));
 
-    return function getMpPageDetail(_x8) {
+    return function getMpDynamicPageList(_x9) {
         return _ref8.apply(this, arguments);
     };
 }();
 
-var saveMpPageDetail = exports.saveMpPageDetail = function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(page) {
+var getMpPageStructure = exports.getMpPageStructure = function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee9$(_context9) {
             while (1) {
                 switch (_context9.prev = _context9.next) {
                     case 0:
                         _context9.next = 2;
-                        return api.post('/mp/save-mp-page-detail', {}, page);
+                        return api.get('/mp/get-mp-page-structure', { pageId: pageId });
 
                     case 2:
                         result = _context9.sent;
@@ -1191,20 +1191,20 @@ var saveMpPageDetail = exports.saveMpPageDetail = function () {
         }, _callee9, this);
     }));
 
-    return function saveMpPageDetail(_x9) {
+    return function getMpPageStructure(_x10) {
         return _ref9.apply(this, arguments);
     };
 }();
 
-var getDynamicPageContentList = exports.getDynamicPageContentList = function () {
-    var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(pageId) {
+var saveMpPageStructure = exports.saveMpPageStructure = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(pageId, structure) {
         var result;
         return regeneratorRuntime.wrap(function _callee10$(_context10) {
             while (1) {
                 switch (_context10.prev = _context10.next) {
                     case 0:
                         _context10.next = 2;
-                        return api.get('/mp/get-mp-dynamicpage-content-list', { pageId: pageId });
+                        return api.post('/mp/save-mp-page-structure', { pageId: pageId }, structure);
 
                     case 2:
                         result = _context10.sent;
@@ -1218,20 +1218,20 @@ var getDynamicPageContentList = exports.getDynamicPageContentList = function () 
         }, _callee10, this);
     }));
 
-    return function getDynamicPageContentList(_x10) {
+    return function saveMpPageStructure(_x11, _x12) {
         return _ref10.apply(this, arguments);
     };
 }();
 
-var getContentDetail = exports.getContentDetail = function () {
-    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(contentId) {
+var getMpPageDetail = exports.getMpPageDetail = function () {
+    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(pageId) {
         var result;
         return regeneratorRuntime.wrap(function _callee11$(_context11) {
             while (1) {
                 switch (_context11.prev = _context11.next) {
                     case 0:
                         _context11.next = 2;
-                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+                        return api.get('/mp/get-mp-page-detail', { pageId: pageId });
 
                     case 2:
                         result = _context11.sent;
@@ -1245,8 +1245,116 @@ var getContentDetail = exports.getContentDetail = function () {
         }, _callee11, this);
     }));
 
-    return function getContentDetail(_x11) {
+    return function getMpPageDetail(_x13) {
         return _ref11.apply(this, arguments);
+    };
+}();
+
+var saveMpPageDetail = exports.saveMpPageDetail = function () {
+    var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(page) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee12$(_context12) {
+            while (1) {
+                switch (_context12.prev = _context12.next) {
+                    case 0:
+                        _context12.next = 2;
+                        return api.post('/mp/save-mp-page-detail', {}, page);
+
+                    case 2:
+                        result = _context12.sent;
+                        return _context12.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context12.stop();
+                }
+            }
+        }, _callee12, this);
+    }));
+
+    return function saveMpPageDetail(_x14) {
+        return _ref12.apply(this, arguments);
+    };
+}();
+
+var getMpContentList = exports.getMpContentList = function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(mpId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee13$(_context13) {
+            while (1) {
+                switch (_context13.prev = _context13.next) {
+                    case 0:
+                        _context13.next = 2;
+                        return api.get('/mp/get-mp-content-list', { mpId: mpId });
+
+                    case 2:
+                        result = _context13.sent;
+                        return _context13.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context13.stop();
+                }
+            }
+        }, _callee13, this);
+    }));
+
+    return function getMpContentList(_x15) {
+        return _ref13.apply(this, arguments);
+    };
+}();
+
+var getContentDetail = exports.getContentDetail = function () {
+    var _ref14 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee14(contentId) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee14$(_context14) {
+            while (1) {
+                switch (_context14.prev = _context14.next) {
+                    case 0:
+                        _context14.next = 2;
+                        return api.get('/mp/get-mp-content-detail', { contentId: contentId });
+
+                    case 2:
+                        result = _context14.sent;
+                        return _context14.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context14.stop();
+                }
+            }
+        }, _callee14, this);
+    }));
+
+    return function getContentDetail(_x16) {
+        return _ref14.apply(this, arguments);
+    };
+}();
+
+var saveContentDetail = exports.saveContentDetail = function () {
+    var _ref15 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee15(contentId, content) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee15$(_context15) {
+            while (1) {
+                switch (_context15.prev = _context15.next) {
+                    case 0:
+                        _context15.next = 2;
+                        return api.post('/mp/save-mp-content-detail', { contentId: contentId }, content);
+
+                    case 2:
+                        result = _context15.sent;
+                        return _context15.abrupt('return', result);
+
+                    case 4:
+                    case 'end':
+                        return _context15.stop();
+                }
+            }
+        }, _callee15, this);
+    }));
+
+    return function saveContentDetail(_x17, _x18) {
+        return _ref15.apply(this, arguments);
     };
 }();
 
@@ -1692,8 +1800,6 @@ var Basic = function (_React$Component) {
     _inherits(Basic, _React$Component);
 
     function Basic(props) {
-        var _this2 = this;
-
         _classCallCheck(this, Basic);
 
         var _this = _possibleConstructorReturn(this, (Basic.__proto__ || Object.getPrototypeOf(Basic)).call(this, props));
@@ -1709,36 +1815,6 @@ var Basic = function (_React$Component) {
             _this.forceUpdate();
         };
 
-        _this.onDynamicPageIdChange = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-            var tabBar, contentList;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            tabBar = _this.props.tabBar;
-                            contentList = [];
-
-                            if (!(tabBar.pageStructure == 'dynamic' && tabBar.pageId)) {
-                                _context.next = 6;
-                                break;
-                            }
-
-                            _context.next = 5;
-                            return mpApi.getDynamicPageContentList(tabBar.pageId);
-
-                        case 5:
-                            contentList = _context.sent;
-
-                        case 6:
-                            _this.setState({ contentList: contentList });
-
-                        case 7:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, _callee, _this2);
-        }));
         return _this;
     }
 
@@ -1783,7 +1859,7 @@ var Basic = function (_React$Component) {
                     value: window.navigationBarTitleText
                 }),
                 _react2.default.createElement(FormSelectField, {
-                    name: 'pageStructure',
+                    name: 'pageType',
                     label: '\u9875\u9762\u7C7B\u578B:',
                     data: [{ value: 'dynamic', text: '动态' }, { value: 'static', text: '静态' }],
                     required: true,
@@ -1792,7 +1868,7 @@ var Basic = function (_React$Component) {
                     validationErrors: { required: '页面类型' },
                     value: window.navigationBarTextStyle
                 }),
-                tabBar.pageStructure == 'static' && _react2.default.createElement(FormSelectField, {
+                tabBar.pageType == 'static' && _react2.default.createElement(FormSelectField, {
                     name: 'pageId',
                     label: '\u8DF3\u8F6C\u7684\u9759\u6001\u9875:',
                     data: staticPageList,
@@ -1800,76 +1876,38 @@ var Basic = function (_React$Component) {
                     optionValue: 'id',
                     validationErrors: { required: '跳转的静态页' },
                     value: window.navigationBarTextStyle
-                }),
-                tabBar.pageStructure == 'dynamic' && _react2.default.createElement(FormSelectField, {
-                    name: 'pageId',
-                    label: '\u8DF3\u8F6C\u7684\u52A8\u6001\u9875:',
-                    data: dynamicPageList,
-                    onChange: this.onDynamicPageIdChange,
-                    optionText: 'label',
-                    optionValue: 'id',
-                    validationErrors: { required: '跳转的动态页' },
-                    value: window.navigationBarTextStyle
-                }),
-                tabBar.pageStructure == 'dynamic' && _react2.default.createElement(FormSelectField, {
-                    name: 'contentId',
-                    label: '\u52A8\u6001\u9875\u5185\u5BB9:',
-                    data: contentList,
-                    optionText: 'name',
-                    optionValue: 'id',
-                    validationErrors: { required: '跳转的动态页' },
-                    value: window.navigationBarTextStyle
                 })
             );
         }
     }, {
         key: 'componentDidMount',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var _getQuery, mpId, tabBar, staticPageList, dynamicPageList, contentList;
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var _getQuery, mpId, staticPageList;
 
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context.prev = _context.next) {
                             case 0:
                                 _getQuery = (0, _url.getQuery)(), mpId = _getQuery.mpId;
-                                tabBar = this.props.tabBar;
-                                _context2.next = 4;
+                                _context.next = 3;
                                 return mpApi.getMpStaticPageList(mpId);
 
-                            case 4:
-                                staticPageList = _context2.sent;
-                                _context2.next = 7;
-                                return mpApi.getMpDynamicPageList(mpId);
+                            case 3:
+                                staticPageList = _context.sent;
 
-                            case 7:
-                                dynamicPageList = _context2.sent;
-                                contentList = [];
+                                this.setState({ staticPageList: staticPageList });
 
-                                if (!(tabBar.pageStructure == 'dynamic' && tabBar.pageId)) {
-                                    _context2.next = 13;
-                                    break;
-                                }
-
-                                _context2.next = 12;
-                                return mpApi.getDynamicPageContentList(tabBar.pageId);
-
-                            case 12:
-                                contentList = _context2.sent;
-
-                            case 13:
-                                this.setState({ staticPageList: staticPageList, dynamicPageList: dynamicPageList, contentList: contentList });
-
-                            case 14:
+                            case 5:
                             case 'end':
-                                return _context2.stop();
+                                return _context.stop();
                         }
                     }
-                }, _callee2, this);
+                }, _callee, this);
             }));
 
             function componentDidMount() {
-                return _ref2.apply(this, arguments);
+                return _ref.apply(this, arguments);
             }
 
             return componentDidMount;
@@ -1949,7 +1987,7 @@ var Basic = function (_React$Component) {
             _this.props.fields.push({
                 "pageId": 1,
                 "pageName": "",
-                "pageStructure": "static",
+                "pageType": "static",
                 "contentId": "",
                 "iconUrl": "",
                 "selectedIconUrl": "",

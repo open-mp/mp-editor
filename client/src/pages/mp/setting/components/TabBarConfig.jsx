@@ -56,7 +56,7 @@ class Basic extends React.Component {
                     value={window.navigationBarTitleText}
                 />
                 <FormSelectField
-                    name="pageStructure"
+                    name="pageType"
                     label="页面类型:"
                     data={[
                         {value: 'dynamic', text: '动态'},
@@ -68,32 +68,13 @@ class Basic extends React.Component {
                     validationErrors={{required: '页面类型'}}
                     value={window.navigationBarTextStyle}
                 />
-                {tabBar.pageStructure == 'static' && <FormSelectField
+                {tabBar.pageType == 'static' && <FormSelectField
                     name="pageId"
                     label="跳转的静态页:"
                     data={staticPageList}
                     optionText="label"
                     optionValue="id"
                     validationErrors={{required: '跳转的静态页'}}
-                    value={window.navigationBarTextStyle}
-                />}
-                {tabBar.pageStructure == 'dynamic' && <FormSelectField
-                    name="pageId"
-                    label="跳转的动态页:"
-                    data={dynamicPageList}
-                    onChange={this.onDynamicPageIdChange}
-                    optionText="label"
-                    optionValue="id"
-                    validationErrors={{required: '跳转的动态页'}}
-                    value={window.navigationBarTextStyle}
-                />}
-                {tabBar.pageStructure == 'dynamic' && <FormSelectField
-                    name="contentId"
-                    label="动态页内容:"
-                    data={contentList}
-                    optionText="name"
-                    optionValue="id"
-                    validationErrors={{required: '跳转的动态页'}}
                     value={window.navigationBarTextStyle}
                 />}
             </FormSection>
@@ -106,25 +87,9 @@ class Basic extends React.Component {
 
     async componentDidMount() {
         let {mpId} = getQuery();
-        let {tabBar} = this.props;
         let staticPageList = await mpApi.getMpStaticPageList(mpId);
-        let dynamicPageList = await mpApi.getMpDynamicPageList(mpId);
-        let contentList = [];
-        if (tabBar.pageStructure == 'dynamic' && tabBar.pageId) {
-            contentList = await mpApi.getDynamicPageContentList(tabBar.pageId);
-        }
-        this.setState({staticPageList, dynamicPageList, contentList})
+        this.setState({staticPageList})
     }
-
-    onDynamicPageIdChange = async () => {
-        let {tabBar} = this.props;
-        let contentList = [];
-        if (tabBar.pageStructure == 'dynamic' && tabBar.pageId) {
-            contentList = await mpApi.getDynamicPageContentList(tabBar.pageId);
-        }
-        this.setState({contentList})
-    }
-
 }
 
 export default Basic

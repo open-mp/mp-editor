@@ -44,7 +44,7 @@ class Basic extends React.Component {
         this.props.fields.push({
             "pageId": 1,
             "pageName": "",
-            "pageStructure": "static",
+            "pageType": "static",
             "contentId": "",
             "iconUrl": "",
             "selectedIconUrl": "",

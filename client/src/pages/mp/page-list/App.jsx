@@ -8,12 +8,6 @@ const columns = [{
     name: 'name',
     width: '200px'
 }, {
-    title: '类型',
-    name: 'description',
-    bodyRender(data) {
-        return (<span>{data.structure == 'static' ? '静态结构页' : '动态结构'}</span>)
-    }
-}, {
     title: '描述',
     name: 'description',
 }, {
@@ -25,21 +19,12 @@ const columns = [{
     title: '操作',
     width: '200px',
     bodyRender(page) {
-        // 动态结构页
-        // 静态结构页
-        if (page.structure == 'static') {
-            return (<div>
-                <a href={`/mp/page-detail?pageId=${page.id}`}><Button type="primary" outline>页面设置</Button></a>
-                <a href={`/editor/mp?pageId=${page.id}&structure=static`}>
-                    <Button type="primary" outline>编辑</Button>
-                </a>
-            </div>)
-        } else {
-            return (<div>
-                <a href={`/mp/page-detail?pageId=${page.id}`}><Button type="primary" outline>页面设置</Button></a>
-                <a href={`/mp/content-list?pageId=${page.id}`}><Button type="primary" outline>内容列表</Button></a>
-            </div>)
-        }
+        return (<div>
+            <a href={`/mp/page-detail?pageId=${page.id}`}><Button type="primary" outline>页面设置</Button></a>
+            <a href={`/editor/mp?pageId=${page.id}&structure=static`}>
+                <Button type="primary" outline>编辑</Button>
+            </a>
+        </div>)
 
     }
 }];

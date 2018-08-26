@@ -23,6 +23,7 @@ class App extends React.Component {
     }
 
     handleChange = (evt) => {
+
         const {target} = evt;
         let {name, type, value} = target;
         let {page} = this.state;
@@ -54,29 +55,33 @@ class App extends React.Component {
         }
     }
 
+    selectBundle = (evt) => {
+        const {target} = evt;
+        let {page} = this.state;
+        let {name, type, value} = target;
+
+        page.bundleList.push(value);
+        this.setState({
+            page
+        });
+    }
+
+    deleteBundle = (evt) => {
+        let {page} = this.state;
+        let {name, type, value} = evt;
+
+        page.bundleList = page.bundleList.filter(v => {
+            return v != value;
+        });
+        this.setState({
+            page
+        });
+    }
+
     render() {
         let {page, loaded, bundleList} = this.state;
         if (!loaded) return null;
         return (<div className="mp-papge-detail">
-            <Row>
-                <Col span={4}>Label</Col>
-                <Col span={8}><Input placeholder="请输入Label"
-                                     value={page.label}
-                                     name="label"
-                                     onChange={this.handleChange}/></Col>
-            </Row>
-            <Row>
-                <Col span={4}>页面名字</Col>
-                <Col span={8}><Input placeholder="页面名字"
-                                     name="name"
-                                     value={page.name} onChange={this.handleChange}/></Col>
-            </Row>
-            <Row>
-                <Col span={4}>description</Col>
-                <Col span={8}><Input placeholder="description"
-                                     name="description"
-                                     value={page.description} onChange={this.handleChange}/></Col>
-            </Row>
             <Row>
                 <Col span={4}>导航栏文字</Col>
                 <Col span={8}><Input
@@ -114,6 +119,22 @@ class App extends React.Component {
                     </Select>
                 </Col>
             </Row>
+            <Row>
+                <Col span={4}>动态组件(多选)</Col>
+                <Col span={8}>
+                    <Select
+                        name="bundleList"
+                        onChange={this.selectBundle}
+                        onDelete={this.deleteBundle}
+                        value={page.bundleList}
+                        data={bundleList}
+                        optionText="name"
+                        optionValue="id"
+                        tags
+                    >
+                    </Select>
+                </Col>
+            </Row>
             <div>
                 <Button type="primary" outline onClick={this.savePage}>保存</Button>
             </div>
@@ -121,14 +142,15 @@ class App extends React.Component {
     }
 
     async loadPage() {
-        let {pageId} = getQuery();
-        let page = await mpApi.getMpPageDetail(pageId);
+        let {mpId} = getQuery();
+        let page = await mpApi.getMpDynamicSetting(mpId);
         this.setState({page, loaded: true});
     }
 
     savePage = async () => {
+        let {mpId} = getQuery();
         let page = this.state.page;
-        await mpApi.saveMpPageDetail(page);
+        await mpApi.saveMpDynamicSetting(mpId, page);
         Notify.success('保存成功');
     }
 

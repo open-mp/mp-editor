@@ -23,8 +23,10 @@ class UserService extends Service {
         // tabBar
         let tabBarButtons = mp.tabBarButtons;
         for (let tabBar of tabBarButtons) {
-            let page = await this.service.mp.page.getPageDetail(tabBar.pageId);
-            tabBar.pageName = page.name;
+            if (tabBar.pageType == 'static') {
+                let page = await this.service.mp.page.getPageDetail(tabBar.pageId);
+                tabBar.pageName = page.name;
+            }
         }
 
         let pageList = await this.service.mp.page.getMpPageList(mpId);
@@ -42,6 +44,24 @@ class UserService extends Service {
         return {
             mp, pageList
         };
+    }
+
+    async getMpDynamicSetting(mpId) {
+        return dynamicPage[mpId] || {
+            mpId: mpId, // 关联的小程序id
+            config: {
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black",
+                "navigationBarTitleText": "微页面",
+                "backgroundColor": "#eeeeee",
+                "backgroundTextStyle": "light"
+            },
+            bundleList: [1, 2, 3, 4, 5, 6]
+        }
+    }
+
+    async saveMpDynamicSetting(mpId, definition) {
+        dynamicPage[mpId] = definition;
     }
 
 }
@@ -71,7 +91,7 @@ let MPList = [{
     tabBarButtons: [{
         "pageId": 1,
         "pageName": "",
-        "pageStructure": "static",
+        "pageType": "static",
         "contentId": "",
         "iconUrl": '',
         "selectedIconUrl": "",
@@ -79,7 +99,7 @@ let MPList = [{
     }, {
         "pageId": 2,
         "pageName": "",
-        "pageStructure": "dynamic",
+        "pageType": "dynamic",
         "contentId": 2,
         "iconUrl": '',
         "selectedIconUrl": "",
@@ -93,5 +113,21 @@ let MPList = [{
             "version": "1.0.0",
             "classifier": ""
         }
-    }
+    },
+    dynamic: {}
 }];
+
+
+let dynamicPage = {
+    1: {
+        mpId: 1, // 关联的小程序id
+        config: {
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black",
+            "navigationBarTitleText": "微页面",
+            "backgroundColor": "#eeeeee",
+            "backgroundTextStyle": "light"
+        },
+        bundleList: [1, 2, 3, 4, 5, 6]
+    }
+}

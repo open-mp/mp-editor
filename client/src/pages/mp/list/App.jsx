@@ -29,8 +29,10 @@ const columns = [{
     width: '200px',
     bodyRender(data) {
         return (<div>
-            <a href={`/mp/page-list?mpId=${data.id}`} target="_blank"><Button type="primary" outline>页面列表</Button></a>
-            <a href={`/mp/setting?mpId=${data.id}`} target="_blank"><Button type="primary" outline>小程序设置</Button></a>
+            <a href={`/mp/dynamic-setting?mpId=${data.id}`}><Button type="primary" outline>微页面配置</Button></a>
+            <a href={`/mp/content-list?mpId=${data.id}`}><Button type="primary" outline>微页面列表</Button></a>
+            <a href={`/mp/page-list?mpId=${data.id}`}><Button type="primary" outline>页面列表</Button></a>
+            <a href={`/mp/setting?mpId=${data.id}`}><Button type="primary" outline>小程序设置</Button></a>
             <Button type="primary" outline>生成小程序代码</Button>
         </div>)
     }

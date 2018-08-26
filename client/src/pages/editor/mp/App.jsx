@@ -12,7 +12,7 @@ import * as mpAPi from "src/common/api/mp";
 class App extends React.Component {
     constructor(props) {
         super(props);
-        
+
     }
 
     state = {
@@ -32,24 +32,25 @@ class App extends React.Component {
 
         // 动态页的内容编辑不允许用户搜索
         this.setState({
-            pageId, 
-            structure, 
+            pageId,
+            structure,
             contentId,
             allowUserQuery: structure == 'static'
         }, () => {
             this.loadBundleList();
             this.loadInstanceList();
-        });     
+        });
     }
 
     render() {
-        let {bundleList ,allowUserQuery} = this.state;
+        let {bundleList, allowUserQuery} = this.state;
         return (
             <div className="mp-workspace">
                 <div className="mp-workspace--toolbox">
-                    <ComponentList bundleList={bundleList} allowUserQuery={allowUserQuery} onAddComponent={(coordinate) => {
-                        this.onAddComponent(coordinate);
-                    }}/>
+                    <ComponentList bundleList={bundleList} allowUserQuery={allowUserQuery}
+                                   onAddComponent={(coordinate) => {
+                                       this.onAddComponent(coordinate);
+                                   }}/>
                 </div>
                 <div className="mp-workspace--editor-wrapper">
                     <Design
@@ -82,15 +83,7 @@ class App extends React.Component {
     }
 
     saveDesign = design => {
-        this.design = design;   
-    }
-
-    submit = async() => {
-       let valid = this.design.validate();
-       if (valid) {
-            const data =  this.design.getInstanceList();
-            console.log(JSON.stringify(data));
-       }
+        this.design = design;
     }
 
     /**
@@ -106,13 +99,13 @@ class App extends React.Component {
      * 加载bundle配置
      */
     async loadInstanceList() {
-        let { pageId, structure, contentId} = this.state;
+        let {pageId, structure, contentId} = this.state;
         if (contentId) {
-            let result = 
+            let result =
                 await mpAPi.getContentDetail(contentId);
             this.design.setInstanceList(result.instanceList);
         } else if (pageId) {
-            let result = 
+            let result =
                 await mpAPi.getMpPageStructure(pageId);
             this.design.setInstanceList(result.instanceList);
         } else {
@@ -122,6 +115,21 @@ class App extends React.Component {
                 version: '1.0.0',
                 classifier: ''
             });
+        }
+    }
+
+    submit = async () => {
+        let valid = await this.design.validate();
+        if (valid) {
+            const data = this.design.getInstanceList();
+            let {pageId, structure, contentId} = this.state;
+            if (contentId) {
+                await mpAPi.saveContentDetail(contentId, data);
+            } else if (pageId) {
+                await mpAPi.saveMpPageStructure(pageId, data);
+            }
+            Notify.success('保存成功');
+            console.log(JSON.stringify(data));
         }
     }
 }

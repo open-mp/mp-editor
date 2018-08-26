@@ -19,6 +19,10 @@ class UserController extends Controller {
         await this.ctx.render('mp/detail.html', {});
     }
 
+    async dynamicSettingHtml() {
+        await this.ctx.render('mp/dynamic-setting.html', {});
+    }
+
     async pageListHtml() {
         await this.ctx.render('mp/page-list.html', {});
     }
@@ -46,6 +50,25 @@ class UserController extends Controller {
         this.ctx.body = {
             code: 0,
             data: mp
+        };
+    }
+
+    async getMpDynamicSetting() {
+        let mpId = this.ctx.query.mpId;
+        let mp = await this.service.mp.app.getMpDynamicSetting(mpId);
+        this.ctx.body = {
+            code: 0,
+            data: mp
+        };
+    }
+
+    async saveMpDynamicSetting() {
+        let mpId = this.ctx.query.mpId;
+        let definition = this.ctx.request.body;
+        await this.service.mp.app.saveMpDynamicSetting(mpId, definition);
+        this.ctx.body = {
+            code: 0,
+            data: {}
         };
     }
 
@@ -79,13 +102,24 @@ class UserController extends Controller {
         };
     }
 
-    async getMpDynamicPageList() {
+    async getMpDynamicDefinition() {
         let {mpId} = this.ctx.query;
-        let mpPageList = await this.service.mp.page.getMpDynamicPageList(mpId);
+        let mpPageList = await this.service.mp.page.getMpDynamicDefinition(mpId);
 
         this.ctx.body = {
             code: 0,
             data: mpPageList
+        };
+    }
+
+    async saveMpDynamicDefinition() {
+        let {mpId} = this.ctx.query;
+        let definition = this.ctx.request.body;
+        await this.service.mp.page.saveMpDynamicDefinition(mpId, definition);
+
+        this.ctx.body = {
+            code: 0,
+            data: {}
         };
     }
 
@@ -126,9 +160,19 @@ class UserController extends Controller {
         };
     }
 
-    async getMpDynamicPageContentList() {
+    async savePageStructure() {
         let {pageId} = this.ctx.query;
-        let mpContentList = await this.service.mp.content.getMpDynamicPageContentList(pageId);
+        let structure = this.ctx.request.body;
+        await this.service.mp.page.savePageStructure(pageId, structure);
+        this.ctx.body = {
+            code: 0,
+            data: {}
+        };
+    }
+
+    async getMpContentList() {
+        let {mpId} = this.ctx.query;
+        let mpContentList = await this.service.mp.content.getMpContentList(mpId);
 
         this.ctx.body = {
             code: 0,
@@ -143,6 +187,17 @@ class UserController extends Controller {
         this.ctx.body = {
             code: 0,
             data: content
+        };
+    }
+
+    async saveContentDetail() {
+        let {contentId} = this.ctx.query;
+        let content = this.ctx.request.body;
+        await this.service.mp.content.saveContentDetail(contentId, content);
+
+        this.ctx.body = {
+            code: 0,
+            data: {}
         };
     }
 

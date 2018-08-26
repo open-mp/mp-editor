@@ -1,9 +1,9 @@
 const Service = require('egg').Service;
 
 class UserService extends Service {
-    async getMpDynamicPageContentList(pageId) {
+    async getMpContentList(mpId) {
         let mpContentList = DynamicContents.filter(content => {
-            return content.pageId == pageId;
+            return content.mpId == mpId;
         });
         return mpContentList;
     }
@@ -11,8 +11,15 @@ class UserService extends Service {
     async getContentDetail(contentId) {
         let content = DynamicContents.find(content => {
             return content.id == contentId;
-        })
+        });
         return content;
+    }
+
+    async saveContentDetail(contentId, newContent) {
+        let content = DynamicContents.find(content=>{
+            return contentId == content.id;
+        })
+        content.instanceList = newContent;
     }
 }
 
@@ -20,11 +27,9 @@ module.exports = UserService;
 
 
 // 动态页内容列表
-const DynamicContents = [{
+let DynamicContents = [{
     id: 1,
-    pageId: 2, // 关联的动态页id
-    name: '限时折扣专题',
-    description: '',
+    mpId: 1, // 关联的动态页id
     instanceList: [{
         "title": "限时折扣专题",
         "color": "",
@@ -43,9 +48,7 @@ const DynamicContents = [{
     }]
 }, {
     id: 2,
-    pageId: 2, // 关联的动态页id
-    name: '中秋活动',
-    description: '',
+    mpId: 1, // 关联的动态页id
     instanceList: [{
         "title": "中秋活动",
         "color": "",
