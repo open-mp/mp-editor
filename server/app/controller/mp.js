@@ -216,14 +216,14 @@ class UserController extends Controller {
         let mpDef = await this.service.mp.app.getMpDefinition(mpId);
         let {mp} = mpDef;
 
-        let mpDir = path.resolve(generatorDir, mp.id);
+        let mpDir = path.resolve(generatorDir, mp.id + '');
         await fs.remove(mpDir);
         let mpProjectDir = path.resolve(mpDir, 'project');
         let mpZipped = path.resolve(mpDir, 'project.zip');
         await fs.mkdirp(mpProjectDir);
 
         // 生成
-        await mpGenerator.generate(dir, mpDef);
+        await mpGenerator.generate(mpProjectDir, JSON.parse(JSON.stringify(mpDef)));
 
         // 压缩
         await new Promise((resolve, reject) => {
@@ -237,7 +237,7 @@ class UserController extends Controller {
                 }
             });
         });
-
+        this.ctx.set('Content-Disposition', `attachment;filename=project-${mpId}.zip`);
         // 文件返回
         this.ctx.body = fs.createReadStream(mpZipped);
     }

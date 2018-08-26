@@ -1609,9 +1609,13 @@ var columns = [{
                 )
             ),
             _react2.default.createElement(
-                _zent.Button,
-                { type: 'primary', outline: true },
-                '\u751F\u6210\u5C0F\u7A0B\u5E8F\u4EE3\u7801'
+                'a',
+                { href: '/mp/get-mp-generate?mpId=' + data.id },
+                _react2.default.createElement(
+                    _zent.Button,
+                    { type: 'primary', outline: true },
+                    '\u751F\u6210\u5C0F\u7A0B\u5E8F\u4EE3\u7801'
+                )
             )
         );
     }

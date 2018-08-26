@@ -35,7 +35,7 @@ class UserService extends Service {
             page.instanceList = await this.service.mp.page.getInstanceList(page.id);
 
         }
-        let dynamic = dynamicPage[mpId];
+        let dynamic = JSON.parse(JSON.stringify(dynamicPage[mpId]));
         let bundleList = dynamic.bundleList;
         let newBundleList = [];
         for (let id of bundleList) {

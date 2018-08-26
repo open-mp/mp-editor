@@ -17,8 +17,6 @@ class UserService extends Service {
     }
 
 
-
-
     async createPage(mpId, page) {
         let pageId = Date.now();
         Pages.push({
@@ -85,11 +83,12 @@ module.exports = UserService;
 
 // 页面
 let Pages = [
+
     {
         mpId: 1, // 关联的小程序id
-        id: 3, // 页面id
-        name: 'order',
-        label: '下单',
+        id: 1, // 页面id
+        name: 'goods-detail',
+        label: '商品详情页',
         description: '',
         type: 'static',
         config: {
@@ -100,12 +99,11 @@ let Pages = [
             "backgroundTextStyle": "light"
         },
         bundleList: []
-    },
-    {
+    }, {
         mpId: 1, // 关联的小程序id
-        id: 1, // 页面id
-        name: 'goods-detail',
-        label: '商品详情页',
+        id: 3, // 页面id
+        name: 'order',
+        label: '下单',
         description: '',
         type: 'static',
         config: {
